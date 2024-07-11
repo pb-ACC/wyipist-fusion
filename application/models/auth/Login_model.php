@@ -1,12 +1,6 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: p-bri
- * Date: 29/10/2019
- * Time: 11:35
- */
-class Login__model extends CI_Model
+class Login_model extends CI_Model
 {
 
     public function __construct()
@@ -25,19 +19,20 @@ class Login__model extends CI_Model
         // $pass = $this->input->post('password');
 
         //echo "entrei";
-
-        $sql = "SELECT  A.*,A.user_type type_id, A.password passwd, B.empresa, B.logo_empresa, C.logo_user,
-                        case when A.user_type=1 or A.user_type=2 or A.user_type=5 then 'FB001'
-                             when A.user_type=1 or A.user_type=2 or A.user_type=6 then 'CL005'
-                             else 'XXXXX'
-                        end sector_user,
-                        case when A.user_type=1 or A.user_type=2 or A.user_type=5 then 'FB003'
-                             when A.user_type=1 or A.user_type=2 or A.user_type=6 then 'CL001'
-                             else 'XXXXX'
-                        end sector_pnc
+        
+        $this->load->database('userEmpresa');
+        $empresa = $this->operadopEmpresa($user);
+        
+        foreach ($empresa as $val) {
+			$codigo_empresa = $val->tipoEmpresa;
+		}
+        
+        $this->load->database('login');
+        $sql = "SELECT A.id, A.username, A.nome, A.type_id, A.unique_id, A.client, A.funcionario_gpac, A.funcao, A.user_type type_id, B.empresa, B.logo_empresa, C.logo_user, 
+                      {$codigo_empresa} tipoEmpresa                        
                 FROM users A join clients         B on (A.client=B.id) 
                              join template_images C on (A.id=C.id_user)
-                where A.username=UPPER('$user') AND A.password=md5('$pass') and A.active=1";
+               where A.username=UPPER('$user') AND A.password=md5('$pass') and A.active=1";
 
         //echo $sql;
 
@@ -59,6 +54,16 @@ class Login__model extends CI_Model
             return FALSE;
 
 
+    }
+
+    public function operadopEmpresa($user){
+        $sql = "SELECT case when isnull(Empresa,'')='CERAGNI' then 1 when isnull(Empresa,'')='CERTECA' then 2 else 3 end tipoEmpresa
+                FROM zxOperEmpresaWeb
+                where operador=UPPER('$user')";        
+        $query = $this->db->query($sql);        
+        $result = $query->result();
+        
+        return $result;
     }
 
     // funcao que verifica se outra pessoa entrou com a conta atual, nesse caso é dada a ordem de expulsao ao user atual

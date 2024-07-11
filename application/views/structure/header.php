@@ -7,57 +7,57 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="<?=base_url();?>assets/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="<?=base_url();?>public/plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bbootstrap 4 -->
-    <link rel="stylesheet" href="<?=base_url();?>assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <link rel="stylesheet" href="<?=base_url();?>public/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <!-- iCheck -->
-    <link rel="stylesheet" href="<?=base_url();?>assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="<?=base_url();?>public/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- JQVMap -->
-    <link rel="stylesheet" href="<?=base_url();?>assets/plugins/jqvmap/jqvmap.min.css">
+    <link rel="stylesheet" href="<?=base_url();?>public/plugins/jqvmap/jqvmap.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="<?=base_url();?>assets/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="<?=base_url();?>public/css/adminlte.min.css">
     <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="<?=base_url();?>assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="<?=base_url();?>public/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Daterange picker -->
-    <link rel="stylesheet" href="<?=base_url();?>assets/plugins/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="<?=base_url();?>public/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
-    <link rel="stylesheet" href="<?=base_url();?>assets/plugins/summernote/summernote-bs4.css">
+    <link rel="stylesheet" href="<?=base_url();?>public/plugins/summernote/summernote-bs4.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <!-- JQuery -->
-    <script src="<?=base_url();?>assets/plugins/jquery/jquery.min.js"></script>
-    <script src="<?=base_url();?>assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="<?=base_url();?>public/plugins/jquery/jquery.min.js"></script>
+    <script src="<?=base_url();?>public/plugins/jquery-ui/jquery-ui.min.js"></script>
     <!-- bootstrap password toggler -->
-    <script  src="<?=base_url();?>js/password-toggler/bootstrap-password-toggler.min.js"></script>
+    <script  src="<?=base_url();?>public/js/password-toggler/bootstrap-password-toggler.min.js"></script>
     <!--Tabulator-->
-    <!--<script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.4.3/dist/js/tabulator.min.js"></script>-->
-    <!--<script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"></script>-->
-    <script type="text/javascript" src="<?=base_url();?>js/tabulator/tabulator.min.js"></script>
-    <link href="<?=base_url();?>css/tabulator/tabulator_bootstrap4.min.css" rel="stylesheet">
+    <!--<script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.4.3/js/tabulator.min.js"></script>-->
+    <!--<script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.7.2/js/tabulator.min.js"></script>-->
+    <script type="text/javascript" src="<?=base_url();?>public/js/tabulator/tabulator.min.js"></script>
+    <link href="<?=base_url();?>public/css/tabulator/tabulator_bootstrap4.min.css" rel="stylesheet">
     <!--blockUI-->
-    <script type="text/javascript" src="<?=base_url();?>js/blockUI/jquery.blockUI.js"></script>
+    <script type="text/javascript" src="<?=base_url();?>public/js/blockUI/jquery.blockUI.js"></script>
     <!-- Select2 -->
-    <link rel="stylesheet" href="<?=base_url();?>assets/plugins/select2/css/select2.min.css">
-    <link rel="stylesheet" href="<?=base_url();?>assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
-    <script src="<?=base_url();?>assets/plugins/select2/js/select2.full.min.js"></script>
+    <link rel="stylesheet" href="<?=base_url();?>public/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="<?=base_url();?>public/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <script src="<?=base_url();?>public/plugins/select2/js/select2.full.min.js"></script>
     <!-- toastr -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <!-- Date Picker -->
-    <link rel="stylesheet" href="<?=base_url();?>js/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="<?=base_url();?>public/js/bootstrap-datepicker/css/bootstrap-datepicker.min.css">
     <!-- image Picker -->
     <link href=" https://cdnjs.cloudflare.com/ajax/libs/image-picker/0.3.1/image-picker.css" rel="stylesheet">
     <!--toogle-->
-    <link href="<?=base_url();?>js/bootstrap4_toogle/bootstrap4-toggle.min.css" rel="stylesheet">
+    <link href="<?=base_url();?>public/js/bootstrap4_toogle/bootstrap4-toggle.min.css" rel="stylesheet">
     <!--Sweet Alert-->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.17/dist/sweetalert2.all.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.17/dist/sweetalert2.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.17/sweetalert2.all.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.17/sweetalert2.min.css" rel="stylesheet">
 
-    <link rel="icon" href="<?=base_url();?>img/logos/wyipi.ico">
+    <link rel="icon" href="<?=base_url();?>public/img/logos/wyipi.ico">
 
-    <link rel="stylesheet" href="<?=base_url();?>css/stockterminal.css">
+    <link rel="stylesheet" href="<?=base_url();?>public/css/stockterminal.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">

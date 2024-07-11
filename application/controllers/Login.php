@@ -21,7 +21,7 @@ class Login extends CI_Controller
         } else {
             $this->load->helper(array('form', 'language'));
             $this->load->library(array('form_validation'));
-            $this->load->model('auth/login__model');
+            $this->load->model('auth/login_model');
 
             $this->form_validation->set_rules('username', 'Username', 'required');
             $this->form_validation->set_rules('password', 'Password', 'required|callback_valid_user_pass');
@@ -49,7 +49,7 @@ class Login extends CI_Controller
         $username = $this->input->post('username'); // podia ter passado como argumento assim como a password
 
         //query BD to check if this is a valid user
-        $result = $this->login__model->check_valid_user($username,$password);
+        $result = $this->login_model->check_valid_user($username,$password);
         // print_r($result);
         if($result)
         {
@@ -62,8 +62,6 @@ class Login extends CI_Controller
                     'id' => $row->id,                    
                     'username' => $row->username,
                     'nome' => $row->nome,
-                    'email' => $row->email,
-                    'telefone' => $row->telefone,
                     'type_id' => $row->type_id,
                     'user_type' => $row->user_type,                    
                     'funcionario_gpac' => $row->funcionario_gpac,
@@ -73,8 +71,6 @@ class Login extends CI_Controller
                     'empresa' => $row->empresa,  
                     'logo_empresa' => $row->logo_empresa,
                     'client' => $row->client,   
-                    'sector_user' => $row->sector_user, 
-                    'sector_pnc' => $row->sector_pnc, 
                     'language' => $GLOBALS['language']
                 );
                 //print_r($sessao);

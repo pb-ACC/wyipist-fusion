@@ -117,6 +117,25 @@ $db['default']['encrypt'] = FALSE;
 //$db['default']['options'] = array(PDO::ATTR_TIMEOUT => 1);
 //$db['default']['trust_server_certificate'] = TRUE;
 
+$db['userEmpresa']['dsn'] = "";
+$db['userEmpresa']['hostname'] = "SRVERP00.ceragni.local";//"SERVERSQL;//SERVERSQL.cerdom.local";//SERVERSQL";//192.168.0.2";
+$db['userEmpresa']['port'] = 1433;
+$db['userEmpresa']['username'] = "MediaSis";
+$db['userEmpresa']['password'] = "MS920527";
+$db['userEmpresa']['database'] = "GPAC-CGCT";
+$db['userEmpresa']['dbdriver'] = "sqlsrv";
+$db['userEmpresa']['dbprefix'] = "";
+$db['userEmpresa']['pconnect'] = FALSE;
+$db['userEmpresa']['db_debug'] = FALSE;
+$db['userEmpresa']['cache_on'] = FALSE;
+$db['userEmpresa']['cachedir'] = "";
+$db['userEmpresa']['char_set'] = "utf8";
+$db['userEmpresa']['dbcollat'] = "utf8_general_ci";
+$db['userEmpresa']['swap_pre'] = "";
+$db['userEmpresa']['autoinit'] = TRUE;
+$db['userEmpresa']['stricton'] = FALSE;
+$db['userEmpresa']['encrypt'] = FALSE;
+
 $db['login']['hostname'] = "127.0.0.1";
 $db['login']['port'] = 3306;
 $db['login']['username'] = "root";
