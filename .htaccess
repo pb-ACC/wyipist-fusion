@@ -1,0 +1,15 @@
+RewriteEngine on
+RewriteCond $1 !^(index\.php|images|css|js|robots\.txt|favicon\.ico)
+RewriteCond %{REQUEST_URI} !\.(css|gif|ico|jpg|js|png|swf|txt)$
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?/$1 [L,QSA]
+AddDefaultCharset UTF-8
+
+php_flag mbstring.encoding_translation Off
+php_value mbstring.http_input pass
+php_value mbstring.http_output pass
+php_value mbstring.http_output pass
+php_value mbstring.func_overload 0
+php_value memory_limit 16384M
+php_value max_execution_time -1

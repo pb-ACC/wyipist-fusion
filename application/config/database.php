@@ -73,7 +73,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
-$db['default'] = array(
+/*$db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
 	'username' => '',
@@ -93,4 +93,43 @@ $db['default'] = array(
 	'stricton' => FALSE,
 	'failover' => array(),
 	'save_queries' => TRUE
-);
+);*/
+//Vps3@aCc#_!;Vps2@aCc#_!;Vps1@aCc#_! AccSystems2020!
+
+$db['default']['dsn'] = "";
+$db['default']['hostname'] = "SRVDC05\SQLGPAC";//"SERVERSQL;//SERVERSQL.cerdom.local";//SERVERSQL";//192.168.0.2";
+$db['default']['port'] = 1433;
+$db['default']['username'] = "MediaSis";
+$db['default']['password'] = "MS920527";
+$db['default']['database'] = "GPAC-CERTECA";
+$db['default']['dbdriver'] = "sqlsrv";
+$db['default']['dbprefix'] = "";
+$db['default']['pconnect'] = FALSE;
+$db['default']['db_debug'] = FALSE;
+$db['default']['cache_on'] = FALSE;
+$db['default']['cachedir'] = "";
+$db['default']['char_set'] = "utf8";
+$db['default']['dbcollat'] = "utf8_general_ci";
+$db['default']['swap_pre'] = "";
+$db['default']['autoinit'] = TRUE;
+$db['default']['stricton'] = FALSE;
+$db['default']['encrypt'] = FALSE;
+//$db['default']['options'] = array(PDO::ATTR_TIMEOUT => 1);
+//$db['default']['trust_server_certificate'] = TRUE;
+
+$db['login']['hostname'] = "127.0.0.1";
+$db['login']['port'] = 3306;
+$db['login']['username'] = "root";
+$db['login']['password'] = "";
+$db['login']['database'] = "GPAC-CERTECA";
+$db['login']['dbdriver'] = "mysqli";
+$db['login']['dbprefix'] = "";
+$db['login']['pconnect'] = FALSE;
+$db['login']['db_debug'] = FALSE;
+$db['login']['cache_on'] = FALSE;
+$db['login']['cachedir'] = "";
+$db['login']['char_set'] = "utf8";
+$db['login']['dbcollat'] = "utf8_general_ci";
+$db['login']['swap_pre'] = "";
+$db['login']['autoinit'] = TRUE;
+$db['login']['stricton'] = FALSE;
