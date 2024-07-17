@@ -60,3 +60,17 @@ $route['home'] = 'homepage/Home';
 $route['home/logout'] = 'homepage/Home/logout';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+/*
+| -------------------------------------------------------------------------
+| STOCKS
+| -------------------------------------------------------------------------
+*/
+$route['stocks/production'] = 'stocks/producao/SaidaProducao';
+
+/*
+| -------------------------------------------------------------------------
+| USERS
+| -------------------------------------------------------------------------
+*/
+$route['users/all-users'] = 'users/Users';

@@ -50,7 +50,7 @@ class Login extends CI_Controller
 
         //query BD to check if this is a valid user
         $result = $this->login_model->check_valid_user($username,$password);
-        // print_r($result);
+        //print_r($result);
         if($result)
         {
             //$sessao = array(
@@ -71,6 +71,7 @@ class Login extends CI_Controller
                     'empresa' => $row->empresa,  
                     'logo_empresa' => $row->logo_empresa,
                     'client' => $row->client,   
+                    'codigoempresa' => $row->codigo_empresa,
                     'language' => $GLOBALS['language']
                 );
                 //print_r($sessao);

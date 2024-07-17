@@ -8,6 +8,15 @@
  */
 class Home extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        date_default_timezone_set('Europe/Lisbon');
+        //funcao para testar se � necess�rio kikar o user
+        $this->load->model('auth/login_model');//, 'reg_model');
+        $this->login_model->to_kick();
+    }
+
     function index(){
         $this->load->helper('url');
         $this->load->library('session');
@@ -20,7 +29,17 @@ class Home extends CI_Controller
 			$this->load->model('auth/login_model');
 			$this->load->view('structure/header', $session_data);
 			$this->load->view('structure/side_menu', $session_data);
-			$this->load->view('homepage/dashboard', $session_data);
+            if ($session_data['user_type'] == 1 || $session_data['user_type'] == 2) {
+                $this->load->view('homepage/dashboardAdmin', $session_data);
+            } elseif ($session_data['user_type'] == 3) {
+                $this->load->view('homepage/dashboardCom', $session_data);
+            } elseif ($session_data['user_type'] == 4) {
+                $this->load->view('homepage/dashboardGab', $session_data);
+            } elseif ($session_data['user_type'] == 5) {
+                $this->load->view('homepage/dashboardFin', $session_data);
+            } elseif ($session_data['user_type'] == 6 || $session_data['user_type'] == 7) {
+                $this->load->view('homepage/dashboardFab', $session_data);
+            }			
 			$this->load->view('structure/footer', $session_data);
         }
         else

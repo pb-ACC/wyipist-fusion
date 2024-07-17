@@ -35,7 +35,7 @@
     <!--<script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.4.3/js/tabulator.min.js"></script>-->
     <!--<script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.7.2/js/tabulator.min.js"></script>-->
     <script type="text/javascript" src="<?=base_url();?>public/js/tabulator/tabulator.min.js"></script>
-    <link href="<?=base_url();?>public/css/tabulator/tabulator_bootstrap4.min.css" rel="stylesheet">
+    <link href="<?=base_url();?>public/css/tabulator/tabulator_bootstrap5.min.css" rel="stylesheet">
     <!--blockUI-->
     <script type="text/javascript" src="<?=base_url();?>public/js/blockUI/jquery.blockUI.js"></script>
     <!-- Select2 -->
@@ -46,14 +46,14 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <!-- Date Picker -->
-    <link rel="stylesheet" href="<?=base_url();?>public/js/bootstrap-datepicker/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="<?=base_url();?>public/js/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
     <!-- image Picker -->
     <link href=" https://cdnjs.cloudflare.com/ajax/libs/image-picker/0.3.1/image-picker.css" rel="stylesheet">
     <!--toogle-->
     <link href="<?=base_url();?>public/js/bootstrap4_toogle/bootstrap4-toggle.min.css" rel="stylesheet">
     <!--Sweet Alert-->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.17/sweetalert2.all.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.17/sweetalert2.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.min.css" rel="stylesheet">
 
     <link rel="icon" href="<?=base_url();?>public/img/logos/wyipi.ico">
 
@@ -208,14 +208,6 @@
                             <div class="form-group">
                                 <label for="user_function">Função</label>
                                 <input type="email" class="form-control" id="user_function2" placeholder="Função" value="<?php echo $funcao;?>" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label for="user_phone">Telefone</label>
-                                <input type="email" class="form-control" id="user_phone2" placeholder="Telefone" value="<?php echo $telefone;?>" >
-                            </div>
-                            <div class="form-group">
-                                <label for="user_email">Email</label>
-                                <input type="email" class="form-control" id="user_email2" placeholder="email" value="<?php echo $email;?>" >
                             </div>
                             <div class="form-group">
                                 <label for="pass2">Nova Password</label>
