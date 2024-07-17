@@ -15,7 +15,7 @@ class Dropdowns extends CI_Model
 
     function escolha_empresa($empresa){
         $value='';
-        if($empresa == 1){
+        if($empresa == 3){
             $value='<select id="empresasDP" onchange="changeEmpresa()" class="form-control">'.
                    '<option selected="selected">Ceragni</option>'.
                    '<option>Certeca</option>'.

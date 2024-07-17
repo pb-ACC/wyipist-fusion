@@ -73,4 +73,5 @@ $route['stocks/production'] = 'stocks/producao/SaidaProducao';
 | USERS
 | -------------------------------------------------------------------------
 */
-$route['users/all-users'] = 'users/Users';
+$route['users/all-users'] = 'users/GetUsers';
+$route['users/add-user'] = 'users/GetUsers';

@@ -40,7 +40,7 @@ class ListarPaletes extends CI_Controller
             //vecho $empresa[0]->Empresa;
             $this->load->model('standards/stocks/GetPalets');
             switch ($empresa[0]->TipoEmpresa) {
-                case 3:
+                case 1:
                     $setor='\'ST010\'';                    
                     $paletes=$this->GetPalets->producao($setor);
                     $data = array( 
@@ -58,7 +58,7 @@ class ListarPaletes extends CI_Controller
                     );
                     echo json_encode($data);
                     break;
-                case 1:
+                case 3:
                     /*                    
                     $st01='ST010';
                     $st02='FB001';

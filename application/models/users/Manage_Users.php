@@ -1,6 +1,6 @@
 <?php
 
-class Users_model extends CI_Model
+class Manage_Users extends CI_Model
 {
 
 
@@ -13,40 +13,17 @@ class Users_model extends CI_Model
         //$this->db->reconnect();
     }
 
-    public function listUsers(){
+    public function editUsers($id,$name,$phone,$email,$user,$user_gpac,$type_id,$empresa_type){
 
-       $sql="SELECT A.id, A.username, A.Nome,A.email, A.telefone, C.type, A.user_type type_id, A.funcionario_gpac, A.password passwd, A.client 
-             from users A join clients      B on (A.client=B.id) 
-                          join client_types C on (A.user_type=C.id) 
-             where A.active=1 and A.client<>3";
-        $query = $this->db->query($sql);
-        $result = $query->result();
-        //print_r($result);
-        return $result;
-    }
-
-    public function editUsers($id,$name,$phone,$email,$user,$pass,$user_gpac,$type_id, $client,$empresa_type){
-
-
-        if($this->verifyUserNameEdit($user, $client, $id)=="Utilizador inserido já existe!"){
-
+        if($this->verifyUserNameEdit($user, $empresa_type, $id)=="Utilizador inserido já existe!"){
             return "Utilizador inserido já existe!";
-
-        }else if ($this->verifyGpacUserEdit($user_gpac, $client, $id)=="Utilizador GPAC inserido já existe!"){
-
-
+        }else if ($this->verifyGpacUserEdit($user_gpac, $empresa_type, $id)=="Utilizador GPAC inserido já existe!"){
             return "Utilizador GPAC inserido já existe!";
-
         }else {
-
-
             $this->db->query("update users set Nome='{$name}',telefone='{$phone}', email='{$email}',username=UPPER('{$user}'),client='{$empresa_type}',
                           funcionario_gpac=UPPER('{$user_gpac}'),user_type={$type_id} where id={$id}");
-
             return true;
-
         }
-
     }
 
 
@@ -181,28 +158,15 @@ class Users_model extends CI_Model
 
     private function verifyUserNameEdit($username, $client, $id){
 
-
-        $sql="Select * from  users where username=UPPER('{$username}') and client='{$client}' and id <> {$id}";
-
-        //echo $sql;
-
+        $sql="SELECT * from  users where username=UPPER('{$username}') and client={$client} and id<>{$id}";
         $query = $this->db->query($sql);
-
         $result = $query->result();
 
         if(!empty($result)){
-
             return "Utilizador inserido já existe!";
-
         }else{
-
-
             return "OK Username";
-
         }
-
-
-
     }
 
 
@@ -232,31 +196,21 @@ class Users_model extends CI_Model
 
     private function verifyGpacUserEdit($funcionario_gpac, $client, $id){
 
-
-        $sql="Select * from  users where funcionario_gpac=UPPER('{$funcionario_gpac}') and client='{$client}' and id <> {$id}";
-
+        $sql="SELECT * from  users where funcionario_gpac=UPPER('{$funcionario_gpac}') and client={$client} and id <> {$id}";
         $query = $this->db->query($sql);
-
         $result = $query->result();
 
         if(!empty($result)){
-
             return "Utilizador GPAC inserido já existe!";
-
         }else{
-
-
             return "OK User GPAC";
-
         }
-
-
     }
 
 
     public function deleteUsers($id){
 
-        $this->db->query("update users 
+        $this->db->query("UPDATE users 
                           set active=0
                           where id={$id}");
 
