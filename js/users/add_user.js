@@ -45,3 +45,74 @@ $('#userForm').on('submit', function(event) {
         }
     });
 });
+
+document.getElementById("file").onclick = function () {
+
+    $("#file").fileupload({
+        url: "http://127.0.0.1/wyipist-fusion/standards/FileUpload/uploadEditUtilizador",
+        //dataType:'json',
+        autoUpload:'false',
+    }).bind('fileuploadadd', function(e, data){
+
+        var fileTypeAllowed = /.\.(jpg|png|jpeg)$/i;
+        var fileName=data.files[0]["name"];
+        var fileSize=data.files[0]["size"];
+
+        if(!fileTypeAllowed.test(fileName))
+            //fire_annotation_error2("Apenas podem ser carregados ficheiros de imagem!!!!","myAlertErrorUpload");
+            toastr["error"]("Apenas podem ser carregados ficheiros de imagem!!!!");
+        else if (fileSize>5000000)
+            //fire_annotation_error2("Ficheiro demasiado Grande!!!! Máximo permitido 5MB","myAlertErrorUpload");
+            toastr["error"]("Ficheiro demasiado Grande!!!! Máximo permitido 5MB");
+        else{
+            //$.post("<?php echo base_url();?>fileUpload_controller/", {codigo:codigo2, numeroDoc:NumeroDocumento2});
+            data.submit();
+            //console.log(data);
+        }
+    }).bind('fileuploaddone', function(e,data){
+
+        var responseText2 = data.jqXHR.responseText;
+        var jsonData=JSON.parse(responseText2);
+        var status=jsonData.status;
+        var path=jsonData.path1;
+        //$("#bodyImagens").empty();
+        //console.log(path);
+       insertUserImageBD(path);
+        //getImagens(codigo2,NumeroDocumento2,linhaTabela2,tipo2);
+
+        if(status==1){
+        }
+
+    }).bind('fileuploadprogressall', function(e,data){
+        var progresso=parseInt(data.loaded / data.total * 100);
+        //fire_annotation_success2(progresso + " % Completo","myAlertSuccessAdicionar");
+        toastr["success"](progresso + " % Completo");
+    });
+};
+
+function insertUserImageBD(file){
+
+    $.ajax({
+        type: "POST",
+        url: 'http://127.0.0.1/wyipist-fusion/users/ManageUsers/addUsersImageBD',
+        dataType: "json",
+        data: {
+            file:file
+        },
+        success: function (data) {          
+            if (data === "kick") {
+                //alert("Outro utilizador entrou com as suas credenciais, faça login de novo.");
+                toastr["warning"]("Outro utilizador entrou com as suas credenciais, faça login de novo.");
+                window.location = "home/logout";
+            } else {
+
+            }
+        },
+        error: function (e) {
+            //alert(e);
+            alert('Request Status: ' + e.status + ' Status Text: ' + e.statusText + ' ' + e.responseText);
+            console.log(e);
+        }
+
+    });
+}

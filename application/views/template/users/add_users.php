@@ -108,10 +108,7 @@
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input" id="file" name="file">
-                                            <label class="custom-file-label" for="exampleInputFile">Escolher ficheiro</label>
-                                        </div>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">Upload</span>
+                                            <label class="custom-file-label" for="photo_add">Escolher ficheiro</label>
                                         </div>
                                     </div>
                                 </div>
