@@ -26,10 +26,11 @@ class Home extends CI_Controller
             $session_data = $this->session->userdata('logged_in');
 			$ip = $_SERVER['REMOTE_ADDR'];
 			$session_data['ip'] = $ip; // vamos adicionar o ip para o modo de manutencao saber atuar
+            
 			$this->load->model('auth/login_model');
 			$this->load->view('structure/header', $session_data);
 			$this->load->view('structure/side_menu', $session_data);
-            if ($session_data['user_type'] == 1 || $session_data['user_type'] == 2) {
+            if ($session_data['user_type'] == 1 || $session_data['user_type'] == 2) {            
                 $this->load->view('homepage/dashboardAdmin', $session_data);
             } elseif ($session_data['user_type'] == 3) {
                 $this->load->view('homepage/dashboardCom', $session_data);

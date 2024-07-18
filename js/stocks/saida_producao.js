@@ -1,5 +1,11 @@
 $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI); // para bloquear a pagina com o ajax load sempre que houver um pedido ajax
 
+$("#menu-stocks01").addClass("menu-is-opening menu-open");
+$("#menu-stocks02").addClass("active");
+$('#menu-stocks03').attr("style", "display: block;" );
+$("#saida-prod01").addClass("active");
+$("#saida-prod02").addClass("active");
+
 let tablePaletes, tableSelPaletes, tableLocal_fabric, tableLocal_logistic, tableLocal_warehouse, selectedData=[], OG, dt, dtt, count=0, count2=0, count3=0, count4=0, local='';
 let type='', title='', text='', text1='', text2='', action='', xposition='', campo='',valor='',tblPL=[], tblLoc=[];
 let palets=[], paletsOG=[], marosca=[];

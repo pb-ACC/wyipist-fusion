@@ -21,26 +21,40 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li id="menu-stocks01" class="nav-item">
+                    <a id="menu-stocks02" href="#" class="nav-link">
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                        <p>  Stocks <i class="fas fa-angle-left right"></i> </p>
+                    </a>
+                    <ul id="menu-stocks03" class="nav nav-treeview" style="display: none;">
+                        <li id="saida-prod01" class="nav-item">
+                            <a id="saida-prod02" href="<?=base_url();?>stocks/production" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p> Saída Produção</p>
+                            </a>
+                        </li>                
+                    </ul>
+                </li>
             <?php if ($user_type==1) { ?>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li id="menu-gestao01" class="nav-item">
+                    <a id="menu-gestao02" href="#" class="nav-link">
                         <i class="nav-icon fas fa-gears"></i>
                         <p> Gestão <i class="right fas fa-angle-left"></i></p>
                     </a>
-                    <ul class="nav nav-treeview" style="display: none;">                    
-                        <li class="nav-item">
+                    <ul id="menu-user01" class="nav nav-treeview" style="display: none;">                    
+                        <li id="menu-user02" class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="fa-solid fa-users"></i>
                                 <p> Utilizadores <i class="right fas fa-angle-left"></i></p>
                             </a>
-                            <ul class="nav nav-treeview" style="display: none;">
-                                <li class="nav-item">
-                                    <a href="<?=base_url();?>users/all-users" class="nav-link">
+                            <ul id="opcoes-user01" class="nav nav-treeview" style="display: none;">
+                                <li id="consultar-user01" class="nav-item">
+                                    <a id="consultar-user02" href="<?=base_url();?>users/all-users" class="nav-link">
                                         <i class="fa-solid fa-magnifying-glass"></i>
                                         <p> Consultar </p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <li id="adicionar-user" class="nav-item">
                                     <a href="#" class="nav-link">
                                         <i class="fa-solid fa-user-plus"></i>
                                         <p> Adicionar </p>

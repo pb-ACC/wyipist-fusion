@@ -21,7 +21,15 @@ class Get_Users extends CI_Model
              where A.active=1 and A.client<>3";
         $query = $this->db->query($sql);
         $result = $query->result();
-        //print_r($result);
         return $result;
     }
+
+    public function countUsers(){
+        $sql="SELECT count(A.id) total
+              from users A 
+              where A.active=1 and A.client<>3";
+         $query = $this->db->query($sql);
+         $result = $query->result();
+         return $result;
+     }
 }

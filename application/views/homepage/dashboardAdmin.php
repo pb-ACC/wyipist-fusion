@@ -49,7 +49,7 @@
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>44</h3>
+                            <h3 id="totUsers"></h3>
                             <p>Utilizadores</p>
                         </div>
                         <div class="icon">
@@ -76,3 +76,5 @@
         </div>
     </section>
 </div>
+
+<script src="<?=base_url();?>js/homepage/main.js"></script>

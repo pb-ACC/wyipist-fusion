@@ -1,3 +1,4 @@
+
 function fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc){
 
     if(action==='motive') {

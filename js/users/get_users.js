@@ -2,6 +2,15 @@ let table;
 let type='', title='', text='', text1='', text2='', action='', xposition='', campo='',valor='',tblPL=[], tblLoc=[];
 $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
 
+$("#menu-gestao01").addClass("menu-is-opening menu-open");
+$("#menu-gestao02").addClass("active");
+$("#menu-gestao02").addClass("active");
+$('#menu-user01').attr("style", "display: block;" );
+$("#menu-user02").addClass("menu-is-opening menu-open");
+$('#opcoes-user01').attr("style", "display: block;" );
+$("#consultar-user01").addClass("active");
+$("#consultar-user02").addClass("active");
+
 $.ajax({                
     type: "GET",
     url: "http://127.0.0.1/wyipist-fusion/users/GetUsers/getUsers",

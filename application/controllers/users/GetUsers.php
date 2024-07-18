@@ -46,4 +46,19 @@ class GetUsers extends CI_Controller
             redirect('start', 'refresh');
         }
     }
+
+    public function countUsers(){
+
+        $this->load->helper('url');
+        $this->load->library('session');
+
+        if($this->session->userdata('logged_in')) {
+            
+            $this->load->model('users/Get_Users');
+            echo json_encode($this->Get_Users->countUsers());
+            
+        }else{
+            redirect('start', 'refresh');
+        }
+    }
 }
