@@ -53,7 +53,7 @@
                             <p>Utilizadores</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-person-add"></i>
+                            <i class="ion ion-person-stalker"></i>
                         </div>
                         <a href="<?php echo base_url();?>users/all-users" class="small-box-footer"> Mais info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>

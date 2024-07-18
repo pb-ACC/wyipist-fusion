@@ -66,9 +66,9 @@ class Manage_Users extends CI_Model
             ];               
             return $response;
         }else {
-            $this->db->query("INSERT into users (nome,telefone, email,username,password,funcionario_gpac,user_type, client, funcao, active)
-                          VALUES ('{$nome}','{$contacto}','{$email}',UPPER('{$user}'),md5('{$password}'),UPPER('{$userGPAC}'),{$user_type},{$empresa_type},'{$cargo}',1)");
-
+            $this->db->query("INSERT into users (nome,telefone, email,username,password,funcionario_gpac,user_type, client, funcao, codigo_empresa, active)
+                          VALUES ('{$nome}','{$contacto}','{$email}',UPPER('{$user}'),md5('{$password}'),UPPER('{$userGPAC}'),{$user_type},{$empresa_type},'{$cargo}',{$empresa_type},1)");
+            
             $maxUser = $this->getMaxUserImage();
             $sql = "SELECT * from  template_images where ifnull(id_user,0)=0";
             $query = $this->db->query($sql);
@@ -79,15 +79,25 @@ class Manage_Users extends CI_Model
             } else {
                 $this->db->query("insert into template_images (id_user,logo_user ) values ({$maxUser},'public/img/users/user.png') ");
             }
-
+            
+            $this->db->close();     
+            $this->insertGPAC($empresa_type,$userGPAC);
             $response = [
                 'type' => 'success',
-                'text' => 'Novo registro criado com sucesso'
+                'text' => 'Novo registo criado com sucesso'
             ];            
             return $response;
         }
     }
 
+    public function insertGPAC($empresa_type,$userGPAC){
+        $this->load->database('default');
+        $sql="INSERT into zxOperEmpresaWEB (Empresa,Operador) 
+              SELECT case when {$empresa_type}=1 then 'CERAGNI' when {$empresa_type}=2 then 'CERTECA' else 'AMBAS' end, UPPER('{$userGPAC}')";
+        //echo $sql;             
+        $this->db->query($sql);
+        $this->db->close();     
+    }
 
     public function addUsersImageBD($file){
 
