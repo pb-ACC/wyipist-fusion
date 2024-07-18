@@ -54,8 +54,8 @@
                                         <p> Consultar </p>
                                     </a>
                                 </li>
-                                <li id="adicionar-user" class="nav-item">
-                                    <a href="#" class="nav-link">
+                                <li id="adicionar-user01" class="nav-item">
+                                    <a id="adicionar-user02" href="<?=base_url();?>users/add-user" class="nav-link">
                                         <i class="fa-solid fa-user-plus"></i>
                                         <p> Adicionar </p>
                                     </a>

@@ -49,51 +49,43 @@ class Manage_Users extends CI_Model
     }
 
 
-    public function addUsers($name,$phone,$email,$user,$pass,$user_gpac,$type_id, $client, $empresa_type){
+    public function addUsers($nome,$contacto,$email,$cargo,$user,$user_type,$userGPAC,$empresa_type,$password,$file){
 
+        $response=[];
 
-        //echo $this->verifyUserName($user);
-
-
-        if($this->verifyUserName($user, $client)=="Utilizador inserido já existe!"){
-
-            return "Utilizador inserido já existe!";
-
-        }else if ($this->verifyGpacUser($user_gpac, $client)=="Utilizador GPAC inserido já existe!"){
-
-
-            return "Utilizador GPAC inserido já existe!";
-
+        if($this->verifyUserName($user, $empresa_type)=="Utilizador inserido já existe!"){
+            $response = [
+                'type' => 'danger',
+                'text' => 'Utilizador inserido já existe!'
+            ];    
+            return $response;                    
+        }else if ($this->verifyGpacUser($userGPAC, $empresa_type)=="Utilizador GPAC inserido já existe!"){
+            $response = [
+                'type' => 'danger',
+                'text' => 'Utilizador GPAC inserido já existe!'
+            ];               
+            return $response;
         }else {
-
-
-            $this->db->query("insert into users (nome,telefone, email,username,password,funcionario_gpac,user_type, client, active)
-                          VALUES ('{$name}','{$phone}','{$email}',UPPER('{$user}'),md5('{$pass}'),UPPER('{$user_gpac}'),{$type_id},{$empresa_type},1)");
+            $this->db->query("INSERT into users (nome,telefone, email,username,password,funcionario_gpac,user_type, client, funcao, active)
+                          VALUES ('{$nome}','{$contacto}','{$email}',UPPER('{$user}'),md5('{$password}'),UPPER('{$userGPAC}'),{$user_type},{$empresa_type},'{$cargo}',1)");
 
             $maxUser = $this->getMaxUserImage();
-
-            $sql = "Select * from  template_images where ifnull(id_user,0)=0";
-
+            $sql = "SELECT * from  template_images where ifnull(id_user,0)=0";
             $query = $this->db->query($sql);
-
             $result = $query->result();
 
             if (!empty($result)) {
-
                 $this->db->query("update template_images set id_user={$maxUser} where ifnull(id_user,0)=0");
-
             } else {
-
-
-                $this->db->query("insert into template_images (id_user,logo_user ) values ({$maxUser},'img/users/user.png') ");
-
-
+                $this->db->query("insert into template_images (id_user,logo_user ) values ({$maxUser},'public/img/users/user.png') ");
             }
 
-            return true;
-
+            $response = [
+                'type' => 'success',
+                'text' => 'Novo registro criado com sucesso'
+            ];            
+            return $response;
         }
-
     }
 
 
@@ -132,7 +124,7 @@ class Manage_Users extends CI_Model
     private function verifyUserName($username, $client){
 
 
-        $sql="Select * from  users where username=UPPER('{$username}') and client='{$client}'";
+        $sql="SELECT * from  users where username=UPPER('{$username}') and client={$client}";
 
         //echo $sql;
 
@@ -173,7 +165,7 @@ class Manage_Users extends CI_Model
     private function verifyGpacUser($funcionario_gpac, $client){
 
 
-        $sql="Select * from  users where funcionario_gpac=UPPER('{$funcionario_gpac}') and client='{$client}'";
+        $sql="SELECT * from  users where funcionario_gpac=UPPER('{$funcionario_gpac}') and client={$client}";
 
         $query = $this->db->query($sql);
 

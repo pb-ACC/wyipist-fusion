@@ -14,6 +14,25 @@ class ManageUsers extends CI_Controller
         $this->login_model->to_kick();
     }
 
+    public function index(){
+
+        $this->load->helper('url');
+        $this->load->library('session');
+
+        if($this->session->userdata('logged_in')) {
+
+            $session_data = $this->session->userdata('logged_in');
+
+            $this->load->view('structure/header', $session_data);
+            $this->load->view('structure/side_menu', $session_data);
+            $this->load->view('template/users/add_users', $session_data);
+            $this->load->view('structure/footer', $session_data);
+
+        }else{
+            redirect('start', 'refresh');
+        }
+    }
+
     public function editUsers(){
 
         $this->load->helper('url');
@@ -95,31 +114,26 @@ class ManageUsers extends CI_Controller
 
         if($this->session->userdata('logged_in')) {
 
-            $session_data = $this->session->userdata('logged_in');
+            $nome = $_POST['nome'];
+            $contacto = $_POST['contacto'];
+            $email = $_POST['email'];
+            $cargo = $_POST['cargo'];
+            $user = $_POST['user'];
+            $user_type = $_POST['user_type'];
+            $userGPAC = $_POST['userGPAC'];
+            $empresa_type = $_POST['empresa_type'];
+            $password = $_POST['password'];
+            $file = $_FILES['file'];
 
-            //print_r($session_data);
-
-            $client=$session_data['client'];
-
-            $name = $this->input->post('name');
-            $phone = $this->input->post('phone');
-            $email = $this->input->post('email');
-            $user = $this->input->post('user');
-            $pass = $this->input->post('pass');
-            $user_gpac = $this->input->post('user_gpac');
-            $type_id = $this->input->post('type_id');
-            $empresa_type = $this->input->post('empresa_type');
-
-            $this->load->model('users/Users_model');
-            echo json_encode($this->Users_model->addUsers($name,$phone,$email,$user,$pass,$user_gpac,$type_id, $client,$empresa_type));
+            //echo $nome.' '.$contacto.' '.$email.' '.$cargo.' '.$user.' '.$user_type.' '.$userGPAC.' '.$empresa_type.' '.$password;
+            $this->load->model('users/Manage_Users');
+            echo json_encode($this->Manage_Users->addUsers($nome,$contacto,$email,$cargo,$user,$user_type,$userGPAC,$empresa_type,$password,$file));
+            //redirect('users/add-user','refresh');
 
         }else{
 
             redirect('start', 'refresh');
         }
-
-
-
     }
 
 
