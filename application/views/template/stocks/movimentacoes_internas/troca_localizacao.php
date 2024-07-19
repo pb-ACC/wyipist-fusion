@@ -4,13 +4,14 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Saída Produção</h1>
+                    <h1 class="m-0">Mov. Internas (Troca Localização)</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>home"> Home</a></li>
-                        <li class="breadcrumb-item"><i class="nav-icon fa-solid fa-boxes-packing"></i> Stocks</li>    
-                        <li class="breadcrumb-item active"><i class="fas fa-boxes"></i> Saída Produção</li>
+                        <li class="breadcrumb-item"><i class="nav-icon fa-solid fa-boxes-packing"></i> Stocks</li>                        
+                        <li class="breadcrumb-item"><i class="nav-icon fas fa-exchange-alt"></i> Mov. Internas</li>
+                        <li class="breadcrumb-item active"><i class="nav-icon fas fa-truck-loading"></i> Troca Localização</li>
                     </ol>
                 </div>
             </div>
@@ -26,7 +27,9 @@
                 </div>
 
                 <div class="card-body">
-                    <div id="radioButtons" style="display: none;">
+                    <div id="select" style="display: none;">
+                    </div>
+                    <div id="radioButtons" class="form-group" style="display: none;">
                     </div>
                     <div id="selected-palets-table" class="table table-striped"  style="margin-top: 35px;box-shadow: 5px 10px 18px #888888;">
                     </div>
@@ -35,7 +38,6 @@
                 <div class="card-footer">                    
                     <div id="buttons"></div>
                 </div>
-
 
             </div>
 
@@ -210,4 +212,4 @@ let user_type=<?php echo $user_type;?>;
 let codigoempresa=<?php echo $codigoempresa;?>;
 </script>
 
-<script src="<?=base_url();?>js/stocks/saida_producao.js"></script>
+<script src="<?=base_url();?>js/stocks/movimentacoes_internas/troca_localizacao.js"></script>

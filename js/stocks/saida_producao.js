@@ -14,15 +14,6 @@ selectedPalets(data=[]);
 toastr.clear();
 toastr["info"]("A carregar paletes...");
 $("#choose_palets").prop("disabled",true);
-if(codigoempresa === 1){
-    $("#warehouse").show();
-    $("#factory").hide();
-    $("#move_logistics").hide();
-}else{
-    $("#warehouse").hide();
-    $("#factory").show();
-    $("#move_logistics").show();
-}
 
 $.ajax({
     type: "GET",
@@ -38,6 +29,8 @@ $.ajax({
                 $('#empresasDP').select2();
                 $("#radioButtons").show();
 
+            if (data['button'].length > 0) 
+                $("#buttons").append(data['button']); 
             //alert(data);
             paletsOG=Object.values(data['paletes']);
             getPalets(Object.values(data['paletes']));
@@ -841,16 +834,6 @@ function confirm_changeEmpresa(){
                 toastr.clear();
                 toastr["info"]("A carregar paletes...");
 
-                if(emp === 'Certeca'){
-                    $("#warehouse").hide();
-                    $("#factory").show();
-                    $("#move_logistics").show();
-                }else{
-                    $("#warehouse").show();
-                    $("#factory").hide();
-                    $("#move_logistics").hide();
-                }
-
                 paletsOG=Object.values(data['paletes']);
                 getPalets(Object.values(data['paletes']));
                 
@@ -859,6 +842,10 @@ function confirm_changeEmpresa(){
                     dtt = Object.values(data['zonas']);
                     listLocal(Object.values(data['zonas']));
 
+                    if (data['button'].length > 0) 
+                        $("#buttons").empty();
+                        $("#buttons").append(data['button']);    
+                        
                     toastr.clear();
                     toastr["success"]("Paletes carregadas com sucesso.");
                     toastr.clear();

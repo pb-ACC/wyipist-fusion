@@ -23,7 +23,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li id="menu-stocks01" class="nav-item">
                     <a id="menu-stocks02" href="#" class="nav-link">
-                        <i class="fa-solid fa-boxes-stacked"></i>
+                        <i class="fa-solid fa-boxes-packing"></i>
                         <p>  Stocks <i class="fas fa-angle-left right"></i> </p>
                     </a>
                     <ul id="menu-stocks03" class="nav nav-treeview" style="display: none;">
@@ -32,7 +32,22 @@
                                 <i class="far fa-circle nav-icon"></i>
                                 <p> Saída Produção</p>
                             </a>
-                        </li>                
+                        </li>      
+                        
+                        <li id="menu-mov01" class="nav-item">
+                            <a id="menu-mov02" href="#" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p> Mov. Internas <i class="right fas fa-angle-left"></i> </p>
+                            </a>
+                            <ul id="opcoes-mov01" class="nav nav-treeview" style="display: none;">
+                                <li id="troca-loc01" class="nav-item">
+                                    <a id="troca-loc02" href="<?=base_url();?>stocks/internal_movements/change_location" class="nav-link">
+                                        <i class="far fa-dot-circle nav-icon"></i>
+                                        <p> Troca Localização </p>
+                                    </a>
+                                </li>                      
+                            </ul>
+                        </li>
                     </ul>
                 </li>
             <?php if ($user_type==1) { ?>

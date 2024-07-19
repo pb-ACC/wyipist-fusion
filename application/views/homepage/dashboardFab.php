@@ -31,7 +31,12 @@
                             <a href="<?=base_url();?>stocks/production" class="btn btn-app bg-secondary" style="height: 95%; width: 95%;">
                                 <i class="fas fa-boxes" style="font-size: x-large"></i></i>&nbsp;<p style="font-size: initial;">Saída<br>Produção</p>
                             </a>
-                        </div>    
+                        </div>  
+                        <div class="col-lg-2 col-6" style="padding: 0;">
+                            <a href="<?=base_url();?>stocks/internal_movements/change_location" class="btn btn-app bg-primary" style="height: 95%; width: 95%;">
+                                <i class="fas fa-truck-loading" style="font-size: x-large"></i>&nbsp;<p  style="font-size: initial;">Movimentações<br>Internas<br>(Troca Localização)</p>
+                            </a>
+                        </div>  
                     </div>
                 </div>
 

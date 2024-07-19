@@ -42,23 +42,60 @@ class ListarPaletes extends CI_Controller
             switch ($empresa[0]->TipoEmpresa) {
                 case 1:
                     $setor='\'ST010\'';                    
+                    
+                    $this->load->model('standards/stocks/GetPalets');
                     $paletes=$this->GetPalets->producao($setor);
+
+                    $this->load->model('standards/others/Buttons');
+                    $button=$this->Buttons->buttons_empresa($empresa[0]->TipoEmpresa);
+
                     $data = array( 
-                        'select' => '',                     
+                        'select' => '',     
+                        'button' => $button,                
                         'paletes' => $paletes
                     );
                     echo json_encode($data);
                     break;
                 case 2:
                     $setor='\'FB001\'';
+                    $this->load->model('standards/stocks/GetPalets');
                     $paletes=$this->GetPalets->producao($setor);
+
+                    $this->load->model('standards/others/Buttons');
+                    $button=$this->Buttons->buttons_empresa($empresa[0]->TipoEmpresa);
+
                     $data = array( 
-                        'select' => '',                                          
+                        'select' => '', 
+                        'button' => $button,  
                         'paletes' => $paletes
                     );
                     echo json_encode($data);
                     break;
                 case 3:
+                    /*                    
+                    $st01='ST010';
+                    $st02='FB001';
+                    $setor = '\''.$st01.'\''.','.'\''.$st02.'\'';     
+                    */
+                    $setor='\'ST010\''; 
+                    $this->load->model('standards/others/Dropdowns');
+                    $select=$this->Dropdowns->escolha_empresa($empresa[0]->TipoEmpresa);
+            
+                    $this->load->model('standards/stocks/GetPalets');
+                    $paletes=$this->GetPalets->producao($setor);
+
+                    $this->load->model('standards/others/Buttons');
+                    $button=$this->Buttons->buttons_empresa($empresa[0]->TipoEmpresa);
+
+                    $data = array(
+                        'select' => $select,
+                        'button' => $button,  
+                        'paletes' => $paletes
+                    );
+                    //print_r($data['paletes']);
+                    echo json_encode($data);
+                    break;
+                case 4:
                     /*                    
                     $st01='ST010';
                     $st02='FB001';
@@ -77,12 +114,116 @@ class ListarPaletes extends CI_Controller
                     );
                     //print_r($data['paletes']);
                     echo json_encode($data);
-                    break;
+                    break;                    
             }
 
         }else{
             redirect('start', 'refresh');
         }   
-    }
+    }  
     
+    public function getPalets_trocaLocal(){
+        $this->load->helper('url');
+        $this->load->library('session');
+        if($this->session->userdata('logged_in')) {
+            
+            $session_data = $this->session->userdata('logged_in');            
+            $user_type = $session_data['user_type'];
+
+            $empresa= $this->getEmpresa();            
+            //vecho $empresa[0]->Empresa;
+            $this->load->model('standards/stocks/GetPalets');
+            switch ($empresa[0]->TipoEmpresa) {
+                case 1:
+                    $setor='\'ST010\'';                    
+                    $this->load->model('standards/stocks/GetPalets');
+                    $paletes=$this->GetPalets->producao($setor);
+
+                    $this->load->model('standards/others/Buttons');
+                    $button=$this->Buttons->buttons_empresa($empresa[0]->TipoEmpresa);
+
+                    $data = array( 
+                        'select' => '',
+                        'radio' => '',
+                        'button' => $button,                     
+                        'paletes' => $paletes
+                    );                    
+                    echo json_encode($data);
+                    break;
+                case 2:
+                    $setor='\'FB001\'';
+                    $this->load->model('standards/stocks/GetPalets');
+                    $paletes=$this->GetPalets->producao($setor);
+                    $this->load->model('standards/others/Dropdowns');
+                    $radio=$this->Dropdowns->escolha_setores_empresa($empresa[0]->TipoEmpresa,$user_type);
+                    
+                    $this->load->model('standards/others/Buttons');
+                    $button=$this->Buttons->buttons_empresa($empresa[0]->TipoEmpresa);
+
+                    $data = array( 
+                        'select' => '',                                          
+                        'radio' => $radio,   
+                        'button' => $button,                                       
+                        'paletes' => $paletes
+                    );
+                    echo json_encode($data);
+                    break;
+                case 3:
+                    /*                    
+                    $st01='ST010';
+                    $st02='FB001';
+                    $setor = '\''.$st01.'\''.','.'\''.$st02.'\'';     
+                    */
+                    $setor='\'ST010\''; 
+                    $this->load->model('standards/others/Dropdowns');
+                    $select=$this->Dropdowns->escolha_empresa($empresa[0]->TipoEmpresa);  
+                    $radio=$this->Dropdowns->escolha_setores_empresa($empresa[0]->TipoEmpresa,$user_type);     
+                    
+                    $this->load->model('standards/others/Buttons');
+                    $button=$this->Buttons->buttons_empresa($empresa[0]->TipoEmpresa);
+            
+                    $this->load->model('standards/stocks/GetPalets');
+                    $paletes=$this->GetPalets->producao($setor);
+
+                    $data = array(
+                        'select' => $select,
+                        'radio' => $radio,
+                        'button' => $button,
+                        'paletes' => $paletes
+                    );
+                    //print_r($data['paletes']);
+                    echo json_encode($data);
+                    break;
+                case 4:
+                    /*                    
+                    $st01='ST010';
+                    $st02='FB001';
+                    $setor = '\''.$st01.'\''.','.'\''.$st02.'\'';     
+                    */
+                    $setor='\'ST010\''; 
+                    $this->load->model('standards/others/Dropdowns');
+                    $select=$this->Dropdowns->escolha_empresa($empresa[0]->TipoEmpresa);
+                    $radio=$this->Dropdowns->escolha_setores_empresa($empresa[0]->TipoEmpresa,$user_type);
+                    
+                    $this->load->model('standards/others/Buttons');
+                    $button=$this->Buttons->buttons_empresa($empresa[0]->TipoEmpresa);
+                    //echo $button;
+                    $this->load->model('standards/stocks/GetPalets');
+                    $paletes=$this->GetPalets->producao($setor);
+
+                    $data = array(
+                        'select' => $select,
+                        'radio' => $radio,
+                        'button' => $button,
+                        'paletes' => $paletes
+                    );
+                    //print_r($data['button']);
+                    echo json_encode($data);
+                    break;                    
+            }
+
+        }else{
+            redirect('start', 'refresh');
+        }   
+    }  
 }
