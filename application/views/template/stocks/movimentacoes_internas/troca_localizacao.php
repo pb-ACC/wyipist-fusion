@@ -27,9 +27,9 @@
                 </div>
 
                 <div class="card-body">
-                    <div id="select" style="display: none;">
+                    <div id="select">
                     </div>
-                    <div id="radioButtons" class="form-group" style="display: none;">
+                    <div id="radioButtons" class="form-group" style="margin-left: 5px; margin-top: 10px;">
                     </div>
                     <div id="selected-palets-table" class="table table-striped"  style="margin-top: 35px;box-shadow: 5px 10px 18px #888888;">
                     </div>

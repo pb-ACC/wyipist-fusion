@@ -13,7 +13,7 @@ selectedPalets(data=[]);
 
 toastr.clear();
 toastr["info"]("A carregar paletes...");
-$("#choose_palets").prop("disabled",true);
+//$("#choose_palets").prop("disabled",true);
 
 $.ajax({
     type: "GET",
@@ -93,7 +93,7 @@ $.ajax({
             toastr.clear();
             toastr["success"]("Paletes carregadas com sucesso.");
             toastr.clear();
-            $("#choose_palets").prop("disabled",false);  
+            //$("#choose_palets").prop("disabled",false);  
         }
     },
     error: function (e) {
@@ -821,7 +821,8 @@ function confirm_changeEmpresa(){
     empp = $("#empresasDP option:selected").text();
     emp = $.trim(empp);    
     //alert(emp.toUpperCase());
-    $("#choose_palets").prop("disabled",true);    
+    //$("#choose_palets").prop("disabled",true);    
+    $("#buttons button").attr("disabled", true);
     $.ajax({
         type: "POST",
         url: "http://127.0.0.1/wyipist-fusion/standards/ListarFiltro/filtraPlZn/"+emp,
@@ -845,11 +846,12 @@ function confirm_changeEmpresa(){
                     if (data['button'].length > 0) 
                         $("#buttons").empty();
                         $("#buttons").append(data['button']);    
-                        
+
                     toastr.clear();
                     toastr["success"]("Paletes carregadas com sucesso.");
                     toastr.clear();
-                    $("#choose_palets").prop("disabled",false);          
+                    //$("#choose_palets").prop("disabled",false);          
+                    $("#buttons button").attr("disabled", false);
             }
         },
         error: function (e) {

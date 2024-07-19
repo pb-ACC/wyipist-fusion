@@ -137,7 +137,7 @@ class ListarPaletes extends CI_Controller
                 case 1:
                     $setor='\'ST010\'';                    
                     $this->load->model('standards/stocks/GetPalets');
-                    $paletes=$this->GetPalets->producao($setor);
+                    $paletes=$this->GetPalets->armazem($setor);
 
                     $this->load->model('standards/others/Buttons');
                     $button=$this->Buttons->buttons_empresa($empresa[0]->TipoEmpresa);
@@ -153,9 +153,10 @@ class ListarPaletes extends CI_Controller
                 case 2:
                     $setor='\'FB001\'';
                     $this->load->model('standards/stocks/GetPalets');
-                    $paletes=$this->GetPalets->producao($setor);
-                    $this->load->model('standards/others/Dropdowns');
-                    $radio=$this->Dropdowns->escolha_setores_empresa($empresa[0]->TipoEmpresa,$user_type);
+                    $paletes=$this->GetPalets->armazem($setor);
+
+                    $this->load->model('standards/others/RadioButtons');
+                    $radio=$this->RadioButtons->escolha_setores_empresa($empresa[0]->TipoEmpresa,$user_type);
                     
                     $this->load->model('standards/others/Buttons');
                     $button=$this->Buttons->buttons_empresa($empresa[0]->TipoEmpresa);
@@ -177,13 +178,15 @@ class ListarPaletes extends CI_Controller
                     $setor='\'ST010\''; 
                     $this->load->model('standards/others/Dropdowns');
                     $select=$this->Dropdowns->escolha_empresa($empresa[0]->TipoEmpresa);  
-                    $radio=$this->Dropdowns->escolha_setores_empresa($empresa[0]->TipoEmpresa,$user_type);     
+
+                    $this->load->model('standards/others/RadioButtons');
+                    $radio=$this->RadioButtons->escolha_setores_empresa($empresa[0]->TipoEmpresa,$user_type);     
                     
                     $this->load->model('standards/others/Buttons');
                     $button=$this->Buttons->buttons_empresa($empresa[0]->TipoEmpresa);
             
                     $this->load->model('standards/stocks/GetPalets');
-                    $paletes=$this->GetPalets->producao($setor);
+                    $paletes=$this->GetPalets->armazem($setor);
 
                     $data = array(
                         'select' => $select,
@@ -203,13 +206,14 @@ class ListarPaletes extends CI_Controller
                     $setor='\'ST010\''; 
                     $this->load->model('standards/others/Dropdowns');
                     $select=$this->Dropdowns->escolha_empresa($empresa[0]->TipoEmpresa);
-                    $radio=$this->Dropdowns->escolha_setores_empresa($empresa[0]->TipoEmpresa,$user_type);
+                    $this->load->model('standards/others/RadioButtons');
+                    $radio=$this->RadioButtons->escolha_setores_empresa($empresa[0]->TipoEmpresa,$user_type);
                     
                     $this->load->model('standards/others/Buttons');
                     $button=$this->Buttons->buttons_empresa($empresa[0]->TipoEmpresa);
                     //echo $button;
                     $this->load->model('standards/stocks/GetPalets');
-                    $paletes=$this->GetPalets->producao($setor);
+                    $paletes=$this->GetPalets->armazem($setor);
 
                     $data = array(
                         'select' => $select,
