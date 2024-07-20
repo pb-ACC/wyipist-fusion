@@ -37,6 +37,11 @@
                                 <i class="fas fa-truck-loading" style="font-size: x-large"></i>&nbsp;<p  style="font-size: initial;">Movimentações<br>Internas<br>(Troca Localização)</p>
                             </a>
                         </div>  
+                        <div class="col-lg-2 col-6" style="padding: 0;">
+                            <a href="<?=base_url();?>stocks/manage_palettes/cancel_palettes" class="btn btn-app bg-danger" style="height: 95%; width: 95%;">
+                                <i class="fas fa-box" style="font-size: x-large"></i>&nbsp;<p  style="font-size: initial;">Anular<br>Paletes</p>
+                            </a>
+                        </div>
                     </div>
                 </div>
 

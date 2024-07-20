@@ -135,7 +135,7 @@ class ListarPaletes extends CI_Controller
             $this->load->model('standards/stocks/GetPalets');
             switch ($empresa[0]->TipoEmpresa) {
                 case 1:
-                    $setor='\'ST010\'';                    
+                    $setor = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST010\', \'ST011\', \'ST012\', \'ST013\', \'ST014\', \'ST015\', \'ST016\', \'ST020\', \'ST200\', \'ST201\', \'ST202\', \'ST203\', \'ST204\', \'ST205\', \'ST206\', \'ST207\', \'ST290\'';               
                     $this->load->model('standards/stocks/GetPalets');
                     $paletes=$this->GetPalets->armazem($setor);
 
@@ -151,7 +151,7 @@ class ListarPaletes extends CI_Controller
                     echo json_encode($data);
                     break;
                 case 2:
-                    $setor='\'FB001\'';
+                    $setor='\'FB003\'';
                     $this->load->model('standards/stocks/GetPalets');
                     $paletes=$this->GetPalets->armazem($setor);
 
@@ -175,7 +175,7 @@ class ListarPaletes extends CI_Controller
                     $st02='FB001';
                     $setor = '\''.$st01.'\''.','.'\''.$st02.'\'';     
                     */
-                    $setor='\'ST010\''; 
+                    $setor = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST010\', \'ST011\', \'ST012\', \'ST013\', \'ST014\', \'ST015\', \'ST016\', \'ST020\', \'ST200\', \'ST201\', \'ST202\', \'ST203\', \'ST204\', \'ST205\', \'ST206\', \'ST207\', \'ST290\'';               
                     $this->load->model('standards/others/Dropdowns');
                     $select=$this->Dropdowns->escolha_empresa($empresa[0]->TipoEmpresa);  
 
@@ -203,7 +203,7 @@ class ListarPaletes extends CI_Controller
                     $st02='FB001';
                     $setor = '\''.$st01.'\''.','.'\''.$st02.'\'';     
                     */
-                    $setor='\'ST010\''; 
+                    $setor = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST010\', \'ST011\', \'ST012\', \'ST013\', \'ST014\', \'ST015\', \'ST016\', \'ST020\', \'ST200\', \'ST201\', \'ST202\', \'ST203\', \'ST204\', \'ST205\', \'ST206\', \'ST207\', \'ST290\'';               
                     $this->load->model('standards/others/Dropdowns');
                     $select=$this->Dropdowns->escolha_empresa($empresa[0]->TipoEmpresa);
                     $this->load->model('standards/others/RadioButtons');

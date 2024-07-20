@@ -32,8 +32,7 @@
                                 <i class="far fa-circle nav-icon"></i>
                                 <p> Saída Produção</p>
                             </a>
-                        </li>      
-                        
+                        </li>                              
                         <li id="menu-mov01" class="nav-item">
                             <a id="menu-mov02" href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -48,6 +47,12 @@
                                 </li>                      
                             </ul>
                         </li>
+                        <li id="anula-pl01" class="nav-item">
+                            <a id="anula-pl02" href="<?=base_url();?>stocks/manage_palettes/cancel_palettes" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Anular Paletes</p>
+                            </a>
+                        </li> 
                     </ul>
                 </li>
             <?php if ($user_type==1) { ?>

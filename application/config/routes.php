@@ -68,6 +68,7 @@ $route['translate_uri_dashes'] = FALSE;
 */
 $route['stocks/production'] = 'stocks/producao/SaidaProducao';
 $route['stocks/internal_movements/change_location'] = 'stocks/movimentacoes_internas/MudaLocalizacao';
+$route['stocks/manage_palettes/cancel_palettes'] = 'stocks/gerir_paletes/AnularPaletes';
 
 /*
 | -------------------------------------------------------------------------
