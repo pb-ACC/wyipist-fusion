@@ -71,7 +71,6 @@ class ListarFiltro extends CI_Controller
         }   
     }
     
-    
     public function filtraPlZn_emanuel($emp,$newSector){
         $this->load->helper('url');
         $this->load->library('session');
@@ -192,5 +191,25 @@ class ListarFiltro extends CI_Controller
         }   
     }
 
+    public function filtraPlZn_emanuel_lista($emp){
+        $this->load->helper('url');
+        $this->load->library('session');
+        if($this->session->userdata('logged_in')) {            
+            
+            $this->load->model('standards/stocks/GetPalets');
+            $paletes=$this->GetPalets->stock($emp);
+            
+            $this->load->model('standards/others/Dropdowns');
+            $setores=$this->Dropdowns->setores_empresa($emp);
+            $data = array( 
+                'paletes' => $paletes,
+                'setores' => $setores
+            );
+                
+            echo json_encode($data);
+        }else{
+            redirect('start', 'refresh');
+        }   
+    }
 
 }

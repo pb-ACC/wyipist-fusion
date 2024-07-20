@@ -53,9 +53,31 @@
                                 <p>Anular Paletes</p>
                             </a>
                         </li> 
+                        <?php if($user_type == 1 || $user_type == 2){ ?>
+                        <li id="menu-list01" class="nav-item">
+                            <a id="menu-list02" href="#" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p> Listagem de Stock <i class="right fas fa-angle-left"></i> </p>
+                            </a>
+                            <ul id="opcoes-list01" class="nav nav-treeview" style="display: none;">
+                                <li id="list-stock01" class="nav-item">
+                                    <a id="list-stock02" href="<?=base_url();?>stocks/stock_list/all-stock" class="nav-link">
+                                    <i class="far fa-dot-circle nav-icon"></i>
+                                        <p>Consulta de Stock</p>
+                                    </a>
+                                </li>                  
+                                <li id="list-stock03" class="nav-item">
+                                    <a id="list-stock04" href="<?=base_url();?>stocks/stock_list/stock-between-dates" class="nav-link">
+                                    <i class="far fa-dot-circle nav-icon"></i>
+                                        <p>Cons. Stock datas</p>
+                                    </a>
+                                </li>                  
+                            </ul>
+                        </li>
+                        <?php }?>  
                     </ul>
                 </li>
-            <?php if ($user_type==1) { ?>
+            <?php if ($user_type==1 || $user_type==2) { ?>
                 <li id="menu-gestao01" class="nav-item">
                     <a id="menu-gestao02" href="#" class="nav-link">
                         <i class="nav-icon fas fa-gears"></i>

@@ -79,4 +79,14 @@ class Dropdowns extends CI_Model
         return $result;
     }
 
+    public function setores_empresa($empresa){                
+        $sql="SELECT Codigo, Descricao
+              FROM Sectores
+              where Empresa='{$empresa}'";        
+        $query = $this->db->query($sql);
+        $result = $query->result();
+        return $result;
+    }
+
+
 }
