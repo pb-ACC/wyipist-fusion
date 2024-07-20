@@ -212,4 +212,25 @@ class ListarFiltro extends CI_Controller
         }   
     }
 
+    public function filtraPlZn_emanuel_lista_datas($emp){
+        $this->load->helper('url');
+        $this->load->library('session');
+        if($this->session->userdata('logged_in')) {            
+            
+            $idata = $this->input->get('idate');
+            $fdata = $this->input->get('fdate');
+
+            $this->load->model('standards/stocks/GetPalets');
+            $paletes=$this->GetPalets->stock_datas($emp,$idata,$fdata);
+            
+            $data = array( 
+                'paletes' => $paletes            
+            );
+                
+            echo json_encode($data);
+        }else{
+            redirect('start', 'refresh');
+        }   
+    }
+
 }

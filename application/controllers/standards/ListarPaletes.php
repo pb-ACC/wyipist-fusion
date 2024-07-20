@@ -445,4 +445,109 @@ class ListarPaletes extends CI_Controller
             redirect('start', 'refresh');
         }   
     }  
+
+    public function getPalets_stock_datas(){
+        $this->load->helper('url');
+        $this->load->library('session');
+        if($this->session->userdata('logged_in')) {
+            
+            //$user_type= $session_data['user_type'];
+
+            $empresa= $this->getEmpresa();            
+            //vecho $empresa[0]->Empresa;
+            $this->load->model('standards/stocks/GetPalets');
+            switch ($empresa[0]->TipoEmpresa) {
+                case 1:
+                    $this->load->model('standards/stocks/GetPalets');
+                    $paletes=$this->GetPalets->stock_datas('CERAGNI',date("Y-m-d") ,date("Y-m-d"));
+
+                    $this->load->model('standards/others/Buttons');
+                    $button=$this->Buttons->buttons_empresa($empresa[0]->TipoEmpresa);
+
+                    $this->load->model('standards/others/Dropdowns');
+                    $setores=$this->Dropdowns->setores_empresa('CERAGNI');
+
+                    $data = array( 
+                        'select' => '',     
+                        'button' => $button,                
+                        'setores' => $setores,                
+                        'paletes' => $paletes
+                    );
+                    echo json_encode($data);
+                    break;
+                case 2:
+                    $this->load->model('standards/stocks/GetPalets');
+                    $paletes=$this->GetPalets->stock_datas('CERTECA',date("Y-m-d") ,date("Y-m-d"));
+                    $this->load->model('standards/others/Buttons');
+                    $button=$this->Buttons->buttons_empresa($empresa[0]->TipoEmpresa);
+
+                    $this->load->model('standards/others/Dropdowns');
+                    $setores=$this->Dropdowns->setores_empresa('CERTECA');
+                    
+
+                    $data = array( 
+                        'select' => '', 
+                        'button' => $button,  
+                        'setores' => $setores,                
+                        'paletes' => $paletes
+                    );
+                    echo json_encode($data);
+                    break;
+                case 3:
+                    /*                    
+                    $st01='ST010';
+                    $st02='FB001';
+                    $setor = '\''.$st01.'\''.','.'\''.$st02.'\'';     
+                    */
+                    $this->load->model('standards/others/Dropdowns');
+                    $select=$this->Dropdowns->escolha_empresa($empresa[0]->TipoEmpresa);
+            
+                    $this->load->model('standards/stocks/GetPalets');
+                    $paletes=$this->GetPalets->stock_datas('CERAGNI',date("Y-m-d") ,date("Y-m-d"));
+
+                    $this->load->model('standards/others/Buttons');
+                    $button=$this->Buttons->buttons_empresa($empresa[0]->TipoEmpresa);
+
+                    $this->load->model('standards/others/Dropdowns');
+                    $setores=$this->Dropdowns->setores_empresa('CERAGNI');
+
+                    $data = array(
+                        'select' => $select,
+                        'button' => $button, 
+                        'setores' => $setores,                 
+                        'paletes' => $paletes
+                    );
+                    //print_r($data['paletes']);
+                    echo json_encode($data);
+                    break;
+                case 4:
+                    /*                    
+                    $st01='ST010';
+                    $st02='FB001';
+                    $setor = '\''.$st01.'\''.','.'\''.$st02.'\'';     
+                    */                    
+                    $this->load->model('standards/others/Dropdowns');
+                    $select=$this->Dropdowns->escolha_empresa($empresa[0]->TipoEmpresa);
+            
+                    $this->load->model('standards/stocks/GetPalets');
+                    $paletes=$this->GetPalets->stock_datas('CERAGNI',date("Y-m-d") ,date("Y-m-d"));
+
+                    $this->load->model('standards/others/Dropdowns');
+                    $setores=$this->Dropdowns->setores_empresa('CERAGNI');
+
+                    $data = array(
+                        'select' => $select,
+                        'button' => '',
+                        'setores' => $setores,                
+                        'paletes' => $paletes
+                    );
+                    //print_r($data['paletes']);
+                    echo json_encode($data);
+                    break;                    
+            }
+
+        }else{
+            redirect('start', 'refresh');
+        }   
+    }  
 }
