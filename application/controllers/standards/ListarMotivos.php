@@ -24,4 +24,21 @@ class ListarMotivos extends CI_Controller
             redirect('start', 'refresh');
         }   
     }
+
+    public function getMotivos_anula(){
+
+        $this->load->helper('url');
+        $this->load->library('session');
+
+        if($this->session->userdata('logged_in')) {
+            
+            $this->load->model('standards/others/Dropdowns');
+            echo json_encode($this->Dropdowns->motivo_anula_palete());
+
+        }else{
+
+            redirect('start', 'refresh');
+        }
+
+    }  
 }

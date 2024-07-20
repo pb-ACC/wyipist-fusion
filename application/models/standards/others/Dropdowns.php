@@ -71,4 +71,12 @@ class Dropdowns extends CI_Model
         return $result;
     }
 
+    public function motivo_anula_palete(){
+        $sql="SELECT Codigo, Descricao
+              FROM zxAnulaPL";        
+        $query = $this->db->query($sql);
+        $result = $query->result();
+        return $result;
+    }
+
 }

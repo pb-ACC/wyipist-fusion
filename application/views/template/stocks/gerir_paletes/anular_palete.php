@@ -79,105 +79,6 @@
   </div>
 </div>
 
-<div id="escolha_local_fab" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document" style="width:auto">
-    <div class="modal-content">
-            <div class="modal-header">
-				<button id="btnclose" type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-
-			<!--<div class="modal-body" style="max-height: calc(100vh - 210px);overflow-y:scroll;overflow-x:scroll;">-->
-            <div class="modal-body" style="width: auto; height:auto;">
-			
-            
-            <div class="form-group">
-            <label for="exampleInputEmail1">Localização</label>
-			<div class="input-group">            
-            <input type="text" class="col-6 form-control" id="localCB" onchange="pick_local_fabric()" placeholder="Código Barras" autofocus>
-            
-			<button onclick="clearLocal_fabric()" type="button" class="col-4 btn btn-warning" style="margin-left: 5px;max-height: 38px;"><i class="fas fa-eraser"></i> Limpar</button>	
-			
-			</div>
-            </div>
-
-
-            <div id="local-table-fabric" class="table table-striped"></div>
-			</div>
-			<div class="modal-footer">		
-                <button id="save_local" onclick="save_local_fabric()" type="button" class="btn btn-primary"><i class="fas fa-save"></i> Confirmar</button>	
-			</div>    
-    </div>
-  </div>
-</div>
-
-<div id="escolha_local_log" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document" style="width:auto">
-    <div class="modal-content">
-            <div class="modal-header">
-				<button id="btnclose" type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-
-			<!--<div class="modal-body" style="max-height: calc(100vh - 210px);overflow-y:scroll;overflow-x:scroll;">-->
-            <div class="modal-body" style="width: auto; height:auto;">
-			
-            
-            <div class="form-group">
-            <label for="exampleInputEmail1">Localização</label>
-			<div class="input-group">            
-            <input type="text" class="col-6 form-control" id="localCB_logistic" onchange="pick_local_logistic()" placeholder="Código Barras" autofocus>
-            
-			<button onclick="clearLocal_logistic()" type="button" class="col-4 btn btn-warning" style="margin-left: 5px;max-height: 38px;"><i class="fas fa-eraser"></i> Limpar</button>	
-			
-			</div>
-            </div>
-
-
-            <div id="local-table-logistic" class="table table-striped"></div>
-			</div>
-			<div class="modal-footer">		
-                <button id="save_local_logistic" onclick="save_local_logistic()" type="button" class="btn btn-primary"><i class="fas fa-save"></i> Confirmar</button>	
-			</div>    
-    </div>
-  </div>
-</div>
-
-<div id="escolha_local_arm" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document" style="width:auto">
-    <div class="modal-content">
-            <div class="modal-header">
-				<button id="btnclose" type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-
-			<!--<div class="modal-body" style="max-height: calc(100vh - 210px);overflow-y:scroll;overflow-x:scroll;">-->
-            <div class="modal-body" style="width: auto; height:auto;">
-			
-            
-            <div class="form-group">
-            <label for="exampleInputEmail1">Localização</label>
-			<div class="input-group">            
-            <input type="text" class="col-6 form-control" id="localCB" onchange="pick_local_warehouse()" placeholder="Código Barras" autofocus>
-            
-			<button onclick="clearLocal_warehouse()" type="button" class="col-4 btn btn-warning" style="margin-left: 5px;max-height: 38px;"><i class="fas fa-eraser"></i> Limpar</button>	
-			
-			</div>
-            </div>
-
-
-            <div id="local-table-warehouse" class="table table-striped"></div>
-			</div>
-			<div class="modal-footer">		
-                <button id="save_local" onclick="save_local_warehouse()" type="button" class="btn btn-primary"><i class="fas fa-save"></i> Confirmar</button>	
-			</div>    
-    </div>
-  </div>
-</div>
-
 <div id="motivo" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -201,6 +102,34 @@
                 
                 <div class="modal-footer">		
                     <button onclick="save_motivo()" type="button" class="btn btn-primary"><i class="fas fa-save"></i> Confirmar</button>                
+                </div>    
+        </div>
+    </div>
+</div>
+
+<div id="motivo_anula" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Preencha o Motivo</h5>
+                    <button id="btnclose" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div id="anls" style="margin-bottom: 15px;">
+					    <select id="anl" class="form-control select2-dropdown"  style="width: 100%;" tabindex="-1" aria-hidden="true" required>
+						</select>
+					</div>
+
+                    <div class="form-group">
+                        <textarea id="obs-anl" class="form-control" rows="3" placeholder="Escreva a sua mensagem..."></textarea>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">		
+                    <button id="save_anulacao" onclick="save_anulacao()" type="button" class="btn btn-primary"><i class="fas fa-save"></i> Confirmar</button>                
                 </div>    
         </div>
     </div>

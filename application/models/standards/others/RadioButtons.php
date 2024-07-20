@@ -32,4 +32,19 @@ class RadioButtons extends CI_Model
         return $value;
     }
 
+    function escolha_setores_empresa_anularPL($empresa){
+        $value='';
+        if($empresa == 2){
+            $value='<div class="form-check">'.
+                    '<input class="form-check-input" type="radio" name="radio1" value="1" style="width: 20px;height: 20px;" checked>'.
+                    '<label class="form-check-label" style="margin-left: 15px;font-size: 18px;">Armazém Fábrica</label>'.
+                    '</div>'.
+                    '<div class="form-check">'.
+                    '<input class="form-check-input" type="radio" name="radio2" value="2" style="width: 20px;height: 20px;">'.
+                    '<label class="form-check-label" style="margin-left: 15px;font-size: 18px;">Centro Logístico</label>'.
+                    '</div>';    
+        }
+        return $value;
+    }
+
 }
