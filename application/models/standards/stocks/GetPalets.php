@@ -378,4 +378,16 @@ class GetPalets extends CI_Model
         
     }
 
+    public function recolhe_dados_palete($serie,$palete){
+        $sql="SELECT A.Numero, A.VossaRef, A.NossaRef, '{$serie}' Serie, CONCAT(B.Referencia,' - ',B.DescricaoArtigo) Artigo, CONCAT(B.Quantidade,' ',B.Unidade) QtdUni, 
+                     case when isnull(B.Lote,'')='' then 'XXXXX' else CONCAT('LOTE ',B.Lote) end Lote, 
+                     case when isnull(B.Calibre,'')='' then 'XXXXX' else CONCAT('CALIBRE ',B.Calibre) end Calibre, CONCAT(convert(char(10),B.DataHoraMOV,105),' ',convert(char(10),B.DataHoraMOV,108)) DataHoraMOV
+              FROM PlDocs A join PlLDocs B on (A.Numero=B.NumeroDocumento)
+              WHERE A.Numero='{$palete}'";         
+  
+        $query = $this->db->query($sql);        
+        $result = $query->result();
+        
+        return $result;
+    }
 }

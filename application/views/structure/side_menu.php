@@ -9,7 +9,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+   <!--     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
                 <img src="<?=base_url();echo $logo_user;?>" class="img-circle elevation-2" alt="User Image">
             </div>
@@ -17,6 +17,7 @@
                 <a href="#" class="d-block"><?php echo $nome;?></a>
             </div>
         </div>
+-->
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -32,7 +33,13 @@
                                 <i class="far fa-circle nav-icon"></i>
                                 <p> Saída Produção</p>
                             </a>
-                        </li>                              
+                        </li>                          
+                        <li id="gerar-pl01" class="nav-item">
+                            <a id="gerar-pl02" href="<?=base_url();?>stocks/generate_new_palette" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p> Gerar Nova Palete</p>
+                            </a>
+                        </li>                          
                         <li id="menu-mov01" class="nav-item">
                             <a id="menu-mov02" href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -53,6 +60,14 @@
                                 <p>Anular Paletes</p>
                             </a>
                         </li> 
+                        <?php if($user_type == 1 || $user_type == 2){ ?>
+                            <li id="corrige-stk01" class="nav-item">
+                            <a id="corrige-stk02" href="<?=base_url();?>stocks/stock_correction" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p> Correção de Stock</p>
+                            </a>
+                        </li>   
+                        <?php }?>  
                         <?php if($user_type == 1 || $user_type == 2){ ?>
                         <li id="menu-list01" class="nav-item">
                             <a id="menu-list02" href="#" class="nav-link">

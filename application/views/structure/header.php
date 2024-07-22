@@ -154,7 +154,7 @@
                     </li>
                     <!-- Menu Footer-->
                     <li class="user-footer">                        
-                        <a href="<?=base_url();?>home/logout" class="btn btn-secondary btn-flat" style="width: 100%"> <i class="fas fa-power-off" style="margin-right: 5px"></i>Log out</a>
+                        <a href="<?=base_url();?>home/logout" class="btn btn-secondary btn-flat" style="width: 100%"> <i class="fas fa-power-off" style="margin-right: 5px"></i>Sair</a>
                     </li>
                 </ul>
             </li>

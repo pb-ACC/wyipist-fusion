@@ -233,4 +233,45 @@ class ListarFiltro extends CI_Controller
         }   
     }
 
+    public function filtraPlZn_emanuel_referencias($emp){
+        $this->load->helper('url');
+        $this->load->library('session');
+        if($this->session->userdata('logged_in')) {        
+            
+            $emp = strtoupper($emp);
+            if($emp == 'CERAGNI'){                
+                $empresa = '\''.$emp.'\'';
+               // echo $empresa;
+
+                $this->load->model('standards/others/GetZonas');                
+                $zonas=$this->GetZonas->zonaCelula($empresa);
+                
+                $this->load->model('standards/stocks/GetReferences');
+                $refs=$this->GetReferences->referencias($emp);                                
+
+                $data = array( 
+                    'zonas' => $zonas,                                          
+                    'refs' => $refs
+                );
+                
+            }else{
+                $empresa = '\''.$emp.'\'';
+                
+                $this->load->model('standards/others/GetZonas');                
+                $zonas=$this->GetZonas->zonaCelula($empresa);
+
+                $this->load->model('standards/stocks/GetReferences');
+                $refs=$this->GetReferences->referencias($emp);                                
+
+                $data = array( 
+                    'zonas' => $zonas,                                          
+                    'refs' => $refs
+                );
+            }
+                echo json_encode($data);
+        }else{
+            redirect('start', 'refresh');
+        }   
+    }
+    
 }

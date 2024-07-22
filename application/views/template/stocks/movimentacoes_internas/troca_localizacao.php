@@ -8,7 +8,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>home"> Home</a></li>
+                        <li class="breadcrumb-item"><i class="nav-icon fa-solid fa-house"></i><a href="<?php echo base_url(); ?>home"> Página Inicial</a></li>
                         <li class="breadcrumb-item"><i class="nav-icon fa-solid fa-boxes-packing"></i> Stocks</li>                        
                         <li class="breadcrumb-item"><i class="nav-icon fas fa-exchange-alt"></i> Mov. Internas</li>
                         <li class="breadcrumb-item active"><i class="nav-icon fas fa-truck-loading"></i> Troca Localização</li>

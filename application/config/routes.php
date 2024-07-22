@@ -71,6 +71,8 @@ $route['stocks/internal_movements/change_location'] = 'stocks/movimentacoes_inte
 $route['stocks/manage_palettes/cancel_palettes'] = 'stocks/gerir_paletes/AnularPaletes';
 $route['stocks/stock_list/all-stock']='stocks/listas/GetStock';
 $route['stocks/stock_list/stock-between-dates']='stocks/listas/GetStock_dates';
+$route['stocks/generate_new_palette']='stocks/gerir_paletes/GerarPaletes';
+$route['stocks/stock_correction']='stocks/correcao_stock/CorrigirStock';
 
 /*
 | -------------------------------------------------------------------------

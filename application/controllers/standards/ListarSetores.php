@@ -63,5 +63,36 @@ class ListarSetores extends CI_Controller
             redirect('start', 'refresh');
         }   
     }
+
+    public function getZonas_pl(){
+        $this->load->helper('url');
+        $this->load->library('session');
+        if($this->session->userdata('logged_in')) {            
+            //$user_type= $session_data['user_type'];
+            $empresa= $this->getEmpresa();            
+            //vecho $empresa[0]->Empresa;
+            $this->load->model('standards/others/GetZonas');
+            switch ($empresa[0]->TipoEmpresa) {
+                case 1:
+                    $empresa='\'CERAGNI\'';           
+                    echo json_encode($this->GetZonas->zonaCelula($empresa));
+                    break;
+                case 2:
+                    $empresa='\'CERTECA\'';                
+                    echo json_encode($this->GetZonas->zonaCelula($empresa));
+                    break;
+                case 3:                    
+                    $empresa='\'CERAGNI\'';           
+                    echo json_encode($this->GetZonas->zonaCelula($empresa));
+                    break;
+                case 4:                    
+                    $empresa='\'CERAGNI\'';           
+                    echo json_encode($this->GetZonas->zonaCelula($empresa));
+                    break;                    
+            }
+        }else{
+            redirect('start', 'refresh');
+        }   
+    }
     
 }
