@@ -1,11 +1,5 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: p-bri
- * Date: 17/05/2019
- * Time: 16:23
- */
 class Templates extends CI_Controller
 {
 
@@ -16,8 +10,8 @@ class Templates extends CI_Controller
         // $this->load->model('chart_valco_model');
 
         //funcao para testar se � necess�rio kikar o user
-        $this->load->model('login__model');//, 'reg_model');
-        $this->login__model->to_kick();
+        $this->load->model('auth/login_model');//, 'reg_model');
+        $this->login_model->to_kick();
     }
 
     public function get_report(){
@@ -26,10 +20,10 @@ class Templates extends CI_Controller
 
         if($this->session->userdata('logged_in')) {
             
-            $tipodoc = $this->input->post('tipodoc');
+            $tipodoc = $this->input->get('tipodoc');
 
-            $this->load->model('standards/reports/Templates');
-            echo json_encode($this->Templates->get_report($tipodoc));
+            $this->load->model('standards/reports/EtiquetaPL');
+            echo json_encode($this->EtiquetaPL->get_report($tipodoc));
 
         }else{
 

@@ -75,7 +75,7 @@ class Guardar_Paletes extends CI_Model
           //  for($gg=$TotLinhas;$gg>0;$gg--){
 
                     //cria PLS
-                    $DocPLS=$this->getMax_PLS();
+                    $DocPLS=$this->getMax_PL($serie);
                     //print_r($DocSP);
                     
                     foreach ($DocPLS as $val) {
@@ -85,8 +85,8 @@ class Guardar_Paletes extends CI_Model
                         $NumeroPL = $val->Numero;
                     }
                     
-                    $this->createPLS($NumeroPL,$CodigoPL,$SeriePL,'',$user);
-                    $this->update_Serie_PLS($NumeradorPL,$CodigoPL,$SeriePL);
+                    $this->createPL($NumeroPL,$CodigoPL,$SeriePL,'',$user);
+                    $this->update_Serie_PL($NumeradorPL,$CodigoPL,$SeriePL);
                     //doclog
                     $this->insert_doclogPL($NumeroPL,$CodigoPL,$user);
 
@@ -167,7 +167,7 @@ class Guardar_Paletes extends CI_Model
         $this->db->close();
 
         $sql05 ="UPDATE PlDocs
-                 SET Estado='F', Cor=16744448, Contramarca='Subcontrato', NumSeqTurno=-1
+                 SET Estado='F', Cor=16744448, Contramarca='Web', NumSeqTurno=-1
                  WHERE Numero='{$Numero}'";   
 
         $this->db->query($sql05);

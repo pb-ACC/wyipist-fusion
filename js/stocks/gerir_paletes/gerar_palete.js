@@ -218,6 +218,16 @@ function listLocal(data){
             {title:"id", field:"id", align:"center", visible:false}
         ]
     });
+
+    tableLocal_fabric.on("rowClick", function(e, row){      
+        var data = row.getData();
+        if(data.Sel === 0){
+            data.Sel=1
+        }else{
+            data.Sel=0;
+        }
+    });
+
 }
 
 function pick_local_fabric() {
@@ -462,7 +472,7 @@ function choose_location(){
     
 }
 
-function save_local_logistic(){
+function save_local_fabric(){
     
     let selected=[];
     sel = tableLocal_fabric.getSelectedData();
@@ -477,10 +487,11 @@ function save_local_logistic(){
             }
         }
     }
+    continue_save_local_fabric(selected);
 }
 
-function save_local_fabric(refs,selected){
-
+function continue_save_local_fabric(selected){
+    //alert(selected);
     $.ajax({
         type: "POST",
         url: "http://127.0.0.1/wyipist-fusion/stocks/gerir_paletes/GerarPaletes/guardar_palete",
@@ -498,15 +509,13 @@ function save_local_fabric(refs,selected){
                 window.location = "home/logout";
             } else {
                 going_to_print();
-                toastr["success"]("Dados gravados com Sucesso");                
-                setTimeout(function(){
-                    location.reload();
-                },2500);
+                toastr["success"]("Dados gravados com Sucesso");                                
             }
         },
         error: function (e) {
             alert('Request Status: ' + e.status + ' Status Text: ' + e.statusText + ' ' + e.responseText);
-            console.log(e);
+            toastr["error"]("Erro na gravação dos dados! Tente novamente!");
+            //console.log(e);
         }
     });  
 
@@ -519,26 +528,21 @@ function going_to_print(){
             url: "http://127.0.0.1/wyipist-fusion/stocks/gerir_paletes/GerarPaletes/recolhe_dados_palete",
             dataType: "json",
             success: function (data) {
-                //alert(data);
-                //console.log(data);
-
                 if (data === "kick") {
                     //alert("Outro utilizador entrou com as suas credenciais, faça login de novo.");
                     toastr["warning"]("Outro utilizador entrou com as suas credenciais, faça login de novo.");
                     window.location = "home/logout";
                 } else {
-                    //toastr["success"]("Dados gravados com Sucesso");
-                    //console.log(data);
-                    get_report(data);
+                    toastr.clear();
+                    toastr["info"]("A carregar dados da etiqueta...");
+                   // alert(data);
+                    get_report(Object.values(data));
                 }
             },
             error: function (e) {
-                //alert(e);
-                //alert('Request Status: ' + e.status + ' Status Text: ' + e.statusText + ' ' + e.responseText);
-                //console.log(e);
-                toastr["error"]("Erro na gravação dos dados! Tente novamente!");
+                //alert('Request Status: ' + e.status + ' Status Text: ' + e.statusText + ' ' + e.responseText);                             
+                toastr["error"]("Erro ao carregar dados da eqtiqueta!");
             }
-
         });   
 
 }
@@ -573,16 +577,14 @@ function get_report(data){
                     toastr["warning"]("Outro utilizador entrou com as suas credenciais, faça login de novo.");
                     window.location = "home/logout";
                 } else {
-                    //toastr["success"]("Dados gravados com Sucesso");
-                    //console.log(data);                        
+                    toastr.clear();
+                    toastr["info"]("A gerar etiqueta...");                    
                     going_to_create_report(artigo,calibre,datahora,lote,nossaref,palete,qtduni,vossaref,serie,data[0]['text']);
                 }
             },
             error: function (e) {
-                //alert(e);
-                //alert('Request Status: ' + e.status + ' Status Text: ' + e.statusText + ' ' + e.responseText);
-                //console.log(e);
-                toastr["error"]("Erro na gravação dos dados! Tente novamente!");
+                alert('Request Status: ' + e.status + ' Status Text: ' + e.statusText + ' ' + e.responseText);
+                toastr["error"]("Erro ao gerar etiqueta!");
             }
 
         });  
@@ -642,13 +644,17 @@ function going_to_create_report(artigo,calibre,datahora,lote,nossaref,palete,qtd
 
     console.log('fechou escrita');
     newWindow.document.close();    
+    
+    toastr.clear();
+    toastr["success"]("Etiqueta gerada com sucesso");       
 
-    
-        console.log('menu impressão');
-        console.log('focus');
-        newWindow.focus();
-        console.log('print');
-        newWindow.print();   
-    
-    
+    console.log('menu impressão');
+    console.log('focus');
+    newWindow.focus();
+    console.log('print');
+    newWindow.print();    
+        
+    setTimeout(function(){
+        location.reload();
+    },2500);                        
 }

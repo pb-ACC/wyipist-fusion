@@ -1,6 +1,6 @@
 <?php
 
-class Templates extends CI_Model
+class EtiquetaPL extends CI_Model
 {
 
 
@@ -18,7 +18,7 @@ class Templates extends CI_Model
         $sql = "SELECT text
                 FROM content_html
                 where doc_type='{$tipodoc}'";
-
+        //echo $sql;
         $query = $this->db->query($sql);        
         $result = $query->result();
         

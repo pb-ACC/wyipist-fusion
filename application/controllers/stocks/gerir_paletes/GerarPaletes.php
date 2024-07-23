@@ -31,7 +31,7 @@ class GerarPaletes extends CI_Controller
         }
     }
    
-    function guardar_palete(){
+    public function guardar_palete(){
 
         $this->load->helper('url');
         $this->load->library('session');
@@ -63,8 +63,8 @@ class GerarPaletes extends CI_Controller
                     $nome_nivel = $tbl[$i]['nome_nivel'];
                     $codigo_nivel = $tbl[$i]['codigo_nivel'];
 
-                    $this->load->model('stocks/gerir_paletes/Gerar_Paletes');
-                    $this->Gerar_Paletes->guardar_palete($referencia,$descricao,$formato,$cb,$calibre,$lote,$quantidade,$serie,$nome_nivel,$codigo_nivel,$local,$setor,$obsPL,$username,$funcionario_gpac);                      
+                    $this->load->model('stocks/gerir_paletes/Guardar_Paletes');
+                    $this->Guardar_Paletes->guardar_palete($referencia,$descricao,$formato,$cb,$calibre,$lote,$quantidade,$serie,$nome_nivel,$codigo_nivel,$local,$setor,$obsPL,$username,$funcionario_gpac);                      
                  }
                  echo json_encode("inseriu");
              }                
@@ -86,7 +86,7 @@ class GerarPaletes extends CI_Controller
             $serie = $_SESSION["seriePalete"];
             $palete = $_SESSION["nPalete"];
 
-            $this->load->model('stocks/GetPalets');
+            $this->load->model('standards/stocks/GetPalets');
             echo json_encode($this->GetPalets->recolhe_dados_palete($serie,$palete));
 
         }else{
