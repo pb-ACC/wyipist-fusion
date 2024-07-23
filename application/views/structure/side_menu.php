@@ -30,25 +30,25 @@
                     <ul id="menu-stocks03" class="nav nav-treeview" style="display: none;">
                         <li id="saida-prod01" class="nav-item">
                             <a id="saida-prod02" href="<?=base_url();?>stocks/production" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fas fa-boxes nav-icon"></i>
                                 <p> Saída Produção</p>
                             </a>
                         </li>                          
                         <li id="gerar-pl01" class="nav-item">
                             <a id="gerar-pl02" href="<?=base_url();?>stocks/generate_new_palette" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fas fa-file-circle-plus nav-icon"></i>
                                 <p> Gerar Nova Palete</p>
                             </a>
                         </li>                          
                         <li id="menu-mov01" class="nav-item">
                             <a id="menu-mov02" href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fas fa-exchange-alt nav-icon"></i>
                                 <p> Mov. Internas <i class="right fas fa-angle-left"></i> </p>
                             </a>
                             <ul id="opcoes-mov01" class="nav nav-treeview" style="display: none;">
                                 <li id="troca-loc01" class="nav-item">
                                     <a id="troca-loc02" href="<?=base_url();?>stocks/internal_movements/change_location" class="nav-link">
-                                        <i class="far fa-dot-circle nav-icon"></i>
+                                        <i class="fas fa-truck-loading nav-icon nav-child-indent"></i>
                                         <p> Troca Localização </p>
                                     </a>
                                 </li>                      
@@ -56,14 +56,14 @@
                         </li>
                         <li id="anula-pl01" class="nav-item">
                             <a id="anula-pl02" href="<?=base_url();?>stocks/manage_palettes/cancel_palettes" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fas fa-box nav-icon"></i>
                                 <p>Anular Paletes</p>
                             </a>
                         </li> 
                         <?php if($user_type == 1 || $user_type == 2){ ?>
                             <li id="corrige-stk01" class="nav-item">
                             <a id="corrige-stk02" href="<?=base_url();?>stocks/stock_correction" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="far fa-circle nav-icon nav-child-indent"></i>
                                 <p> Correção de Stock</p>
                             </a>
                         </li>   
@@ -71,19 +71,19 @@
                         <?php if($user_type == 1 || $user_type == 2){ ?>
                         <li id="menu-list01" class="nav-item">
                             <a id="menu-list02" href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fas fa-clipboard-list nav-icon"></i>
                                 <p> Listagem de Stock <i class="right fas fa-angle-left"></i> </p>
                             </a>
                             <ul id="opcoes-list01" class="nav nav-treeview" style="display: none;">
                                 <li id="list-stock01" class="nav-item">
                                     <a id="list-stock02" href="<?=base_url();?>stocks/stock_list/all-stock" class="nav-link">
-                                    <i class="far fa-dot-circle nav-icon"></i>
+                                    <i class="fas fa-clipboard nav-icon nav-child-indent"></i>
                                         <p>Consulta de Stock</p>
                                     </a>
                                 </li>                  
                                 <li id="list-stock03" class="nav-item">
                                     <a id="list-stock04" href="<?=base_url();?>stocks/stock_list/stock-between-dates" class="nav-link">
-                                    <i class="far fa-dot-circle nav-icon"></i>
+                                    <i class="fas fa-clipboard nav-icon"></i>
                                         <p>Cons. Stock datas</p>
                                     </a>
                                 </li>                  
@@ -101,19 +101,19 @@
                     <ul id="menu-user01" class="nav nav-treeview" style="display: none;">                    
                         <li id="menu-user02" class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="fa-solid fa-users"></i>
+                                <i class="fas fa-users nav-icon"></i>
                                 <p> Utilizadores <i class="right fas fa-angle-left"></i></p>
                             </a>
                             <ul id="opcoes-user01" class="nav nav-treeview" style="display: none;">
                                 <li id="consultar-user01" class="nav-item">
                                     <a id="consultar-user02" href="<?=base_url();?>users/all-users" class="nav-link">
-                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                        <i class="fas fa-magnifying-glass nav-icon nav-child-indent"></i>
                                         <p> Consultar </p>
                                     </a>
                                 </li>
                                 <li id="adicionar-user01" class="nav-item">
                                     <a id="adicionar-user02" href="<?=base_url();?>users/add-user" class="nav-link">
-                                        <i class="fa-solid fa-user-plus"></i>
+                                        <i class="fas fa-user-plus nav-icon nav-child-indent"></i>
                                         <p> Adicionar </p>
                                     </a>
                                 </li>                    
