@@ -138,23 +138,27 @@
 
             <li class="nav-item dropdown" style="min-width: 154px;">
                 <a href="#" class="nav-link" data-toggle="dropdown">
+                    <span class="hidden-xs"><?php echo $nome;?>&nbsp;&nbsp;</span>
+                    <i class="fas fa-circle fa-2xs" style="color: limegreen;"></i>                    
                     <img src="<?=base_url();echo $logo_user;?>" class="user-image" alt="User Image">
-                    <span class="hidden-xs"><?php echo $nome;?></span>
                 </a>
                 <ul class="dropdown-menu">
                     <!-- User image -->
+                    <!--
                     <li class="user-header">
                         <img src="<?=base_url(); echo $logo_user;?>" class="img-circle" alt="User Image" style="height: 120px; width: 90px;">
-                    </li>                
-                    <li style="text-align: center;">
+                    </li>       
+                    -->         
+                    <!--<li style="text-align: center;">
                         <i class="fas fa-circle fa-2xs" style="color: limegreen;">&nbsp;&nbsp;</i> <?php echo $nome;?>
                     </li>
                     <li style="text-align: center;">
                         <?php echo $funcao;?>
                     </li>
+                    -->
                     <!-- Menu Footer-->
                     <li class="user-footer">                        
-                        <a href="<?=base_url();?>home/logout" class="btn btn-secondary btn-flat" style="width: 100%"> <i class="fas fa-power-off" style="margin-right: 5px"></i>Sair</a>
+                        <a href="<?=base_url();?>home/logout" class="btn btn-secondary btn-flat" style="width: 100%"> <i class="fas fa-sign-out" style="margin-right: 5px"></i>&nbsp;Sair</a>
                     </li>
                 </ul>
             </li>
