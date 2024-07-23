@@ -23,7 +23,7 @@ class CorrigirStock extends CI_Controller
 
             $this->load->view('structure/header', $session_data);
             $this->load->view('structure/side_menu', $session_data);
-            $this->load->view('template/stocks/gerir_paletes/anular_palete', $session_data);
+            $this->load->view('template/stocks/corrigir_stock/corrigir_stock', $session_data);
             $this->load->view('structure/footer', $session_data);
 
         }else{

@@ -60,14 +60,12 @@
                                 <p>Anular Paletes</p>
                             </a>
                         </li> 
-                        <?php if($user_type == 1 || $user_type == 2){ ?>
-                            <li id="corrige-stk01" class="nav-item">
+                        <li id="corrige-stk01" class="nav-item">
                             <a id="corrige-stk02" href="<?=base_url();?>stocks/stock_correction" class="nav-link">
-                                <i class="far fa-circle nav-icon nav-child-indent"></i>
+                                <i class="fas fa-edit nav-icon nav-child-indent"></i>
                                 <p> Correção de Stock</p>
                             </a>
                         </li>   
-                        <?php }?>  
                         <?php if($user_type == 1 || $user_type == 2){ ?>
                         <li id="menu-list01" class="nav-item">
                             <a id="menu-list02" href="#" class="nav-link">

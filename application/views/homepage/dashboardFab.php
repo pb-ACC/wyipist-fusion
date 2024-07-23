@@ -45,6 +45,11 @@
                                 <i class="fas fa-box" style="font-size: x-large"></i>&nbsp;<p  style="font-size: large;">Anular<br>Paletes</p>
                             </a>
                         </div>
+                        <div class="col-lg-2 col-6" style="padding: 0;">
+                            <a href="<?=base_url();?>stocks/stock_correction" class="btn btn-app bg-olive" style="height: 95%; width: 95%;">
+                                <i class="fas fa-edit" style="font-size: x-large"></i>&nbsp;<p  style="font-size: large;">Correção<br>de Stock</p>
+                            </a>
+                        </div>                        
                     </div>
                 </div>
 

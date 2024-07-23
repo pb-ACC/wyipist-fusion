@@ -53,7 +53,7 @@ class Gravar_SaidaProducao extends CI_Controller
                     $Calibre = $tbl[$i]['Calibre'];
                     $Nivel = $tbl[$i]['Nivel'];
 
-                    $this->load->model('stocks/SaidaProducao');
+                    $this->load->model('stocks/producao/SaidaProducao');
                     $this->SaidaProducao->save_production($DocPL,$LinhaPL,$Referencia,$Artigo,$DescricaoArtigo,$Quantidade,$Unidade,$Sector,$Formato,$Qual,$TipoEmbalagem,$Superficie,$Decoracao,$RefCor,$Lote,$TabEspessura, 
                                                           $Calibre,$Nivel,$novo_sector,$local,$username,$funcionario_gpac);                   
                  }
