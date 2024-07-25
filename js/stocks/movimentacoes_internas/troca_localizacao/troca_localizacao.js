@@ -886,7 +886,14 @@ function radioButtons(){
 function change_sector_emp(newSector){
     empp = $("#empresasDP option:selected").text();
     emp = $.trim(empp);   
+    
+    toastr.clear();
+    toastr["info"]("A carregar paletes...");
+    tableSelPaletes.alert("A processar...");
+    $('#empresasDP').prop('disabled', true);
     $("#buttons button").attr("disabled", true);
+    $("input[type=radio]").attr('disabled', true);
+    
     $.ajax({
         type: "POST",
         url: "http://127.0.0.1/wyipist-fusion/standards/ListarFiltro/filtraPlZn_emanuel/"+emp+"/"+newSector,
@@ -896,8 +903,7 @@ function change_sector_emp(newSector){
                 toastr["warning"]("Outro utilizador entrou com as suas credenciais, faça login de novo.");
                 window.location = "home/logout";
             } else {    
-                toastr.clear();
-                toastr["info"]("A carregar paletes...");
+
 
                 paletsOG=Object.values(data['paletes']);
                 getPalets(Object.values(data['paletes']));
@@ -907,10 +913,15 @@ function change_sector_emp(newSector){
                     dtt = Object.values(data['zonas']);
                     listLocal(Object.values(data['zonas']));                    
 
+
+                    tableSelPaletes.clearAlert();
+                    $('#empresasDP').prop('disabled', false);
+                    $("#buttons button").attr("disabled", false);
+                    $("input[type=radio]").attr('disabled', false);
+    
                     toastr.clear();
                     toastr["success"]("Paletes carregadas com sucesso.");
-                    toastr.clear();
-                    $("#buttons button").attr("disabled", false);     
+                    toastr.clear();  
             }
         },
         error: function (e) {
@@ -947,7 +958,11 @@ function confirm_changeEmpresa(){
         newSector='ST010';
     }
     //alert(emp.toUpperCase());
+    tableSelPaletes.alert("A processar...");
+    $('#empresasDP').prop('disabled', true);
     $("#buttons button").attr("disabled", true);
+    $("input[type=radio]").attr('disabled', true);
+
     $.ajax({
         type: "POST",
         url: "http://127.0.0.1/wyipist-fusion/standards/ListarFiltro/filtraPlZn_emanuel/"+emp+"/"+newSector,
@@ -957,9 +972,7 @@ function confirm_changeEmpresa(){
                 toastr["warning"]("Outro utilizador entrou com as suas credenciais, faça login de novo.");
                 window.location = "home/logout";
             } else {    
-                toastr.clear();
-                toastr["info"]("A carregar paletes...");
-
+                
                 paletsOG=Object.values(data['paletes']);
                 getPalets(Object.values(data['paletes']));
                 
@@ -977,10 +990,14 @@ function confirm_changeEmpresa(){
                         $("#buttons").empty();
                         $("#buttons").append(data['button']);                         
 
-                    toastr.clear();
-                    toastr["success"]("Paletes carregadas com sucesso.");
-                    toastr.clear();
-                    $("#buttons button").attr("disabled", false);     
+                tableSelPaletes.clearAlert();
+                $('#empresasDP').prop('disabled', false);
+                $("#buttons button").attr("disabled", false);
+                $("input[type=radio]").attr('disabled', false);
+
+                toastr.clear();
+                toastr["success"]("Paletes carregadas com sucesso.");
+                toastr.clear();
             }
         },
         error: function (e) {

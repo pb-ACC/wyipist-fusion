@@ -822,7 +822,12 @@ function confirm_changeEmpresa(){
     emp = $.trim(empp);    
     //alert(emp.toUpperCase());
     //$("#choose_palets").prop("disabled",true);    
-    $("#buttons button").attr("disabled", true);
+    toastr.clear();
+    toastr["info"]("A carregar paletes...");
+    tableSelPaletes.alert("A processar...");
+    $('#empresasDP').prop('disabled', true);
+    $("#buttons button").attr("disabled", true);    
+    
     $.ajax({
         type: "POST",
         url: "http://127.0.0.1/wyipist-fusion/standards/ListarFiltro/filtraPlZn/"+emp,
@@ -832,9 +837,7 @@ function confirm_changeEmpresa(){
                 toastr["warning"]("Outro utilizador entrou com as suas credenciais, faça login de novo.");
                 window.location = "home/logout";
             } else {    
-                toastr.clear();
-                toastr["info"]("A carregar paletes...");
-
+                
                 paletsOG=Object.values(data['paletes']);
                 getPalets(Object.values(data['paletes']));
                 
@@ -847,11 +850,13 @@ function confirm_changeEmpresa(){
                         $("#buttons").empty();
                         $("#buttons").append(data['button']);    
 
-                    toastr.clear();
-                    toastr["success"]("Paletes carregadas com sucesso.");
-                    toastr.clear();
-                    //$("#choose_palets").prop("disabled",false);          
-                    $("#buttons button").attr("disabled", false);
+                tableSelPaletes.clearAlert();
+                $('#empresasDP').prop('disabled', false);
+                $("#buttons button").attr("disabled", false);                
+
+                toastr.clear();
+                toastr["success"]("Paletes carregadas com sucesso.");
+                toastr.clear();
             }
         },
         error: function (e) {
