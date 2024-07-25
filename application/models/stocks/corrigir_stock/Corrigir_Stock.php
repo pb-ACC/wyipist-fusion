@@ -155,10 +155,10 @@ class Corrigir_Stock extends CI_Model
                                     LinhaMae, LinhaPai, Ordena, QuantidadeUnStock, UnidadeStock, RelUni, FactorRelUni, ValorStock, DataStockMOV, Changed, FCor, LinhaArtCliForn, 
                                     Local, KeyScript, Formato, Qual, TipoEmbalagem, Superficie, Decoracao, RefCor, Lote, TabEspessura, Palete, SectorDestino, RefP, LoteInt, 
                                     Script, DocumentoOrigem, LinhaDocumentoOrigem, Calibre, LinhaPL, DocPL, NivelPalete)".
-               "SELECT 0,'{$CodigoGS}', '{$NumeroGS}', '','05', '{$Sector}', 0, 'ACERTO GS WEB', {$NovaQtd}, {$NovaQtd},'{$Referencia}', '{$Artigo}', '{$DescricaoArtigo}', 0, 0, 0,
-               '{$Unidade}', VolumeM3, Preco, PrecoNM, Desconto, '00', 0, NVolumes, VolumeCarga, Peso, FactorEmbalagem,TotalNVolumes, TotalVolumeCarga, TotalPeso,{$NovaQtd}*PrecoNM, 
-               0, 0,{$NovaQtd}*PrecoNM, 0, {$NovaQtd}*PrecoNM,{$NovaQtd}*PrecoNM, 0, 0, {$NovaQtd}*PrecoNM, 0, {$NovaQtd}*PrecoNM,'GS','{$user}',getdate(), 0, 0, 0, 0, TotalComissao, 
-               TotalComissaoNM, -1, 0, 0,{$NovaQtd},'{$Unidade}', '{$reluni}' , 1, 0, getdate(), 1, 0, 0, '{$Local}', 'Corrigir_Stock#correct_stock', '{$Formato}', '{$Qual}', 
+               "SELECT 0,'{$CodigoGS}', '{$NumeroGS}', '','15', '{$Sector}', 0, 'ACERTO GS WEB', {$Quantidade}, {$Quantidade},'{$Referencia}', '{$Artigo}', '{$DescricaoArtigo}', 0, 0, 0,
+               '{$Unidade}', VolumeM3, Preco, PrecoNM, Desconto, '00', 0, NVolumes, VolumeCarga, Peso, FactorEmbalagem,TotalNVolumes, TotalVolumeCarga, TotalPeso,{$Quantidade}*PrecoNM, 
+               0, 0,{$Quantidade}*PrecoNM, 0, {$Quantidade}*PrecoNM,{$Quantidade}*PrecoNM, 0, 0, {$Quantidade}*PrecoNM, 0, {$Quantidade}*PrecoNM,'GS','{$user}',getdate(), 0, 0, 0, 0, TotalComissao, 
+               TotalComissaoNM, -1, 0, 0,{$Quantidade},'{$Unidade}', '{$reluni}' , 1, 0, getdate(), 1, 0, 0, '{$Local}', 'Corrigir_Stock#correct_stock', '{$Formato}', '{$Qual}', 
                '{$TipoEmbalagem}', '{$Superficie}', '{$Decoracao}', '{$RefCor}', '{$Lote}', '{$TabEspessura}', '{$DocPL}', '', '{$Referencia}', '', -1, '', 0, '{$Calibre}', {$LinhaPL}, '{$DocPL}', '{$Nivel}'
                from PlLDocs
                where NumeroDocumento='{$DocPL}' and {$Reabilitado}=1";       
