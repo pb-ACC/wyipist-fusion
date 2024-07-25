@@ -20,7 +20,7 @@ class GetZonas extends CI_Model
             //         --case when Empresa='CERAGNI' then substring(Codigo,1,2) else substring(Sector,1,2) end Identificador          case when Empresa='CERAGNI' then Zona else isnull(Zona,'')<>'' end,
                       //case when Empresa='CERAGNI' then Celula else isnull(Celula,'') not in ('','*') end";
                 
-       //echo $sql;                
+        //echo $sql;                
         $query = $this->db->query($sql);
         $result = $query->result();
         return $result;

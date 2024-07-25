@@ -48,10 +48,16 @@
                             <ul id="opcoes-mov01" class="nav nav-treeview" style="display: none;">
                                 <li id="troca-loc01" class="nav-item">
                                     <a id="troca-loc02" href="<?=base_url();?>stocks/internal_movements/change_location" class="nav-link">
-                                        <i class="fas fa-truck-loading nav-icon nav-child-indent"></i>
+                                        <i class="fas fa-dolly nav-icon nav-child-indent"></i>
                                         <p> Troca Localização </p>
                                     </a>
                                 </li>                      
+                                <li id="rec_mat01" class="nav-item">
+                                    <a id="rec_mat02" href="<?=base_url();?>stocks/internal_movements/material_reception" class="nav-link">
+                                        <i class="fas fa-truck-loading nav-icon nav-child-indent"></i>
+                                        <p> Receção de Material </p>
+                                    </a>
+                                </li>      
                             </ul>
                         </li>
                         <li id="anula-pl01" class="nav-item">

@@ -81,14 +81,14 @@
                         </div>
 
                         <div class="col-lg-2 col-6" style="padding: 0;">
-                            <a href="<?=base_url();?>stocks/movimentacoes_internas/troca_localizacao" class="btn btn-app bg-primary" style="height: 95%; width: 95%;">
+                            <a href="<?=base_url();?>stocks/movimentacoes_internas/troca_localizacao/troca_localizacao" class="btn btn-app bg-primary" style="height: 95%; width: 95%;">
                                 <i class="fas fa-truck-loading" style="font-size: x-large"></i>&nbsp;<p  style="font-size: initial;">Movimentações<br>Internas<br>(Troca Localização)</p>
                             </a>
                         </div>
 
                         <?php if($user_type == 1 || $user_type == 2 || $user_type == 6){ ?>
                             <div class="col-lg-2 col-6" style="padding: 0;">
-                                <a href="<?=base_url();?>stocks/movimentacoes_internas/fabrica_centro" class="btn btn-app bg-info" style="height: 95%; width: 95%;">
+                                <a href="<?=base_url();?>stocks/movimentacoes_internas/troca_localizacao/fabrica_centro" class="btn btn-app bg-info" style="height: 95%; width: 95%;">
                                     <i class="fas fa-truck-moving" style="font-size: x-large"></i>&nbsp;<p  style="font-size: initial;">Movimentações<br>Internas<br>(Fábrica <i class="fas fa-arrow-right" style="font-size: x-large"></i> Centro)</p>
                                 </a>
                             </div>
@@ -96,7 +96,7 @@
 
                         <?php if($user_type == 1 || $user_type == 2 || $user_type == 5){ ?>
                             <div class="col-lg-2 col-6" style="padding: 0;">
-                                <a href="<?=base_url();?>stocks/movimentacoes_internas/centro_fabrica" class="btn btn-app bg-cyan" style="height: 95%; width: 95%;">
+                                <a href="<?=base_url();?>stocks/movimentacoes_internas/troca_localizacao/centro_fabrica" class="btn btn-app bg-cyan" style="height: 95%; width: 95%;">
                                     <i class="fas fa-truck-moving" style="font-size: x-large"></i>&nbsp;<p  style="font-size: initial;">Movimentações<br>Internas<br>(Centro <i class="fas fa-arrow-right" style="font-size: x-large"></i> Fábrica)</p>
                                 </a>
                             </div>

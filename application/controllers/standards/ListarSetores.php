@@ -47,15 +47,19 @@ class ListarSetores extends CI_Controller
                     echo json_encode($this->GetZonas->zonaCelula($empresa));
                     break;
                 case 3:                    
-                    $emp01='CERAGNI';
+                    /*$emp01='CERAGNI';
                     $emp02='CERTECA';
                     $empresa = '\''.$emp01.'\''.','.'\''.$emp02.'\'';                         
+                    */
+                    $empresa='\'CERAGNI\'';      
                     echo json_encode($this->GetZonas->zonaCelula($empresa));
                     break;
                 case 4:                    
-                    $emp01='CERAGNI';
-                    $emp02='CERTECA';
+                    /*$emp01='CERAGNI';
+                    $emp02='CERTECA';                    
                     $empresa = '\''.$emp01.'\''.','.'\''.$emp02.'\'';                         
+                    */
+                    $empresa='\'CERAGNI\'';      
                     echo json_encode($this->GetZonas->zonaCelula($empresa));
                     break;                    
             }

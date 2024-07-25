@@ -25,7 +25,7 @@ class MudaLocalizacao extends CI_Controller
 
             $this->load->view('structure/header', $session_data);
             $this->load->view('structure/side_menu', $session_data);
-            $this->load->view('template/stocks/movimentacoes_internas/troca_localizacao', $session_data);
+            $this->load->view('template/stocks/movimentacoes_internas/troca_localizacao/troca_localizacao', $session_data);
             $this->load->view('structure/footer', $session_data);
 
         }else{

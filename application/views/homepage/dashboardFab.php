@@ -37,7 +37,12 @@
                         </div>
                         <div class="col-lg-2 col-6" style="padding: 0;">
                             <a href="<?=base_url();?>stocks/internal_movements/change_location" class="btn btn-app bg-primary" style="height: 95%; width: 95%;">
-                                <i class="fas fa-truck-loading" style="font-size: x-large"></i>&nbsp;<p  style="font-size: large;">Movimentações<br>Internas<br>(Troca Localização)</p>
+                                <i class="fas fa-dolly" style="font-size: x-large"></i>&nbsp;<p  style="font-size: large;">Troca de<br>Localização</p>
+                            </a>
+                        </div>  
+                        <div class="col-lg-2 col-6" style="padding: 0;">
+                            <a href="<?=base_url();?>stocks/internal_movements/material_reception" class="btn btn-app bg-info" style="height: 95%; width: 95%;">
+                                <i class="fas fa-truck-loading" style="font-size: x-large"></i>&nbsp;<p  style="font-size: large;">Receção de<br>Material</p>
                             </a>
                         </div>  
                         <div class="col-lg-2 col-6" style="padding: 0;">
@@ -47,7 +52,7 @@
                         </div>
                         <div class="col-lg-2 col-6" style="padding: 0;">
                             <a href="<?=base_url();?>stocks/stock_correction" class="btn btn-app bg-olive" style="height: 95%; width: 95%;">
-                                <i class="fas fa-edit" style="font-size: x-large"></i>&nbsp;<p  style="font-size: large;">Correção<br>de Stock</p>
+                                <i class="fas fa-edit" style="font-size: x-large"></i>&nbsp;<p  style="font-size: large;">Correção de<br>Stock</p>
                             </a>
                         </div>                        
                     </div>

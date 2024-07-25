@@ -438,11 +438,14 @@ function listLocal(data){
     
     dataAR=dtt;
     for (let i = 0; i < dataAR.length; i++) {
-            if(dataAR[i]['Identificador'] === 'CT'){ 
+            if(dataAR[i]['Identificador'] != 'CT'){ 
                 dataAR.splice(i, 1);
                 i--; // Ajustar o índice após a remoção
             }                        
-        }
+    }
+
+    //alert(dataAR);
+
         tableLocal_warehouse= new Tabulator("#local-table-warehouse", {
             data:dataAR, //assign data to table            
             selectableRows:true, //make rows selectable
@@ -482,8 +485,9 @@ function listLocal(data){
                 data.Sel = 1;
             },
             columns:[
-                {title:"Zona", field:"Zona", align:"center",visible:true,headerFilter:"input"},
-                {title:"Celula", field:"Celula", align:"center",visible:true,headerFilter:"input"},
+                {title:"Codigo", field:"Codigo", align:"center",visible:true,headerFilter:"input"},
+                {title:"Fila", field:"Fila", align:"center",visible:true,headerFilter:"input"},
+                {title:"Posicao", field:"Posicao", align:"center",visible:true,headerFilter:"input"},
                 {title:"CodigoBarras", field:"CodigoBarras", align:"center",visible:true,headerFilter:"input"},   
                 {title:"Sector", field:"Sector", align:"center", visible:false},   
                 {title:"Identificador", field:"Identificador", align:"center", visible:false},
@@ -992,7 +996,7 @@ function confirm_save(tblPL,tblLoc){
     //alert(tblLoc[0]['CodigoBarras']);
     $.ajax({
         type: "POST",        
-        url: "http://127.0.0.1/wyipist-fusion/stocks/movimentacoes_internas/Gravar_MudaLocalizacao/save_new_position",
+        url: "http://127.0.0.1/wyipist-fusion/stocks/movimentacoes_internas/troca_localizacao/Gravar_MudaLocalizacao/save_new_position",
         dataType: "json",
         data:{
             palete: tblPL,

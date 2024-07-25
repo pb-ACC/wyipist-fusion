@@ -55,7 +55,7 @@ class Gravar_MudaLocalizacao extends CI_Controller
 
                     //$novo_sector=$tbl[$i]['Sector'];
 
-                    $this->load->model('stocks/movimentacoes_internas/MovimentacoesInternas_troca');
+                    $this->load->model('stocks/movimentacoes_internas/troca_localizacao/MovimentacoesInternas_troca');
                     $this->MovimentacoesInternas_troca->save_new_position($DocPL, $LinhaPL, $Referencia, $Artigo, $DescricaoArtigo, $Quantidade, $Unidade, $Sector, $Formato,
                                                                                  $Qual, $TipoEmbalagem, $Superficie, $Decoracao, $RefCor, $Lote, $TabEspessura, $Calibre, $Local, $novo_sector,
                                                                                  $Nivel,$novo_local,$username,$funcionario_gpac);                   
