@@ -369,7 +369,7 @@ function confirm_changeEmpresa(){
     toastr.clear();
     toastr["info"]("A carregar paletes...");
 
-    tablePaletes.alert("A processar...");
+    tableSelPaletes.alert("A processar...");
     $('#empresasDP').prop('disabled', true);
     $("#buttons button").attr("disabled", true);
 
@@ -386,9 +386,10 @@ function confirm_changeEmpresa(){
                 getPalets(Object.values(data['paletes']));       
                 
                 if (data['button'].length > 0) 
+                    $("#buttons").empty();
                     $("#buttons").append(data['button']); 
 
-                tablePaletes.clearAlert();
+                tableSelPaletes.clearAlert();
                 $('#empresasDP').prop('disabled', false);
                 $("#buttons button").attr("disabled", false);
                 toastr.clear();
