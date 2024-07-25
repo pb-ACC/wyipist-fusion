@@ -123,3 +123,10 @@ margin-bottom: 10px;
 	position:absolute; right:0px; top:bottom; z-index:2; */
 	}
 
+/* Selecione a div específica pela classe e o input dentro dela */
+.tabulator-cell.tabulator-editable.tabulator-editing input[type="checkbox"] {
+    width: 50px !important;  /* Ajuste a largura conforme necessário */
+    height: 50px !important; /* Ajuste a altura conforme necessário */
+    margin-top: 5px !important;
+    box-sizing: border-box !important;
+}

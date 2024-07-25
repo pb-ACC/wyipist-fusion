@@ -98,7 +98,7 @@ class GetPalets extends CI_Model
         $sql01 = "SELECT count(A.id) nLinhas
                   FROM ( SELECT cast(0 as int) Sel, A.Sector, isnull(A.Local,'') Local, round(sum(case when A.TipoMovimento<='10' then A.Quantidade else -A.Quantidade end),2) Quantidade, case when isnull(B.Unidade,'')='' then 'M2' else B.Unidade end Unidade,
                             A.RefP Referencia, A.Artigo, B.Descricao DescricaoArtigo, isnull(A.Lote,'') Lote, isnull(A.Calibre,'') Calibre, D.NumeroLinha LinhaPL, C.Numero DocPL, B.Formato, B.Qual, B.TipoEmbalagem, B.Superficie, B.Decoracao,
-                            B.RefCor, B.TabEspessura, isnull(A.NivelPalete,'') Nivel, CAST(ROW_NUMBER() OVER(ORDER BY C.Numero asc)-1 AS int) Id
+                            B.RefCor, B.TabEspessura, isnull(A.NivelPalete,'') Nivel, cast(0 as float) NovaQtd, CAST(ROW_NUMBER() OVER(ORDER BY C.Numero asc)-1 AS int) Id
                          from StkLDocs A join ReferArt B on (A.RefP=B.Referencia and A.Artigo=B.Artigo)
                                          join PlDocs   C on (C.Estado='F' and (case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
                                          join PllDocs  D on (C.Numero=D.NumeroDocumento)
@@ -124,7 +124,7 @@ class GetPalets extends CI_Model
             $this->db->db_pconnect(); 
             $sql02 = "SELECT cast(0 as int) Sel, A.Sector, isnull(A.Local,'') Local, round(sum(case when A.TipoMovimento<='10' then A.Quantidade else -A.Quantidade end),2) Quantidade, case when isnull(B.Unidade,'')='' then 'M2' else B.Unidade end Unidade,
                             A.RefP Referencia, A.Artigo, B.Descricao DescricaoArtigo, isnull(A.Lote,'') Lote, isnull(A.Calibre,'') Calibre, D.NumeroLinha LinhaPL, C.Numero DocPL, B.Formato, B.Qual, B.TipoEmbalagem, B.Superficie, B.Decoracao,
-                            B.RefCor, B.TabEspessura, isnull(A.NivelPalete,'') Nivel, CAST(ROW_NUMBER() OVER(ORDER BY C.Numero asc)-1 AS int) Id
+                            B.RefCor, B.TabEspessura, isnull(A.NivelPalete,'') Nivel, cast(0 as float) NovaQtd, cast(0 as int) Reabilitado, CAST(ROW_NUMBER() OVER(ORDER BY C.Numero asc)-1 AS int) Id
                       from StkLDocs A join ReferArt B on (A.RefP=B.Referencia and A.Artigo=B.Artigo)
                                       join PlDocs   C on (C.Estado='F' and (case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
                                       join PllDocs  D on (C.Numero=D.NumeroDocumento)
@@ -163,6 +163,8 @@ class GetPalets extends CI_Model
                 $arr['RefCor']=$row->RefCor;
                 $arr['TabEspessura']=$row->TabEspessura;
                 $arr['Nivel']=$row->Nivel;
+                $arr['NovaQtd']=$row->NovaQtd;
+                $arr['Reabilitado']=$row->Reabilitado;
                 $arr['Id']=$row->Id;
 
                 $data[]=$arr;
