@@ -492,13 +492,19 @@ function save_local_fabric(){
 
 function continue_save_local_fabric(selected){
     //alert(selected);
+    if(emp === 'Certeca'){
+        newSector=selected[0]['Sector'];
+    }else{
+        newSector='ST015';
+    }
+
     $.ajax({
         type: "POST",
         url: "http://127.0.0.1/wyipist-fusion/stocks/gerir_paletes/GerarPaletes/guardar_palete",
         dataType: "json",
         data:{
             palete: refs,
-            setor: selected[0]['Sector'],
+            setor: newSector,
             local: selected[0]['CodigoBarras']
         },
         success: function (data) {

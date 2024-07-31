@@ -90,7 +90,7 @@ class MovimentacoesInternas_rececao extends CI_Model
                                     Script, DocumentoOrigem, LinhaDocumentoOrigem, Calibre, LinhaPL, DocPL, NivelPalete)".
                "VALUES(0,'{$Codigo}', '{$Numero}', '', '12', '{$Sector}', 0, 'REMOÇÃO DA PALETE', {$Quantidade}, {$Quantidade}, '{$Referencia}', '{$Artigo}', '{$DescricaoArtigo}', 0, 0, 0,
                '{$Unidade}', 0, 0, 0, '0', '00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'SP','{$user}',getdate(), 0, 0, 0, 0, 0, 0, -1, 0, 0, 
-                {$Quantidade},'{$Unidade}', '{$reluni}' , 1, 0, getdate(), 1, 0, 0, '{$Local}', 'MovimentacoesInternas_troca#remove_palete_setor_atual', '{$Formato}', '{$Qual}', '{$TipoEmbalagem}',
+                {$Quantidade},'{$Unidade}', '{$reluni}' , 1, 0, getdate(), 1, 0, 0, '{$Local}', 'MovimentacoesInternas_rececao#remove_palete_setor_atual', '{$Formato}', '{$Qual}', '{$TipoEmbalagem}',
                '{$Superficie}', '{$Decoracao}', '{$RefCor}', '{$Lote}', '{$TabEspessura}', '{$DocPL}', '', '{$Referencia}', '', -1, '', 0, '{$Calibre}', {$LinhaPL},
                '{$DocPL}', '{$Nivel}')";       
         
@@ -128,7 +128,7 @@ class MovimentacoesInternas_rececao extends CI_Model
                 "VALUES(0,'{$Codigo}', '{$Numero}', '', '02', '{$novo_sector}', 0, 'INSERÇÃO DA PALETE', {$Quantidade}, {$Quantidade}, '{$Referencia}', '{$Artigo}', '{$DescricaoArtigo}', 0, 0, 0,
                 '{$Unidade}', 0, 0, 0, '0', '00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'SP','{$user}',getdate(), 0, 0, 0, 0, 0, 0, -1, 0, 0, 
                 {$Quantidade},'{$Unidade}', '{$reluni}' , 1, 0, getdate(), 1, 0, 0, (case when '{$novo_local}'='XPTOXPTO' then '{$Local}' else '{$novo_local}' end), 
-                'MovimentacoesInternas_troca#insere_palete_novosector', '{$Formato}', '{$Qual}', '{$TipoEmbalagem}', '{$Superficie}', '{$Decoracao}', '{$RefCor}', '{$Lote}', '{$TabEspessura}', 
+                'MovimentacoesInternas_rececao#insere_palete_novosector', '{$Formato}', '{$Qual}', '{$TipoEmbalagem}', '{$Superficie}', '{$Decoracao}', '{$RefCor}', '{$Lote}', '{$TabEspessura}', 
                 '{$DocPL}', '', '{$Referencia}', '', -1, '', 0, '{$Calibre}', {$LinhaPL},'{$DocPL}', '{$Nivel}')";        
         $this->db->query($sql04);
         $this->db->close();

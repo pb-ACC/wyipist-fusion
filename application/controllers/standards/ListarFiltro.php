@@ -274,4 +274,59 @@ class ListarFiltro extends CI_Controller
         }   
     }
     
+    public function filtraPlZn_emanuel_rececaomaterial($emp,$newSector){
+        $this->load->helper('url');
+        $this->load->library('session');
+        if($this->session->userdata('logged_in')) {            
+                       
+            $session_data = $this->session->userdata('logged_in');            
+            $user_type = $session_data['user_type'];
+
+            $emp = strtoupper($emp);
+            if($emp == 'CERAGNI'){                
+                $empresa = '\''.$emp.'\'';
+               // echo $empresa;
+
+                $this->load->model('standards/others/GetZonas');                
+                $zonas=$this->GetZonas->zonaCelula($empresa);
+
+                $this->load->model('standards/stocks/GetPalets');
+                $setor = '\''.$newSector.'\'';             
+                $paletes=$this->GetPalets->armazem($setor);
+
+                $this->load->model('standards/others/Buttons');
+                $button=$this->Buttons->buttons_empresa(1);
+
+                $data = array( 
+                    'zonas' => $zonas,                                          
+                    'paletes' => $paletes,
+                    'radio' => '',
+                    'button' => $button
+                );
+                
+            }else{
+                $empresa = '\''.$emp.'\'';
+                //echo $empresa;
+
+                $this->load->model('standards/others/GetZonas');                
+                $zonas=$this->GetZonas->zonaCelula($empresa);
+
+                $this->load->model('standards/stocks/GetPalets');
+                $setor = '\''.$newSector.'\'';                              
+                $paletes=$this->GetPalets->armazem($setor);
+
+                $this->load->model('standards/others/Buttons');
+                $button=$this->Buttons->buttons_empresa(2);
+
+                $data = array( 
+                    'zonas' => $zonas,                                          
+                    'paletes' => $paletes,                    
+                    'button' => $button
+                );
+            }
+                echo json_encode($data);
+        }else{
+            redirect('start', 'refresh');
+        }   
+    }
 }
