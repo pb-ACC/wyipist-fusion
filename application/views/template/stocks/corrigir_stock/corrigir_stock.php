@@ -99,7 +99,7 @@
                 </div>
                 
                 <div class="modal-footer">		
-                    <button onclick="save_motivo()" type="button" class="btn btn-primary"><i class="fas fa-save"></i> Confirmar</button>                
+                    <button onclick="save_motivo()" type="button" class="btn btn-primary"><i class="fas fa-save"></i> Gravar</button>                
                 </div>    
         </div>
     </div>
@@ -129,7 +129,7 @@
                 </div>
                 
                 <div class="modal-footer">		
-                    <button id="save_anulacao" onclick="save_anulacao()" type="button" class="btn btn-primary"><i class="fas fa-save"></i> Confirmar</button>                
+                    <button id="save_anulacao" onclick="save_anulacao()" type="button" class="btn btn-primary"><i class="fas fa-save"></i> Gravar</button>                
                 </div>    
         </div>
     </div>

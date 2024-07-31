@@ -120,7 +120,7 @@
                     <div class="card-footer" style="background-color:transparent;">
                         <div class="row">
                             <div class="col-md-12 text-right">
-                                <button type="submit" class="btn btn-primary">Gravar</button>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Gravar</button>
                             </div>
                         </div>
                     </div>

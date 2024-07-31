@@ -138,7 +138,7 @@
             <div id="local-table-logistic" class="table table-striped"></div>
 			</div>
 			<div class="modal-footer">		
-                <button id="save_local_logistic" onclick="save_local_logistic()" type="button" class="btn btn-primary"><i class="fas fa-save"></i> Confirmar</button>	
+                <button id="save_local_logistic" onclick="save_local_logistic()" type="button" class="btn btn-primary"><i class="fas fa-save"></i> Gravar</button>	
 			</div>    
     </div>
   </div>
@@ -171,7 +171,7 @@
             <div id="local-table-warehouse" class="table table-striped"></div>
 			</div>
 			<div class="modal-footer">		
-                <button id="save_local" onclick="save_local_warehouse()" type="button" class="btn btn-primary"><i class="fas fa-save"></i> Confirmar</button>	
+                <button id="save_local" onclick="save_local_warehouse()" type="button" class="btn btn-primary"><i class="fas fa-save"></i> Gravar</button>	
 			</div>    
     </div>
   </div>
@@ -199,7 +199,7 @@
                 </div>
                 
                 <div class="modal-footer">		
-                    <button onclick="save_motivo()" type="button" class="btn btn-primary"><i class="fas fa-save"></i> Confirmar</button>                
+                    <button onclick="save_motivo()" type="button" class="btn btn-primary"><i class="fas fa-save"></i> Gravar</button>                
                 </div>    
         </div>
     </div>

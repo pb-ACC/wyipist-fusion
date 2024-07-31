@@ -99,7 +99,7 @@
                 </div>                
 			</div>
 			<div class="modal-footer">		                            
-                <button id="savePLS" onclick="savePLS()" type="button" class="btn btn-success"><i class="fas fa-save"></i> Confirmar</button>	
+                <button id="savePLS" onclick="savePLS()" type="button" class="btn btn-success"><i class="fas fa-arrow-right"></i> Continuar</button>	
 			</div>    
     </div>
   </div>
@@ -132,7 +132,7 @@
             <div id="local-table-fabric" class="table table-striped"></div>
 			</div>
 			<div class="modal-footer">		
-                <button id="save_local" onclick="save_local_fabric()" type="button" class="btn btn-primary"><i class="fas fa-save"></i> Confirmar</button>	
+                <button id="save_local" onclick="save_local_fabric()" type="button" class="btn btn-primary"><i class="fas fa-save"></i> Gravar</button>	
 			</div>    
     </div>
   </div>

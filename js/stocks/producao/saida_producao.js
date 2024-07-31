@@ -434,7 +434,7 @@ function listLocal(data){
     
     dataAR=dtt;
     for (let i = 0; i < dataAR.length; i++) {
-            if(dataAR[i]['Identificador'] === 'CT'){ 
+            if(dataAR[i]['Identificador'] != 'CT'){ 
                 dataAR.splice(i, 1);
                 i--; // Ajustar o índice após a remoção
             }                        
@@ -478,8 +478,9 @@ function listLocal(data){
                 data.Sel = 1;
             },
             columns:[
-                {title:"Zona", field:"Zona", align:"center",visible:true,headerFilter:"input"},
-                {title:"Celula", field:"Celula", align:"center",visible:true,headerFilter:"input"},
+                {title:"Codigo", field:"Codigo", align:"center",visible:true,headerFilter:"input"},
+                {title:"Fila", field:"Fila", align:"center",visible:true,headerFilter:"input"},
+                {title:"Posicao", field:"Posicao", align:"center",visible:true,headerFilter:"input"},
                 {title:"CodigoBarras", field:"CodigoBarras", align:"center",visible:true,headerFilter:"input"},   
                 {title:"Sector", field:"Sector", align:"center", visible:false},   
                 {title:"Identificador", field:"Identificador", align:"center", visible:false},
@@ -869,13 +870,21 @@ function confirm_changeEmpresa(){
 
 /*GRAVAR DADOS NA BD*/
 function confirm_save(tblPL,tblLoc){
+    empp = $("#empresasDP option:selected").text();
+    emp = $.trim(empp);    
+    if(emp === 'Certeca'){
+        newSector=tblLoc[0]['Sector'];
+    }else{
+        newSector='ST015';
+    }
+
     $.ajax({
         type: "POST",
         url: "http://127.0.0.1/wyipist-fusion/stocks/producao/Gravar_SaidaProducao/save_production",
         dataType: "json",
         data:{
             palete: tblPL,
-            setor: tblLoc[0]['Sector'],
+            setor: newSector,
             local: tblLoc[0]['CodigoBarras']
         },
         success: function (data) {
