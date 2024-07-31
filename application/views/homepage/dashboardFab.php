@@ -56,8 +56,26 @@
                             </a>
                         </div>                        
                     </div>
-                </div>
+                    <div class="row">                      
+                        <div class="col-lg-2 col-6" style="padding: 0;">
+                            <a href="<?=base_url();?>load_plans/load_preparation" class="btn btn-app bg-lime" style="height: 95%; width: 95%;">
+                                <i class="fas fa-dolly-flatbed" style="font-size: x-large"></i>&nbsp;<p  style="font-size: initial;">Prepação<br>de<br>Cargas</p>
+                            </a>
+                        </div>    
 
+                        <div class="col-lg-2 col-6" style="padding: 0;">
+                            <a href="<?=base_url();?>load_plans/cancellation_of_load_preparation" class="btn btn-app bg-fuchsia" style="height: 95%; width: 95%;">
+                                <i class="fas fa-times-circle" style="font-size: x-large"></i>&nbsp;<p  style="font-size: initial;">Anulação<br>Preparação de<br>Carga</p>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-2 col-6" style="padding: 0;">
+                            <a href="<?=base_url();?>load_plans/correction_of_load_preparation" class="btn btn-app bg-gray" style="height: 95%; width: 95%;">
+                                <i class="fas fa-redo" style="font-size: x-large"></i>&nbsp;<p  style="font-size: initial;">Correção<br>Preparação de<br>Carga</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>            
             <div class="card-footer" style="display: block; background-color: transparent;">
             </div>		

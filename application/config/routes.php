@@ -77,6 +77,15 @@ $route['stocks/stock_correction']='stocks/corrigir_stock/CorrigirStock';
 
 /*
 | -------------------------------------------------------------------------
+| PLANOS DE CARGA
+| -------------------------------------------------------------------------
+*/
+$route['load_plans/load_preparation'] = 'planos_carga/preparacao/PreparacaoCarga';
+$route['load_plans/cancellation_of_load_preparation'] = 'planos_carga/anulacao/AnulacaoCarga';
+$route['load_plans/correction_of_load_preparation']='planos_carga/correcao/CorrecaoCarga';
+
+/*
+| -------------------------------------------------------------------------
 | USERS
 | -------------------------------------------------------------------------
 */

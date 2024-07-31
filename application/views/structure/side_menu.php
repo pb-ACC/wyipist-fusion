@@ -60,6 +60,7 @@
                                 </li>      
                             </ul>
                         </li>
+                        
                         <li id="anula-pl01" class="nav-item">
                             <a id="anula-pl02" href="<?=base_url();?>stocks/manage_palettes/cancel_palettes" class="nav-link">
                                 <i class="fas fa-box nav-icon"></i>
@@ -96,6 +97,37 @@
                         <?php }?>  
                     </ul>
                 </li>
+
+                <li id="menu-planos01" class="nav-item">
+                    <a id="menu-planos02" href="#" class="nav-link">
+                        <i class="fas fa-shipping-fast nav-icon"></i>                        
+                        <p> Planos de Carga <i class="fas fa-angle-left right"></i> </p>
+                    </a>
+                    <ul id="menu-planos03" class="nav nav-treeview" style="display: none;">
+                        <li id="prep-carg01" class="nav-item">
+                            <a id="prep-carg02" href="<?=base_url();?>load_plans/load_preparation" class="nav-link">
+                                <i class="fas fa-dolly-flatbed nav-icon"></i>                        
+                                <p> Preparação de Cargas</p>
+                            </a>
+                        </li>
+                        
+                        <li id="anula-carg01" class="nav-item">
+                            <a id="anula-carg02" href="<?=base_url();?>load_plans/cancellation_of_load_preparation" class="nav-link">
+                                <i class="fas fa-times-circle nav-icon"></i>
+                                <p> Anulação Prep. de Cargas</p>
+                            </a>
+                        </li>    
+
+                        <li id="correc-carg01" class="nav-item">
+                            <a id="correc-carg02" href="<?=base_url();?>load_plans/correction_of_load_preparation" class="nav-link">
+                                <i class="fas fa-redo nav-icon"></i>                        
+                                <p> Correção Prep. de Cargas</p>
+                            </a>
+                        </li>                       
+                        
+                    </ul>
+                </li>
+
             <?php if ($user_type==1 || $user_type==2) { ?>
                 <li id="menu-gestao01" class="nav-item">
                     <a id="menu-gestao02" href="#" class="nav-link">
