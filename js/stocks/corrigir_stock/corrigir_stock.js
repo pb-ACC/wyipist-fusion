@@ -96,6 +96,11 @@ function getPalets(data){
         columnDefaults:{
             tooltip:true,         //show tool tips on cells
         },
+        locale: true, // enable locale support
+        langs: {
+            "pt-pt": ptLocale
+        },
+        initialLocale: "pt-pt",
         rowFormatter: function(row) {
             var data = row.getData();
             

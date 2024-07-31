@@ -58,6 +58,7 @@
     <link rel="icon" href="<?=base_url();?>public/img/logos/wyipi.ico">
 
     <link rel="stylesheet" href="<?=base_url();?>public/css/stockterminal.css">
+    <script src="<?=base_url();?>js/header/main.js"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">

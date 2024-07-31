@@ -63,6 +63,11 @@ function listUsers(data){
             columnDefaults:{
                 tooltip:true,         //show tool tips on cells
             },
+            locale: true, // enable locale support
+            langs: {
+                "pt-pt": ptLocale
+            },
+            initialLocale: "pt-pt",
             columns:[
                 {title:"#", field:"id", width:"5%", align:"center"},
                 {title:"User", field:"username", align:"center"},

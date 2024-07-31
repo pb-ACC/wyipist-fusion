@@ -117,6 +117,11 @@ function getPalets(data){
         columnDefaults:{
             tooltip:true,         //show tool tips on cells
         },
+        locale: true, // enable locale support
+        langs: {
+            "pt-pt": ptLocale
+        },
+        initialLocale: "pt-pt",
         rowFormatter: function(row) {
             var data = row.getData();
             
@@ -226,6 +231,11 @@ function selectedPalets(data){
         columnDefaults:{
             tooltip:true,         //show tool tips on cells
         },
+        locale: true, // enable locale support
+        langs: {
+            "pt-pt": ptLocale
+        },
+        initialLocale: "pt-pt",
         columns:[
             {title:"Palete", field:"DocPL", align:"center",headerFilter:"input"},
             {title:"LinhaPL", field:"LinhaPL", align:"center", visible:false},                
@@ -336,6 +346,11 @@ function listLocal(data){
             paginationSize:25,
             paginationSizeSelector:[25,50,75,100],
         layout:"fitColumns", //fit columns to width of table (optional)
+        locale: true, // enable locale support
+        langs: {
+            "pt-pt": ptLocale
+        },
+        initialLocale: "pt-pt",
         rowFormatter: function(row) {
             var data = row.getData();
             
@@ -392,6 +407,11 @@ function listLocal(data){
                 paginationSize:25,
                 paginationSizeSelector:[25,50,75,100],
             layout:"fitColumns", //fit columns to width of table (optional)
+            locale: true, // enable locale support
+            langs: {
+                "pt-pt": ptLocale
+            },
+            initialLocale: "pt-pt",
             rowFormatter: function(row) {
                 var data = row.getData();
                 
@@ -452,6 +472,11 @@ function listLocal(data){
                 paginationSize:25,
                 paginationSizeSelector:[25,50,75,100],
             layout:"fitColumns", //fit columns to width of table (optional)
+            locale: true, // enable locale support
+            langs: {
+                "pt-pt": ptLocale
+            },
+            initialLocale: "pt-pt",
             rowFormatter: function(row) {
                 var data = row.getData();
                 

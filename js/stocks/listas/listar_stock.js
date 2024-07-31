@@ -65,6 +65,11 @@ function getPalets(data){
         columnDefaults:{
             tooltip:true,         //show tool tips on cells
         },
+        locale: true, // enable locale support
+        langs: {
+            "pt-pt": ptLocale
+        },
+        initialLocale: "pt-pt",
         columns:[
             {title:"Sector", field:"Sector", align:"center",headerFilter:"input"},  
             {title:"Local", field:"Local", align:"center",headerFilter:"input"},
@@ -290,6 +295,11 @@ function listExtrato(data){
         columnDefaults:{
             tooltip:true,         //show tool tips on cells
         },
+        locale: true, // enable locale support
+        langs: {
+            "pt-pt": ptLocale
+        },
+        initialLocale: "pt-pt",
         columns:[
             {title:"Sector", field:"Sector", align:"center",headerFilter:"input"},  
             {title:"Local", field:"Local", align:"center",headerFilter:"input"},                
