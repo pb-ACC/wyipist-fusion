@@ -329,4 +329,39 @@ class ListarFiltro extends CI_Controller
             redirect('start', 'refresh');
         }   
     }
+
+    public function filtraPlZn_emanuel_planoscarga($emp){
+        $this->load->helper('url');
+        $this->load->library('session');
+        if($this->session->userdata('logged_in')) {        
+            
+            $emp = strtoupper($emp);
+            $this->load->model('planos_carga/preparacao/Preparacao_Carga');
+
+            if($emp == 'CERAGNI'){                
+                $tipoDoc='GG';
+                $serie='CG';                    
+                $estado='P';                                    
+                $carga=$this->Preparacao_Carga->getPreparacaoCarga($tipoDoc,$serie,$estado);
+
+                $data = array(     
+                    'carga' => $carga
+                );
+                
+            }else{
+                $tipoDoc='GG';
+                $serie='CT';                    
+                $estado='P';                                    
+                $carga=$this->Preparacao_Carga->getPreparacaoCarga($tipoDoc,$serie,$estado);
+
+                $data = array(     
+                    'carga' => $carga
+                );
+            }
+                echo json_encode($data);
+        }else{
+            redirect('start', 'refresh');
+        }   
+    }
+    
 }

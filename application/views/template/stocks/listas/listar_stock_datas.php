@@ -53,4 +53,5 @@ let user_type=<?php echo $user_type;?>;
 let codigoempresa=<?php echo $codigoempresa;?>;
 </script>
 
+<script src="<?=base_url();?>js/reload.js"></script>
 <script src="<?=base_url();?>js/stocks/listas/listar_stock_datas.js"></script>

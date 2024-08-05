@@ -212,4 +212,5 @@ let user_type=<?php echo $user_type;?>;
 let codigoempresa=<?php echo $codigoempresa;?>;
 </script>
 
+<script src="<?=base_url();?>js/reload.js"></script>
 <script src="<?=base_url();?>js/stocks/movimentacoes_internas/troca_localizacao/troca_localizacao.js"></script>

@@ -81,6 +81,9 @@ $route['stocks/stock_correction']='stocks/corrigir_stock/CorrigirStock';
 | -------------------------------------------------------------------------
 */
 $route['load_plans/load_preparation'] = 'planos_carga/preparacao/PreparacaoCarga';
+$route['load_plans/load_preparation/(:any)/(:any)'] = 'planos_carga/preparacao/GetLinhasGG/linhasGG/$1/$2';
+$route['load_plans/load_preparation/(:any)/(:any)/(:any)/(:any)/(:any)'] = 'planos_carga/preparacao/PreparaRef/stockRef/$1/$2/$3/$4/$5';
+
 $route['load_plans/cancellation_of_load_preparation'] = 'planos_carga/anulacao/AnulacaoCarga';
 $route['load_plans/correction_of_load_preparation']='planos_carga/correcao/CorrecaoCarga';
 

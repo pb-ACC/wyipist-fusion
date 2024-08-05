@@ -125,4 +125,5 @@
     <!-- /.modal-dialog -->
 </div>
 
+<script src="<?=base_url();?>js/reload.js"></script>
 <script src="<?=base_url();?>js/users/get_users.js"></script>
