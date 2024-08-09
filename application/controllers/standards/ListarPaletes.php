@@ -647,4 +647,103 @@ class ListarPaletes extends CI_Controller
             redirect('start', 'refresh');
         }   
     }  
+
+    public function getPalets_prepararefs($serie,$linha,$refp){
+        $this->load->helper('url');
+        $this->load->library('session');
+        if($this->session->userdata('logged_in')) {
+            
+            $session_data = $this->session->userdata('logged_in');            
+            $user_type = $session_data['user_type'];            
+            $username = $session_data['username'];
+            $funcionario_gpac = $session_data['funcionario_gpac'];     
+            
+            $empresa= $this->getEmpresa();            
+            //vecho $empresa[0]->Empresa;
+            $this->load->model('standards/stocks/GetPalets');
+            switch ($empresa[0]->TipoEmpresa) {
+                case 1:
+                    $setor = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST015\', \'ST020\', \'CL007\'';               
+                    $this->load->model('standards/stocks/GetPalets');
+                    $paletes=$this->GetPalets->cargas($refp,$setor);
+
+                    if($serie == 'CG'){
+                        $seriePL='C';
+                    }else{
+                        $seriePL='PC';
+                    }                    
+                    $this->load->model('planos_carga/preparacao/Preparacao_Carga');
+                    $linhaGG=$this->Preparacao_Carga->getLinha($linha,$seriePL,$username,$funcionario_gpac);
+
+                    $data = array( 
+                        'paletes' => $paletes,
+                        'linhaGG' => $linhaGG,
+                    );                    
+                    echo json_encode($data);
+                    break;
+                case 2:
+                    $setor='\'FB003\',\'CL001\',\'ST017\'';
+                    $this->load->model('standards/stocks/GetPalets');
+                    $paletes=$this->GetPalets->cargas($refp,$setor);
+                
+                    $data = array( 
+                        'paletes' => $paletes
+                    );
+                    echo json_encode($data);
+                    break;
+                case 3:
+                    /*                    
+                    $st01='ST010';
+                    $st02='FB001';
+                    $setor = '\''.$st01.'\''.','.'\''.$st02.'\'';     
+                    */
+                    $setor = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST015\', \'ST020\', \'CL007\'';                          
+                    $this->load->model('standards/stocks/GetPalets');
+                    $paletes=$this->GetPalets->cargas($refp,$setor);
+
+                    if($serie == 'CG'){
+                        $seriePL='C';
+                    }else{
+                        $seriePL='PC';
+                    }                    
+                    $this->load->model('planos_carga/preparacao/Preparacao_Carga');
+                    $linhaGG=$this->Preparacao_Carga->getLinha($linha,$seriePL,$username,$funcionario_gpac);
+
+                    $data = array( 
+                        'paletes' => $paletes,
+                        'linhaGG' => $linhaGG,
+                    );        
+                    echo json_encode($data);
+                    break;
+                case 4:
+                    /*                    
+                    $st01='ST010';
+                    $st02='FB001';
+                    $setor = '\''.$st01.'\''.','.'\''.$st02.'\'';     
+                    */
+                    $setor = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST015\', \'ST020\', \'CL007\'';                                               
+                    $this->load->model('standards/stocks/GetPalets');
+                    $paletes=$this->GetPalets->cargas($refp,$setor);
+
+                    if($serie == 'CG'){
+                        $seriePL='C';
+                    }else{
+                        $seriePL='PC';
+                    }                    
+                    $this->load->model('planos_carga/preparacao/Preparacao_Carga');
+                    $linhaGG=$this->Preparacao_Carga->getLinha($linha,$seriePL,$username,$funcionario_gpac);
+
+                    $data = array( 
+                        'paletes' => $paletes,
+                        'linhaGG' => $linhaGG,
+                    );        
+                    echo json_encode($data);
+                    break;                    
+            }
+
+        }else{
+            redirect('start', 'refresh');
+        }   
+    }  
+    
 }

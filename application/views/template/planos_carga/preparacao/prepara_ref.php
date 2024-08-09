@@ -2,7 +2,7 @@
 
     <section class="content-header">        
         <div class="container-fluid">
-            <div class="row mb-2">
+            <div class="row mb-3">
                 <div class="col-sm-6">
                     <h1 class="m-0">Plano de Carga <?=$_SESSION['PlanoGG']?></h1>
                 </div>
@@ -25,20 +25,74 @@
             <div class="card card-info">
                 <div class="card-header">
                     <h3 class="card-title">Preparar Referência <?=$_SESSION['Referencia']?></h3>
+                    <div class="pull pull-right" style="float: right;">									
+                        <button class="btn btn-light btn-sm btn-flat" title="Atualizar Página" onclick="location.reload();" style="margin-right: 10px;float: right">Atualizar Página</button>
+					</div>
                 </div>
                 <div class="card-body">
-                    <div id="radioButtons" style="display: none;">
+                    <h3 class="m-0">Linha da Encomenda</h3>
+                    <div id="line-table" class="table table-striped"  style="margin-top: 35px;box-shadow: 5px 10px 18px #888888;">
                     </div>
-                    <div id="plano-carga-table" class="table table-striped"  style="margin-top: 35px;box-shadow: 5px 10px 18px #888888;">
+                    <br><br>
+                    <h3 class="m-0">Paletes a Paletizar</h3>
+                    <div id="selected-palets-table" class="table table-striped"  style="margin-top: 35px;box-shadow: 5px 10px 18px #888888;">
                     </div>
                 </div>
                 
-                <div class="card-footer">                                        
+                <div class="card-footer" style="background-color:transparent">      
+                    <div class="row">        
+                        <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-3 col-md-push-3 col-lg-3 col-lg-push-3">
+                            <button id="choose_palets" onclick="choose_palets()" type="button" class="btn btn-dark" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Picar Palete</button>
+                        </div>
+                        <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-3 col-md-push-3 col-lg-3 col-lg-push-3">
+                            <button onclick="cancel_palets()" type="button" class="btn btn-dark" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Anular Palete</button>
+                        </div>
+                        <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-3 col-md-push-3 col-lg-3 col-lg-push-3">
+                            <button onclick="close_gg()" type="button" class="btn btn-light" style="border-color: lightgrey;width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Concluir Manual.</button>
+                        </div> 
+                        <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-3 col-md-push-3 col-lg-3 col-lg-push-3">
+                            <button onclick="paletizar()" type="button" class="btn btn-primary" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Paletizar</button>
+                        </div> 
+                    </div>                                  
                 </div>
             </div>
 
         </div>
     </section>
+</div>
+
+<div id="escolha_palete" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document" style="width:auto">
+    <div class="modal-content">
+            <div class="modal-header">
+				<button id="btnclose" type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+
+			<!--<div class="modal-body" style="max-height: calc(100vh - 210px);overflow-y:scroll;overflow-x:scroll;">-->
+            <div class="modal-body" style="width: auto; height:auto;">
+			
+            
+            <div class="form-group">
+            <label for="exampleInputEmail1">Palete</label>
+			<div class="input-group">            
+            <input type="text" class="col-6 form-control" id="paleteCB" onchange="pick_palete()" placeholder="Código Barras" autofocus>
+            
+			<button onclick="clearPaletes()" type="button" class="col-4 btn btn-warning" style="margin-left: 5px;max-height: 38px;"><i class="fas fa-eraser"></i> Limpar</button>	
+			
+			</div>
+            </div>
+
+
+            <div id="tablePLs" class="table table-striped"></div>
+			</div>
+			<div class="modal-footer">		                
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i> Cancelar</button>		
+                <button onclick="save_paletes()" type="button" class="btn btn-success"><i class="fas fa-arrow-right"></i> Continuar</button>
+			</div>    
+    </div>
+  </div>
 </div>
 
 <div id="motivo" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
