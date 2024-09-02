@@ -55,17 +55,23 @@ class Manage_Users extends CI_Model
 
         if($this->verifyUserName($user, $empresa_type)=="Utilizador inserido já existe!"){
             $response = [
-                'type' => 'danger',
+                'type' => 'error',
                 'text' => 'Utilizador inserido já existe!'
             ];    
             return $response;                    
         }else if ($this->verifyGpacUser($userGPAC, $empresa_type)=="Utilizador GPAC inserido já existe!"){
             $response = [
-                'type' => 'danger',
+                'type' => 'error',
                 'text' => 'Utilizador GPAC inserido já existe!'
             ];               
             return $response;
         }else {
+            $this->load->database('default');
+            $this->createOperador($userGPAC,$nome,$contacto,$email,$user_type);
+            $this->insertGPAC($empresa_type,$userGPAC);            
+            $this->createSchema($userGPAC);
+
+            $this->load->database('login');
             $this->db->query("INSERT into users (nome,telefone, email,username,password,funcionario_gpac,user_type, client, funcao, codigo_empresa, active)
                           VALUES ('{$nome}','{$contacto}','{$email}',UPPER('{$user}'),md5('{$password}'),UPPER('{$userGPAC}'),{$user_type},{$empresa_type},'{$cargo}',{$empresa_type},1)");
             
@@ -81,7 +87,7 @@ class Manage_Users extends CI_Model
             }
             
             $this->db->close();     
-            $this->insertGPAC($empresa_type,$userGPAC);
+            
             $response = [
                 'type' => 'success',
                 'text' => 'Novo registo criado com sucesso'
@@ -90,8 +96,25 @@ class Manage_Users extends CI_Model
         }
     }
 
+    public function createOperador($userGPAC,$nome,$contacto,$email,$user_type){
+        
+        $sql="INSERT into operador (Codigo,Nome,Telemovel,EMail,Password,Administrador,Layout,Foto,AssiDigi,CaminhoLocal,Grupo,MsAdmin,Terminal,PTesouraria,ThumbNail,CaminhoFoto,Contexto,ImplAdm,EnviaTicket,OutlookEMail,OutlookBox,Impressora,SQLSenha,ImpressoraPDF,DesativaALT,PodeEditarGrid,ContrasteGrid,NoBatteryMSG,SerieOperador,FicheiroPDF,CaminhoPDF,CopiaPDF,TicketInterno) 
+              SELECT UPPER('{$userGPAC}'),'{$nome}','{$contacto}','{$email}','#',case when {$user_type} in (1,2) then 1 else 0 end,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null";
+        //echo $sql;             
+        $this->db->query($sql);
+        $this->db->close();     
+    }
+
+    public function createSchema($userGPAC){
+        
+        $sql="EXEC dbo.CriarOperadores UPPER('{$userGPAC}')";
+        //echo $sql;             
+        $this->db->query($sql);
+        $this->db->close(); 
+    }
+
     public function insertGPAC($empresa_type,$userGPAC){
-        $this->load->database('default');
+        
         $sql="INSERT into zxOperEmpresaWEB (Empresa,Operador) 
               SELECT case when {$empresa_type}=1 then 'CERAGNI' when {$empresa_type}=2 then 'CERTECA' else 'AMBAS' end, UPPER('{$userGPAC}')";
         //echo $sql;             

@@ -116,12 +116,15 @@ class GetPalets extends CI_Model
 
         $data = array();
 		$arr = [];
+        set_time_limit(0);
+        $this->db->db_pconnect();
         $batches = $itemcount / 3500; // Number of while-loop calls - around 120.
 
         for ($i = 0; $i <= $batches; $i++) {
             $offset = $i * 3500; // MySQL Limit offset number
             $fetch = $offset + 3500;
-            $this->db->db_pconnect(); 
+            set_time_limit(0);
+            $this->db->db_pconnect();
             $sql02 = "SELECT cast(0 as int) Sel, A.Sector, isnull(A.Local,'') Local, round(sum(case when A.TipoMovimento<='10' then A.Quantidade else -A.Quantidade end),2) Quantidade, case when isnull(B.Unidade,'')='' then 'M2' else B.Unidade end Unidade,
                             A.RefP Referencia, A.Artigo, B.Descricao DescricaoArtigo, isnull(A.Lote,'') Lote, isnull(A.Calibre,'') Calibre, D.NumeroLinha LinhaPL, C.Numero DocPL, B.Formato, B.Qual, B.TipoEmbalagem, B.Superficie, B.Decoracao,
                             B.RefCor, B.TabEspessura, isnull(A.NivelPalete,'') Nivel, cast(0 as float) NovaQtd, cast(0 as int) Reabilitado, CAST(ROW_NUMBER() OVER(ORDER BY C.Numero asc)-1 AS int) Id
@@ -137,40 +140,51 @@ class GetPalets extends CI_Model
                       FETCH NEXT ".$fetch ." ROWS ONLY";  
             //and isnull(A.Local,'')<>'' 
             //echo $sql02;
-            $query02 = $this->db->query($sql02);
-            $result = $query02->result();
-            $this->db->close();
+            set_time_limit(0);
+            $this->db->db_pconnect();                                          
+            $query = $this->db->query($sql02);
+        
+                    // Verifique se a consulta foi bem-sucedida
+            if ($query) {
+                $result = $query->result();
+                        
+                        // Processa os resultados conforme necessário
+                foreach ($result as $row) {
+                    $arr['Sel']=$row->Sel;
+                    $arr['Sector']=$row->Sector;
+                    $arr['Local']=$row->Local;
+                    $arr['Quantidade']=$row->Quantidade;
+                    $arr['Unidade']=$row->Unidade;
+                    $arr['Referencia']=$row->Referencia;
+                    $arr['Artigo']=$row->Artigo;
+                    $arr['DescricaoArtigo']=$row->DescricaoArtigo;
+                    $arr['Lote']=$row->Lote;
+                    $arr['Calibre']=$row->Calibre;
+                    $arr['LinhaPL']=$row->LinhaPL;
+                    $arr['DocPL']=$row->DocPL;
+                    $arr['Formato']=$row->Formato;
+                    $arr['Qual']=$row->Qual;
+                    $arr['TipoEmbalagem']=$row->TipoEmbalagem;
+                    $arr['Superficie']=$row->Superficie;
+                    $arr['Decoracao']=$row->Decoracao;
+                    $arr['RefCor']=$row->RefCor;
+                    $arr['TabEspessura']=$row->TabEspessura;
+                    $arr['Nivel']=$row->Nivel;
+                    $arr['NovaQtd']=$row->NovaQtd;
+                    $arr['Reabilitado']=$row->Reabilitado;
+                    $arr['Id']=$row->Id;
 
-            foreach ($result as $row) {
-
-                $arr['Sel']=$row->Sel;
-                $arr['Sector']=$row->Sector;
-                $arr['Local']=$row->Local;
-                $arr['Quantidade']=$row->Quantidade;
-                $arr['Unidade']=$row->Unidade;
-                $arr['Referencia']=$row->Referencia;
-                $arr['Artigo']=$row->Artigo;
-                $arr['DescricaoArtigo']=$row->DescricaoArtigo;
-                $arr['Lote']=$row->Lote;
-                $arr['Calibre']=$row->Calibre;
-                $arr['LinhaPL']=$row->LinhaPL;
-                $arr['DocPL']=$row->DocPL;
-                $arr['Formato']=$row->Formato;
-                $arr['Qual']=$row->Qual;
-                $arr['TipoEmbalagem']=$row->TipoEmbalagem;
-                $arr['Superficie']=$row->Superficie;
-                $arr['Decoracao']=$row->Decoracao;
-                $arr['RefCor']=$row->RefCor;
-                $arr['TabEspessura']=$row->TabEspessura;
-                $arr['Nivel']=$row->Nivel;
-                $arr['NovaQtd']=$row->NovaQtd;
-                $arr['Reabilitado']=$row->Reabilitado;
-                $arr['Id']=$row->Id;
-
-                $data[]=$arr;
-                unset($arr);
-            }
-        }        
+                    $data[]=$arr;
+                    unset($arr);
+                }
+        } else {
+            // Lida com o erro de consulta
+            $erro = $this->db->error();
+            log_message('error', 'Erro na consulta SQL: ' . $erro['message']);
+        }
+    
+        $this->db->close();
+    } 
 
         $data = array_unique($data, SORT_REGULAR);        
         return $data;
