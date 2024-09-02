@@ -921,9 +921,19 @@ function radioButtons(){
 }
 
 function change_sector_emp(newSector){
-    empp = $("#empresasDP option:selected").text();
-    emp = $.trim(empp);   
-    
+
+    if (user_type == 1 || user_type == 2){
+        empp = $("#empresasDP option:selected").text();
+        emp = $.trim(empp);  
+    }
+    else{
+        if(codigoempresa == 1){
+            emp = "CERAGNI";
+        }else{
+            emp = "CERTECA";
+        }
+    }    
+
     toastr.clear();
     toastr["info"]("A carregar paletes...");
     tableSelPaletes.alert("A processar...");
