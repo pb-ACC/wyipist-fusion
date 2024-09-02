@@ -139,7 +139,7 @@ class GetPalets extends CI_Model
                       OFFSET ".$offset." ROWS
                       FETCH NEXT ".$fetch ." ROWS ONLY";  
             //and isnull(A.Local,'')<>'' 
-            //echo $sql02;
+           // echo $sql02;
             set_time_limit(0);
             $this->db->db_pconnect();                                          
             $query = $this->db->query($sql02);
