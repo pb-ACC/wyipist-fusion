@@ -30,12 +30,29 @@
 					</div>
                 </div>
                 <div class="card-body">
-                    <h3 class="m-0">Linha da Encomenda</h3>
-                    <div id="line-table" class="table table-striped"  style="margin-top: 35px;box-shadow: 5px 10px 18px #888888;">
+                    <div class="row">
+                        <h3 class="m-0">Linha da Encomenda</h3>
+                        <div id="line-table" class="table table-striped"  style="margin-top: 35px;box-shadow: 5px 10px 18px #888888;">
+                        </div>
+                    </div>                     
+                    <br>
+                    <div class="row">
+                        <h3 class="m-0">Paletes a Paletizar</h3>
+                        <div id="selected-palets-table" class="table table-striped"  style="margin-top: 35px;box-shadow: 5px 10px 18px #888888;">
+                        </div>
                     </div>
-                    <br><br>
-                    <h3 class="m-0">Paletes a Paletizar</h3>
-                    <div id="selected-palets-table" class="table table-striped"  style="margin-top: 35px;box-shadow: 5px 10px 18px #888888;">
+                    <br>
+                    <div class="row">        
+                        <div class="col-sm-12 col-sm-push-6 col-xs-12 col-md-6 col-md-push-6 col-lg-6 col-lg-push-6">
+                            <h3 class="m-0">Lotes Afetados</h3>
+                            <div id="afetado_encomenda-table" class="table table-striped"  style="margin-top: 35px;box-shadow: 5px 10px 18px #888888;">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-sm-push-6 col-xs-12 col-md-6 col-md-push-6 col-lg-6 col-lg-push-6">
+                            <h3 class="m-0">Lotes Consumidos</h3>
+                            <div id="lotes_consumidos-table" class="table table-striped"  style="margin-top: 35px;box-shadow: 5px 10px 18px #888888;">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -118,6 +135,38 @@
                 
                 <div class="modal-footer">		
                     <button onclick="save_motivo()" type="button" class="btn btn-primary"><i class="fas fa-save"></i> Gravar</button>                
+                </div>    
+        </div>
+    </div>
+</div>
+
+<div id="lotes_diff" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Preencha o Motivo</h5>
+                    <button id="btnclose" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div id="mts-stk" style="margin-bottom: 15px;">
+					    <select id="mt-stk" class="form-control select2-dropdown"  style="width: 100%;" tabindex="-1" aria-hidden="true" required>
+						</select>
+					</div>
+
+                    <div class="form-group">
+                        <textarea id="obs-stk" class="form-control" rows="3" placeholder="Escreva a sua mensagem..."></textarea>
+                        <div id="count" style="float: right;">
+                            <span id="current_count">0 </span>
+                            <span id="maximum_count">/ 255</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">		
+                    <button onclick="save_palletize()" type="button" class="btn btn-primary"><i class="fas fa-save"></i> Gravar</button>                
                 </div>    
         </div>
     </div>

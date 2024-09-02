@@ -24,15 +24,16 @@ class Motivo extends CI_Controller
             $session_data = $this->session->userdata('logged_in');            
             $username = $session_data['username'];
             $funcionario_gpac = $session_data['funcionario_gpac']; 
-            $user_type = $session_data['user_type'];
 
             $motivo = $this->input->post('motivo');
             $codigomotivo = $this->input->post('codigomotivo');
             $palete = $this->input->post('palete');
             $obs = $this->input->post('obs');
 
+            $sectorDestino='FB999';
+
             $this->load->model('standards/stocks/Motivo');
-            echo json_encode($this->Motivo->save_motivo($palete,$codigomotivo,$motivo,$obs,$username,$funcionario_gpac,$user_type));
+            echo json_encode($this->Motivo->save_motivo($palete,$sectorDestino,$codigomotivo,$motivo,$obs,$username,$funcionario_gpac));
 
         }else{
 
@@ -67,7 +68,5 @@ class Motivo extends CI_Controller
 
             redirect('start', 'refresh');
         }
-
-
     }
 }

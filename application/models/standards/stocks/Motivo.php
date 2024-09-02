@@ -39,20 +39,18 @@ class Motivo extends CI_Model
         $this->insere_palete_sem_stock($NumeroSP,$CodigoSP,$palete,$sectorDestino,$user);
 
         //zxErrosPicagemPalete
-        $this->save_motivo($palete,$codigomotivo,$motivo,$obs,$username,$funcionario_gpac,$user_type);
+        $this->save_motivo($palete,$sectorDestino,$codigomotivo,$motivo,$obs,$username,$funcionario_gpac,$user_type);
     }
 
-    public function save_motivo($palete,$codigomotivo,$motivo,$obs,$username,$funcionario_gpac,$user_type){
+    public function save_motivo($palete,$sectorDestino,$codigomotivo,$motivo,$obs,$username,$funcionario_gpac){
 
         $user=strtoupper($funcionario_gpac);        
         if($user==''){
             $user=strtoupper($username);
         }
-
-        $sector = $this->convert_type_to_sector02($user_type);
         
         $sql="INSERT INTO zxErrosPicagemPalete (Palete, Motivo, Observacoes, CodigoMotivo, SectorErro, OperadorMOV, DataHoraMOV)
-              VALUES ('{$palete}', '{$motivo}', '{$obs}', '{$codigomotivo}', '{$sector}', '{$user}',getdate())";       
+              VALUES ('{$palete}', '{$motivo}', '{$obs}', '{$codigomotivo}', '{$sectorDestino}', '{$user}',getdate())";       
        
         $this->db->query($sql);
         $this->db->close();
@@ -165,4 +163,5 @@ class Motivo extends CI_Model
             $this->db->close(); 
 
     }
+
 }

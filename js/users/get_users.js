@@ -1,6 +1,6 @@
 let table;
 let user_id=0;
-let type='', title='', text='', text1='', text2='', action='', xposition='', campo='',valor='',tblPL=[], tblLoc=[];
+let type='', title='', text='', text1='', text2='', action='', xposition='', campo='',valor='',tblPL=[], tblLoc=[], tblLote=[], tblAfet=[];
 $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
 
 $("#menu-gestao01").addClass("menu-is-opening menu-open");
@@ -182,7 +182,9 @@ function deleteUserID(id){
     tblLoc=[];
     valor=id;
 
-    fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc); 
+    tblLote=[];
+    tblAfet=[];
+    fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
 }
 
 function confirm_delete(id){    

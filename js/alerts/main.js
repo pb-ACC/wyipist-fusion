@@ -1,4 +1,4 @@
-function fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc){
+function fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet){
 
     if(action==='motive') {
 
@@ -183,6 +183,25 @@ function fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tbl
         ).then((result) => {
             if (result.isConfirmed) {            
                 confirm_close(tblPL);
+            } else if (result.isDenied) {            
+            }
+        })
+    }
+
+    if(action==='segue_para_paletizar') {
+        Swal.fire({
+                icon: type,
+                iconHtml: '?',
+                iconColor: '#f8bb86',
+                title: title,
+                //html: '<p  style="font-family: Arial, Helvetica, sans-serif; font-size: 14px;color: #333">Deseja continuar?</p>',
+                showDenyButton: true,
+                confirmButtonText: '<i class="fa fa-thumbs-up"></i> Sim',
+                denyButtonText: '<i class="fa fa-thumbs-down"></i> Não'
+            }
+        ).then((result) => {
+            if (result.isConfirmed) {            
+                confirm_paletizar(tblPL,tblLoc,tblLote,tblAfet);
             } else if (result.isDenied) {            
             }
         })

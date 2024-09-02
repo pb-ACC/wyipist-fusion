@@ -8,7 +8,7 @@ $("#anula-pl01").addClass("active");
 $("#anula-pl02").addClass("active");
 
 let tablePaletes, tableSelPaletes, tableLocal_fabric, tableLocal_logistic, tableLocal_warehouse, selectedData=[], OG, dt, dtt, count=0, count2=0, count3=0, count4=0, local='';
-let type='', title='', text='', text1='', text2='', action='', xposition='', campo='',valor='',tblPL=[], tblLoc=[];
+let type='', title='', text='', text1='', text2='', action='', xposition='', campo='',valor='',tblPL=[], tblLoc=[], tblLote=[], tblAfet=[];
 let palets=[], paletsOG=[], marosca=[];
 let no_change=0;
 selectedPalets(data=[]);
@@ -374,7 +374,9 @@ function save_anulacao(){
     xposition='center';
     tblPL=tableSelPaletes.getData();
     tblLoc=[];
-    fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc); 
+    tblLote=[];
+    tblAfet=[];
+    fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
 }
 
 /*RADIO BTNS*/
@@ -396,7 +398,9 @@ function radioButtons(){
                 valor=this;
                 tblPL=[];
                 tblLoc=[];
-                fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc); 
+                tblLote=[];
+                tblAfet=[];
+                fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
             }else{
                 no_change=1;
                 $('.form-check-input').prop('checked', false); // Unchecks it    
@@ -417,7 +421,9 @@ function radioButtons(){
                 valor=this;
                 tblPL=[];
                 tblLoc=[];
-                fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc); 
+                tblLote=[];
+                tblAfet=[];
+                fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
             }else{
                 no_change=1;
                 $('.form-check-input').prop('checked', false); // Unchecks it    
@@ -440,7 +446,9 @@ function radioButtons(){
                 valor=this;
                 tblPL=[];
                 tblLoc=[];
-                fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc); 
+                tblLote=[];
+                tblAfet=[];
+                fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
             }else{
                 no_change=1;
                 $('.form-check-input').prop('checked', false); // Unchecks it    
@@ -505,7 +513,9 @@ function changeEmpresa(){
         xposition='center';
         tblPL=[];
         tblLoc=[];
-        fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc); 
+        tblLote=[];
+        tblAfet=[];
+        fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
     }else{
         confirm_changeEmpresa();
     }

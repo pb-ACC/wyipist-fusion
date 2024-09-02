@@ -6,8 +6,8 @@ $('#menu-planos03').attr("style", "display: block;" );
 $("#prep-carg01").addClass("active");
 $("#prep-carg02").addClass("active");
 
-let tablePaletes, tableSelPaletes, tableLocal_fabric, tableLocal_logistic, tableLocal_warehouse, tableLinha, selectedData=[], OG, dt, dtt, count=0, count2=0, count3=0, count4=0, local='';
-let type='', title='', text='', text1='', text2='', action='', xposition='', campo='',valor='',tblPL=[], tblLoc=[];
+let tablePaletes, tableSelPaletes, tableLocal_fabric, tableLocal_logistic, tableLocal_warehouse, tableLinha, tableAfetada, tableLotes, selectedData=[], OG, dt, dtt, count=0, count2=0, count3=0, count4=0, local='';
+let type='', title='', text='', text1='', text2='', action='', xposition='', campo='',valor='',tblPL=[], tblLoc=[], tblLote=[], tblAfet=[];
 let palets=[], paletsOG=[], marosca=[];
 
 $(".card-body .m-0").hide();
@@ -25,6 +25,10 @@ $.ajax({
 
             palets=Object.values(data['linhaGG']);
             linhaGG(Object.values(data['linhaGG']));
+            linha_afetada(Object.values(data['linha_afetada']));
+            paletsOG=Object.values(data['linha_afetada']);
+            lotes_gastos(Object.values(data['lotes_gastos']));
+            marosca=Object.values(data['lotes_gastos']);
             selectedPalets(data=[]);
             $(".card-body .m-0").show();
             $(".card-footer .row").show();
@@ -49,6 +53,41 @@ $.ajax({
         } else {
             //console.log(data);  
             let select = $('#mt');    
+            // Limpa qualquer opção existente
+            select.empty();        
+            // Adiciona as novas opções
+            for (let i = 0; i < data.length; i++) {
+                let value = {
+                    id: data[i]['Codigo'],
+                    text: data[i]['Descricao']
+                };        
+                let option = new Option(value.text, value.id, false, false);
+                select.append(option);
+            }        
+            // Inicializa o Select2
+            select.select2();
+            //$("#choose_palets").prop("disabled",false);  
+        }
+    },
+    error: function (e) {
+        //alert(e);
+        alert('Request Status: ' + e.status + ' Status Text: ' + e.statusText + ' ' + e.responseText);
+        console.log(e);
+    }
+});
+
+$.ajax({
+    type: "GET",
+    url: "http://127.0.0.1/wyipist-fusion/standards/ListarMotivos/getMotivo_stock",
+    dataType: "json",
+    success: function (data) {
+        if (data === "kick") {
+            //alert("Outro utilizador entrou com as suas credenciais, faça login de novo.");
+            toastr["warning"]("Outro utilizador entrou com as suas credenciais, faça login de novo.");
+            window.location = "home/logout";
+        } else {
+            //console.log(data);  
+            let select = $('#mt-stk');    
             // Limpa qualquer opção existente
             select.empty();        
             // Adiciona as novas opções
@@ -113,7 +152,68 @@ function linhaGG(data){
     });
 }
 
+function linha_afetada(data){
+    tableAfetada= new Tabulator("#afetado_encomenda-table", {
+        data:data, //assign data to table          
+        headerSort:false, //disable header sort for all columns
+        placeholder:"Sem Dados Disponíveis",   
+        layout:"fitColumns",      //fit columns to width of table
+        responsiveLayout:"hide",  //hide columns that don't fit on the table        
+        pagination:"local",       //paginate the data
+        paginationSize:10,         //allow 7 rows per page of data        
+        columnDefaults:{
+            tooltip:true,         //show tool tips on cells
+        },
+        locale: true, // enable locale support
+        langs: {
+            "pt-pt": ptLocale
+        },
+        initialLocale: 'pt-pt',
+        columns:[
+            {title:"Lote", field:"Lote", align:"center", headerFilter:"input"},  
+            {title:"Calibre", field:"Calibre", align:"center", headerFilter:"input"},  
+            {title:"Quantidade", field:"Quantidade", align:"center", headerFilter:"input",bottomCalc:"sum", bottomCalcParams:{precision:2}},
+            {title:"Unidade", field:"Unidade", align:"center", headerFilter:"input"},
+            {title:"LinhaDocumento", field:"LinhaDocumento", align:"center", visible:false},
+            {title:"Documento", field:"Documento", align:"center", visible:false},
+            {title:"Ordem", field:"Ordem", align:"center", visible:false},
+            {title:"NumSeq", field:"NumSeq", align:"center", visible:false}
+        ]
+    });
+}
+
+function lotes_gastos(data){
+    tableLotes= new Tabulator("#lotes_consumidos-table", {
+        data:data, //assign data to table          
+        headerSort:false, //disable header sort for all columns
+        placeholder:"Sem Dados Disponíveis",   
+        layout:"fitColumns",      //fit columns to width of table
+        responsiveLayout:"hide",  //hide columns that don't fit on the table        
+        pagination:"local",       //paginate the data
+        paginationSize:10,         //allow 7 rows per page of data        
+        columnDefaults:{
+            tooltip:true,         //show tool tips on cells
+        },
+        locale: true, // enable locale support
+        langs: {
+            "pt-pt": ptLocale
+        },
+        initialLocale: 'pt-pt',
+        columns:[
+            {title:"Lote", field:"Lote", align:"center", headerFilter:"input"},  
+            {title:"Calibre", field:"Calibre", align:"center", headerFilter:"input"},  
+            {title:"Quantidade", field:"Quantidade", align:"center", headerFilter:"input",bottomCalc:"sum", bottomCalcParams:{precision:2}},
+            {title:"Unidade", field:"Unidade", align:"center", headerFilter:"input"}
+            
+        ]
+    });
+}
+
 function selectedPalets(data){
+    let deleteUser = function(cell, formatterParams){ //plain text value
+        return "<i class='fas fa-trash-alt' style='color: red' title='Remover'></i>";
+    };
+
     tableSelPaletes= new Tabulator("#selected-palets-table", {
         data:data, //assign data to table          
         headerSort:false, //disable header sort for all columns
@@ -136,8 +236,10 @@ function selectedPalets(data){
             {title:"Referencia", field:"Referencia", align:"center"},
             {title:"Artigo", field:"Artigo", align:"center", visible:false},
             {title:"Descrição", field:"DescricaoArtigo", align:"center"},
-            {title:"QTD.", field:"Quantidade", align:"center"},
-            {title:"QTD. a Usar", field:"NovaQtd",  hozAlign:"center", editor:"input",formatter:function (cell) {
+            {title:"Lote", field:"Lote", align:"center"},
+            {title:"Calibre", field:"Calibre", align:"center"},                
+            {title:"QTD.", field:"Quantidade", align:"center",bottomCalc:"sum", bottomCalcParams:{precision:2}},
+            {title:"QTD. a Usar", field:"NovaQtd",  hozAlign:"center", editor:"input",bottomCalc:"sum", bottomCalcParams:{precision:2},formatter:function (cell) {
                 let val = cell.getValue();
                 let el = cell.getElement();        
                 el.style.backgroundColor = "#fdfd96";        
@@ -161,6 +263,31 @@ function selectedPalets(data){
                 // Atualizar a linha em tableLinha com o novo valor de QtdPaletizada
                 row.update({QtdPaletizada: k});
                 row.update({QtdFalta: parseFloat(tableLinha.getData()[0]['Quantidade']) - parseFloat(tableLinha.getData()[0]['QtdPaletizada']) });
+
+                // 2. Combine ogData and selected into a single array
+                let combinedArray = [...marosca, ...tableSelPaletesData];    
+               // alert(combinedArray);            
+                // 3. Create an object to store the grouped and summed data
+                let groupedData = {};
+                combinedArray.forEach(row => {
+                    let key = row.Lote + '_' + row.Calibre; // Create a unique key based on "lote" and "calibre"
+                    if (!groupedData[key]) {
+                        groupedData[key] = {
+                            Lote: row.Lote,
+                            Calibre: row.Calibre,
+                            Quantidade: 0,
+                            Unidade: row.Unidade,
+                        };
+                    }
+                    // 3. Sum the values
+                    groupedData[key].Quantidade = parseFloat(groupedData[key].Quantidade) + parseFloat(row.NovaQtd);
+                });
+                
+                // Convert groupedData object back to an array if needed
+                let result = Object.values(groupedData);
+                
+                // Now 'result' contains the summed values grouped by "lote" and "calibre"
+                lotes_gastos(result);
             },
             },
             {title:"UNI.", field:"Unidade", align:"center", visible:false},
@@ -170,13 +297,59 @@ function selectedPalets(data){
             {title:"TipoEmbalagem", field:"TipoEmbalagem", align:"center", visible:false},
             {title:"Superficie", field:"Superficie", align:"center", visible:false},
             {title:"Decoracao", field:"Decoracao", align:"center", visible:false},
-            {title:"RefCor", field:"RefCor", align:"center", visible:false},
-            {title:"Lote", field:"Lote", align:"center", visible:false},
+            {title:"RefCor", field:"RefCor", align:"center", visible:false},            
             {title:"Nivel", field:"Nivel", align:"center", visible:false},
-            {title:"TabEspessura", field:"TabEspessura", align:"center", visible:false},                                
-            {title:"Calibre", field:"Calibre", align:"center", visible:false},                
+            {title:"TabEspessura", field:"TabEspessura", align:"center", visible:false},                                            
             {title:"Sel", field:"Sel", align:"center", visible:false},
-            {title:"Id", field:"Id", align:"center", visible:false}
+            {title:"Id", field:"Id", align:"center", visible:false},
+            {title:" ",formatter:deleteUser, width:50, align:"center",tooltip:true, cellClick:function(e, cell){
+                let row01 = cell.getRow();
+                // Deleta a linha
+                row01.delete();
+
+                let editedData = cell.getData();
+            
+                // Inicializar o valor QtdPaletizada em tableLinha
+                let row02 = tableLinha.getRowFromPosition(1); // Ajuste para a linha específica conforme necessário
+                row02.update({ QtdPaletizada: 0 });
+                row02.update({ QtdFalta: 0 });
+            
+                // Calcular o novo valor de QtdPaletizada
+                let k = 0;
+                let tableSelPaletesData = tableSelPaletes.getData(); // Obter todos os dados de tableSelPaletes
+                for (let i = 0; i < tableSelPaletesData.length; i++) {
+                    k = parseFloat(k) + parseFloat(tableSelPaletesData[i]['NovaQtd']);
+                }
+            
+                // Atualizar a linha em tableLinha com o novo valor de QtdPaletizada
+                row02.update({QtdPaletizada: k});
+                row02.update({QtdFalta: parseFloat(tableLinha.getData()[0]['Quantidade']) - parseFloat(tableLinha.getData()[0]['QtdPaletizada']) });    
+
+                // 2. Combine ogData and selected into a single array
+                let combinedArray = [...marosca, ...tableSelPaletesData];                
+                // 3. Create an object to store the grouped and summed data
+                let groupedData = {};
+                combinedArray.forEach(row => {
+                    let key = row.Lote + '_' + row.Calibre; // Create a unique key based on "lote" and "calibre"
+                    if (!groupedData[key]) {
+                        groupedData[key] = {
+                            Lote: row.Lote,
+                            Calibre: row.Calibre,
+                            Quantidade: 0,
+                            Unidade: row.Unidade,
+                        };
+                    }
+                    // 3. Sum the values
+                    groupedData[key].Quantidade = parseFloat(groupedData[key].Quantidade) + parseFloat(row.NovaQtd);
+                });
+                
+                // Convert groupedData object back to an array if needed
+                let result = Object.values(groupedData);
+                
+                // Now 'result' contains the summed values grouped by "lote" and "calibre"
+                lotes_gastos(result);
+
+            }}
         ]
     });
     
@@ -186,6 +359,8 @@ function selectedPalets(data){
 function choose_palets(){  
     toastr.clear();
     toastr["info"]("A carregar paletes...");  
+    $(".card-footer .row .btn").prop("disabled", true);
+    $(".card-header .btn").prop("disabled", true);
 
     $.ajax({
         type: "GET",
@@ -203,6 +378,8 @@ function choose_palets(){
                 toastr.clear();
                 toastr["success"]("Paletes carregadas com sucesso.");
                 toastr.clear();
+                $(".card-footer .row .btn").prop("disabled", false);
+                $(".card-header .btn").prop("disabled", false);
             }
         },
         error: function (e) {
@@ -254,6 +431,31 @@ function confirm_close(tblPL){
             toastr["error"]("Erro ao concluir a linha da encomenda");                                   
         }
     });
+}
+
+function paletizar(){
+    if (parseFloat(tableLinha.getData()[0]['QtdPaletizada']) <= 0) {
+        toastr["error"]("Não colocou quantidades a paletizar!");
+    } else if (parseFloat(tableLinha.getData()[0]['QtdPaletizada']) > parseFloat(tableLinha.getData()[0]['Quantidade'])) {
+        toastr["error"]("Não pode colocar quantidades superiores à existente!");
+    } else if (parseFloat(tableLinha.getData()[0]['QtdPaletizada']) < 0) {
+        toastr["error"]("Não pode colocar quantidades negativas!");
+    } else {
+        segue_para_paletizar();
+    }    
+}
+
+function segue_para_paletizar(){
+    type='success';
+    title='Tem a certeza que pretende continuar?';
+    text2='';
+    action='segue_para_paletizar';
+    xposition='center';
+    tblPL=tableSelPaletes.getData();    
+    tblLoc=tableLinha.getData();
+    tblLote=tableLotes.getData();
+    tblAfet=tableAfetada.getData();
+    fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
 }
 
 /*PALETES*/
@@ -310,20 +512,20 @@ function getPalets(data){
             {title:"Referencia", field:"Referencia", align:"center"},
             {title:"Artigo", field:"Artigo", align:"center", visible:false},
             {title:"Descrição", field:"DescricaoArtigo", align:"center"},
+            {title:"Lote", field:"Lote", align:"center"},
+            {title:"Calibre", field:"Calibre", align:"center"},
             {title:"QTD.", field:"Quantidade", align:"center"},
-            {title:"UNI.", field:"Unidade", align:"center", visible:false},
-            {title:"Sector", field:"Sector", align:"center", visible:false},                
+            {title:"UNI.", field:"Unidade", align:"center"},
+            {title:"Sector", field:"Sector", align:"center"},
             {title:"Formato", field:"Formato", align:"center", visible:false},
             {title:"Qual", field:"Qual", align:"center", visible:false},
             {title:"TipoEmbalagem", field:"TipoEmbalagem", align:"center", visible:false},
             {title:"Superficie", field:"Superficie", align:"center", visible:false},
             {title:"Decoracao", field:"Decoracao", align:"center", visible:false},
             {title:"RefCor", field:"RefCor", align:"center", visible:false},
-            {title:"Lote", field:"Lote", align:"center", visible:false},
             {title:"Nivel", field:"Nivel", align:"center", visible:false},
             {title:"TabEspessura", field:"TabEspessura", align:"center", visible:false},   
             {title:"NovaQtd", field:"NovaQtd", align:"center", visible:false},   
-            {title:"Calibre", field:"Calibre", align:"center", visible:false},                
             {title:"Sel", field:"Sel", align:"center", visible:false},
             {title:"Id", field:"Id", align:"center", visible:false}
         ]
@@ -376,6 +578,7 @@ function save_paletes(){
       } 
     }   
     atualiza_qtdPL(selected);      
+    atualiza_lotesConsumidos(selected);      
 }
 
 function clearPaletes(){
@@ -459,7 +662,150 @@ function atualiza_qtdPL(selected){
     row.update({QtdFalta: x});
 }
 
+function atualiza_lotesConsumidos(selected){
+    // 2. Combine ogData and selected into a single array
+    let combinedArray = [...marosca, ...selected];
+    // 3. Create an object to store the grouped and summed data
+    let groupedData = {};
+    combinedArray.forEach(row => {
+        let key = row.Lote + '_' + row.Calibre; // Create a unique key based on "lote" and "calibre"
+        if (!groupedData[key]) {
+            groupedData[key] = {
+                Lote: row.Lote,
+                Calibre: row.Calibre,
+                Quantidade: 0,
+                Unidade: row.Unidade,
+            };
+        }
+        // 3. Sum the values
+        groupedData[key].Quantidade = parseFloat(groupedData[key].Quantidade) + parseFloat(row.Quantidade);
+    });
+    
+    // Convert groupedData object back to an array if needed
+    let result = Object.values(groupedData);
+    
+    // Now 'result' contains the summed values grouped by "lote" and "calibre"
+    lotes_gastos(result);
+}
+
 /*GRAVAR DADOS NA BD*/
+function confirm_paletizar(tblPL,tblLoc,tblLote,tblAfet){    
+
+    if (tblAfet.length > 0) {        
+        tblLote.forEach(consumidoRow => {
+            let lote = consumidoRow.Lote;
+            let calibre = consumidoRow.Calibre;
+
+            // Check if lote and calibre exist in "Paletes a Paletizar" and "Lotes Afetados"
+            let existsInPaletes = tblPL.some(paleteRow => paleteRow.Lote === lote && paleteRow.Calibre === calibre);
+            let existsInLotesAfetados = tblAfet.some(loteAfetadoRow => loteAfetadoRow.Lote === lote && loteAfetadoRow.Calibre === calibre);
+
+            if (!existsInPaletes || !existsInLotesAfetados) {
+                
+                $('#current_count').text(0);
+
+                $('#obs-stk').keyup(function() {                        
+                    var characterCount = $(this).val().length,
+                    current_count = $('#current_count'),
+                    maximum_count = $('#maximum_count'),
+                    count = $('#count');    
+                    current_count.text(characterCount);  
+                    
+                    if(parseInt(characterCount) > 255){
+                        $('#current_count').css('color', 'red');
+                    }else{
+                        $('#current_count').css('color', 'black');
+                    }
+                });
+            
+                // Handle the mismatch - for example, by logging it or highlighting the row                
+                setTimeout(function () {
+                    $("#lotes_diff").modal();
+                }, 350);
+        
+                setTimeout(function () {
+                    $('#obs-stk').trigger('focus');
+                }, 850);
+            }
+        });    
+    }else{
+        save_palletize();
+    }
+}
+
+function save_palletize(){    
+
+    let obs = document.getElementById('obs-stk').value;
+    let codigomotivo = $("#mt-stk").val();
+
+    if(obs != '' && codigomotivo == 'MT999'){
+        $(".card-footer .row").hide();
+        // Inicializa a flag com um valor padrão, por exemplo, 0
+        let flag = 0;
+        // Obtém o valor do cliente
+        let cliente = tableLinha.getData()[0]['Cliente'];
+        // Verifica se o valor contém "Certeca" ou "Ceragni" e define a flag
+        if (cliente.includes("Ceragni")) {
+            flag = 1;
+        } else if (cliente.includes("Certeca")) {
+            flag = 2;
+        }    
+        mtt = $("#mt-stk option:selected").text();
+        mt = $.trim(mtt);    
+
+        if(serie === 'CG'){
+            seriePL='PLC';
+            setorDestino='ST012';
+            setorCarga='CL007';
+        }else{
+            seriePL='PLPC';
+            setorDestino='CL006';
+            setorCarga='ST017';
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "http://127.0.0.1/wyipist-fusion/planos_carga/preparacao/PaletizarCarga/paletizar_carga/"+serie+"/"+flag,
+            dataType: "json",
+            data:{
+                encomenda: tblLoc,
+                paletes: tblPL,
+                motivo: mt,
+                codigomotivo: codigomotivo,
+                obs: obs,
+                serie: serie,
+                seriePL: seriePL,
+                setorDestino: setorDestino,
+                setorCarga: setorCarga 
+            },
+            success: function (data) {
+                if (data === "kick") {
+                    //alert("Outro utilizador entrou com as suas credenciais, faça login de novo.");
+                    toastr["warning"]("Outro utilizador entrou com as suas credenciais, faça login de novo.");
+                    window.location = "home/logout";
+                } else {
+                    toastr["success"]("Dados gravados com Sucesso");                    
+                    $(".card-footer .row").show();
+                    if(parseFloat(tableLinha.getData()[0]['Quantidade']) === parseFloat(tableLinha.getData()[0]['QtdPaletizada'])){
+                        // Construct the URL based on the PHP code you provided
+                        window.history.back();
+                    }else{
+                        location.reload();
+                    }                
+                }
+            },
+            error: function (e) {
+                //alert(e);
+                alert('Request Status: ' + e.status + ' Status Text: ' + e.statusText + ' ' + e.responseText);
+                toastr["error"]("Erro ao gravar dados");    
+                //console.log(e);
+            }
+        });
+    }else{
+        toastr["error"]("Ao escolher o motivo 'Outro' tem de preencher Observações!");    
+    }
+}
+
 function save_motivo(){
         
     mtt = $("#mt option:selected").text();

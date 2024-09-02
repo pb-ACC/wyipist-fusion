@@ -12,7 +12,7 @@ $("#list-stock03").addClass("active");
 $("#list-stock04").addClass("active");
 
 let tablePaletes, tableSelPaletes, tableExtrato, tableLocal_fabric, tableLocal_logistic, tableLocal_warehouse, selectedData=[], OG, dt, dtt, count=0, count2=0, count3=0, count4=0, local='';
-let type='', title='', text='', text1='', text2='', action='', xposition='', campo='',valor='',tblPL=[], tblLoc=[];
+let type='', title='', text='', text1='', text2='', action='', xposition='', campo='',valor='',tblPL=[], tblLoc=[], tblLote=[], tblAfet=[];
 let palets=[], paletsOG=[], marosca=[];
 let no_change=0;
 let start, end, idate, fdate;

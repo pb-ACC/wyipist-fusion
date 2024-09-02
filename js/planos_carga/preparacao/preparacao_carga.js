@@ -7,7 +7,7 @@ $("#prep-carg01").addClass("active");
 $("#prep-carg02").addClass("active");
 
 let tableplanoGG, tableSelplanoGG, tableLocal_fabric, tableLocal_logistic, tableLocal_warehouse, selectedData=[], OG, dt, dtt, count=0, count2=0, count3=0, count4=0, local='';
-let type='', title='', text='', text1='', text2='', action='', xposition='', campo='',valor='',tblPL=[], tblLoc=[];
+let type='', title='', text='', text1='', text2='', action='', xposition='', campo='',valor='',tblPL=[], tblLoc=[], tblLote=[], tblAfet=[];
 let planoCarga=[], planoCargaOG=[], marosca=[];
 //selectedplanoCarga(data=[]);
 

@@ -8,7 +8,7 @@ $("#gerar-pl01").addClass("active");
 $("#gerar-pl02").addClass("active");
 
 let tablerefs, tableSelrefs, tableLocal_fabric, tableLocal_logistic, tableLocal_warehouse, selectedData=[], OG, dt, dtt, count=0, count2=0, count3=0, count4=0, local='';
-let type='', title='', text='', text1='', text2='', action='', xposition='', campo='',valor='',tblPL=[], tblLoc=[];
+let type='', title='', text='', text1='', text2='', action='', xposition='', campo='',valor='',tblPL=[], tblLoc=[], tblLote=[], tblAfet=[];
 let refs=[], refsOG=[], marosca=[];
 let no_change=0;
 let gblote, gbcalibre, gbqtd, gbnome_arm, gbcodigo_arm, gbnome_lvl, gbcodigo_lvl, gbreferencia,gbdescricao,gbcodigoformato,gbcodigobarras,gbserie;

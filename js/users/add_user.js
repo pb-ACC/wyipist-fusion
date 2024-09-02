@@ -1,5 +1,5 @@
 let table;
-let type='', title='', text='', text1='', text2='', action='', xposition='', campo='',valor='',tblPL=[], tblLoc=[];
+let type='', title='', text='', text1='', text2='', action='', xposition='', campo='',valor='',tblPL=[], tblLoc=[], tblLote=[], tblAfet=[];
 $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
 
 $("#menu-gestao01").addClass("menu-is-opening menu-open");

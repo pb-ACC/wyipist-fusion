@@ -88,5 +88,13 @@ class Dropdowns extends CI_Model
         return $result;
     }
 
+    public function motivo_stock(){
+
+        $sql = "SELECT cast('.' as varchar(1)) x, cast(0 as bit) Sel, Codigo, Descricao, cast('' as varchar(255)) Observacao, cast(row_number() over(order by Codigo) as int) Ordem
+                from zx_MotivosStkAfe";
+        $query = $this->db->query($sql);
+        $result = $query->result();
+        return $result;
+    }
 
 }

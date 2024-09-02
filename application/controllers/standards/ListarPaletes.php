@@ -674,10 +674,14 @@ class ListarPaletes extends CI_Controller
                     }                    
                     $this->load->model('planos_carga/preparacao/Preparacao_Carga');
                     $linhaGG=$this->Preparacao_Carga->getLinha($linha,$seriePL,$username,$funcionario_gpac);
+                    $linha_afetada=$this->Preparacao_Carga->getLinha_afetada($linha,$seriePL,$username,$funcionario_gpac);
+                    $lotes_gastos=$this->Preparacao_Carga->getLinha_lotesgastos($linha,$seriePL,$setor,$username,$funcionario_gpac);
 
                     $data = array( 
                         'paletes' => $paletes,
                         'linhaGG' => $linhaGG,
+                        'linha_afetada' => $linha_afetada,
+                        'lotes_gastos' => $lotes_gastos,
                     );                    
                     echo json_encode($data);
                     break;
@@ -686,9 +690,21 @@ class ListarPaletes extends CI_Controller
                     $this->load->model('standards/stocks/GetPalets');
                     $paletes=$this->GetPalets->cargas($refp,$setor);
                 
+                    if($serie == 'CG'){
+                        $seriePL='C';
+                    }else{
+                        $seriePL='PC';
+                    }                    
+                    $this->load->model('planos_carga/preparacao/Preparacao_Carga');
+                    $linhaGG=$this->Preparacao_Carga->getLinha($linha,$seriePL,$username,$funcionario_gpac);
+                    $linha_afetada=$this->Preparacao_Carga->getLinha_afetada($linha,$seriePL,$username,$funcionario_gpac);
+
                     $data = array( 
-                        'paletes' => $paletes
-                    );
+                        'paletes' => $paletes,
+                        'linhaGG' => $linhaGG,
+                        'linha_afetada' => $linha_afetada,
+                        'lotes_gastos' => $lotes_gastos,
+                    );        
                     echo json_encode($data);
                     break;
                 case 3:
@@ -708,10 +724,14 @@ class ListarPaletes extends CI_Controller
                     }                    
                     $this->load->model('planos_carga/preparacao/Preparacao_Carga');
                     $linhaGG=$this->Preparacao_Carga->getLinha($linha,$seriePL,$username,$funcionario_gpac);
+                    $linha_afetada=$this->Preparacao_Carga->getLinha_afetada($linha,$seriePL,$username,$funcionario_gpac);
+                    $lotes_gastos=$this->Preparacao_Carga->getLinha_lotesgastos($linha,$seriePL,$setor,$username,$funcionario_gpac);
 
                     $data = array( 
                         'paletes' => $paletes,
                         'linhaGG' => $linhaGG,
+                        'linha_afetada' => $linha_afetada,
+                        'lotes_gastos' => $lotes_gastos,
                     );        
                     echo json_encode($data);
                     break;
@@ -732,10 +752,14 @@ class ListarPaletes extends CI_Controller
                     }                    
                     $this->load->model('planos_carga/preparacao/Preparacao_Carga');
                     $linhaGG=$this->Preparacao_Carga->getLinha($linha,$seriePL,$username,$funcionario_gpac);
+                    $linha_afetada=$this->Preparacao_Carga->getLinha_afetada($linha,$seriePL,$username,$funcionario_gpac);
+                    $lotes_gastos=$this->Preparacao_Carga->getLinha_lotesgastos($linha,$seriePL,$setor,$username,$funcionario_gpac);
 
                     $data = array( 
                         'paletes' => $paletes,
                         'linhaGG' => $linhaGG,
+                        'linha_afetada' => $linha_afetada,
+                        'lotes_gastos' => $lotes_gastos,
                     );        
                     echo json_encode($data);
                     break;                    

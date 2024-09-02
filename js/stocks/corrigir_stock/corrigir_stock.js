@@ -8,7 +8,7 @@ $("#corrige-stk01").addClass("active");
 $("#corrige-stk02").addClass("active");
 
 let tablePaletes, tableSelPaletes, tableLocal_fabric, tableLocal_logistic, tableLocal_warehouse, selectedData=[], OG, dt, dtt, count=0, count2=0, count3=0, count4=0, local='';
-let type='', title='', text='', text1='', text2='', action='', xposition='', campo='',valor='',tblPL=[], tblLoc=[];
+let type='', title='', text='', text1='', text2='', action='', xposition='', campo='',valor='',tblPL=[], tblLoc=[], tblLote=[], tblAfet=[], tblStk=[];
 let palets=[], paletsOG=[], marosca=[];
 let no_change=0;
 let reabilitado=[], producao=[];
@@ -343,7 +343,10 @@ function save_anulacao(){
     xposition='center';
     tblPL=tableSelPaletes.getData();
     tblLoc=[];
-    fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc); 
+    tblStk=[];
+    tblLote=[];
+    tblAfet=[];
+    fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
 }
 
 /*FILTRO*/
@@ -357,7 +360,10 @@ function changeEmpresa(){
         xposition='center';
         tblPL=[];
         tblLoc=[];
-        fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc); 
+        tblStk=[];
+        tblLote=[];
+        tblAfet=[];
+        fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
     }else{
         confirm_changeEmpresa();
     }
