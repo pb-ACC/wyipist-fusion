@@ -277,7 +277,7 @@ function pick_local_fabric() {
             tableLocal_fabric.clearFilter(true);
             $("#localCB").val('');
 
-            if (user_type != 1) {
+            if (user_type != 1 || user_type != 2 || user_type != 4) {
                 count2++;
             }
         } else {

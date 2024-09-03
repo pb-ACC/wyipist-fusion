@@ -198,7 +198,7 @@ function save_paletes(){
     }
 
     //alert(selected);
-    if(user_type == 1){
+    if(user_type == 1 || user_type == 2 || user_type == 4){
         $("#selected-palets-table").empty();
         //selectedPalets(tablePaletes.getSelectedData());
         selectedPalets(selected);
@@ -276,8 +276,8 @@ function pick_palete() {
         let tbl = rows[0].getData();
         let paletsOG = tablePaletes.getData();
         let picadas = [];
-
-        if (user_type == 1 || count < 2) {
+        
+        if ( (user_type == 1 || user_type == 2 || user_type == 4) || count < 2) {
             for (let i = 0; i < paletsOG.length; i++) {
                 if (paletsOG[i]['DocPL'] == tbl['DocPL']) {
                     paletsOG[i]['Sel'] = 1; // Marcar a palete como selecionada
@@ -306,7 +306,7 @@ function pick_palete() {
             tablePaletes.clearFilter(true);
             $("#paleteCB").val('');
 
-            if (user_type != 1) {
+            if (user_type != 1 || user_type != 2 || user_type != 4) {
                 count++;
             }
         } else {
