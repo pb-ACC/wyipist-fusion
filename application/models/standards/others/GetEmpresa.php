@@ -20,7 +20,10 @@ class GetEmpresa extends CI_Model
                         Empresa 
                 FROM zxOperEmpresaWEB 
                 WHERE Operador='{$username}' or Operador='{$funcionario_gpac}'
-                GROUP BY case when Empresa='CERAGNI' then 1 when Empresa='CERTECA' then 2 else 3 end, Empresa";
+                GROUP BY case when Empresa='CERAGNI' and {$user_type} in (1,2) then 3 
+                              when Empresa='CERAGNI' and {$user_type} not in (1,2) then 1 
+                              when Empresa='CERTECA' then 2 
+                            else 3 end, Empresa";
                 
         $query = $this->db->query($sql);
         $result = $query->result();
