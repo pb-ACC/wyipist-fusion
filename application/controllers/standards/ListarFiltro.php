@@ -26,7 +26,7 @@ class ListarFiltro extends CI_Controller
                // echo $empresa;
 
                 $this->load->model('standards/others/GetZonas');                
-                $zonas=$this->GetZonas->zonaCelula($empresa);
+                $zonas=$this->GetZonas->zonaCelula($empresa,$emp);
 
                 $this->load->model('standards/stocks/GetPalets');
                 $setor='\'ST010\'';                    
@@ -49,7 +49,7 @@ class ListarFiltro extends CI_Controller
                 $radio=$this->RadioButtons->escolha_setores_empresa(2,$user_type);
 
                 $this->load->model('standards/others/GetZonas');                
-                $zonas=$this->GetZonas->zonaCelula($empresa);
+                $zonas=$this->GetZonas->zonaCelula($empresa,$emp);
 
                 $this->load->model('standards/stocks/GetPalets');
                 $setor='\'FB001\'';                    
@@ -85,7 +85,7 @@ class ListarFiltro extends CI_Controller
                // echo $empresa;
 
                 $this->load->model('standards/others/GetZonas');                
-                $zonas=$this->GetZonas->zonaCelula($empresa);
+                $zonas=$this->GetZonas->zonaCelula($empresa,$emp);
 
                 $this->load->model('standards/stocks/GetPalets');
                 //$setor = '\''.$newSector.'\'';             
@@ -109,7 +109,7 @@ class ListarFiltro extends CI_Controller
                 $radio=$this->RadioButtons->escolha_setores_empresa(2,$user_type);
 
                 $this->load->model('standards/others/GetZonas');                
-                $zonas=$this->GetZonas->zonaCelula($empresa);
+                $zonas=$this->GetZonas->zonaCelula($empresa,$emp);
 
                 $this->load->model('standards/stocks/GetPalets');
                 $setor = '\''.$newSector.'\'';                              
@@ -145,7 +145,7 @@ class ListarFiltro extends CI_Controller
                // echo $empresa;
 
                 $this->load->model('standards/others/GetZonas');                
-                $zonas=$this->GetZonas->zonaCelula($empresa);
+                $zonas=$this->GetZonas->zonaCelula($empresa,$emp);
 
                 $this->load->model('standards/stocks/GetPalets');
                 //$setor = '\''.$newSector.'\'';             
@@ -169,7 +169,7 @@ class ListarFiltro extends CI_Controller
                 $radio=$this->RadioButtons->escolha_setores_empresa_anularPL(2);
 
                 $this->load->model('standards/others/GetZonas');                
-                $zonas=$this->GetZonas->zonaCelula($empresa);
+                $zonas=$this->GetZonas->zonaCelula($empresa,$emp);
 
                 $this->load->model('standards/stocks/GetPalets');
                 $setor = '\''.$newSector.'\'';                              
@@ -244,7 +244,7 @@ class ListarFiltro extends CI_Controller
                // echo $empresa;
 
                 $this->load->model('standards/others/GetZonas');                
-                $zonas=$this->GetZonas->zonaCelula($empresa);
+                $zonas=$this->GetZonas->zonaCelula($empresa,$emp);
                 
                 $this->load->model('standards/stocks/GetReferences');
                 $refs=$this->GetReferences->referencias($emp);                                
@@ -258,7 +258,7 @@ class ListarFiltro extends CI_Controller
                 $empresa = '\''.$emp.'\'';
                 
                 $this->load->model('standards/others/GetZonas');                
-                $zonas=$this->GetZonas->zonaCelula($empresa);
+                $zonas=$this->GetZonas->zonaCelula($empresa,$emp);
 
                 $this->load->model('standards/stocks/GetReferences');
                 $refs=$this->GetReferences->referencias($emp);                                
@@ -288,7 +288,7 @@ class ListarFiltro extends CI_Controller
                // echo $empresa;
 
                 $this->load->model('standards/others/GetZonas');                
-                $zonas=$this->GetZonas->zonaCelula($empresa);
+                $zonas=$this->GetZonas->zonaCelula($empresa,$emp);
 
                 $this->load->model('standards/stocks/GetPalets');
                 $setor = '\''.$newSector.'\'';             
@@ -309,7 +309,7 @@ class ListarFiltro extends CI_Controller
                 //echo $empresa;
 
                 $this->load->model('standards/others/GetZonas');                
-                $zonas=$this->GetZonas->zonaCelula($empresa);
+                $zonas=$this->GetZonas->zonaCelula($empresa,$emp);
 
                 $this->load->model('standards/stocks/GetPalets');
                 $setor = '\''.$newSector.'\'';                              

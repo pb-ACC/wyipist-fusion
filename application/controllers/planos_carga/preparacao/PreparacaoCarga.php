@@ -39,9 +39,10 @@ class PreparacaoCarga extends CI_Controller
             $session_data = $this->session->userdata('logged_in');            
             $username = $session_data['username'];
             $funcionario_gpac = $session_data['funcionario_gpac'];
+            $user_type = $session_data['user_type'];
 
             $this->load->model('standards/others/GetEmpresa');
-            return $this->GetEmpresa->getEmpresa($username,$funcionario_gpac);
+            return $this->GetEmpresa->getEmpresa($username,$funcionario_gpac,$user_type);
 
         }else{
             redirect('start', 'refresh');

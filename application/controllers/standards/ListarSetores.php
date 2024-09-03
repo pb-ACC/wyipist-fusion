@@ -41,11 +41,11 @@ class ListarSetores extends CI_Controller
             switch ($empresa[0]->TipoEmpresa) {
                 case 1:
                     $empresa='\'CERAGNI\'';           
-                    echo json_encode($this->GetZonas->zonaCelula($empresa));
+                    echo json_encode($this->GetZonas->zonaCelula($empresa,'CERAGNI'));
                     break;
                 case 2:
                     $empresa='\'CERTECA\'';                
-                    echo json_encode($this->GetZonas->zonaCelula($empresa));
+                    echo json_encode($this->GetZonas->zonaCelula($empresa,'CERTECA'));
                     break;
                 case 3:                    
                     /*$emp01='CERAGNI';
@@ -53,7 +53,7 @@ class ListarSetores extends CI_Controller
                     $empresa = '\''.$emp01.'\''.','.'\''.$emp02.'\'';                         
                     */
                     $empresa='\'CERAGNI\'';      
-                    echo json_encode($this->GetZonas->zonaCelula($empresa));
+                    echo json_encode($this->GetZonas->zonaCelula($empresa,'CERAGNI'));
                     break;
                 case 4:                    
                     /*$emp01='CERAGNI';
@@ -61,7 +61,7 @@ class ListarSetores extends CI_Controller
                     $empresa = '\''.$emp01.'\''.','.'\''.$emp02.'\'';                         
                     */
                     $empresa='\'CERAGNI\'';      
-                    echo json_encode($this->GetZonas->zonaCelula($empresa));
+                    echo json_encode($this->GetZonas->zonaCelula($empresa,'CERAGNI'));
                     break;                    
             }
         }else{
@@ -80,19 +80,19 @@ class ListarSetores extends CI_Controller
             switch ($empresa[0]->TipoEmpresa) {
                 case 1:
                     $empresa='\'CERAGNI\'';           
-                    echo json_encode($this->GetZonas->zonaCelula($empresa));
+                    echo json_encode($this->GetZonas->zonaCelula($empresa,'CERAGNI'));
                     break;
                 case 2:
                     $empresa='\'CERTECA\'';                
-                    echo json_encode($this->GetZonas->zonaCelula($empresa));
+                    echo json_encode($this->GetZonas->zonaCelula($empresa,'CERTECA'));
                     break;
                 case 3:                    
                     $empresa='\'CERAGNI\'';           
-                    echo json_encode($this->GetZonas->zonaCelula($empresa));
+                    echo json_encode($this->GetZonas->zonaCelula($empresa,'CERAGNI'));
                     break;
                 case 4:                    
                     $empresa='\'CERAGNI\'';           
-                    echo json_encode($this->GetZonas->zonaCelula($empresa));
+                    echo json_encode($this->GetZonas->zonaCelula($empresa,'CERAGNI'));
                     break;                    
             }
         }else{
