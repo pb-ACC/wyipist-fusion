@@ -855,13 +855,28 @@ function changeEmpresa(){
 
 function confirm_changeEmpresa(){
 
-    empp = $("#empresasDP option:selected").text();
-    emp = $.trim(empp);    
-    if(emp === 'Certeca'){
-        newSector='ST017';
-    }else{
-        newSector='CL007';
+    //empp = $("#empresasDP option:selected").text();
+    //emp = $.trim(empp);    
+
+    if (user_type == 1 || user_type == 2){
+        empp = $("#empresasDP option:selected").text();
+        emp = $.trim(empp);  
+        if(emp === 'Certeca'){
+            newSector='ST017';
+        }else{
+            newSector='CL007';
+        }
     }
+    else{
+        if(codigoempresa == 1){
+            emp = "CERAGNI";
+            newSector='CL007';
+        }else{
+            emp = "CERTECA";
+            newSector='ST017';
+        }
+    }  
+
     //alert(emp.toUpperCase());
     tableSelPaletes.alert("A processar...");
     $('#empresasDP').prop('disabled', true);
@@ -911,13 +926,27 @@ function confirm_changeEmpresa(){
 
 /*GRAVAR DADOS NA BD*/
 function confirm_save(tblPL,tblLoc){
-    empp = $("#empresasDP option:selected").text();
-    emp = $.trim(empp);    
-    if(emp === 'Certeca'){
-        newSector=tblLoc[0]['Sector'];
-    }else{
-        newSector='ST015';
+
+    if (user_type == 1 || user_type == 2){
+        empp = $("#empresasDP option:selected").text();
+        emp = $.trim(empp);  
+        if(emp === 'Certeca'){
+            newSector=tblLoc[0]['Sector'];
+        }else{
+            newSector='ST015';
+        }
     }
+    else{
+        if(codigoempresa == 1){
+            emp = "CERAGNI";
+            newSector='ST015';
+        }else{
+            emp = "CERTECA";
+            newSector=tblLoc[0]['Sector'];
+        }
+    }  
+
+
     $.ajax({
         type: "POST",        
         url: "http://127.0.0.1/wyipist-fusion/stocks/movimentacoes_internas/rececao_material/Gravar_RececaoMaterial/save_new_position",

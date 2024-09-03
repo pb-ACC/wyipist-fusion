@@ -7,12 +7,6 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?/$1 [L,QSA]
 
-# Bloquear acesso direto a arquivos .js sem Referer
-<FilesMatch "\.js$">
-    RewriteCond %{HTTP_REFERER} !^http://127\.0\.0\.1/wyipist-fusion [NC]
-    RewriteRule .* - [F]
-</FilesMatch>
-
 # Configurações de charset e PHP
 AddDefaultCharset UTF-8
 

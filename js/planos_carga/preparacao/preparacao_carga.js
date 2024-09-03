@@ -115,8 +115,26 @@ function getPlanoCarga(data){
 
 /*FILTRO*/
 function changeEmpresa(){
-    empp = $("#empresasDP option:selected").text();
-    emp = $.trim(empp);    
+    //empp = $("#empresasDP option:selected").text();
+    //emp = $.trim(empp);    
+    if (user_type == 1 || user_type == 2){
+        empp = $("#empresasDP option:selected").text();
+        emp = $.trim(empp);  
+        if(emp === 'Certeca'){
+            newSector='FB003';
+        }else{
+            newSector='ST010';
+        }
+    }
+    else{
+        if(codigoempresa == 1){
+            emp = "CERAGNI";
+            newSector='ST010';
+        }else{
+            emp = "CERTECA";
+            newSector='FB003';
+        }
+    }  
     //alert(emp.toUpperCase());
     //$("#choose_planoCarga").prop("disabled",true);    
     toastr.clear();

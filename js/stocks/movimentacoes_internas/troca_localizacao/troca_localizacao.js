@@ -999,13 +999,28 @@ function changeEmpresa(){
 
 function confirm_changeEmpresa(){
 
-    empp = $("#empresasDP option:selected").text();
-    emp = $.trim(empp);    
-    if(emp === 'Certeca'){
-        newSector='FB003';
-    }else{
-        newSector='ST010';
+    //empp = $("#empresasDP option:selected").text();
+    //emp = $.trim(empp);    
+
+    if (user_type == 1 || user_type == 2){
+        empp = $("#empresasDP option:selected").text();
+        emp = $.trim(empp);  
+        if(emp === 'Certeca'){
+            newSector='FB003';
+        }else{
+            newSector='ST010';
+        }
     }
+    else{
+        if(codigoempresa == 1){
+            emp = "CERAGNI";
+            newSector='ST010';
+        }else{
+            emp = "CERTECA";
+            newSector='FB003';
+        }
+    }  
+
     //alert(emp.toUpperCase());
     tableSelPaletes.alert("A processar...");
     $('#empresasDP').prop('disabled', true);

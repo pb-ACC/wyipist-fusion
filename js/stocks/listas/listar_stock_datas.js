@@ -132,9 +132,27 @@ function datepicker(){
 
 /*FILTRO*/
 function changeEmpresa(){    
-    empp = $("#empresasDP option:selected").text();
-    emp = $.trim(empp);    
-    
+    //empp = $("#empresasDP option:selected").text();
+    //emp = $.trim(empp);    
+
+    if (user_type == 1 || user_type == 2){
+        empp = $("#empresasDP option:selected").text();
+        emp = $.trim(empp);  
+        if(emp === 'Certeca'){
+            newSector='FB003';
+        }else{
+            newSector='ST010';
+        }
+    }
+    else{
+        if(codigoempresa == 1){
+            emp = "CERAGNI";
+            newSector='ST010';
+        }else{
+            emp = "CERTECA";
+            newSector='FB003';
+        }
+    }  
     toastr.clear();
     toastr["info"]("A carregar stock...");
 
@@ -178,8 +196,27 @@ function changeEmpresa(){
 } 
 
 function movimentos_entre_datas(idate,fdate){
-    empp = $("#empresasDP option:selected").text();
-    emp = $.trim(empp);
+    //empp = $("#empresasDP option:selected").text();
+    //emp = $.trim(empp);    
+
+    if (user_type == 1 || user_type == 2){
+        empp = $("#empresasDP option:selected").text();
+        emp = $.trim(empp);  
+        if(emp === 'Certeca'){
+            newSector='FB003';
+        }else{
+            newSector='ST010';
+        }
+    }
+    else{
+        if(codigoempresa == 1){
+            emp = "CERAGNI";
+            newSector='ST010';
+        }else{
+            emp = "CERTECA";
+            newSector='FB003';
+        }
+    }  
     toastr.clear();
     toastr["info"]("A carregar stock...");
 
