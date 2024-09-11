@@ -12,7 +12,7 @@ class CorrigirStock extends CI_Controller
     }
 
 
-    function index(){
+    function positivo(){
 
         $this->load->helper('url');
         $this->load->library('session');
@@ -23,7 +23,45 @@ class CorrigirStock extends CI_Controller
 
             $this->load->view('structure/header', $session_data);
             $this->load->view('structure/side_menu', $session_data);
-            $this->load->view('template/stocks/corrigir_stock/corrigir_stock', $session_data);
+            $this->load->view('template/stocks/corrigir_stock/positivo/corrigir_stock', $session_data);
+            $this->load->view('structure/footer', $session_data);
+
+        }else{
+            redirect('start', 'refresh');
+        }
+    }
+
+    function negativo(){
+
+        $this->load->helper('url');
+        $this->load->library('session');
+
+        if($this->session->userdata('logged_in')) {
+
+            $session_data = $this->session->userdata('logged_in');
+
+            $this->load->view('structure/header', $session_data);
+            $this->load->view('structure/side_menu', $session_data);
+            $this->load->view('template/stocks/corrigir_stock/negativo/corrigir_stock', $session_data);
+            $this->load->view('structure/footer', $session_data);
+
+        }else{
+            redirect('start', 'refresh');
+        }
+    }
+
+    function zero(){
+
+        $this->load->helper('url');
+        $this->load->library('session');
+
+        if($this->session->userdata('logged_in')) {
+
+            $session_data = $this->session->userdata('logged_in');
+
+            $this->load->view('structure/header', $session_data);
+            $this->load->view('structure/side_menu', $session_data);
+            $this->load->view('template/stocks/corrigir_stock/zero/corrigir_stock', $session_data);
             $this->load->view('structure/footer', $session_data);
 
         }else{

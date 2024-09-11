@@ -73,7 +73,9 @@ $route['stocks/manage_palettes/cancel_palettes'] = 'stocks/gerir_paletes/AnularP
 $route['stocks/stock_list/all-stock']='stocks/listas/GetStock';
 $route['stocks/stock_list/stock-between-dates']='stocks/listas/GetStock_dates';
 $route['stocks/generate_new_palette']='stocks/gerir_paletes/GerarPaletes';
-$route['stocks/stock_correction']='stocks/corrigir_stock/CorrigirStock';
+$route['stocks/stock_correction/positive']='stocks/corrigir_stock/CorrigirStock/positivo';
+$route['stocks/stock_correction/negative']='stocks/corrigir_stock/CorrigirStock/negativo';
+$route['stocks/stock_correction/zero']='stocks/corrigir_stock/CorrigirStock/zero';
 
 /*
 | -------------------------------------------------------------------------

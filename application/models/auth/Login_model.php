@@ -29,7 +29,7 @@ class Login_model extends CI_Model
                 FROM users A join clients         B on (A.client=B.id) 
                              join template_images C on (A.id=C.id_user)
                where A.username=UPPER('$user') AND A.password=md5('$pass') and A.active=1";
-       // echo $sql;
+       //echo $sql;
 
         $query = $this->db->query($sql);
         // $this->db->close();

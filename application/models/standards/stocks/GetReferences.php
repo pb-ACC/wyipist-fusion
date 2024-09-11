@@ -18,7 +18,11 @@ class GetReferences extends CI_Model
                        case when B.Empresa='CERAGNI' then isnull(B.EAN13,'') else isnull(B.CodigoBarras,'') end CodigoBarras, isnull(B.TipoEcra,'') TipoEcra, 
                        cast(case when B.Empresa='CERAGNI' then '' else 'P' end as varchar(1)) Serie, isnull(B.TipoEcra,'') TipoEcra, 
                        cast(0 as int) Sel
-                from Artigos A join ReferArt          B on ((case when isnull(B.RefCeragni,0)=0 then 'CERTECA' else 'CERAGNI' end)='{$empresa}' and A.Codigo=B.Artigo)
+                from Artigos A join ReferArt          B on ((case when isnull(B.RefCeragni,0)=0 and isnull(B.RefCerteca,0)=1 then 'CERTECA' 
+                                                                  when isnull(B.RefCeragni,0)=1 and isnull(B.RefCerteca,0)=0 then 'CERAGNI' 
+                                                                  when isnull(B.RefCeragni,0)=0 or isnull(B.RefCerteca,0)=1 then 'CERTECA' 
+                                                                  else 'CERAGNI' 
+                                                             end)='{$empresa}' and A.Codigo=B.Artigo)
                           left join Formato           C on (B.Formato=C.Codigo)
                           left join zxEscolhaAlargada D on (B.Referencia=D.Referencia) 
                 where isnull(A.Inactivo,0)=0 and isnull(B.Inactivo,0)=0

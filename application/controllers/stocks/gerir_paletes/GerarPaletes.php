@@ -47,10 +47,10 @@ class GerarPaletes extends CI_Controller
             $setor = $this->input->post('setor');
             $obsPL = $this->input->post('obsPL');
             
-            $countTBL = count($tbl, COUNT_RECURSIVE);
+            //$countTBL = count($tbl, COUNT_RECURSIVE);
 
-            if ($countTBL > 2) {
-                
+           // if ($countTBL > 2) {
+            if (!empty($tbl)) {      
                 for ($i = 0; $i < count($tbl); $i++) {
                     $referencia = $tbl[$i]['referencia'];
                     $descricao = $tbl[$i]['descricao'];

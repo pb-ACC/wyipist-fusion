@@ -4,8 +4,12 @@ $("#menu-stocks01").addClass("menu-is-opening menu-open");
 $("#menu-stocks02").addClass("active");
 $('#menu-stocks03').attr("style", "display: block;" );
 
-$("#corrige-stk01").addClass("active");
-$("#corrige-stk02").addClass("active");
+$("#menu-stk01").addClass("menu-is-opening menu-open");
+$("#opcoes-stk1").addClass("menu-is-opening menu-open");
+$('#opcoes-stk1').attr("style", "display: block;" );
+$("#list-stk05").addClass("active");
+$("#list-stk06").addClass("active");
+
 
 let tablePaletes, tableSelPaletes, tableLocal_fabric, tableLocal_logistic, tableLocal_warehouse, selectedData=[], OG, dt, dtt, count=0, count2=0, count3=0, count4=0, local='';
 let type='', title='', text='', text1='', text2='', action='', xposition='', campo='',valor='',tblPL=[], tblLoc=[], tblLote=[], tblAfet=[], tblStk=[];
@@ -13,35 +17,29 @@ let palets=[], paletsOG=[], marosca=[];
 let no_change=0;
 let reabilitado=[], producao=[];
 selectedPalets(data=[]);
-toastr.clear();
-toastr["info"]("A carregar paletes...");
 
-$.ajax({
-    type: "GET",
-    url: "http://127.0.0.1/wyipist-fusion/standards/ListarPaletes/getPalets_anulaPL",
-    dataType: "json",
-    success: function (data) {
-        if (data === "kick") {
-            toastr["warning"]("Outro utilizador entrou com as suas credenciais, faça login de novo.");
-            window.location = "home/logout";
-        } else {                                            
-            if (data['select'].length > 0) 
-                $("#select").append(data['select']);                
-                $('#empresasDP').select2();                                    
-            //alert(data);
-            if (data['button'].length > 0) 
-                $("#buttons").append(data['button']); 
-            
-            paletsOG=Object.values(data['paletes']);
-            getPalets(Object.values(data['paletes']));
-        }
-    },
-    error: function (e) {
-                alert('Request Status: ' + e.status + ' Status Text: ' + e.statusText + ' ' + e.responseText);
-                console.log(e);
+    $.ajax({
+        type: "GET",
+        url: "http://127.0.0.1/wyipist-fusion/standards/FiltroEmpresa/getDropdowns",
+        dataType: "json",
+        success: function (data) {
+            if (data === "kick") {
+                toastr["warning"]("Outro utilizador entrou com as suas credenciais, faça login de novo.");
+                window.location = "home/logout";
+            } else {                                            
+                if (data['select'].length > 0) 
+                    $("#select").append(data['select']);                
+                    $('#empresasDP').select2();                                    
+                //alert(data);
+                if (data['button'].length > 0) 
+                    $("#buttons").append(data['button']); 
             }
-});
-
+        },
+        error: function (e) {
+                    alert('Request Status: ' + e.status + ' Status Text: ' + e.statusText + ' ' + e.responseText);
+                    console.log(e);
+                }
+    });
 
 $.ajax({
     type: "GET",
@@ -68,11 +66,6 @@ $.ajax({
             }        
             // Inicializa o Select2
             select.select2();
-
-            toastr.clear();
-            toastr["success"]("Paletes carregadas com sucesso.");
-            toastr.clear();            
-            $("#choose_palets").prop("disabled",false);  
         }
     },
     error: function (e) {
@@ -154,12 +147,6 @@ function getPalets(data){
             {title:"Id", field:"Id", align:"center", visible:false}
         ]
     });
-    
-    /*
-    tablePaletes.on("rowClick", function(e, row){
-        open_extrato(row.getData().DocPL);
-    });
-    */    
 }
 
 function save_paletes(){
@@ -312,15 +299,66 @@ function pick_palete() {
 
 /*BTNS*/
 function choose_palets(){    
-    setTimeout(function () {  
-        $("#escolha_palete").modal("show");
-        //$("#escolha_palete").modal();  
-    }, 350);
+    if (user_type == 1 || user_type == 2){
+        empp = $("#empresasDP option:selected").text();
+        emp = $.trim(empp);  
+        if(emp === 'Certeca'){
+            newSector='FB003';
+        }else{
+            newSector='ST010';
+        }
+    }
+    else{
+        if(codigoempresa == 1){
+            emp = "CERAGNI";
+            newSector='ST010';
+        }else{
+            emp = "CERTECA";
+            newSector='FB003';
+        }
+    }  
+    toastr.clear();
+    toastr["info"]("A carregar paletes...");
 
-    setTimeout(function () {            
-        $('#paleteCB').trigger('focus');
-    //    tablePaletes.redraw(true);            
-    }, 850);
+    tableSelPaletes.alert("A processar...");
+    $('#empresasDP').prop('disabled', true);
+    $("#buttons button").attr("disabled", true);
+
+    $.ajax({
+        type: "POST",
+        url: "http://127.0.0.1/wyipist-fusion/standards/ListarFiltro/filtraPlZn_emanuel_corrige_stk_zero/"+emp+"/"+newSector,
+        dataType: "json",
+        success: function (data) {
+            if (data === "kick") {
+                toastr["warning"]("Outro utilizador entrou com as suas credenciais, faça login de novo.");
+                window.location = "home/logout";
+            } else {                    
+                paletsOG=Object.values(data['paletes']);
+                getPalets(Object.values(data['paletes']));
+
+                tableSelPaletes.clearAlert();
+                $('#empresasDP').prop('disabled', false);
+                $("#buttons button").attr("disabled", false);
+                toastr.clear();
+                toastr["success"]("Paletes carregadas com sucesso.");
+                toastr.clear();
+
+                setTimeout(function () {  
+                    $("#escolha_palete").modal("show");
+                    //$("#escolha_palete").modal();  
+                }, 350);
+            
+                setTimeout(function () {            
+                    $('#paleteCB').trigger('focus');
+                //    tablePaletes.redraw(true);            
+                }, 850);  
+            }
+        },
+        error: function (e) {
+                    alert('Request Status: ' + e.status + ' Status Text: ' + e.statusText + ' ' + e.responseText);
+                    console.log(e);
+                }
+    });
 }
 
 function cancel_palette(){
@@ -369,66 +407,10 @@ function changeEmpresa(){
     }
 }
 
+//estúpido eu sei, mas mantém tudo igual ao código já existente
 function confirm_changeEmpresa(){
-    //empp = $("#empresasDP option:selected").text();
-    //emp = $.trim(empp);    
-
-    if (user_type == 1 || user_type == 2){
-        empp = $("#empresasDP option:selected").text();
-        emp = $.trim(empp);  
-        if(emp === 'Certeca'){
-            newSector='FB003';
-        }else{
-            newSector='ST010';
-        }
-    }
-    else{
-        if(codigoempresa == 1){
-            emp = "CERAGNI";
-            newSector='ST010';
-        }else{
-            emp = "CERTECA";
-            newSector='FB003';
-        }
-    }  
-    toastr.clear();
-    toastr["info"]("A carregar paletes...");
-
-    tableSelPaletes.alert("A processar...");
-    $('#empresasDP').prop('disabled', true);
-    $("#buttons button").attr("disabled", true);
-
-    $.ajax({
-        type: "POST",
-        url: "http://127.0.0.1/wyipist-fusion/standards/ListarFiltro/filtraPlZn_emanuel_anula/"+emp+"/"+newSector,
-        dataType: "json",
-        success: function (data) {
-            if (data === "kick") {
-                toastr["warning"]("Outro utilizador entrou com as suas credenciais, faça login de novo.");
-                window.location = "home/logout";
-            } else {                    
-                paletsOG=Object.values(data['paletes']);
-                getPalets(Object.values(data['paletes']));       
-                
-                if (data['button'].length > 0) 
-                    $("#buttons").empty();
-                    $("#buttons").append(data['button']); 
-
-                tableSelPaletes.clearAlert();
-                $('#empresasDP').prop('disabled', false);
-                $("#buttons button").attr("disabled", false);
-                toastr.clear();
-                toastr["success"]("Paletes carregadas com sucesso.");
-                toastr.clear();
-            }
-        },
-        error: function (e) {
-                    alert('Request Status: ' + e.status + ' Status Text: ' + e.statusText + ' ' + e.responseText);
-                    console.log(e);
-                }
-    });
-    
-} 
+    selectedPalets(data=[]);
+}
 
 /*GRAVAR DADOS NA BD*/
 function confirm_correction(tblPL){

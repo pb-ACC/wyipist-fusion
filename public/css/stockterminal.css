@@ -452,4 +452,46 @@ input[type=range] {
     transform-origin: 0 0;
 }
 
+#radioButtons .select2.select2-container.select2-container--default.select2-container--below {
+    font-weight: bold !important;
+    font-size: larger !important;
+}
+#radioButtons .select2.select2-container.select2-container--default{
+    font-weight: bold !important;
+    font-size: larger !important;   
+}
+#radioButtons .select2.select2-container.select2-container--default.select2-container--below.select2-container--focus {
+    font-weight: bold !important;
+    font-size: larger !important;
+}
+#empresasDP{
+    background: lavender !important;
+}
+#radioButtons .select2-selection.select2-selection--single {
+    background: lavender !important;
+}
 
+
+#select .select2.select2-container.select2-container--default.select2-container--below {
+    font-weight: bold !important;
+    font-size: larger !important;
+}
+#select .select2.select2-container.select2-container--default{
+    font-weight: bold !important;
+    font-size: larger !important;   
+}
+#select .select2.select2-container.select2-container--default.select2-container--below.select2-container--focus {
+    font-weight: bold !important;
+    font-size: larger !important;
+}
+#empresasDP{
+    background: lavender !important;
+}
+#select .select2-selection.select2-selection--single {
+    background: lavender !important;
+}
+
+#amostras:hover{
+    background-color: #943f63 !important;
+    border-color:  #833c57 !important;
+}

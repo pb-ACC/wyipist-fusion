@@ -112,7 +112,7 @@
 		// override these in your code to change the default behavior and style
 		$.blockUI.defaults = {
 			// message displayed when blocking (use null for no message)
-			message:  '<img src="http://192.168.1.6/wyipist-fusion/public/img/load/busy.gif" /> A processar...',
+			message:  '<img src="http://127.0.0.1/wyipist-fusion/public/img/load/busy.gif" /> A processar...',
 
 			title: null,		// title string; only used when theme == true
 			draggable: true,	// only used when theme == true (requires jquery-ui.js to be loaded)

@@ -93,7 +93,7 @@ class GetPalets extends CI_Model
         return $data;
     }
     
-    public function armazem($setor){
+    public function armazem($setor,$condicao){
         //echo $setor;
         $sql01 = "SELECT count(A.id) nLinhas
                   FROM ( SELECT cast(0 as int) Sel, A.Sector, isnull(A.Local,'') Local, round(sum(case when A.TipoMovimento<='10' then A.Quantidade else -A.Quantidade end),2) Quantidade, case when isnull(B.Unidade,'')='' then 'M2' else B.Unidade end Unidade,
@@ -106,7 +106,7 @@ class GetPalets extends CI_Model
                          -- and isnull(A.Local,'')<>''
                         group by A.Sector, isnull(A.Local,''), A.RefP, A.Artigo, isnull(A.Lote,''), isnull(A.Calibre,''), D.NumeroLinha, C.Numero, B.Formato, B.Qual, B.TipoEmbalagem,
                                  B.Superficie, B.Decoracao, B.RefCor, B.TabEspessura, case when isnull(B.Unidade,'')='' then 'M2' else B.Unidade end, B.Descricao, isnull(A.NivelPalete,'')
-                        having round(sum(case when A.TipoMovimento<='10' then A.Quantidade else -A.Quantidade end),8)>0
+                        having round(sum(case when A.TipoMovimento<='10' then A.Quantidade else -A.Quantidade end),8){$condicao}
                      ) A";        
         $query01 = $this->db->query($sql01);        
         $tot  = $query01->result();
@@ -134,7 +134,7 @@ class GetPalets extends CI_Model
                       where A.Sector in ({$setor}) 
                       group by A.Sector, isnull(A.Local,''), A.RefP, A.Artigo, isnull(A.Lote,''), isnull(A.Calibre,''), D.NumeroLinha, C.Numero, B.Formato, B.Qual, B.TipoEmbalagem,
                                 B.Superficie, B.Decoracao, B.RefCor, B.TabEspessura, case when isnull(B.Unidade,'')='' then 'M2' else B.Unidade end, B.Descricao, isnull(A.NivelPalete,'')
-                      having round(sum(case when A.TipoMovimento<='10' then A.Quantidade else -A.Quantidade end),8)>0
+                      having round(sum(case when A.TipoMovimento<='10' then A.Quantidade else -A.Quantidade end),8){$condicao}
                       Order by C.Numero ASC
                       OFFSET ".$offset." ROWS
                       FETCH NEXT ".$fetch ." ROWS ONLY";  

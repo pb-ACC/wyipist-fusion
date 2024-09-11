@@ -154,9 +154,9 @@ function getPalets(data){
         columns:[
             {title:"Palete", field:"DocPL", align:"center",headerFilter:"input"},
             {title:"LinhaPL", field:"LinhaPL", align:"center", visible:false},                
-            {title:"Referencia", field:"Referencia", align:"center"},
+            {title:"Referencia", field:"Referencia", align:"center",headerFilter:"input"},
             {title:"Artigo", field:"Artigo", align:"center", visible:false},
-            {title:"Descrição", field:"DescricaoArtigo", align:"center"},
+            {title:"Descrição", field:"DescricaoArtigo", align:"center",headerFilter:"input"},
             {title:"QTD.", field:"Quantidade", align:"center"},
             {title:"UNI.", field:"Unidade", align:"center", visible:false},
             {title:"Sector", field:"Sector", align:"center", visible:false},                
@@ -503,11 +503,11 @@ function listLocal(data){
                 data.Sel = 1;
             },
             columns:[
-                {title:"Codigo", field:"Codigo", align:"center",visible:true,headerFilter:"input"},
+                {title:"Armazém", field:"Sector", align:"center",visible:true,headerFilter:"input"},
+                {title:"Setor", field:"Codigo", align:"center",visible:true,headerFilter:"input"},
                 {title:"Fila", field:"Fila", align:"center",visible:true,headerFilter:"input"},
                 {title:"Posicao", field:"Posicao", align:"center",visible:true,headerFilter:"input"},
                 {title:"CodigoBarras", field:"CodigoBarras", align:"center",visible:true,headerFilter:"input"},   
-                {title:"Sector", field:"Sector", align:"center", visible:false},   
                 {title:"Identificador", field:"Identificador", align:"center", visible:false},
                 {title:"Sel", field:"Sel", align:"center", visible:false},
                 {title:"id", field:"id", align:"center", visible:false}

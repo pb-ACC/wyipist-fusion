@@ -77,7 +77,7 @@ function getPalets(data){
             {title:"Referencia", field:"Referencia", align:"center",headerFilter:"input"},
             {title:"Descrição", field:"DescricaoArtigo", align:"center",headerFilter:"input"},
             {title:"Formato", field:"Formato", align:"center",headerFilter:"input"},
-            {title:"QTD.", field:"Quantidade", align:"center",headerFilter:"input"},
+            {title:"QTD.", field:"Quantidade", align:"center",headerFilter:"input",bottomCalc:"sum", bottomCalcParams:{precision:2}},
             {title:"UNI.", field:"Unidade", align:"center", visible:false},                              
             {title:"Lote", field:"Lote", align:"center",headerFilter:"input"},
             {title:"Calibre", field:"Calibre", align:"center",headerFilter:"input"}, 

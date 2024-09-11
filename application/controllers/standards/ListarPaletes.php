@@ -139,7 +139,7 @@ class ListarPaletes extends CI_Controller
                 case 1:
                     $setor = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST010\', \'ST011\', \'ST012\', \'ST013\', \'ST014\', \'ST015\', \'ST016\', \'ST020\', \'ST200\', \'ST201\', \'ST202\', \'ST203\', \'ST204\', \'ST205\', \'ST206\', \'ST207\', \'ST290\'';               
                     $this->load->model('standards/stocks/GetPalets');
-                    $paletes=$this->GetPalets->armazem($setor);
+                    $paletes=$this->GetPalets->armazem($setor,'>0');
 
                     $this->load->model('standards/others/Buttons');
                     $button=$this->Buttons->buttons_empresa($empresa[0]->TipoEmpresa);
@@ -155,7 +155,7 @@ class ListarPaletes extends CI_Controller
                 case 2:
                     $setor='\'FB003\'';
                     $this->load->model('standards/stocks/GetPalets');
-                    $paletes=$this->GetPalets->armazem($setor);
+                    $paletes=$this->GetPalets->armazem($setor,'>0');
 
                     $this->load->model('standards/others/RadioButtons');
                     $radio=$this->RadioButtons->escolha_setores_empresa($empresa[0]->TipoEmpresa,$user_type);
@@ -188,7 +188,7 @@ class ListarPaletes extends CI_Controller
                     $button=$this->Buttons->buttons_empresa($empresa[0]->TipoEmpresa);
             
                     $this->load->model('standards/stocks/GetPalets');
-                    $paletes=$this->GetPalets->armazem($setor);
+                    $paletes=$this->GetPalets->armazem($setor,'>0');
 
                     $data = array(
                         'select' => $select,
@@ -215,7 +215,7 @@ class ListarPaletes extends CI_Controller
                     $button=$this->Buttons->buttons_empresa($empresa[0]->TipoEmpresa);
                     //echo $button;
                     $this->load->model('standards/stocks/GetPalets');
-                    $paletes=$this->GetPalets->armazem($setor);
+                    $paletes=$this->GetPalets->armazem($setor,'>0');
 
                     $data = array(
                         'select' => $select,
@@ -248,7 +248,7 @@ class ListarPaletes extends CI_Controller
                 case 1:
                     $setor = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST010\', \'ST011\', \'ST012\', \'ST013\', \'ST014\', \'ST015\', \'ST016\', \'ST020\', \'ST200\', \'ST201\', \'ST202\', \'ST203\', \'ST204\', \'ST205\', \'ST206\', \'ST207\', \'ST290\'';               
                     $this->load->model('standards/stocks/GetPalets');
-                    $paletes=$this->GetPalets->armazem($setor);
+                    $paletes=$this->GetPalets->armazem($setor,'>0');
 
                     $this->load->model('standards/others/Buttons');
                     $button=$this->Buttons->buttons_empresa_anular_palete();
@@ -262,9 +262,9 @@ class ListarPaletes extends CI_Controller
                     echo json_encode($data);
                     break;
                 case 2:
-                    $setor='\'FB003\'';
+                    $setor = '\'FB003\', \'CL001\'';               
                     $this->load->model('standards/stocks/GetPalets');
-                    $paletes=$this->GetPalets->armazem($setor);
+                    $paletes=$this->GetPalets->armazem($setor,'>0');
 
                     $this->load->model('standards/others/RadioButtons');
                     $radio=$this->RadioButtons->escolha_setores_empresa_anularPL($empresa[0]->TipoEmpresa);
@@ -297,7 +297,7 @@ class ListarPaletes extends CI_Controller
                     $button=$this->Buttons->buttons_empresa_anular_palete();
             
                     $this->load->model('standards/stocks/GetPalets');
-                    $paletes=$this->GetPalets->armazem($setor);
+                    $paletes=$this->GetPalets->armazem($setor,'>0');
 
                     $data = array(
                         'select' => $select,
@@ -324,7 +324,7 @@ class ListarPaletes extends CI_Controller
                     $button=$this->Buttons->buttons_empresa_anular_palete();
                     //echo $button;
                     $this->load->model('standards/stocks/GetPalets');
-                    $paletes=$this->GetPalets->armazem($setor);
+                    $paletes=$this->GetPalets->armazem($setor,'>0');
 
                     $data = array(
                         'select' => $select,
@@ -342,6 +342,333 @@ class ListarPaletes extends CI_Controller
         }   
     }  
 
+    public function getPalets_corrige_stk_positivo(){
+        $this->load->helper('url');
+        $this->load->library('session');
+        if($this->session->userdata('logged_in')) {
+            
+            $session_data = $this->session->userdata('logged_in');            
+            $user_type = $session_data['user_type'];
+
+            $empresa= $this->getEmpresa();            
+            //vecho $empresa[0]->Empresa;
+            $this->load->model('standards/stocks/GetPalets');
+            switch ($empresa[0]->TipoEmpresa) {
+                case 1:
+                    $setor = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST010\', \'ST011\', \'ST012\', \'ST013\', \'ST014\', \'ST015\', \'ST016\', \'ST020\', \'ST200\', \'ST201\', \'ST202\', \'ST203\', \'ST204\', \'ST205\', \'ST206\', \'ST207\', \'ST290\'';               
+                    $this->load->model('standards/stocks/GetPalets');
+                    $paletes=$this->GetPalets->armazem($setor,'>0');
+
+                    $this->load->model('standards/others/Buttons');
+                    $button=$this->Buttons->buttons_empresa_anular_palete();
+
+                    $data = array( 
+                        'select' => '',
+                        'radio' => '',
+                        'button' => $button,                     
+                        'paletes' => $paletes
+                    );                    
+                    echo json_encode($data);
+                    break;
+                case 2:
+                    $setor = '\'FB003\', \'CL001\'';               
+                    $this->load->model('standards/stocks/GetPalets');
+                    $paletes=$this->GetPalets->armazem($setor,'>0');
+
+                    $this->load->model('standards/others/RadioButtons');
+                    $radio=$this->RadioButtons->escolha_setores_empresa_anularPL($empresa[0]->TipoEmpresa);
+                    
+                    $this->load->model('standards/others/Buttons');
+                    $button=$this->Buttons->buttons_empresa_anular_palete();
+
+                    $data = array( 
+                        'select' => '',                                          
+                        'radio' => $radio,   
+                        'button' => $button,                                       
+                        'paletes' => $paletes
+                    );
+                    echo json_encode($data);
+                    break;
+                case 3:
+                    /*                    
+                    $st01='ST010';
+                    $st02='FB001';
+                    $setor = '\''.$st01.'\''.','.'\''.$st02.'\'';     
+                    */
+                    $setor = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST010\', \'ST011\', \'ST012\', \'ST013\', \'ST014\', \'ST015\', \'ST016\', \'ST020\', \'ST200\', \'ST201\', \'ST202\', \'ST203\', \'ST204\', \'ST205\', \'ST206\', \'ST207\', \'ST290\'';               
+                    $this->load->model('standards/others/Dropdowns');
+                    $select=$this->Dropdowns->escolha_empresa($empresa[0]->TipoEmpresa);  
+
+                    $this->load->model('standards/others/RadioButtons');
+                    $radio=$this->RadioButtons->escolha_setores_empresa_anularPL($empresa[0]->TipoEmpresa);
+                    
+                    $this->load->model('standards/others/Buttons');
+                    $button=$this->Buttons->buttons_empresa_anular_palete();
+            
+                    $this->load->model('standards/stocks/GetPalets');
+                    $paletes=$this->GetPalets->armazem($setor,'>0');
+
+                    $data = array(
+                        'select' => $select,
+                        'radio' => $radio,
+                        'button' => $button,
+                        'paletes' => $paletes
+                    );
+                    //print_r($data['paletes']);
+                    echo json_encode($data);
+                    break;
+                case 4:
+                    /*                    
+                    $st01='ST010';
+                    $st02='FB001';
+                    $setor = '\''.$st01.'\''.','.'\''.$st02.'\'';     
+                    */
+                    $setor = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST010\', \'ST011\', \'ST012\', \'ST013\', \'ST014\', \'ST015\', \'ST016\', \'ST020\', \'ST200\', \'ST201\', \'ST202\', \'ST203\', \'ST204\', \'ST205\', \'ST206\', \'ST207\', \'ST290\'';               
+                    $this->load->model('standards/others/Dropdowns');
+                    $select=$this->Dropdowns->escolha_empresa($empresa[0]->TipoEmpresa);
+                    $this->load->model('standards/others/RadioButtons');
+                    $radio=$this->RadioButtons->escolha_setores_empresa_anularPL($empresa[0]->TipoEmpresa);
+                    
+                    $this->load->model('standards/others/Buttons');
+                    $button=$this->Buttons->buttons_empresa_anular_palete();
+                    //echo $button;
+                    $this->load->model('standards/stocks/GetPalets');
+                    $paletes=$this->GetPalets->armazem($setor,'>0');
+
+                    $data = array(
+                        'select' => $select,
+                        'radio' => $radio,
+                        'button' => $button,
+                        'paletes' => $paletes
+                    );
+                    //print_r($data['button']);
+                    echo json_encode($data);
+                    break;                    
+            }
+
+        }else{
+            redirect('start', 'refresh');
+        }   
+    } 
+
+    public function getPalets_corrige_stk_negativo(){
+        $this->load->helper('url');
+        $this->load->library('session');
+        if($this->session->userdata('logged_in')) {
+            
+            $session_data = $this->session->userdata('logged_in');            
+            $user_type = $session_data['user_type'];
+
+            $empresa= $this->getEmpresa();            
+            //vecho $empresa[0]->Empresa;
+            $this->load->model('standards/stocks/GetPalets');
+            switch ($empresa[0]->TipoEmpresa) {
+                case 1:
+                    $setor = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST010\', \'ST011\', \'ST012\', \'ST013\', \'ST014\', \'ST015\', \'ST016\', \'ST020\', \'ST200\', \'ST201\', \'ST202\', \'ST203\', \'ST204\', \'ST205\', \'ST206\', \'ST207\', \'ST290\'';               
+                    $this->load->model('standards/stocks/GetPalets');
+                    $paletes=$this->GetPalets->armazem($setor,'<0');
+
+                    $this->load->model('standards/others/Buttons');
+                    $button=$this->Buttons->buttons_empresa_anular_palete();
+
+                    $data = array( 
+                        'select' => '',
+                        'radio' => '',
+                        'button' => $button,                     
+                        'paletes' => $paletes
+                    );                    
+                    echo json_encode($data);
+                    break;
+                case 2:
+                    $setor = '\'FB003\', \'CL001\'';               
+                    $this->load->model('standards/stocks/GetPalets');
+                    $paletes=$this->GetPalets->armazem($setor,'<0');
+
+                    $this->load->model('standards/others/RadioButtons');
+                    $radio=$this->RadioButtons->escolha_setores_empresa_anularPL($empresa[0]->TipoEmpresa);
+                    
+                    $this->load->model('standards/others/Buttons');
+                    $button=$this->Buttons->buttons_empresa_anular_palete();
+
+                    $data = array( 
+                        'select' => '',                                          
+                        'radio' => $radio,   
+                        'button' => $button,                                       
+                        'paletes' => $paletes
+                    );
+                    echo json_encode($data);
+                    break;
+                case 3:
+                    /*                    
+                    $st01='ST010';
+                    $st02='FB001';
+                    $setor = '\''.$st01.'\''.','.'\''.$st02.'\'';     
+                    */
+                    $setor = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST010\', \'ST011\', \'ST012\', \'ST013\', \'ST014\', \'ST015\', \'ST016\', \'ST020\', \'ST200\', \'ST201\', \'ST202\', \'ST203\', \'ST204\', \'ST205\', \'ST206\', \'ST207\', \'ST290\'';               
+                    $this->load->model('standards/others/Dropdowns');
+                    $select=$this->Dropdowns->escolha_empresa($empresa[0]->TipoEmpresa);  
+
+                    $this->load->model('standards/others/RadioButtons');
+                    $radio=$this->RadioButtons->escolha_setores_empresa_anularPL($empresa[0]->TipoEmpresa);
+                    
+                    $this->load->model('standards/others/Buttons');
+                    $button=$this->Buttons->buttons_empresa_anular_palete();
+            
+                    $this->load->model('standards/stocks/GetPalets');
+                    $paletes=$this->GetPalets->armazem($setor,'<0');
+
+                    $data = array(
+                        'select' => $select,
+                        'radio' => $radio,
+                        'button' => $button,
+                        'paletes' => $paletes
+                    );
+                    //print_r($data['paletes']);
+                    echo json_encode($data);
+                    break;
+                case 4:
+                    /*                    
+                    $st01='ST010';
+                    $st02='FB001';
+                    $setor = '\''.$st01.'\''.','.'\''.$st02.'\'';     
+                    */
+                    $setor = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST010\', \'ST011\', \'ST012\', \'ST013\', \'ST014\', \'ST015\', \'ST016\', \'ST020\', \'ST200\', \'ST201\', \'ST202\', \'ST203\', \'ST204\', \'ST205\', \'ST206\', \'ST207\', \'ST290\'';               
+                    $this->load->model('standards/others/Dropdowns');
+                    $select=$this->Dropdowns->escolha_empresa($empresa[0]->TipoEmpresa);
+                    $this->load->model('standards/others/RadioButtons');
+                    $radio=$this->RadioButtons->escolha_setores_empresa_anularPL($empresa[0]->TipoEmpresa);
+                    
+                    $this->load->model('standards/others/Buttons');
+                    $button=$this->Buttons->buttons_empresa_anular_palete();
+                    //echo $button;
+                    $this->load->model('standards/stocks/GetPalets');
+                    $paletes=$this->GetPalets->armazem($setor,'<0');
+
+                    $data = array(
+                        'select' => $select,
+                        'radio' => $radio,
+                        'button' => $button,
+                        'paletes' => $paletes
+                    );
+                    //print_r($data['button']);
+                    echo json_encode($data);
+                    break;                    
+            }
+
+        }else{
+            redirect('start', 'refresh');
+        }   
+    } 
+
+    public function getPalets_corrige_stk_zero(){
+        $this->load->helper('url');
+        $this->load->library('session');
+        if($this->session->userdata('logged_in')) {
+            
+            $session_data = $this->session->userdata('logged_in');            
+            $user_type = $session_data['user_type'];
+
+            $empresa= $this->getEmpresa();            
+            //vecho $empresa[0]->Empresa;
+            $this->load->model('standards/stocks/GetPalets');
+            switch ($empresa[0]->TipoEmpresa) {
+                case 1:
+                    $setor = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST010\', \'ST011\', \'ST012\', \'ST013\', \'ST014\', \'ST015\', \'ST016\', \'ST020\', \'ST200\', \'ST201\', \'ST202\', \'ST203\', \'ST204\', \'ST205\', \'ST206\', \'ST207\', \'ST290\'';               
+                    $this->load->model('standards/stocks/GetPalets');
+                    $paletes=$this->GetPalets->armazem($setor,'=0');
+
+                    $this->load->model('standards/others/Buttons');
+                    $button=$this->Buttons->buttons_empresa_anular_palete();
+
+                    $data = array( 
+                        'select' => '',
+                        'radio' => '',
+                        'button' => $button,                     
+                        'paletes' => $paletes
+                    );                    
+                    echo json_encode($data);
+                    break;
+                case 2:
+                    $setor = '\'FB003\', \'CL001\'';               
+                    $this->load->model('standards/stocks/GetPalets');
+                    $paletes=$this->GetPalets->armazem($setor,'=0');
+
+                    $this->load->model('standards/others/RadioButtons');
+                    $radio=$this->RadioButtons->escolha_setores_empresa_anularPL($empresa[0]->TipoEmpresa);
+                    
+                    $this->load->model('standards/others/Buttons');
+                    $button=$this->Buttons->buttons_empresa_anular_palete();
+
+                    $data = array( 
+                        'select' => '',                                          
+                        'radio' => $radio,   
+                        'button' => $button,                                       
+                        'paletes' => $paletes
+                    );
+                    echo json_encode($data);
+                    break;
+                case 3:
+                    /*                    
+                    $st01='ST010';
+                    $st02='FB001';
+                    $setor = '\''.$st01.'\''.','.'\''.$st02.'\'';     
+                    */
+                    $setor = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST010\', \'ST011\', \'ST012\', \'ST013\', \'ST014\', \'ST015\', \'ST016\', \'ST020\', \'ST200\', \'ST201\', \'ST202\', \'ST203\', \'ST204\', \'ST205\', \'ST206\', \'ST207\', \'ST290\'';               
+                    $this->load->model('standards/others/Dropdowns');
+                    $select=$this->Dropdowns->escolha_empresa($empresa[0]->TipoEmpresa);  
+
+                    $this->load->model('standards/others/RadioButtons');
+                    $radio=$this->RadioButtons->escolha_setores_empresa_anularPL($empresa[0]->TipoEmpresa);
+                    
+                    $this->load->model('standards/others/Buttons');
+                    $button=$this->Buttons->buttons_empresa_anular_palete();
+            
+                    $this->load->model('standards/stocks/GetPalets');
+                    $paletes=$this->GetPalets->armazem($setor,'=0');
+
+                    $data = array(
+                        'select' => $select,
+                        'radio' => $radio,
+                        'button' => $button,
+                        'paletes' => $paletes
+                    );
+                    //print_r($data['paletes']);
+                    echo json_encode($data);
+                    break;
+                case 4:
+                    /*                    
+                    $st01='ST010';
+                    $st02='FB001';
+                    $setor = '\''.$st01.'\''.','.'\''.$st02.'\'';     
+                    */
+                    $setor = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST010\', \'ST011\', \'ST012\', \'ST013\', \'ST014\', \'ST015\', \'ST016\', \'ST020\', \'ST200\', \'ST201\', \'ST202\', \'ST203\', \'ST204\', \'ST205\', \'ST206\', \'ST207\', \'ST290\'';               
+                    $this->load->model('standards/others/Dropdowns');
+                    $select=$this->Dropdowns->escolha_empresa($empresa[0]->TipoEmpresa);
+                    $this->load->model('standards/others/RadioButtons');
+                    $radio=$this->RadioButtons->escolha_setores_empresa_anularPL($empresa[0]->TipoEmpresa);
+                    
+                    $this->load->model('standards/others/Buttons');
+                    $button=$this->Buttons->buttons_empresa_anular_palete();
+                    //echo $button;
+                    $this->load->model('standards/stocks/GetPalets');
+                    $paletes=$this->GetPalets->armazem($setor,'=0');
+
+                    $data = array(
+                        'select' => $select,
+                        'radio' => $radio,
+                        'button' => $button,
+                        'paletes' => $paletes
+                    );
+                    //print_r($data['button']);
+                    echo json_encode($data);
+                    break;                    
+            }
+
+        }else{
+            redirect('start', 'refresh');
+        }   
+    } 
+
     public function getPalets_stock(){
         $this->load->helper('url');
         $this->load->library('session');
@@ -350,7 +677,7 @@ class ListarPaletes extends CI_Controller
             //$user_type= $session_data['user_type'];
 
             $empresa= $this->getEmpresa();            
-            //vecho $empresa[0]->Empresa;
+            //echo $empresa[0]->TipoEmpresa;
             $this->load->model('standards/stocks/GetPalets');
             switch ($empresa[0]->TipoEmpresa) {
                 case 1:
@@ -567,7 +894,7 @@ class ListarPaletes extends CI_Controller
                 case 1:
                     $setor='\'CL007\'';
                     $this->load->model('standards/stocks/GetPalets');
-                    $paletes=$this->GetPalets->armazem($setor);
+                    $paletes=$this->GetPalets->armazem($setor,'>0');
 
                     $this->load->model('standards/others/Buttons');
                     $button=$this->Buttons->buttons_empresa($empresa[0]->TipoEmpresa);
@@ -582,7 +909,7 @@ class ListarPaletes extends CI_Controller
                 case 2:
                     $setor='\'ST017\'';
                     $this->load->model('standards/stocks/GetPalets');
-                    $paletes=$this->GetPalets->armazem($setor);
+                    $paletes=$this->GetPalets->armazem($setor,'>0');
                     
                     $this->load->model('standards/others/Buttons');
                     $button=$this->Buttons->buttons_empresa($empresa[0]->TipoEmpresa);
@@ -608,7 +935,7 @@ class ListarPaletes extends CI_Controller
                     $button=$this->Buttons->buttons_empresa($empresa[0]->TipoEmpresa);
             
                     $this->load->model('standards/stocks/GetPalets');
-                    $paletes=$this->GetPalets->armazem($setor);
+                    $paletes=$this->GetPalets->armazem($setor,'>0');
 
                     $data = array(
                         'select' => $select,
@@ -632,7 +959,7 @@ class ListarPaletes extends CI_Controller
                     $button=$this->Buttons->buttons_empresa($empresa[0]->TipoEmpresa);
                     //echo $button;
                     $this->load->model('standards/stocks/GetPalets');
-                    $paletes=$this->GetPalets->armazem($setor);
+                    $paletes=$this->GetPalets->armazem($setor,'>0');
 
                     $data = array(
                         'select' => $select,                        
