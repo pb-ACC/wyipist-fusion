@@ -24,7 +24,7 @@ class GetPalets extends CI_Model
                          from StkLDocs A join ReferArt B on (A.RefP=B.Referencia and A.Artigo=B.Artigo)
                                          join PlDocs   C on (C.Estado='F' and (case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
                                          join PllDocs  D on (C.Numero=D.NumeroDocumento)
-                        where A.Sector in ({$setor})
+                        where A.Sector in ({$setor}) and C.Serie not in ('C','PC')
                         group by A.Sector, A.RefP, A.Artigo, isnull(A.Lote,''), isnull(A.Calibre,''), D.NumeroLinha, C.Numero,B.Formato, B.Qual, B.TipoEmbalagem, B.Superficie, B.Decoracao,
                                 B.RefCor, B.TabEspessura, case when isnull(B.Unidade,'')='' then 'M2' else B.Unidade end, B.Descricao, isnull(A.NivelPalete,'')
                         having round(sum(case when A.TipoMovimento<='10' then A.Quantidade else -A.Quantidade end),8)>0
@@ -49,7 +49,7 @@ class GetPalets extends CI_Model
                       from StkLDocs A join ReferArt B on (A.RefP=B.Referencia and A.Artigo=B.Artigo)
                                       join PlDocs   C on (C.Estado='F' and (case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
                                       join PllDocs  D on (C.Numero=D.NumeroDocumento)
-                      where A.Sector in ({$setor})
+                      where A.Sector in ({$setor}) and C.Serie not in ('C','PC')
                       group by A.Sector, A.RefP, A.Artigo, isnull(A.Lote,''), isnull(A.Calibre,''), D.NumeroLinha, C.Numero,B.Formato, B.Qual, B.TipoEmbalagem, B.Superficie, B.Decoracao,
                                 B.RefCor, B.TabEspessura, case when isnull(B.Unidade,'')='' then 'M2' else B.Unidade end, B.Descricao, isnull(A.NivelPalete,'')
                       having round(sum(case when A.TipoMovimento<='10' then A.Quantidade else -A.Quantidade end),8)>0
@@ -102,7 +102,7 @@ class GetPalets extends CI_Model
                          from StkLDocs A join ReferArt B on (A.RefP=B.Referencia and A.Artigo=B.Artigo)
                                          join PlDocs   C on (C.Estado='F' and (case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
                                          join PllDocs  D on (C.Numero=D.NumeroDocumento)
-                        where A.Sector in ({$setor})
+                        where A.Sector in ({$setor}) and C.Serie not in ('C','PC')
                          -- and isnull(A.Local,'')<>''
                         group by A.Sector, isnull(A.Local,''), A.RefP, A.Artigo, isnull(A.Lote,''), isnull(A.Calibre,''), D.NumeroLinha, C.Numero, B.Formato, B.Qual, B.TipoEmbalagem,
                                  B.Superficie, B.Decoracao, B.RefCor, B.TabEspessura, case when isnull(B.Unidade,'')='' then 'M2' else B.Unidade end, B.Descricao, isnull(A.NivelPalete,'')
@@ -131,7 +131,7 @@ class GetPalets extends CI_Model
                       from StkLDocs A join ReferArt B on (A.RefP=B.Referencia and A.Artigo=B.Artigo)
                                       join PlDocs   C on (C.Estado='F' and (case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
                                       join PllDocs  D on (C.Numero=D.NumeroDocumento)
-                      where A.Sector in ({$setor}) 
+                      where A.Sector in ({$setor}) and C.Serie not in ('C','PC')
                       group by A.Sector, isnull(A.Local,''), A.RefP, A.Artigo, isnull(A.Lote,''), isnull(A.Calibre,''), D.NumeroLinha, C.Numero, B.Formato, B.Qual, B.TipoEmbalagem,
                                 B.Superficie, B.Decoracao, B.RefCor, B.TabEspessura, case when isnull(B.Unidade,'')='' then 'M2' else B.Unidade end, B.Descricao, isnull(A.NivelPalete,'')
                       having round(sum(case when A.TipoMovimento<='10' then A.Quantidade else -A.Quantidade end),8){$condicao}
@@ -199,7 +199,7 @@ class GetPalets extends CI_Model
                          from StkLDocs A join ReferArt B on (A.RefP=B.Referencia and A.Artigo=B.Artigo)
                                          join PlDocs   C on (C.Estado='F' and (case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
                                          join PllDocs  D on (C.Numero=D.NumeroDocumento)
-                        where A.Refp='{$refp}' and A.Sector in ({$setor})
+                        where A.Refp='{$refp}' and A.Sector in ({$setor}) and C.Serie not in ('C','PC)
                          -- and isnull(A.Local,'')<>''
                         group by A.Sector, isnull(A.Local,''), A.RefP, A.Artigo, isnull(A.Lote,''), isnull(A.Calibre,''), D.NumeroLinha, C.Numero, B.Formato, B.Qual, B.TipoEmbalagem,
                                  B.Superficie, B.Decoracao, B.RefCor, B.TabEspessura, case when isnull(B.Unidade,'')='' then 'M2' else B.Unidade end, B.Descricao, isnull(A.NivelPalete,'')
@@ -225,7 +225,7 @@ class GetPalets extends CI_Model
                       from StkLDocs A join ReferArt B on (A.RefP=B.Referencia and A.Artigo=B.Artigo)
                                       join PlDocs   C on (C.Estado='F' and (case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
                                       join PllDocs  D on (C.Numero=D.NumeroDocumento)
-                      where A.Refp='{$refp}' and A.Sector in ({$setor})
+                      where A.Refp='{$refp}' and A.Sector in ({$setor}) and C.Serie not in ('C','PC)
                       group by A.Sector, isnull(A.Local,''), A.RefP, A.Artigo, isnull(A.Lote,''), isnull(A.Calibre,''), D.NumeroLinha, C.Numero, B.Formato, B.Qual, B.TipoEmbalagem,
                                 B.Superficie, B.Decoracao, B.RefCor, B.TabEspessura, case when isnull(B.Unidade,'')='' then 'M2' else B.Unidade end, B.Descricao, isnull(A.NivelPalete,'')
                       having round(sum(case when A.TipoMovimento<='10' then A.Quantidade else -A.Quantidade end),8)>0

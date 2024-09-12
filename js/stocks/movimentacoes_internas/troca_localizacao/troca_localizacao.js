@@ -32,7 +32,7 @@ $.ajax({
                 $('#empresasDP').select2();
             if (data['radio'].length > 0) 
                 $("#radioButtons").append(data['radio']);                                    
-            radioButtons()                 
+            radioButtons();                 
             if (data['button'].length > 0) 
                 $("#buttons").append(data['button']); 
             //alert(data);
@@ -841,8 +841,8 @@ function save_local_warehouse(){
 /*RADIO BTNS*/
 function radioButtons(){
     $('#radioButtons input:radio').click(function() {
-        toastr.clear();
-        toastr["info"]("A carregar paletes...");
+       // toastr.clear();
+        //toastr["info"]("A carregar paletes...");
         $("#open_picking_modal").prop("disabled",true);
     
         if ($(this).val() === '1') {
@@ -943,7 +943,7 @@ function change_sector_emp(newSector){
     
     $.ajax({
         type: "POST",
-        url: "http://127.0.0.1/wyipist-fusion/standards/ListarFiltro/filtraPlZn_emanuel/"+emp+"/"+newSector,
+        url: "http://127.0.0.1/wyipist-fusion/standards/ListarFiltro/filtraPlZn_emanuel_trocalocalizacao/"+emp+"/"+newSector,
         dataType: "json",
         success: function (data) {
             if (data === "kick") {
@@ -1021,7 +1021,8 @@ function confirm_changeEmpresa(){
         }
     }  
 
-    //alert(emp.toUpperCase());
+    toastr.clear();
+    toastr["info"]("A carregar paletes...");
     tableSelPaletes.alert("A processar...");
     $('#empresasDP').prop('disabled', true);
     $("#buttons button").attr("disabled", true);

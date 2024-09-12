@@ -949,7 +949,8 @@ function confirm_save(tblPL,tblLoc){
         dataType: "json",
         data:{
             palete: tblPL,
-            setor: newSector,
+            //setor: newSector,
+            setor: tblLoc[0]['Sector'],
             local: tblLoc[0]['CodigoBarras']
         },
         success: function (data) {
