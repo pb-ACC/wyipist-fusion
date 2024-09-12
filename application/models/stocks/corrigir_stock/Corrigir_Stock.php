@@ -134,7 +134,7 @@ class Corrigir_Stock extends CI_Model
         $this->db->close();
 
         $sql02 ="UPDATE StklDocs
-                 SET LinhaMae=NumeroLinha
+                 SET LinhaMae=NumeroLinha, LinhaPai=NumeroLinha, Ordena=NumeroLinha
                  WHERE NumeroDocumento='{$NumeroGS}'";   
         $this->db->query($sql02);
         $this->db->close();  
@@ -168,7 +168,7 @@ class Corrigir_Stock extends CI_Model
         $this->db->close();
 
         $sql05 ="UPDATE StklDocs
-                 SET LinhaMae=NumeroLinha
+                 SET LinhaMae=NumeroLinha, LinhaPai=NumeroLinha, Ordena=NumeroLinha
                  WHERE NumeroDocumento='{$NumeroGS}'";   
         $this->db->query($sql05);
         $this->db->close();  
