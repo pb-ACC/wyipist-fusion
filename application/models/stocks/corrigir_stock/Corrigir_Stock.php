@@ -113,17 +113,17 @@ class Corrigir_Stock extends CI_Model
                                     LinhaMae, LinhaPai, Ordena, QuantidadeUnStock, UnidadeStock, RelUni, FactorRelUni, ValorStock, DataStockMOV, Changed, FCor, LinhaArtCliForn, 
                                     Local, KeyScript, Formato, Qual, TipoEmbalagem, Superficie, Decoracao, RefCor, Lote, TabEspessura, Palete, SectorDestino, RefP, LoteInt, 
                                     Script, DocumentoOrigem, LinhaDocumentoOrigem, Calibre, LinhaPL, DocPL, NivelPalete)".
-               "SELECT 0,'{$CodigoGS}', '{$NumeroGS}', '',case when {$NovaQtd}<{$Quantidade} then '15' else '05' end, '{$Sector}', 0, 'ACERTO GS WEB',                
-               case when {$NovaQtd}={$Quantidade} then 0 when {$NovaQtd}<{$Quantidade} then {$Quantidade}-{$NovaQtd} else {$NovaQtd}-{$Quantidade} end,
-               case when {$NovaQtd}={$Quantidade} then 0 when {$NovaQtd}<{$Quantidade} then {$Quantidade}-{$NovaQtd} else {$NovaQtd}-{$Quantidade} end,
+               "SELECT 0,'{$CodigoGS}', '{$NumeroGS}', '',case when ({$NovaQtd})<({$Quantidade}) then '15' else '05' end, '{$Sector}', 0, 'ACERTO GS WEB',                
+               case when ({$NovaQtd})=({$Quantidade}) then 0 when ({$NovaQtd})<({$Quantidade}) then ({$Quantidade})-({$NovaQtd}) else ({$NovaQtd})-({$Quantidade}) end,
+               case when ({$NovaQtd})=({$Quantidade}) then 0 when ({$NovaQtd})<({$Quantidade}) then ({$Quantidade})-({$NovaQtd}) else ({$NovaQtd})-({$Quantidade}) end,
                '{$Referencia}', '{$Artigo}', '{$DescricaoArtigo}', 0, 0, 0,'{$Unidade}', VolumeM3, Preco, PrecoNM, Desconto, '00', 0, NVolumes, VolumeCarga, Peso, FactorEmbalagem, 
-               TotalNVolumes, TotalVolumeCarga, TotalPeso,(case when {$NovaQtd}={$Quantidade} then 0 when {$NovaQtd}<{$Quantidade} then {$Quantidade}-{$NovaQtd} else {$NovaQtd}-{$Quantidade} end)*PrecoNM, 
-               0, 0,(case when {$NovaQtd}={$Quantidade} then 0 when {$NovaQtd}<{$Quantidade} then {$Quantidade}-{$NovaQtd} else {$NovaQtd}-{$Quantidade} end)*PrecoNM, 0,                
-               (case when {$NovaQtd}={$Quantidade} then 0 when {$NovaQtd}<{$Quantidade} then {$Quantidade}-{$NovaQtd} else {$NovaQtd}-{$Quantidade} end)*PrecoNM,                
-               (case when {$NovaQtd}={$Quantidade} then 0 when {$NovaQtd}<{$Quantidade} then {$Quantidade}-{$NovaQtd} else {$NovaQtd}-{$Quantidade} end)*PrecoNM, 0, 0,                
-               (case when {$NovaQtd}={$Quantidade} then 0 when {$NovaQtd}<{$Quantidade} then {$Quantidade}-{$NovaQtd} else {$NovaQtd}-{$Quantidade} end)*PrecoNM, 0, 
-               (case when {$NovaQtd}={$Quantidade} then 0 when {$NovaQtd}<{$Quantidade} then {$Quantidade}-{$NovaQtd} else {$NovaQtd}-{$Quantidade} end)*PrecoNM, 
-               'GS','{$user}',getdate(), 0, 0, 0, 0, TotalComissao, TotalComissaoNM, -1, 0, 0,(case when {$NovaQtd}={$Quantidade} then 0 when {$NovaQtd}<{$Quantidade} then {$Quantidade}-{$NovaQtd} else {$NovaQtd}-{$Quantidade} end),
+               TotalNVolumes, TotalVolumeCarga, TotalPeso,(case when ({$NovaQtd})=({$Quantidade}) then 0 when ({$NovaQtd})<({$Quantidade}) then ({$Quantidade})-({$NovaQtd}) else ({$NovaQtd})-({$Quantidade}) end)*PrecoNM, 
+               0, 0,(case when ({$NovaQtd})=({$Quantidade}) then 0 when ({$NovaQtd})<({$Quantidade}) then ({$Quantidade})-({$NovaQtd}) else ({$NovaQtd})-({$Quantidade}) end)*PrecoNM, 0,                
+               (case when ({$NovaQtd})=({$Quantidade}) then 0 when ({$NovaQtd})<({$Quantidade}) then ({$Quantidade})-({$NovaQtd}) else ({$NovaQtd})-({$Quantidade}) end)*PrecoNM,                
+               (case when ({$NovaQtd})=({$Quantidade}) then 0 when ({$NovaQtd})<({$Quantidade}) then ({$Quantidade})-({$NovaQtd}) else ({$NovaQtd})-({$Quantidade}) end)*PrecoNM, 0, 0,                
+               (case when ({$NovaQtd})=({$Quantidade}) then 0 when ({$NovaQtd})<({$Quantidade}) then ({$Quantidade})-({$NovaQtd}) else ({$NovaQtd})-({$Quantidade}) end)*PrecoNM, 0, 
+               (case when ({$NovaQtd})=({$Quantidade}) then 0 when ({$NovaQtd})<({$Quantidade}) then ({$Quantidade})-({$NovaQtd}) else ({$NovaQtd})-({$Quantidade}) end)*PrecoNM, 
+               'GS','{$user}',getdate(), 0, 0, 0, 0, TotalComissao, TotalComissaoNM, -1, 0, 0,(case when ({$NovaQtd})=({$Quantidade}) then 0 when ({$NovaQtd})<({$Quantidade}) then ({$Quantidade})-({$NovaQtd}) else ({$NovaQtd})-({$Quantidade}) end),
                '{$Unidade}', '{$reluni}' , 1, 0, getdate(), 1, 0, 0, '{$Local}', 'Corrigir_Stock#correct_stock', '{$Formato}', '{$Qual}', '{$TipoEmbalagem}', '{$Superficie}', '{$Decoracao}', '{$RefCor}', '{$Lote}', 
                '{$TabEspessura}', '{$DocPL}', '', '{$Referencia}', '', -1, '', 0, '{$Calibre}', {$LinhaPL}, '{$DocPL}', '{$Nivel}'
                from PlLDocs
@@ -155,10 +155,10 @@ class Corrigir_Stock extends CI_Model
                                     LinhaMae, LinhaPai, Ordena, QuantidadeUnStock, UnidadeStock, RelUni, FactorRelUni, ValorStock, DataStockMOV, Changed, FCor, LinhaArtCliForn, 
                                     Local, KeyScript, Formato, Qual, TipoEmbalagem, Superficie, Decoracao, RefCor, Lote, TabEspessura, Palete, SectorDestino, RefP, LoteInt, 
                                     Script, DocumentoOrigem, LinhaDocumentoOrigem, Calibre, LinhaPL, DocPL, NivelPalete)".
-               "SELECT 0,'{$CodigoGS}', '{$NumeroGS}', '','15', '{$Sector}', 0, 'ACERTO GS WEB', {$Quantidade}, {$Quantidade},'{$Referencia}', '{$Artigo}', '{$DescricaoArtigo}', 0, 0, 0,
-               '{$Unidade}', VolumeM3, Preco, PrecoNM, Desconto, '00', 0, NVolumes, VolumeCarga, Peso, FactorEmbalagem,TotalNVolumes, TotalVolumeCarga, TotalPeso,{$Quantidade}*PrecoNM, 
-               0, 0,{$Quantidade}*PrecoNM, 0, {$Quantidade}*PrecoNM,{$Quantidade}*PrecoNM, 0, 0, {$Quantidade}*PrecoNM, 0, {$Quantidade}*PrecoNM,'GS','{$user}',getdate(), 0, 0, 0, 0, TotalComissao, 
-               TotalComissaoNM, -1, 0, 0,{$Quantidade},'{$Unidade}', '{$reluni}' , 1, 0, getdate(), 1, 0, 0, '{$Local}', 'Corrigir_Stock#correct_stock', '{$Formato}', '{$Qual}', 
+               "SELECT 0,'{$CodigoGS}', '{$NumeroGS}', '','15', '{$Sector}', 0, 'ACERTO GS WEB', ({$Quantidade}), ({$Quantidade}),'{$Referencia}', '{$Artigo}', '{$DescricaoArtigo}', 0, 0, 0,
+               '{$Unidade}', VolumeM3, Preco, PrecoNM, Desconto, '00', 0, NVolumes, VolumeCarga, Peso, FactorEmbalagem,TotalNVolumes, TotalVolumeCarga, TotalPeso,({$Quantidade})*PrecoNM, 
+               0, 0,({$Quantidade})*PrecoNM, 0, ({$Quantidade})*PrecoNM,({$Quantidade})*PrecoNM, 0, 0, ({$Quantidade})*PrecoNM, 0, ({$Quantidade})*PrecoNM,'GS','{$user}',getdate(), 0, 0, 0, 0, TotalComissao, 
+               TotalComissaoNM, -1, 0, 0,({$Quantidade}),'{$Unidade}', '{$reluni}' , 1, 0, getdate(), 1, 0, 0, '{$Local}', 'Corrigir_Stock#correct_stock', '{$Formato}', '{$Qual}', 
                '{$TipoEmbalagem}', '{$Superficie}', '{$Decoracao}', '{$RefCor}', '{$Lote}', '{$TabEspessura}', '{$DocPL}', '', '{$Referencia}', '', -1, '', 0, '{$Calibre}', {$LinhaPL}, '{$DocPL}', '{$Nivel}'
                from PlLDocs
                where NumeroDocumento='{$DocPL}' and {$Reabilitado}=1";       
