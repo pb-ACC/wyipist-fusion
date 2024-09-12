@@ -295,7 +295,7 @@ class ListarFiltro extends CI_Controller
 
                 $this->load->model('standards/stocks/GetPalets');
                 //$setor = '\''.$newSector.'\'';                              
-                $setor = '\'FB003\', \'CL001\'';                                
+                $setor = '\'FB003\', \'CL001\', \'ST555\'';                                
                 $paletes=$this->GetPalets->armazem($setor,'>0');
 
                 $this->load->model('standards/others/Buttons');
@@ -356,7 +356,7 @@ class ListarFiltro extends CI_Controller
 
                 $this->load->model('standards/stocks/GetPalets');
                 //$setor = '\''.$newSector.'\'';                              
-                $setor = '\'FB003\', \'CL001\'';                                
+                $setor = '\'FB003\', \'CL001\', \'ST555\'';                                                           
                 $paletes=$this->GetPalets->armazem($setor,'<0');
 
                 $this->load->model('standards/others/Buttons');
@@ -417,7 +417,7 @@ class ListarFiltro extends CI_Controller
 
                 $this->load->model('standards/stocks/GetPalets');
                 //$setor = '\''.$newSector.'\'';                              
-                $setor = '\'FB003\', \'CL001\'';                                
+                $setor = '\'FB003\', \'CL001\', \'ST555\'';                                                         
                 $paletes=$this->GetPalets->armazem($setor,'=0');
 
                 $this->load->model('standards/others/Buttons');
