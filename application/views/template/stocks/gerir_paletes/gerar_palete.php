@@ -55,8 +55,8 @@
     </section>
 </div>
 
-<div id="escolha-tipo-pl" class="modal fade bd-example-modal-lg" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document" style="width:auto; max-width: 95%;">
+<div id="escolha-tipo-pl" class="modal fade bd-example-modal-xl" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl"role="document" style="width:auto; max-width: 95%;">
     <div class="modal-content">
             <div class="modal-header">
             <h5 class="modal-title">PL Subcontratos</h5>
@@ -105,8 +105,8 @@
   </div>
 </div>
 
-<div id="escolha_local_fab" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document" style="width:auto">
+<div id="escolha_local_fab" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl"role="document" style="width:auto">
     <div class="modal-content">
             <div class="modal-header">
 				<button id="btnclose" type="button" class="close" data-dismiss="modal" aria-label="Close">

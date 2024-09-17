@@ -44,8 +44,8 @@
 </div>
 
 
-<div id="escolha_palete" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document" style="width:auto">
+<div id="escolha_palete" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl"role="document" style="width:auto">
     <div class="modal-content">
             <div class="modal-header">
 				<button id="btnclose" type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -70,16 +70,25 @@
 
             <div id="tablePLs" class="table table-striped"></div>
 			</div>
-			<div class="modal-footer">		                
-                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i> Cancelar</button>		
-                <button onclick="save_paletes()" type="button" class="btn btn-success"><i class="fas fa-arrow-right"></i> Continuar</button>
+			<div class="modal-footer">
+                <div class="row">        	
+                    <div class="col-sm-12 col-sm-push-4 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">	                
+                    <button onclick="select_all_paletes()" id="select-all" type="button" class="btn btn-light" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;background-color:#E6D9A2;border-color:#D4C38F"><i class="fas fa-clipboard-check"></i> Selecionar</button>		
+                    </div>
+                    <div class="col-sm-12 col-sm-push-4 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                        <button type="button" class="btn btn-danger" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;" data-dismiss="modal"><i class="fas fa-times"></i> Cancelar</button>		
+                    </div>
+                    <div class="col-sm-12 col-sm-push-4 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                        <button onclick="save_paletes()" type="button" class="btn btn-success" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"><i class="fas fa-arrow-right"></i> Continuar</button>
+                    </div>
+                </div>
 			</div>    
     </div>
   </div>
 </div>
 
-<div id="escolha_local_fab" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document" style="width:auto">
+<div id="escolha_local_fab" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl"role="document" style="width:auto">
     <div class="modal-content">
             <div class="modal-header">
 				<button id="btnclose" type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -111,8 +120,8 @@
   </div>
 </div>
 
-<div id="escolha_local_log" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document" style="width:auto">
+<div id="escolha_local_log" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl"role="document" style="width:auto">
     <div class="modal-content">
             <div class="modal-header">
 				<button id="btnclose" type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -144,8 +153,8 @@
   </div>
 </div>
 
-<div id="escolha_local_arm" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document" style="width:auto">
+<div id="escolha_local_arm" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl"role="document" style="width:auto">
     <div class="modal-content">
             <div class="modal-header">
 				<button id="btnclose" type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -177,7 +186,7 @@
   </div>
 </div>
 
-<div id="motivo" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div id="motivo" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
                 <div class="modal-header">

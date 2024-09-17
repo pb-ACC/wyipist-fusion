@@ -495,3 +495,9 @@ input[type=range] {
     background-color: #943f63 !important;
     border-color:  #833c57 !important;
 }
+
+#select-all:hover{
+    background-color: #CBBE85 !important;
+    border-color: #9F8A5A !important; 
+    
+}

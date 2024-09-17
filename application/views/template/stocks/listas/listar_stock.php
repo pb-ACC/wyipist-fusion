@@ -44,8 +44,8 @@
         </div>
     </section>
 </div>
-<div id="extrato-table" class="modal fade bd-example-modal-lg" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document" style="width:auto; max-width: 95%;">
+<div id="extrato-table" class="modal fade bd-example-modal-xl" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl"role="document" style="width:auto; max-width: 95%;">
     <div class="modal-content">
             <div class="modal-header">
             <h5 class="modal-title">Extrato</h5>

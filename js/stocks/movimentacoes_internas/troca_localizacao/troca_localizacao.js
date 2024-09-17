@@ -160,19 +160,19 @@ function getPalets(data){
             {title:"Referencia", field:"Referencia", align:"center",headerFilter:"input"},
             {title:"Artigo", field:"Artigo", align:"center", visible:false},
             {title:"Descrição", field:"DescricaoArtigo", align:"center",headerFilter:"input"},
-            {title:"QTD.", field:"Quantidade", align:"center"},
+            {title:"QTD.", field:"Quantidade", align:"center",headerFilter:"input"},
             {title:"UNI.", field:"Unidade", align:"center", visible:false},
             {title:"Sector", field:"Sector", align:"center",headerFilter:"input"},                
-            {title:"Formato", field:"Formato", align:"center", visible:false},
+            {title:"Formato", field:"Formato", align:"center", headerFilter:"input"},
             {title:"Qual", field:"Qual", align:"center", visible:false},
             {title:"TipoEmbalagem", field:"TipoEmbalagem", align:"center", visible:false},
             {title:"Superficie", field:"Superficie", align:"center", visible:false},
             {title:"Decoracao", field:"Decoracao", align:"center", visible:false},
             {title:"RefCor", field:"RefCor", align:"center", visible:false},
-            {title:"Lote", field:"Lote", align:"center", visible:false},
+            {title:"Lote", field:"Lote", align:"center", headerFilter:"input"},
             {title:"Nivel", field:"Nivel", align:"center", visible:false},                
             {title:"TabEspessura", field:"TabEspessura", align:"center", visible:false},                                
-            {title:"Calibre", field:"Calibre", align:"center", visible:false},       
+            {title:"Calibre", field:"Calibre", align:"center",headerFilter:"input"},
             {title:"Sel", field:"Sel", align:"center", visible:false},
             {title:"Local", field:"Local", align:"center",headerFilter:"input"},
             {title:"Id", field:"Id", align:"center", visible:false}
@@ -222,6 +222,9 @@ function save_paletes(){
 }
 
 function selectedPalets(data){
+    let deleteUser = function(cell, formatterParams){ //plain text value
+        return "<i class='fas fa-trash-alt' style='color: red' title='Remover'></i>";
+    };
     tableSelPaletes= new Tabulator("#selected-palets-table", {
         data:data, //assign data to table                 
         selectableRows:true, //make rows selectable
@@ -242,25 +245,30 @@ function selectedPalets(data){
         columns:[
             {title:"Palete", field:"DocPL", align:"center",headerFilter:"input"},
             {title:"LinhaPL", field:"LinhaPL", align:"center", visible:false},                
-            {title:"Referencia", field:"Referencia", align:"center"},
+            {title:"Referencia", field:"Referencia", align:"center",headerFilter:"input"},
             {title:"Artigo", field:"Artigo", align:"center", visible:false},
-            {title:"Descrição", field:"DescricaoArtigo", align:"center"},
-            {title:"QTD.", field:"Quantidade", align:"center"},
+            {title:"Descrição", field:"DescricaoArtigo", align:"center",headerFilter:"input"},
+            {title:"QTD.", field:"Quantidade", align:"center",headerFilter:"input"},
             {title:"UNI.", field:"Unidade", align:"center", visible:false},
-            {title:"Sector", field:"Sector", align:"center"},                
-            {title:"Formato", field:"Formato", align:"center", visible:false},
+            {title:"Sector", field:"Sector", align:"center",headerFilter:"input"},
+            {title:"Formato", field:"Formato", align:"center", headerFilter:"input"},
             {title:"Qual", field:"Qual", align:"center", visible:false},
             {title:"TipoEmbalagem", field:"TipoEmbalagem", align:"center", visible:false},
             {title:"Superficie", field:"Superficie", align:"center", visible:false},
             {title:"Decoracao", field:"Decoracao", align:"center", visible:false},
             {title:"RefCor", field:"RefCor", align:"center", visible:false},
-            {title:"Lote", field:"Lote", align:"center", visible:false},
+            {title:"Lote", field:"Lote", align:"center", headerFilter:"input"},
             {title:"Nivel", field:"Nivel", align:"center", visible:false},                
             {title:"TabEspessura", field:"TabEspessura", align:"center", visible:false},                                
-            {title:"Calibre", field:"Calibre", align:"center", visible:false},  
+            {title:"Calibre", field:"Calibre", align:"center", headerFilter:"input"},
             {title:"Sel", field:"Sel", align:"center", visible:false},
             {title:"Local", field:"Local", align:"center",headerFilter:"input"},
-            {title:"Id", field:"Id", align:"center", visible:false}
+            {title:"Id", field:"Id", align:"center", visible:false},
+            {title:" ",formatter:deleteUser, width:50, align:"center",tooltip:true, cellClick:function(e, cell){
+                let row01 = cell.getRow();
+                // Deleta a linha
+                row01.delete();
+            }}
         ]
     });
 
@@ -328,6 +336,10 @@ function pick_palete() {
             $('#obs').trigger('focus');
         }, 850);
     }
+}
+
+function select_all_paletes(){        
+    tablePaletes.selectRow("visible"); //select all rows currently visible in the table viewport;     
 }
 
 /*ZONAS*/
