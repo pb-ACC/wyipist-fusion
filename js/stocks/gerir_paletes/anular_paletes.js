@@ -395,10 +395,7 @@ function save_anulacao(){
 /*RADIO BTNS*/
 function radioButtons(){
     $('#radioButtons input:radio').click(function() {
-        toastr.clear();
-        toastr["info"]("A carregar paletes...");
-        $("#open_picking_modal").prop("disabled",true);
-    
+
         if ($(this).val() === '1') {
             sizeofTBL=tableSelPaletes.getData();        
             if(sizeofTBL.length>0){          
@@ -470,7 +467,32 @@ function radioButtons(){
                 change_sector_emp(newSector); 
                 no_change=0;                                   
             }                
-        }              
+        }else if ($(this).val() === '4') {
+    
+            sizeofTBL=tableSelPaletes.getData();        
+            if(sizeofTBL.length>0){
+                
+                type='success';
+                title='Dados da tabela serão perdidos';
+                text2='Tem a certeza que pretende continuar?';
+                action='radioButtons';
+                xposition='center';            
+                campo='FB001';
+                valor=this;
+                tblPL=[];
+                tblLoc=[];
+                tblLote=[];
+                tblAfet=[];
+                fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
+            }else{
+                no_change=1;
+                $('.form-check-input').prop('checked', false); // Unchecks it    
+                $(this).prop('checked', true); // Checks it             
+                newSector='FB001';
+                change_sector_emp(newSector); 
+                no_change=0;                                   
+            }                
+        }                  
     });    
 }
 
@@ -496,6 +518,8 @@ function change_sector_emp(newSector){
     $('#empresasDP').prop('disabled', true);
     $("#buttons button").attr("disabled", true);
     $("input[type=radio]").attr('disabled', true);
+
+    $("#open_picking_modal").prop("disabled",true);
     
     $.ajax({
         type: "POST",
