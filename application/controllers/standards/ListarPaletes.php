@@ -262,7 +262,7 @@ class ListarPaletes extends CI_Controller
                     echo json_encode($data);
                     break;
                 case 2:
-                    $setor = '\'FB001\',\'FB003\', \'CL001\'';               
+                    $setor = '\'FB001\', \'FB003\', \'CL001\'';               
                     $this->load->model('standards/stocks/GetPalets');
                     $paletes=$this->GetPalets->armazem($setor,'>0');
 
