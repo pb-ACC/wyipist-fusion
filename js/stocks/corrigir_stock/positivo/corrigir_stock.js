@@ -29,7 +29,9 @@ selectedPalets(data=[]);
             } else {                                            
                 if (data['select'].length > 0) 
                     $("#select").append(data['select']);                
-                    $('#empresasDP').select2();                                    
+                    window.requestAnimationFrame(function() {
+                        $('#empresasDP').select2();                                    
+                    });
                 //alert(data);
                 if (data['button'].length > 0) 
                     $("#buttons").append(data['button']); 
