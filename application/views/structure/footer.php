@@ -42,7 +42,7 @@
 <!-- bootstrap password toggler -->
 <script  src="<?=base_url();?>public/js/password-toggler/bootstrap-password-toggler.min.js"></script>
 <!-- Select2 -->
-<script src="<?=base_url();?>public/plugins/select2/js/select2.full.min.js"></script>
+<!--<script src="<?=base_url();?>public/plugins/select2/js/select2.full.min.js"></script>-->
 <!-- fileUpload -->
 <script src="<?=base_url();?>public/js/fileUpload/vendor/jquery.ui.widget.js"></script>
 <script src="<?=base_url();?>public/js/fileUpload/jquery.iframe-transport.js"></script>
