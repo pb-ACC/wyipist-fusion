@@ -69,7 +69,10 @@
 
 
 <!-- Select2 -->
-<script src="<?=base_url();?>public/plugins/select2/js/select2.full.min.js"></script>
+<!--<script src="<?=base_url();?>public/plugins/select2/js/select2.full.min.js"></script>-->
+<!-- No final do body -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
 </body>
 </html>
