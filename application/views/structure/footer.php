@@ -12,6 +12,8 @@
 <!-- jQuery UI 1.11.4 -->
 <script src="<?=base_url();?>public/plugins/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+ <!-- Select2 -->
+<script src="<?=base_url();?>public/plugins/select2/js/select2.min.js"></script>
 <script>
     $.widget.bridge('uibutton', $.ui.button)
 </script>
@@ -66,10 +68,6 @@
 <script src="<?=base_url();?>public/js/JsBarCode/JsBarcode.all.min.js"></script>
 
 <script src="<?=base_url();?>js/alerts/main.js"></script>
-
-
-<!-- Select2 -->
-<script src="<?=base_url();?>public/plugins/select2/js/select2.min.js"></script>
 
 </body>
 </html>
