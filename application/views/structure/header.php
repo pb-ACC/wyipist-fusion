@@ -58,6 +58,10 @@
 
     <link rel="stylesheet" href="<?=base_url();?>public/css/stockterminal.css">
     <script src="<?=base_url();?>js/header/main.js"></script>
+
+    <!-- Select2 -->
+    <script src="<?=base_url();?>public/plugins/select2/js/select2.full.min.js"></script>
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
