@@ -67,5 +67,11 @@
 
 <script src="<?=base_url();?>js/alerts/main.js"></script>
 
+
+<!-- Select2 -->
+<script src="<?=base_url();?>public/plugins/select2/js/select2.full.min.js" defer></script>
+<link rel="stylesheet" href="<?=base_url();?>public/plugins/select2/css/select2.min.css">
+<link rel="stylesheet" href="<?=base_url();?>public/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
 </body>
 </html>
