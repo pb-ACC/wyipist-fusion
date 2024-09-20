@@ -60,7 +60,7 @@
     <script src="<?=base_url();?>js/header/main.js"></script>
 
     <!-- Select2 -->
-    <script src="<?=base_url();?>public/plugins/select2/js/select2.full.min.js"></script>
+    <script src="<?=base_url();?>public/plugins/select2/js/select2.min.js"></script>
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
