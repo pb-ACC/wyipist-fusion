@@ -173,6 +173,57 @@ function getRefs(data){
 
 /*ZONAS*/
 function listLocal(data){
+
+    if (user_type == 1 || user_type == 2){
+        empp = $("#empresasDP option:selected").text();
+        emp = $.trim(empp);  
+        if(emp === 'Certeca'){
+           columns=[
+                {title:"Zona", field:"Zona", align:"center",visible:true,headerFilter:"input"},
+                {title:"Celula", field:"Celula", align:"center",visible:true,headerFilter:"input"},
+                {title:"CodigoBarras", field:"CodigoBarras", align:"center",visible:true,headerFilter:"input"},      
+                {title:"Sector", field:"Sector", align:"center", visible:false},
+                {title:"Identificador", field:"Identificador", align:"center", visible:false},
+                {title:"Sel", field:"Sel", align:"center", visible:false},
+                {title:"id", field:"id", align:"center", visible:false}
+            ];
+        }else{
+            columns=[
+                {title:"Armazém", field:"Sector", align:"center",visible:true,headerFilter:"input"},
+                {title:"Setor", field:"Codigo", align:"center",visible:true,headerFilter:"input"},
+                {title:"Fila", field:"Fila", align:"center",visible:true,headerFilter:"input"},
+                {title:"Posicao", field:"Posicao", align:"center",visible:true,headerFilter:"input"},
+                {title:"CodigoBarras", field:"CodigoBarras", align:"center",visible:true,headerFilter:"input"},   
+                {title:"Identificador", field:"Identificador", align:"center", visible:false},
+                {title:"Sel", field:"Sel", align:"center", visible:false},
+                {title:"id", field:"id", align:"center", visible:false}
+            ];
+        }
+    }
+    else{
+        if(codigoempresa == 1){
+            columns=[
+                {title:"Armazém", field:"Sector", align:"center",visible:true,headerFilter:"input"},
+                {title:"Setor", field:"Codigo", align:"center",visible:true,headerFilter:"input"},
+                {title:"Fila", field:"Fila", align:"center",visible:true,headerFilter:"input"},
+                {title:"Posicao", field:"Posicao", align:"center",visible:true,headerFilter:"input"},
+                {title:"CodigoBarras", field:"CodigoBarras", align:"center",visible:true,headerFilter:"input"},   
+                {title:"Identificador", field:"Identificador", align:"center", visible:false},
+                {title:"Sel", field:"Sel", align:"center", visible:false},
+                {title:"id", field:"id", align:"center", visible:false}
+            ];
+        }else{
+            columns=[
+                {title:"Zona", field:"Zona", align:"center",visible:true,headerFilter:"input"},
+                {title:"Celula", field:"Celula", align:"center",visible:true,headerFilter:"input"},
+                {title:"CodigoBarras", field:"CodigoBarras", align:"center",visible:true,headerFilter:"input"},      
+                {title:"Sector", field:"Sector", align:"center", visible:false},
+                {title:"Identificador", field:"Identificador", align:"center", visible:false},
+                {title:"Sel", field:"Sel", align:"center", visible:false},
+                {title:"id", field:"id", align:"center", visible:false}
+            ];
+        }
+    }  
     
     tableLocal_fabric= new Tabulator("#local-table-fabric", {
         data:data, //assign data to table            
@@ -217,15 +268,7 @@ function listLocal(data){
             var data = row.getData();
             data.Sel = 1;
         },
-        columns:[
-            {title:"Zona", field:"Zona", align:"center",visible:true,headerFilter:"input"},
-            {title:"Celula", field:"Celula", align:"center",visible:true,headerFilter:"input"},
-            {title:"CodigoBarras", field:"CodigoBarras", align:"center",visible:true,headerFilter:"input"},      
-            {title:"Sector", field:"Sector", align:"center", visible:false},
-            {title:"Identificador", field:"Identificador", align:"center", visible:false},
-            {title:"Sel", field:"Sel", align:"center", visible:false},
-            {title:"id", field:"id", align:"center", visible:false}
-        ]
+        columns:columns
     });
 
     tableLocal_fabric.on("rowClick", function(e, row){      
@@ -518,14 +561,33 @@ function save_local_fabric(){
 }
 
 function continue_save_local_fabric(selected){
+
     //alert(selected);
     
+    if (user_type == 1 || user_type == 2){
+        empp = $("#empresasDP option:selected").text();
+        emp = $.trim(empp);  
+        if(emp === 'Certeca'){
+            serie='P';
+        }else{
+            serie='';
+        }
+    }
+    else{
+        if(codigoempresa == 1){
+            serie='';
+        }else{
+            serie='P';
+        }
+    } 
+
     $.ajax({
         type: "POST",
         url: "http://127.0.0.1/wyipist-fusion/stocks/gerir_paletes/GerarPaletes/guardar_palete",
         dataType: "json",
         data:{
             palete: refs,
+            serie: serie,
             setor: selected[0]['Sector'],
             local: selected[0]['CodigoBarras']
         },

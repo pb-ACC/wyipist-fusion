@@ -43,6 +43,7 @@ class GerarPaletes extends CI_Controller
             $funcionario_gpac = $session_data['funcionario_gpac']; 
             
             $tbl = $this->input->post('palete');
+            $serie = $this->input->post('serie');
             $local = $this->input->post('local');
             $setor = $this->input->post('setor');
             $obsPL = $this->input->post('obsPL');
@@ -59,7 +60,7 @@ class GerarPaletes extends CI_Controller
                     $calibre = $tbl[$i]['calibre'];
                     $lote = $tbl[$i]['lote'];
                     $quantidade = $tbl[$i]['qtd'];
-                    $serie = $tbl[$i]['serie'];
+                    //$serie = $tbl[$i]['serie'];
                     $nome_nivel = $tbl[$i]['nome_nivel'];
                     $codigo_nivel = $tbl[$i]['codigo_nivel'];
 
