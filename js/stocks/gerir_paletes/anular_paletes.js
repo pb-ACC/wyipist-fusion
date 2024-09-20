@@ -55,9 +55,8 @@ $.ajax({
             window.location = "home/logout";
         } else {
             //console.log(data);  
-            let select = $('#mt');    
             // Limpa qualquer opção existente
-            select.empty();        
+            $('#mt').empty();        
             // Adiciona as novas opções
             for (let i = 0; i < data.length; i++) {
                 let value = {
@@ -65,10 +64,10 @@ $.ajax({
                     text: data[i]['Descricao']
                 };        
                 let option = new Option(value.text, value.id, false, false);
-                select.append(option);
+                $('#mt').append(option);
             }        
             // Inicializa o Select2
-            select.select2();
+            $('#mt').select2();
         }
     },
     error: function (e) {
@@ -89,9 +88,8 @@ $.ajax({
             window.location = "home/logout";
         } else {
             //console.log(data);  
-            let select = $('#anl');    
             // Limpa qualquer opção existente
-            select.empty();        
+            $('#anl').empty();        
             // Adiciona as novas opções
             for (let i = 0; i < data.length; i++) {
                 let value = {
@@ -99,10 +97,10 @@ $.ajax({
                     text: data[i]['Descricao']
                 };        
                 let option = new Option(value.text, value.id, false, false);
-                select.append(option);
+                $('#anl').append(option);
             }        
             // Inicializa o Select2
-            select.select2();
+            $('#anl').select2();
 
             toastr.clear();
             toastr["success"]("Paletes carregadas com sucesso.");

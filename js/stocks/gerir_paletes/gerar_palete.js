@@ -71,9 +71,8 @@ $.ajax({
             window.location = "home/logout";
         } else {
             //console.log(data);  
-            let select = $('#mt');    
             // Limpa qualquer opção existente
-            select.empty();        
+            $('#mt').empty();        
             // Adiciona as novas opções
             for (let i = 0; i < data.length; i++) {
                 let value = {
@@ -81,10 +80,10 @@ $.ajax({
                     text: data[i]['Descricao']
                 };        
                 let option = new Option(value.text, value.id, false, false);
-                select.append(option);
+                $('#mt').append(option);
             }        
             // Inicializa o Select2
-            select.select2();
+            $('#mt').select2();
 
             toastr.clear();
             toastr["success"]("Referências carregadas com sucesso.");

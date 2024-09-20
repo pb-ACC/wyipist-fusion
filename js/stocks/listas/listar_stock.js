@@ -104,10 +104,9 @@ function getPalets(data){
 }
 
 /*SETORES*/
-function getSetores(data){
-    let select = $('#sector');    
+function getSetores(data){    
     // Limpa qualquer opção existente
-    select.empty();        
+    $('#sector').empty();        
 
     // Adiciona as novas opções
     for (let i = 0; i < data.length; i++) {
@@ -116,10 +115,10 @@ function getSetores(data){
             text: data[i]['Descricao']
         };        
         let option = new Option(value.text, value.id, false, false);
-        select.append(option);
+        $('#sector').append(option);
     }        
     // Inicializa o Select2 com o placeholder
-    select.select2({
+    $('#sector').select2({
         placeholder: 'Selecione setor(es)',
         allowClear: true // Adiciona a opção de limpar a seleção
     });
