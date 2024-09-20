@@ -100,7 +100,7 @@ class GetPalets extends CI_Model
                             A.RefP Referencia, A.Artigo, B.Descricao DescricaoArtigo, isnull(A.Lote,'') Lote, isnull(A.Calibre,'') Calibre, D.NumeroLinha LinhaPL, C.Numero DocPL, B.Formato, B.Qual, B.TipoEmbalagem, B.Superficie, B.Decoracao,
                             B.RefCor, B.TabEspessura, isnull(D.NivelPalete,'') Nivel, cast(0 as float) NovaQtd, CAST(ROW_NUMBER() OVER(ORDER BY C.Numero asc)-1 AS int) Id
                          from StkLDocs A join ReferArt B on (A.RefP=B.Referencia and A.Artigo=B.Artigo)
-                                         join PlDocs   C on (C.Estado='F' and (case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
+                                         join PlDocs   C on ((case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
                                          join PllDocs  D on (C.Numero=D.NumeroDocumento)
                         where A.Sector in ({$setor}) and C.Serie not in ('C','PC')
                          -- and isnull(A.Local,'')<>''
@@ -129,7 +129,7 @@ class GetPalets extends CI_Model
                             A.RefP Referencia, A.Artigo, B.Descricao DescricaoArtigo, isnull(A.Lote,'') Lote, isnull(A.Calibre,'') Calibre, D.NumeroLinha LinhaPL, C.Numero DocPL, B.Formato, B.Qual, B.TipoEmbalagem, B.Superficie, B.Decoracao,
                             B.RefCor, B.TabEspessura, isnull(D.NivelPalete,'') Nivel, cast(0 as float) NovaQtd, cast(0 as int) Reabilitado, CAST(ROW_NUMBER() OVER(ORDER BY C.Numero asc)-1 AS int) Id
                       from StkLDocs A join ReferArt B on (A.RefP=B.Referencia and A.Artigo=B.Artigo)
-                                      join PlDocs   C on (C.Estado='F' and (case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
+                                      join PlDocs   C on ((case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
                                       join PllDocs  D on (C.Numero=D.NumeroDocumento)
                       where A.Sector in ({$setor}) and C.Serie not in ('C','PC')
                       group by A.Sector, isnull(A.Local,''), A.RefP, A.Artigo, isnull(A.Lote,''), isnull(A.Calibre,''), D.NumeroLinha, C.Numero, B.Formato, B.Qual, B.TipoEmbalagem,
