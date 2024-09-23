@@ -13,18 +13,19 @@ class GetZonas extends CI_Model
         $this->load->library('session');
     }
 
-    public function zonaCelula($empresa,$emp){
+    public function zonaCelula($empresa,$emp,$setor){
 
         if($emp == 'CERTECA'){
             $sql = "SELECT Codigo,Sector,Zona,Celula,Fila,Posicao,case when Empresa='CERAGNI' then Codigo else CONCAT(Zona,Celula) end CodigoBarras, cast(0 as int) Sel,
                        case when Empresa='CERAGNI' then 'CT' else substring(Sector,1,2) end Identificador, (row_number() over(order by Codigo asc)-1) id              
                 FROM zx_Locais 
-                WHERE Empresa in ({$empresa})";
+                WHERE Empresa in ({$empresa}) and Sector in ({$setor})";
         }
         else{
             $sql = "SELECT A.Codigo,B.Codigo Sector,A.Zona,A.Celula,A.Fila,A.Posicao,case when A.Empresa='CERAGNI' then A.Codigo else CONCAT(A.Zona,A.Celula) end CodigoBarras, 
                         cast(0 as int) Sel,case when A.Empresa='CERAGNI' then 'CT' else substring(A.Sector,1,2) end Identificador, (row_number() over(order by A.Codigo asc)-1) id              
-                    FROM zx_Locais A join Sectores B on (A.Empresa=B.Empresa and A.Empresa in ({$empresa}) and B.Empresa in ({$empresa}) )";
+                    FROM zx_Locais A join Sectores B on (A.Empresa=B.Empresa and A.Empresa in ({$empresa}) and B.Empresa in ({$empresa}) )
+                    where B.Codigo in ({$setor})";
         }
             //         --case when Empresa='CERAGNI' then substring(Codigo,1,2) else substring(Sector,1,2) end Identificador          case when Empresa='CERAGNI' then Zona else isnull(Zona,'')<>'' end,
                       //case when Empresa='CERAGNI' then Celula else isnull(Celula,'') not in ('','*') end";
