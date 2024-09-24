@@ -47,7 +47,7 @@ class ListarSetores extends CI_Controller
                 case 2:
                     $empresa='\'CERTECA\''; 
                     $setor='\'FB003\', \'CL001\'';                                 
-                    echo json_encode($this->GetZonas->zonaCelula($empresa,'CERTECA'));
+                    echo json_encode($this->GetZonas->zonaCelula($empresa,'CERTECA',$setor));
                     break;
                 case 3:                    
                     /*$emp01='CERAGNI';
@@ -90,7 +90,7 @@ class ListarSetores extends CI_Controller
                 case 2:
                     $empresa='\'CERTECA\''; 
                     $setor='\'FB003\', \'CL001\'';                     
-                    echo json_encode($this->GetZonas->zonaCelula($empresa,'CERTECA'));
+                    echo json_encode($this->GetZonas->zonaCelula($empresa,'CERTECA',$setor));
                     break;
                 case 3:                    
                     $empresa='\'CERAGNI\'';           
