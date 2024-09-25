@@ -13,13 +13,13 @@ class GetZonas extends CI_Model
         $this->load->library('session');
     }
 
-    public function zonaCelula($empresa,$emp,$setor){
+    public function zonaCelula($empresa,$emp,$setor,$sigla){
 
         if($emp == 'CERTECA'){
             $sql = "SELECT Codigo,Sector,Zona,Celula,Fila,Posicao,case when Empresa='CERAGNI' then Codigo else CONCAT(Zona,Celula) end CodigoBarras, cast(0 as int) Sel,
-                       case when Empresa='CERAGNI' then 'CT' else substring(Sector,1,2) end Identificador, (row_number() over(order by Codigo asc)-1) id              
+                       Identificador, (row_number() over(order by Codigo asc)-1) id              
                 FROM zx_Locais 
-                WHERE Empresa in ({$empresa}) and Sector in ({$setor})";
+                WHERE Empresa in ({$empresa}) and Sector in ({$setor}) and isnull(Zona,'')<>'' and isnull(Celula,'') not in ('','*')";
         }
         else{
             $sql = "SELECT A.Codigo,B.Codigo Sector,A.Zona,A.Celula,A.Fila,A.Posicao,case when A.Empresa='CERAGNI' then A.Codigo else CONCAT(A.Zona,A.Celula) end CodigoBarras, 

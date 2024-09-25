@@ -933,6 +933,8 @@ function radioButtons(){
 
 function change_sector_emp(newSector){
 
+    //alert('asdf');
+
     if (user_type == 1 || user_type == 2){
         empp = $("#empresasDP option:selected").text();
         emp = $.trim(empp);  
@@ -976,6 +978,8 @@ function change_sector_emp(newSector){
                     $('#empresasDP').prop('disabled', false);
                     $("#buttons button").attr("disabled", false);
                     $("input[type=radio]").attr('disabled', false);
+
+                    selectedPalets(data=[]);
     
                     toastr.clear();
                     toastr["success"]("Paletes carregadas com sucesso.");
@@ -1012,6 +1016,7 @@ function confirm_changeEmpresa(){
 
     //empp = $("#empresasDP option:selected").text();
     //emp = $.trim(empp);    
+
 
     if (user_type == 1 || user_type == 2){
         empp = $("#empresasDP option:selected").text();
@@ -1070,6 +1075,9 @@ function confirm_changeEmpresa(){
                 $('#empresasDP').prop('disabled', false);
                 $("#buttons button").attr("disabled", false);
                 $("input[type=radio]").attr('disabled', false);
+
+                
+                selectedPalets(data=[]);
 
                 toastr.clear();
                 toastr["success"]("Paletes carregadas com sucesso.");

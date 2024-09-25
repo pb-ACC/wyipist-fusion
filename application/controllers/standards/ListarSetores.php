@@ -42,12 +42,12 @@ class ListarSetores extends CI_Controller
                 case 1:
                     $empresa='\'CERAGNI\'';   
                     $setor = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST011\', \'ST012\', \'ST013\', \'ST014\', \'ST015\', \'ST016\', \'ST020\', \'ST200\', \'ST201\', \'ST202\', \'ST203\', \'ST204\', \'ST205\', \'ST206\', \'ST207\', \'ST290\'';                       
-                    echo json_encode($this->GetZonas->zonaCelula($empresa,'CERAGNI',$setor));
+                    echo json_encode($this->GetZonas->zonaCelula($empresa,'CERAGNI',$setor,'CT'));
                     break;
                 case 2:
                     $empresa='\'CERTECA\''; 
-                    $setor='\'FB003\', \'CL001\'';                                 
-                    echo json_encode($this->GetZonas->zonaCelula($empresa,'CERTECA',$setor));
+                    $setor='\'FB003\', \'CL001\', \'ST555\'';                                 
+                    echo json_encode($this->GetZonas->zonaCelula($empresa,'CERTECA',$setor,'FB'));
                     break;
                 case 3:                    
                     /*$emp01='CERAGNI';
@@ -56,7 +56,7 @@ class ListarSetores extends CI_Controller
                     */
                     $empresa='\'CERAGNI\'';  
                     $setor = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST011\', \'ST012\', \'ST013\', \'ST014\', \'ST015\', \'ST016\', \'ST020\', \'ST200\', \'ST201\', \'ST202\', \'ST203\', \'ST204\', \'ST205\', \'ST206\', \'ST207\', \'ST290\'';                   
-                    echo json_encode($this->GetZonas->zonaCelula($empresa,'CERAGNI',$setor));
+                    echo json_encode($this->GetZonas->zonaCelula($empresa,'CERAGNI',$setor,'CT'));
                     break;
                 case 4:                    
                     /*$emp01='CERAGNI';
@@ -65,7 +65,7 @@ class ListarSetores extends CI_Controller
                     */
                     $empresa='\'CERAGNI\''; 
                     $setor = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST011\', \'ST012\', \'ST013\', \'ST014\', \'ST015\', \'ST016\', \'ST020\', \'ST200\', \'ST201\', \'ST202\', \'ST203\', \'ST204\', \'ST205\', \'ST206\', \'ST207\', \'ST290\'';                    
-                    echo json_encode($this->GetZonas->zonaCelula($empresa,'CERAGNI',$setor));
+                    echo json_encode($this->GetZonas->zonaCelula($empresa,'CERAGNI',$setor,'CT'));
                     break;                    
             }
         }else{
@@ -85,22 +85,22 @@ class ListarSetores extends CI_Controller
                 case 1:
                     $empresa='\'CERAGNI\'';           
                     $setor = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST011\', \'ST012\', \'ST013\', \'ST014\', \'ST015\', \'ST016\', \'ST020\', \'ST200\', \'ST201\', \'ST202\', \'ST203\', \'ST204\', \'ST205\', \'ST206\', \'ST207\', \'ST290\'';                    
-                    echo json_encode($this->GetZonas->zonaCelula($empresa,'CERAGNI',$setor));
+                    echo json_encode($this->GetZonas->zonaCelula($empresa,'CERAGNI',$setor,'CT'));
                     break;
                 case 2:
                     $empresa='\'CERTECA\''; 
                     $setor='\'FB003\', \'CL001\'';                     
-                    echo json_encode($this->GetZonas->zonaCelula($empresa,'CERTECA',$setor));
+                    echo json_encode($this->GetZonas->zonaCelula($empresa,'CERTECA',$setor,'FB'));
                     break;
                 case 3:                    
                     $empresa='\'CERAGNI\'';           
                     $setor = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST011\', \'ST012\', \'ST013\', \'ST014\', \'ST015\', \'ST016\', \'ST020\', \'ST200\', \'ST201\', \'ST202\', \'ST203\', \'ST204\', \'ST205\', \'ST206\', \'ST207\', \'ST290\'';                    
-                    echo json_encode($this->GetZonas->zonaCelula($empresa,'CERAGNI',$setor));
+                    echo json_encode($this->GetZonas->zonaCelula($empresa,'CERAGNI',$setor,'CT'));
                     break;
                 case 4:                    
                     $empresa='\'CERAGNI\'';   
                     $setor = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST011\', \'ST012\', \'ST013\', \'ST014\', \'ST015\', \'ST016\', \'ST020\', \'ST200\', \'ST201\', \'ST202\', \'ST203\', \'ST204\', \'ST205\', \'ST206\', \'ST207\', \'ST290\'';                            
-                    echo json_encode($this->GetZonas->zonaCelula($empresa,'CERAGNI',$setor));
+                    echo json_encode($this->GetZonas->zonaCelula($empresa,'CERAGNI',$setor,'CT'));
                     break;                    
             }
         }else{
