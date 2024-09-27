@@ -862,30 +862,29 @@ function changeEmpresa(){
 
 function confirm_changeEmpresa(){
 
-    //empp = $("#empresasDP option:selected").text();
-    //emp = $.trim(empp);  
-    
-    if (user_type == 1 || user_type == 2){
-        empp = $("#empresasDP option:selected").text();
-        emp = $.trim(empp);  
-        if(emp === 'Certeca'){
-            newSector='FB003';
-        }else{
-            newSector='ST010';
+    // Obter e ajustar o nome da empresa selecionada
+    emp = $.trim($("#empresasDP option:selected").text()).toUpperCase();
+    // Verificar se há uma empresa selecionada
+    if (emp != '') {
+        if (emp === 'CERTECA') {
+            newSector = 'FB003';
+        } else {
+            newSector = 'ST010';
+        }
+    } else {
+        // Dependendo do código da empresa, atribuir valores padrão
+        if (codigoempresa == 1) {
+            emp = "CERAGNI";
+            newSector = 'ST010';
+        } else if (codigoempresa == 2) {
+            emp = "CERTECA";
+            newSector = 'FB003';
+        } else {
+            emp = "CERAGNI";
+            newSector = 'ST010';
         }
     }
-    else{
-        if(codigoempresa == 1){
-            emp = "CERAGNI";
-            newSector='ST010';
-        }else{
-            emp = "CERTECA";
-            newSector='FB003';
-        }
-    } 
 
-
-    //alert(emp.toUpperCase());
     //$("#choose_palets").prop("disabled",true);    
     toastr.clear();
     toastr["info"]("A carregar paletes...");
@@ -934,25 +933,6 @@ function confirm_changeEmpresa(){
 
 /*GRAVAR DADOS NA BD*/
 function confirm_save(tblPL,tblLoc){
-    empp = $("#empresasDP option:selected").text();
-    emp = $.trim(empp);    
-
-    if (user_type == 1 || user_type == 2){
-        empp = $("#empresasDP option:selected").text();
-        emp = $.trim(empp);  
-        if(emp === 'Certeca'){
-            newSector=tblLoc[0]['Sector'];
-        }else{
-            newSector='ST015';
-        }
-    }
-    else{
-        if(codigoempresa == 1){
-            newSector='ST015';
-        }else{
-            newSector=tblLoc[0]['Sector'];
-        }
-    }  
 
     $.ajax({
         type: "POST",
@@ -960,7 +940,6 @@ function confirm_save(tblPL,tblLoc){
         dataType: "json",
         data:{
             palete: tblPL,
-            //setor: newSector,
             setor: tblLoc[0]['Sector'],
             local: tblLoc[0]['CodigoBarras']
         },

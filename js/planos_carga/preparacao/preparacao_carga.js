@@ -115,27 +115,20 @@ function getPlanoCarga(data){
 
 /*FILTRO*/
 function changeEmpresa(){
-    //empp = $("#empresasDP option:selected").text();
-    //emp = $.trim(empp);    
-    if (user_type == 1 || user_type == 2){
-        empp = $("#empresasDP option:selected").text();
-        emp = $.trim(empp);  
-        if(emp === 'Certeca'){
-            newSector='FB003';
-        }else{
-            newSector='ST010';
+    // Obter e ajustar o nome da empresa selecionada
+    emp = $.trim($("#empresasDP option:selected").text()).toUpperCase();
+    // Verificar se há uma empresa selecionada
+    if (emp == '') {
+        // Dependendo do código da empresa, atribuir valores padrão
+        if (codigoempresa == 1) {
+            emp = "CERAGNI";
+        } else if (codigoempresa == 2) {
+            emp = "CERTECA";
+        } else {
+            emp = "CERAGNI";
         }
     }
-    else{
-        if(codigoempresa == 1){
-            emp = "CERAGNI";
-            newSector='ST010';
-        }else{
-            emp = "CERTECA";
-            newSector='FB003';
-        }
-    }  
-    //alert(emp.toUpperCase());
+    
     //$("#choose_planoCarga").prop("disabled",true);    
     toastr.clear();
     toastr["info"]("A planos de carga...");

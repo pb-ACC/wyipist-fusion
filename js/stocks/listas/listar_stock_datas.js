@@ -132,27 +132,29 @@ function datepicker(){
 
 /*FILTRO*/
 function changeEmpresa(){    
-    //empp = $("#empresasDP option:selected").text();
-    //emp = $.trim(empp);    
-
-    if (user_type == 1 || user_type == 2){
-        empp = $("#empresasDP option:selected").text();
-        emp = $.trim(empp);  
-        if(emp === 'Certeca'){
-            newSector='FB003';
-        }else{
-            newSector='ST010';
+    // Obter e ajustar o nome da empresa selecionada
+    emp = $.trim($("#empresasDP option:selected").text()).toUpperCase();
+    // Verificar se há uma empresa selecionada
+    if (emp != '') {
+        if (emp === 'CERTECA') {
+            newSector = 'FB003';
+        } else {
+            newSector = 'ST010';
+        }
+    } else {
+        // Dependendo do código da empresa, atribuir valores padrão
+        if (codigoempresa == 1) {
+            emp = "CERAGNI";
+            newSector = 'ST010';
+        } else if (codigoempresa == 2) {
+            emp = "CERTECA";
+            newSector = 'FB003';
+        } else {
+            emp = "CERAGNI";
+            newSector = 'ST010';
         }
     }
-    else{
-        if(codigoempresa == 1){
-            emp = "CERAGNI";
-            newSector='ST010';
-        }else{
-            emp = "CERTECA";
-            newSector='FB003';
-        }
-    }  
+
     toastr.clear();
     toastr["info"]("A carregar stock...");
 
@@ -196,27 +198,29 @@ function changeEmpresa(){
 } 
 
 function movimentos_entre_datas(idate,fdate){
-    //empp = $("#empresasDP option:selected").text();
-    //emp = $.trim(empp);    
-
-    if (user_type == 1 || user_type == 2){
-        empp = $("#empresasDP option:selected").text();
-        emp = $.trim(empp);  
-        if(emp === 'Certeca'){
-            newSector='FB003';
-        }else{
-            newSector='ST010';
+    // Obter e ajustar o nome da empresa selecionada
+    emp = $.trim($("#empresasDP option:selected").text()).toUpperCase();
+    // Verificar se há uma empresa selecionada
+    if (emp != '') {
+        if (emp === 'CERTECA') {
+            newSector = 'FB003';
+        } else {
+            newSector = 'ST010';
+        }
+    } else {
+        // Dependendo do código da empresa, atribuir valores padrão
+        if (codigoempresa == 1) {
+            emp = "CERAGNI";
+            newSector = 'ST010';
+        } else if (codigoempresa == 2) {
+            emp = "CERTECA";
+            newSector = 'FB003';
+        } else {
+            emp = "CERAGNI";
+            newSector = 'ST010';
         }
     }
-    else{
-        if(codigoempresa == 1){
-            emp = "CERAGNI";
-            newSector='ST010';
-        }else{
-            emp = "CERTECA";
-            newSector='FB003';
-        }
-    }  
+    
     toastr.clear();
     toastr["info"]("A carregar stock...");
 

@@ -174,9 +174,10 @@ function getRefs(data){
 /*ZONAS*/
 function listLocal(data){
 
-    if (user_type == 1 || user_type == 2){
-        empp = $("#empresasDP option:selected").text();
-        emp = $.trim(empp);  
+    // Obter e ajustar o nome da empresa selecionada
+    emp = $.trim($("#empresasDP option:selected").text()).toUpperCase();
+    // Verificar se há uma empresa selecionada
+    if (emp != '') {
         if(emp === 'Certeca'){
            columns=[
                 {title:"Zona", field:"Zona", align:"center",visible:true,headerFilter:"input"},
@@ -201,23 +202,23 @@ function listLocal(data){
         }
     }
     else{
-        if(codigoempresa == 1){
+        if(codigoempresa == 2){
             columns=[
-                {title:"Armazém", field:"Sector", align:"center",visible:true,headerFilter:"input"},
-                {title:"Setor", field:"Codigo", align:"center",visible:true,headerFilter:"input"},
-                {title:"Fila", field:"Fila", align:"center",visible:true,headerFilter:"input"},
-                {title:"Posicao", field:"Posicao", align:"center",visible:true,headerFilter:"input"},
-                {title:"CodigoBarras", field:"CodigoBarras", align:"center",visible:true,headerFilter:"input"},   
+                {title:"Zona", field:"Zona", align:"center",visible:true,headerFilter:"input"},
+                {title:"Celula", field:"Celula", align:"center",visible:true,headerFilter:"input"},
+                {title:"CodigoBarras", field:"CodigoBarras", align:"center",visible:true,headerFilter:"input"},      
+                {title:"Sector", field:"Sector", align:"center", visible:false},
                 {title:"Identificador", field:"Identificador", align:"center", visible:false},
                 {title:"Sel", field:"Sel", align:"center", visible:false},
                 {title:"id", field:"id", align:"center", visible:false}
             ];
         }else{
             columns=[
-                {title:"Zona", field:"Zona", align:"center",visible:true,headerFilter:"input"},
-                {title:"Celula", field:"Celula", align:"center",visible:true,headerFilter:"input"},
-                {title:"CodigoBarras", field:"CodigoBarras", align:"center",visible:true,headerFilter:"input"},      
-                {title:"Sector", field:"Sector", align:"center", visible:false},
+                {title:"Armazém", field:"Sector", align:"center",visible:true,headerFilter:"input"},
+                {title:"Setor", field:"Codigo", align:"center",visible:true,headerFilter:"input"},
+                {title:"Fila", field:"Fila", align:"center",visible:true,headerFilter:"input"},
+                {title:"Posicao", field:"Posicao", align:"center",visible:true,headerFilter:"input"},
+                {title:"CodigoBarras", field:"CodigoBarras", align:"center",visible:true,headerFilter:"input"},   
                 {title:"Identificador", field:"Identificador", align:"center", visible:false},
                 {title:"Sel", field:"Sel", align:"center", visible:false},
                 {title:"id", field:"id", align:"center", visible:false}
@@ -334,27 +335,29 @@ function pick_local_fabric() {
 
 /*FILTRO*/
 function changeEmpresa(){    
-    //empp = $("#empresasDP option:selected").text();
-    //emp = $.trim(empp);    
-
-    if (user_type == 1 || user_type == 2){
-        empp = $("#empresasDP option:selected").text();
-        emp = $.trim(empp);  
-        if(emp === 'Certeca'){
-            newSector='FB003';
-        }else{
-            newSector='ST010';
+    // Obter e ajustar o nome da empresa selecionada
+    emp = $.trim($("#empresasDP option:selected").text()).toUpperCase();
+    // Verificar se há uma empresa selecionada
+    if (emp != '') {
+        if (emp === 'CERTECA') {
+            newSector = 'FB003';
+        } else {
+            newSector = 'ST010';
+        }
+    } else {
+        // Dependendo do código da empresa, atribuir valores padrão
+        if (codigoempresa == 1) {
+            emp = "CERAGNI";
+            newSector = 'ST010';
+        } else if (codigoempresa == 2) {
+            emp = "CERTECA";
+            newSector = 'FB003';
+        } else {
+            emp = "CERAGNI";
+            newSector = 'ST010';
         }
     }
-    else{
-        if(codigoempresa == 1){
-            emp = "CERAGNI";
-            newSector='ST010';
-        }else{
-            emp = "CERTECA";
-            newSector='FB003';
-        }
-    }  
+
     toastr.clear();
     toastr["info"]("A carregar referências...");
 
@@ -562,24 +565,25 @@ function save_local_fabric(){
 
 function continue_save_local_fabric(selected){
 
-    //alert(selected);
-    
-    if (user_type == 1 || user_type == 2){
-        empp = $("#empresasDP option:selected").text();
-        emp = $.trim(empp);  
-        if(emp === 'Certeca'){
+    // Obter e ajustar o nome da empresa selecionada
+    emp = $.trim($("#empresasDP option:selected").text()).toUpperCase();
+    // Verificar se há uma empresa selecionada
+    if (emp != '') {
+        if (emp === 'CERTECA') {
             serie='P';
-        }else{
+        } else {
             serie='';
+        }
+    } else {
+        // Dependendo do código da empresa, atribuir valores padrão
+        if (codigoempresa == 1) {
+            serie='';
+        } else if (codigoempresa == 2) {
+            serie='P';
+        } else {
+           serie='';
         }
     }
-    else{
-        if(codigoempresa == 1){
-            serie='';
-        }else{
-            serie='P';
-        }
-    } 
 
     $.ajax({
         type: "POST",

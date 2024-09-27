@@ -495,20 +495,19 @@ function radioButtons(){
 }
 
 function change_sector_emp(newSector){
-    //empp = $("#empresasDP option:selected").text();
-    //emp = $.trim(empp);    
-
-    if (user_type == 1 || user_type == 2){
-        empp = $("#empresasDP option:selected").text();
-        emp = $.trim(empp);  
-    }
-    else{
-        if(codigoempresa == 1){
-            emp = "CERAGNI";           
-        }else{
+    // Obter e ajustar o nome da empresa selecionada
+    emp = $.trim($("#empresasDP option:selected").text()).toUpperCase();
+    // Verificar se há uma empresa selecionada
+    if (emp == '') {
+        // Dependendo do código da empresa, atribuir valores padrão
+        if (codigoempresa == 1) {
+            emp = "CERAGNI";
+        } else if (codigoempresa == 2) {
             emp = "CERTECA";
+        } else {
+            emp = "CERAGNI";
         }
-    }   
+    } 
     
     toastr.clear();
     toastr["info"]("A carregar paletes...");
@@ -569,14 +568,29 @@ function changeEmpresa(){
 }
 
 function confirm_changeEmpresa(){
-
-    empp = $("#empresasDP option:selected").text();
-    emp = $.trim(empp);    
-    if(emp === 'Certeca'){
-        newSector='FB003';
-    }else{
-        newSector='ST010';
+    // Obter e ajustar o nome da empresa selecionada
+    emp = $.trim($("#empresasDP option:selected").text()).toUpperCase();
+    // Verificar se há uma empresa selecionada
+    if (emp != '') {
+        if (emp === 'CERTECA') {
+            newSector = 'FB003';
+        } else {
+            newSector = 'ST010';
+        }
+    } else {
+        // Dependendo do código da empresa, atribuir valores padrão
+        if (codigoempresa == 1) {
+            emp = "CERAGNI";
+            newSector = 'ST010';
+        } else if (codigoempresa == 2) {
+            emp = "CERTECA";
+            newSector = 'FB003';
+        } else {
+            emp = "CERAGNI";
+            newSector = 'ST010';
+        }
     }
+    
     //alert(emp.toUpperCase());
     toastr.clear();
     toastr["info"]("A carregar paletes...");
