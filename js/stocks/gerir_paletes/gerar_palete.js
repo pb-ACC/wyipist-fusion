@@ -176,9 +176,11 @@ function listLocal(data){
 
     // Obter e ajustar o nome da empresa selecionada
     emp = $.trim($("#empresasDP option:selected").text()).toUpperCase();
+    columns=[];
+
     // Verificar se há uma empresa selecionada
     if (emp != '') {
-        if(emp === 'Certeca'){
+        if(emp === 'CERTECA'){
            columns=[
                 {title:"Zona", field:"Zona", align:"center",visible:true,headerFilter:"input"},
                 {title:"Celula", field:"Celula", align:"center",visible:true,headerFilter:"input"},
@@ -202,23 +204,23 @@ function listLocal(data){
         }
     }
     else{
-        if(codigoempresa == 2){
-            columns=[
-                {title:"Zona", field:"Zona", align:"center",visible:true,headerFilter:"input"},
-                {title:"Celula", field:"Celula", align:"center",visible:true,headerFilter:"input"},
-                {title:"CodigoBarras", field:"CodigoBarras", align:"center",visible:true,headerFilter:"input"},      
-                {title:"Sector", field:"Sector", align:"center", visible:false},
-                {title:"Identificador", field:"Identificador", align:"center", visible:false},
-                {title:"Sel", field:"Sel", align:"center", visible:false},
-                {title:"id", field:"id", align:"center", visible:false}
-            ];
-        }else{
+        if(codigoempresa == 1){
             columns=[
                 {title:"Armazém", field:"Sector", align:"center",visible:true,headerFilter:"input"},
                 {title:"Setor", field:"Codigo", align:"center",visible:true,headerFilter:"input"},
                 {title:"Fila", field:"Fila", align:"center",visible:true,headerFilter:"input"},
                 {title:"Posicao", field:"Posicao", align:"center",visible:true,headerFilter:"input"},
                 {title:"CodigoBarras", field:"CodigoBarras", align:"center",visible:true,headerFilter:"input"},   
+                {title:"Identificador", field:"Identificador", align:"center", visible:false},
+                {title:"Sel", field:"Sel", align:"center", visible:false},
+                {title:"id", field:"id", align:"center", visible:false}
+            ];            
+        }else if(codigoempresa == 2 || codigoempresa == 3) {            
+            columns=[
+                {title:"Zona", field:"Zona", align:"center",visible:true,headerFilter:"input"},
+                {title:"Celula", field:"Celula", align:"center",visible:true,headerFilter:"input"},
+                {title:"CodigoBarras", field:"CodigoBarras", align:"center",visible:true,headerFilter:"input"},      
+                {title:"Sector", field:"Sector", align:"center", visible:false},
                 {title:"Identificador", field:"Identificador", align:"center", visible:false},
                 {title:"Sel", field:"Sel", align:"center", visible:false},
                 {title:"id", field:"id", align:"center", visible:false}
@@ -352,9 +354,6 @@ function changeEmpresa(){
         } else if (codigoempresa == 2) {
             emp = "CERTECA";
             newSector = 'FB003';
-        } else {
-            emp = "CERAGNI";
-            newSector = 'ST010';
         }
     }
 
