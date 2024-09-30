@@ -32,6 +32,14 @@ $.ajax({
             refsOG=Object.values(data['refs']);
             getRefs(Object.values(data['refs']));
             $("#code_bar").show();
+            
+            const selectDiv = document.getElementById('select');
+            const codeBarDiv = document.getElementById('code_bar');
+        
+            if (!selectDiv.innerHTML.trim()) {
+                codeBarDiv.classList.remove('col-sm-12', 'col-sm-push-3', 'col-md-4', 'col-md-push-4', 'col-lg-4', 'col-lg-push-4');
+                codeBarDiv.classList.add('col-12'); // Faz o code_bar ocupar toda a largura
+            }
         }
     },
     error: function (e) {

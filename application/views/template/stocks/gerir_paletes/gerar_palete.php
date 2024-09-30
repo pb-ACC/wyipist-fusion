@@ -27,9 +27,9 @@
 
                 <div class="card-body">                
                     <div class="row">
-                        <div id="select" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <div id="select" class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
                         </div>
-                        <div id="code_bar" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">       
+                        <div id="code_bar" class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">

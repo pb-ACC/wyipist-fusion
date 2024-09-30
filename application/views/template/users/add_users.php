@@ -86,6 +86,7 @@
                                     <select id="empresa_type" class="form-control" name="empresa_type">
                                         <option value="1">Ceragni</option>
                                         <option value="2">Certeca</option>
+                                        <option value="3">Ambas</option>
                                     </select>
                                 </div>
                             </div>

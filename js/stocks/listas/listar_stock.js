@@ -37,7 +37,15 @@ $.ajax({
             paletsOG=Object.values(data['paletes']);
             getPalets(Object.values(data['paletes']));
             
-            getSetores(Object.values(data['setores']));           
+            getSetores(Object.values(data['setores']));      
+            
+            const selectDiv = document.getElementById('select');
+            const codeBarDiv = document.getElementById('sectores');
+        
+            if (!selectDiv.innerHTML.trim()) {
+                codeBarDiv.classList.remove('col-sm-12', 'col-sm-push-3', 'col-md-4', 'col-md-push-4', 'col-lg-4', 'col-lg-push-4');
+                codeBarDiv.classList.add('col-12'); // Faz o code_bar ocupar toda a largura
+            }
 
             toastr.clear();
             toastr["success"]("Stock carregado com sucesso.");

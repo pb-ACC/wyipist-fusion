@@ -29,7 +29,7 @@
                     <div class="row">
                         <div id="select" class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
                         </div>
-                        <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                        <div id="sectores" class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
                             <select id="sector" class="form-control" name="sectors[]" multiple="multiple" tabindex="-1" aria-hidden="true" required>                    
                                 <option></option>
                             </select>
