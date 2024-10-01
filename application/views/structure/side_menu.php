@@ -22,6 +22,21 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li id="menu-prod01" class="nav-item">
+                    <a id="menu-prod02" href="#" class="nav-link">
+                    <i class="fab fa-product-hunt"></i>
+                        <p>  Produção <i class="fas fa-angle-left right"></i> </p>
+                    </a>
+                    <ul id="menu-prod03" class="nav nav-treeview" style="display: none;">
+                        <li id="valida-pl01" class="nav-item">
+                            <a id="valida-pl02" href="<?=base_url();?>production/confirm_palettes" class="nav-link">
+                            <i class="fas fa-check-circle"></i>
+                                <p> Confirmação Paletes</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
                 <li id="menu-stocks01" class="nav-item">
                     <a id="menu-stocks02" href="#" class="nav-link">
                         <i class="fa-solid fa-boxes-packing"></i>
