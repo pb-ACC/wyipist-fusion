@@ -892,7 +892,7 @@ class ListarPaletes extends CI_Controller
             $this->load->model('standards/stocks/GetPalets');
             switch ($empresa[0]->TipoEmpresa) {
                 case 1:
-                    $setor='\'CL007\'';
+                    $setor='\'ST017\'';
                     $this->load->model('standards/stocks/GetPalets');
                     $paletes=$this->GetPalets->armazem($setor,'>0');
 
@@ -907,7 +907,7 @@ class ListarPaletes extends CI_Controller
                     echo json_encode($data);
                     break;
                 case 2:
-                    $setor='\'ST017\'';
+                    $setor='\'CL007\'';
                     $this->load->model('standards/stocks/GetPalets');
                     $paletes=$this->GetPalets->armazem($setor,'>0');
                     
@@ -927,7 +927,7 @@ class ListarPaletes extends CI_Controller
                     $st02='FB001';
                     $setor = '\''.$st01.'\''.','.'\''.$st02.'\'';     
                     */
-                    $setor='\'CL007\'';
+                    $setor='\'ST017\'';
                     $this->load->model('standards/others/Dropdowns');
                     $select=$this->Dropdowns->escolha_empresa($empresa[0]->TipoEmpresa);  
                     
@@ -951,7 +951,7 @@ class ListarPaletes extends CI_Controller
                     $st02='FB001';
                     $setor = '\''.$st01.'\''.','.'\''.$st02.'\'';     
                     */
-                    $setor='\'CL007\'';
+                    $setor='\'ST017\'';
                     $this->load->model('standards/others/Dropdowns');
                     $select=$this->Dropdowns->escolha_empresa($empresa[0]->TipoEmpresa);
                     

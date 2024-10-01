@@ -72,8 +72,7 @@ class PaletizarCarga extends CI_Controller
                                                             $Referencia,$DescricaoArtigo,$Lote,$Calibre,$Formato,$Qual,$TipoEmbalagem,$Superficie,$Decoracao,$RefCor,$TabEspessura,$Nivel,
                                                             $Quantidade,$NovaQtd,$Unidade,$LinhaPL,$DocPL,$motivo,$codigomotivo,$obs,$seriePL,$setorDestino,$setorCarga,$username,$funcionario_gpac);                   
                  }
-
-                 //recalcdoc
+                 
                  //envio de email
                  //impressão de etiquetas
                  //gestão documental

@@ -871,21 +871,21 @@ function confirm_changeEmpresa(){
         // Verificar se há uma empresa selecionada
         if (emp != '') {
             if (emp === 'CERTECA') {
-                newSector = 'ST017';
-            } else {
                 newSector = 'CL007';
+            } else {
+                newSector = 'ST017';
             }
         } else {
             // Dependendo do código da empresa, atribuir valores padrão
             if (codigoempresa == 1) {
                 emp = "CERAGNI";
-                newSector = 'CL007';
+                newSector = 'ST017';
             } else if (codigoempresa == 2) {
                 emp = "CERTECA";
-                newSector = 'ST017';
+                newSector = 'CL007';
             } else {
                 emp = "CERAGNI";
-                newSector = 'CL007';
+                newSector = 'ST017';
             }
         }
 
