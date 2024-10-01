@@ -934,6 +934,13 @@ function confirm_changeEmpresa(){
 /*GRAVAR DADOS NA BD*/
 function confirm_save(tblPL,tblLoc){
 
+    tableSelPaletes.alert("A gravar...");
+    $('#empresasDP').prop('disabled', true);
+    $("#buttons button").attr("disabled", true);   
+    $("#save_local").prop('disabled', true);
+    $("#save_local_logistic").prop('disabled', true);
+    $("#save_local_warehouse").prop('disabled', true);
+
     $.ajax({
         type: "POST",
         url: "http://127.0.0.1/wyipist-fusion/stocks/producao/Gravar_SaidaProducao/save_production",
@@ -950,7 +957,8 @@ function confirm_save(tblPL,tblLoc){
                 toastr["warning"]("Outro utilizador entrou com as suas credenciais, faça login de novo.");
                 window.location = "home/logout";
             } else {
-                toastr["success"]("Dados gravados com Sucesso");                
+                toastr["success"]("Dados gravados com Sucesso");                     
+
                 setTimeout(function(){
                     location.reload();
                 },2500);

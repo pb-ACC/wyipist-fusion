@@ -182,7 +182,7 @@
             <div id="local-table-warehouse" class="table table-striped"></div>
 			</div>
 			<div class="modal-footer">		
-                <button id="save_local" onclick="save_local_warehouse()" type="button" class="btn btn-primary"><i class="fas fa-save"></i> Gravar</button>	
+                <button id="save_local_warehouse" onclick="save_local_warehouse()" type="button" class="btn btn-primary"><i class="fas fa-save"></i> Gravar</button>	
 			</div>    
     </div>
   </div>

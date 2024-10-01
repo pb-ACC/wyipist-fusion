@@ -446,7 +446,11 @@ function confirm_correction(tblPL){
 function send_arrays_rp(producao,reabilitado){
     //anll = $("#anl option:selected").text();
     //anula = $.trim(anll);
-  $("#save_anulacao").prop("disabled",true);  
+    tblPL.alert("A gravar...");
+    $('#empresasDP').prop('disabled', true);
+    $("#buttons button").attr("disabled", true);   
+    $("#save_anulacao").prop('disabled', true); 
+  
     $.ajax({
         type: "POST",
         url: "http://127.0.0.1/wyipist-fusion/stocks/corrigir_stock/Gravar_CorrigirStock/confirm_correction",

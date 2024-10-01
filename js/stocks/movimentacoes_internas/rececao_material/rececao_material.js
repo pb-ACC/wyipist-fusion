@@ -939,6 +939,14 @@ function confirm_changeEmpresa(){
 /*GRAVAR DADOS NA BD*/
 function confirm_save(tblPL,tblLoc){
 
+    tableSelPaletes.alert("A gravar...");
+    $('#empresasDP').prop('disabled', true);
+    $("#buttons button").attr("disabled", true);   
+    $("input[type=radio]").attr('disabled', false);
+    $("#save_local").prop('disabled', true);
+    $("#save_local_logistic").prop('disabled', true);
+    $("#save_local_warehouse").prop('disabled', true);
+        
     $.ajax({
         type: "POST",        
         url: "http://127.0.0.1/wyipist-fusion/stocks/movimentacoes_internas/rececao_material/Gravar_RececaoMaterial/save_new_position",

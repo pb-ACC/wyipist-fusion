@@ -641,6 +641,13 @@ function confirm_changeEmpresa(){
 
 /*GRAVAR DADOS NA BD*/
 function confirm_cancellation(tblPL){
+    
+    tableSelPaletes.alert("A gravar...");
+    $('#empresasDP').prop('disabled', true);
+    $("#buttons button").attr("disabled", true);   
+    $("input[type=radio]").attr('disabled', true);
+    $("#save_anulacao").prop('disabled', true);
+
     anll = $("#anl option:selected").text();
     anula = $.trim(anll);
     $("#save_anulacao").prop("disabled",true);  

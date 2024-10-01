@@ -572,6 +572,13 @@ function save_local_fabric(){
 
 function continue_save_local_fabric(selected){
 
+    tablerefs.alert("A gravar...");
+    $('input[name="cb"]').prop('disabled', true);
+    $('#empresasDP').prop('disabled', true);
+    $("#buttons button").attr("disabled", true);   
+    $("#savePLS").prop('disabled', true);
+    $("#save_local").prop('disabled', true);
+
     // Obter e ajustar o nome da empresa selecionada
     emp = $.trim($("#empresasDP option:selected").text()).toUpperCase();
     // Verificar se há uma empresa selecionada

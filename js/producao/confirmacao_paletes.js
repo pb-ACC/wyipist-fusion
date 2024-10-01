@@ -430,6 +430,10 @@ function confirm_changeEmpresa(){
 /*GRAVAR DADOS NA BD*/
 function confirm_palette(tblPL){
 
+    tableSelPaletes.alert("A gravar...");
+    $('#empresasDP').prop('disabled', true);
+    $("#buttons button").attr("disabled", true);
+
     $.ajax({
         type: "POST",
         url: "http://127.0.0.1/wyipist-fusion/producao/Gravar_ConfirmacaoPaletes/save_confirmation",
