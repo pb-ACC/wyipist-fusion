@@ -545,13 +545,13 @@ class ListarFiltro extends CI_Controller
                 $empresa = '\''.$emp.'\'';
                // echo $empresa;
 
-               $setor = '\'FB003\', \'CL001\'';     
+                $setor01 = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST011\', \'ST012\', \'ST013\', \'ST014\', \'ST015\', \'ST016\', \'ST020\', \'ST200\', \'ST201\', \'ST202\', \'ST203\', \'ST204\', \'ST205\', \'ST206\', \'ST207\', \'ST290\'';                  
                 $this->load->model('standards/others/GetZonas');                
-                $zonas=$this->GetZonas->zonaCelula($empresa,$emp,$setor,'FB');
+                $zonas=$this->GetZonas->zonaCelula($empresa,$emp,$setor01,'FB');
 
                 $this->load->model('standards/stocks/GetPalets');
-                //$setor = '\''.$newSector.'\'';                              
-                $paletes=$this->GetPalets->armazem($setor,'>0');
+                $setor02 = '\''.$newSector.'\'';                              
+                $paletes=$this->GetPalets->armazem($setor02,'>0');
 
                 $this->load->model('standards/others/Buttons');
                 $button=$this->Buttons->buttons_empresa(1);
@@ -567,13 +567,13 @@ class ListarFiltro extends CI_Controller
                 $empresa = '\''.$emp.'\'';
                 //echo $empresa;
 
-                $setor = '\'FB003\', \'CL001\'';     
+                $setor01 = '\'FB003\', \'CL001\'';     
                 $this->load->model('standards/others/GetZonas');                
-                $zonas=$this->GetZonas->zonaCelula($empresa,$emp,$setor,'FB');
+                $zonas=$this->GetZonas->zonaCelula($empresa,$emp,$setor01,'FB');
 
                 $this->load->model('standards/stocks/GetPalets');
-                //$setor = '\''.$newSector.'\'';                              
-                $paletes=$this->GetPalets->armazem($setor,'>0');
+                $setor02 = '\''.$newSector.'\'';                              
+                $paletes=$this->GetPalets->armazem($setor02,'>0');
 
                 $this->load->model('standards/others/Buttons');
                 $button=$this->Buttons->buttons_empresa(2);
