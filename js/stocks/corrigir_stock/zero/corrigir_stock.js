@@ -446,7 +446,7 @@ function confirm_correction(tblPL){
 function send_arrays_rp(producao,reabilitado){
     //anll = $("#anl option:selected").text();
     //anula = $.trim(anll);
-    tblPL.alert("A gravar...");
+    tableSelPaletes.alert("A gravar...");
     $('#empresasDP').prop('disabled', true);
     $("#buttons button").attr("disabled", true);   
     $("#save_anulacao").prop('disabled', true); 
