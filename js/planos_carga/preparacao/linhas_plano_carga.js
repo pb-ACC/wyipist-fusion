@@ -11,8 +11,8 @@ let type='', title='', text='', text1='', text2='', action='', xposition='', cam
 let planoCarga=[], planoCargaOG=[], marosca=[];
 
 $.ajax({
-    type: "POST",
-    url: "http://127.0.0.1/wyipist-fusion/planos_carga/preparacao/GetLinhasGG/getLinhasGG/"+plano,
+    type: "GET",
+    url: "http://127.0.0.1/wyipist-fusion/planos_carga/preparacao/GetLinhasGG/getLinhasGG/"+plano+"/"+serie,
     dataType: "json",
     success: function (data) {
         if (data === "kick") {
@@ -28,7 +28,10 @@ $.ajax({
 
             toastr.clear();
             toastr["success"]("Planos de carga carregados com sucesso.");
-            toastr.clear();
+            toastr.clear();       
+  
+            valida_fechaGG();
+
         }
     },
     error: function (e) {
@@ -81,11 +84,12 @@ function linhasPlanoCarga(data){
         },        
         columns:[
             {title:"Encomenda", field:"NumeroDocumento", align:"center", headerFilter:"input",width:140},  
-            {title:"Quantidade", field:"Quantidade", align:"center", headerFilter:"input",width:140},  
-            {title:"Uni.", field:"Unidade", align:"center", headerFilter:"input", width:78},  
             {title:"Referência", field:"Referencia", align:"center", headerFilter:"input",width:160},  
             {title:"Descrição", field:"DescricaoArtigo", align:"center", headerFilter:"input"},  
-            {title:"Qtd. PL", field:"QtdPL", align:"center", headerFilter:"input",width:140},
+            {title:"Quantidade", field:"Quantidade", align:"center", headerFilter:"input",width:140},  
+            {title:"Paletizado", field:"QtdPaletizada", align:"center", headerFilter:"input",width:140},
+            {title:"Falta", field:"QtdFalta", align:"center", headerFilter:"input",width:140},
+            {title:"Uni.", field:"Unidade", align:"center", headerFilter:"input", width:78},  
             {title:"Apontamentos", field:"Descricao", align:"center", headerFilter:"input",visible:false},
             {title:"Artigo", field:"Artigo", align:"center",sorter:"date", headerFilter:"input",visible:false},  
             {title:"LinhaEN", field:"NumeroLinha", align:"center", visible:false},
@@ -99,5 +103,58 @@ function linhasPlanoCarga(data){
         //row - row component
         //alert(row.getData().DocumentoCarga);
         window.location.href = row.getData().DocumentoCarga+"/"+row.getData().NumeroDocumento+"/"+row.getData().NumeroLinha+"/"+row.getData().Referencia;
+    });
+}
+
+function valida_fechaGG() {
+    setTimeout(() => {
+        totalQtd = 0, totalPL = 0 ; // Reinicializa totalQtd para evitar somas cumulativas
+
+        tableplanoGG.getData().forEach(row => {
+            let quantidade = parseFloat(row.Quantidade);            
+            // Verifica se o valor é um número válido
+            if (!isNaN(quantidade)) { 
+                totalQtd += quantidade;                
+            }
+
+            let paletizado = parseFloat(row.QtdPaletizada);            
+            // Verifica se o valor é um número válido
+            if (!isNaN(paletizado)) { 
+                totalPL += paletizado;                
+            }
+        });
+        // Verifica se totalQtd e totalPL são iguais e exibe os alertas se forem
+        if (totalQtd === totalPL) {
+            type='success';
+            title='Carga totalmente paletizada';
+            text2='Pretende marcá-la como pronta?';
+            action='gg_ready';
+            xposition='center';
+            tblPL=[];    
+            tblLoc=[];
+            tblLote=[]
+            tblAfet=[];
+            fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
+        } 
+    }, 300);
+}
+
+function confirm_gg_ready(){
+    $.ajax({
+        type: "POST",
+        url: "http://127.0.0.1/wyipist-fusion/planos_carga/preparacao/PaletizarCarga/fecharGG/"+plano,
+        dataType: "json",
+        success: function (data) {
+            if (data === "kick") {
+                toastr["warning"]("Outro utilizador entrou com as suas credenciais, faça login de novo.");
+                window.location = "home/logout";
+            } else {                        
+                window.history.back();           
+            }
+        },
+        error: function (e) {
+                    alert('Request Status: ' + e.status + ' Status Text: ' + e.statusText + ' ' + e.responseText);
+                    console.log(e);
+                }
     });
 }

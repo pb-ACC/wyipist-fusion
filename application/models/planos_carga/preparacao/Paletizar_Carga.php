@@ -75,6 +75,8 @@ class Paletizar_Carga extends CI_Model
                                        $Sector,$Local,$Artigo,$Referencia,$DescricaoArtigo,$Lote,$Calibre,$Formato,$Qual,$TipoEmbalagem,$Superficie,$Decoracao,$RefCor,$TabEspessura,
                                        $Nivel,$Quantidade,$NovaQtd,$Unidade,$LinhaPL,$DocPL,$motivo,$codigomotivo,$obs,$seriePL,$setorDestino,$setorCarga,$user);
 
+        $this->update_linhas_EN($NumeroDocumento,$NumeroLinha,$QtdPaletizada);
+
         //verifica se existe mais do que uma linha por DocPL
         $newPL = $this->valida_linhas_PL($NumeroPL);        
 
@@ -344,6 +346,7 @@ class Paletizar_Carga extends CI_Model
             $this->db->query($sql10);
             $this->db->close();
 
+            
             //se for ceragni dá entrada da PL no armazém da certeca
             $sql11="INSERT INTO ".$tbl01." (LinhaDocumento, NumeroDocumento, Documento, TipoMovimento, Sector, NumeroSerieInferior, NumeroSerieSuperior, Quantidade,
                                             QuantidadeUnidade, Referencia, Artigo, DescricaoArtigo, Formato, RefCor, Qual, TipoEmbalagem, Superficie, Lote, Calibre,
@@ -375,7 +378,7 @@ class Paletizar_Carga extends CI_Model
                     //echo $sql09;
             $this->db->query($sql12);
             $this->db->close();
-
+            
             $sql13="INSERT INTO StkLDocs (LinhaDocumento, NumeroDocumento, Documento, TipoMovimento, Sector, NumeroSerieInferior, NumeroSerieSuperior, Quantidade,
                                           QuantidadeUnidade, Referencia, Artigo, DescricaoArtigo, Formato, RefCor, Qual, TipoEmbalagem, Superficie, Lote, Calibre,
                                           Decoracao, Acabamento, Coleccao, TabEspessura, RefP, Referencia, Unidade, Preco, PrecoNM, Desconto, Iva, TaxaIva,
@@ -401,6 +404,12 @@ class Paletizar_Carga extends CI_Model
                     where NumeroDocumento='{$NumeroSP}' and isnull(LoteInt,'')=''";
             $this->db->query($sql06);
             $this->db->close();  
+
+            $sql07 ="UPDATE PlDocs
+                     SET Reverte=1
+                     WHERE Numero='{$DocPL}' and {$flag} in (1,2)";   
+            $this->db->query($sql07);
+            $this->db->close();
     }
 
     public function createTBL_ExeSP($tbl){                        
@@ -638,5 +647,36 @@ class Paletizar_Carga extends CI_Model
         $this->dbforge->add_field($fields);
         // Cria a tabela
         $this->dbforge->create_table($tbl, TRUE);
+    }
+
+    public function update_linhas_EN($NumeroDocumento,$NumeroLinha,$QtdPaletizada){
+        $sql01 ="UPDATE A
+                 set A.QtdPaletizada=isnull({$QtdPaletizada},0)
+                 from VdLEncs A 
+                 where A.NumeroDocumento='{$NumeroDocumento}' and C.NumeroLinha={$NumeroLinha}";
+            $this->db->query($sql01);	
+            $this->db->close();
+    }
+
+    public function fecharGG($documentoCarga,$username,$funcionario_gpac){
+
+        $user=strtoupper($funcionario_gpac);        
+        if($user==''){
+            $user=strtoupper($username);
+        }    
+
+        $sql01 ="UPDATE A
+                 set A.Estado='F', A.Cor=C.Cor
+                 from PrGuias A join Estado  C on (A.Numero='{$documentoCarga}' and C.Codigo='F' and A.Codigo=C.TipoDoc)";
+        $this->db->query($sql01);	
+        $this->db->close();
+        
+
+        $sql02 ="INSERT INTO EstadoLog (Documento, Accao, Maquina, DataHoraMov, OperadorMOV, Estado, Sistema, OperSistH)
+                 select A.Numero, 'BLOQUEOU', 'WEB', getdate(), '{$user}', 'F', 0, 'WEB'
+                 from PrGuias A where A.Numero='{$documentoCarga}'";
+        $this->db->query($sql02);
+        $this->db->close();  
+        
     }
 }

@@ -62,7 +62,7 @@
                             <button id="choose_palets" onclick="choose_palets()" type="button" class="btn btn-dark" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Picar Palete</button>
                         </div>
                         <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-3 col-md-push-3 col-lg-3 col-lg-push-3">
-                            <button onclick="cancel_palets()" type="button" class="btn btn-dark" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Anular Palete</button>
+                            <button onclick="cancel_palets()" type="button" class="btn btn-danger" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Anular Palete</button>
                         </div>
                         <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-3 col-md-push-3 col-lg-3 col-lg-push-3">
                             <button onclick="close_gg()" type="button" class="btn btn-light" style="border-color: lightgrey;width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Concluir Manual.</button>
@@ -104,9 +104,8 @@
 
             <div id="tablePLs" class="table table-striped"></div>
 			</div>
-			<div class="modal-footer">		                
-                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i> Cancelar</button>		
-                <button onclick="save_paletes()" type="button" class="btn btn-success"><i class="fas fa-arrow-right"></i> Continuar</button>
+			<div class="modal-footer">		                                
+                <div id="modal_buttons"></div>
 			</div>    
     </div>
   </div>
@@ -170,6 +169,26 @@
                 </div>    
         </div>
     </div>
+</div>
+
+<div id="ver_palete" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl"role="document" style="width:auto">
+    <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Palete(s) associada(s)</h5>
+				<button id="btnclose" type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+
+			<!--<div class="modal-body" style="max-height: calc(100vh - 210px);overflow-y:scroll;overflow-x:scroll;">-->
+            <div class="modal-body" style="width: auto; height:auto;">
+            <div id="tablePL_assoc" class="table table-striped"></div>
+			</div>
+			<div class="modal-footer">		                                                
+			</div>    
+    </div>
+  </div>
 </div>
 
 <script>

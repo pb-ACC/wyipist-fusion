@@ -225,4 +225,61 @@ function fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tbl
             }
         })
     }
+
+    if(action==='gg_ready') {
+        Swal.fire({
+                icon: type,
+                iconHtml: '?',
+                iconColor: '#f8bb86',
+                title: title,
+                html: '<p  style="font-family: Arial, Helvetica, sans-serif; font-size: 20px;color: #333">'+text2+'</p>',
+                showDenyButton: true,
+                confirmButtonText: '<i class="fa fa-thumbs-up"></i> Sim',
+                denyButtonText: '<i class="fa fa-thumbs-down"></i> Não'
+            }
+        ).then((result) => {
+            if (result.isConfirmed) {            
+                confirm_gg_ready();
+            } else if (result.isDenied) {       
+            }
+        })
+    }
+
+    if(action==='valida_anulacao') {
+        Swal.fire({
+                icon: type,
+                iconHtml: '?',
+                iconColor: '#f8bb86',
+                title: title,
+                //html: '<p  style="font-family: Arial, Helvetica, sans-serif; font-size: 14px;color: #333">Deseja continuar?</p>',
+                showDenyButton: true,
+                confirmButtonText: '<i class="fa fa-thumbs-up"></i> Sim',
+                denyButtonText: '<i class="fa fa-thumbs-down"></i> Não'
+            }
+        ).then((result) => {
+            if (result.isConfirmed) {            
+                confirma_anualacao(tblPL,tblLoc,tblLote,tblAfet);
+            } else if (result.isDenied) {            
+            }
+        })
+    }
+
+    if(action==='valida_movimentosPL') {
+        Swal.fire({
+                icon: type,
+                iconHtml: '!',
+                iconColor: '#f88686',
+                title: title,
+                html: '<p  style="font-family: Arial, Helvetica, sans-serif; font-size: 20px;color: #333">'+text2+'</p>',
+                showDenyButton: true,
+                confirmButtonText: '<i class="fa fa-thumbs-up"></i> Sim',
+                denyButtonText: '<i class="fa fa-thumbs-down"></i> Não'
+            }
+        ).then((result) => {
+            if (result.isConfirmed) {            
+                avanca_anualacao(tblPL,tblLoc,tblLote,tblAfet);
+            } else if (result.isDenied) {            
+            }
+        })
+    }
 }

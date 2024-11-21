@@ -14,13 +14,13 @@ class Preparacao_Carga extends CI_Model
 
     public function getPreparacaoCarga($tipoDoc,$serie,$estado){
 
-        $sql = "SELECT cast(0 as int) Sel, F.Nome Cliente, D.Numero DocumentoCarga, '' NumeroDocumento, D.DataPrevista, '' VossaRef, '' NossaRef, D.VossaRef Responsavel, D.NossaRef NossaRefGG, '' DataEntrega, 
+        $sql = "SELECT cast(0 as int) Sel, F.Nome Cliente, D.Numero DocumentoCarga, '' NumeroDocumento, D.DataPrevista, '' VossaRef, '' NossaRef, isnull(D.VossaRef,'') Responsavel, D.NossaRef NossaRefGG, '' DataEntrega, 
                        row_number() over(order by D.DataPrevista, D.Numero)-1 Id, D.Serie, convert(char,D.Data,105) Data, cast(null as datetime) UltimaEdicao
                 from VdEncs B join Clientes      F on (B.Terceiro=F.Codigo)
                               join VdLEncs       C on (B.Numero=C.NumeroDocumento)
                               join PrGuias       D on (C.DocumentoCarga=D.Numero and D.Estado='{$estado}' and D.Serie='{$serie}' and D.Codigo='{$tipoDoc}')
                 where isnull(C.DocumentoCarga,'')<>'' and isnull(C.Referencia,'')<>''
-                group by F.Nome, D.Numero, D.DataPrevista, D.VossaRef, D.NossaRef, D.Serie, convert(char,D.Data,105)";
+                group by F.Nome, D.Numero, D.DataPrevista, isnull(D.VossaRef,''), D.NossaRef, D.Serie, convert(char,D.Data,105)";
         $query = $this->db->query($sql);
         $result = $query->result();
         return $result;    
@@ -80,6 +80,11 @@ class Preparacao_Carga extends CI_Model
                 from ".$tbl03." A join ".$tbl01." B on (A.NumeroLinha=B.LinhaDocumento and A.NumeroDocumento=B.Documento)";
         $this->db->query($sql04);
 
+        $sql07="UPDATE A
+                set A.QtdFalta=round(isnull(A.Quantidade,0)-isnull(A.QtdPaletizada,0),4)
+                from ".$tbl03." A";
+        $this->db->query($sql07);
+
         $sql05="UPDATE A
                 set A.UltimaEdicao=convert(char(8),B.DataUltimaEdicao,112)+' '+convert(char(8),B.HoraUltimaEdicao,108)
                 from ".$tbl03." A join ".$tbl02." B on (A.DocumentoCarga=B.Documento)";
@@ -138,17 +143,17 @@ class Preparacao_Carga extends CI_Model
         //RECOLHE_DATA HORA ÚLTIMA EDIÇÃO
         $tbl03 = $user.'.MS_Main';
         $this->createTBL_main($tbl03);
-        $sql03="INSERT INTO ". $tbl03 ." (x, Sel, Cliente, DocumentoCarga, NumeroDocumento, NumeroLinha, LinhaMae, Quantidade, Unidade, Referencia, Artigo, DescricaoArtigo, Apontamentos, Formato, RefCor, Qual, 
+        $sql03="INSERT INTO ". $tbl03 ." (x, Sel, CodCL, Cliente, DocumentoCarga, NumeroDocumento, NumeroLinha, LinhaMae, Quantidade, Unidade, Referencia, Artigo, DescricaoArtigo, Apontamentos, Formato, RefCor, Qual, 
                                           TipoEmbalagem, Superficie, TabEspessura, Lote, Calibre, Decoracao, Acabamento, Coleccao, Chave, DataPrevista, VossaRef, NossaRef, Responsavel, NossaRefGG, DataEntregaCliente, 
                                           QtdLinhaEN, PesoLiquido, PesoBruto, TotalVolumes, QtdPaletizada, QtdFalta, Id, UltimaEdicao)".
-               "SELECT '.', 0, F.Nome, C.DocumentoCarga, C.NumeroDocumento, C.NumeroLinha, C.LinhaMae, ROUND(C.Quantidade, 4), C.Unidade, C.Referencia, C.Artigo, C.DescricaoArtigo, C.Descricao, C.Formato, C.RefCor, C.Qual, C.TipoEmbalagem,
+               "SELECT '.', 0, F.Codigo, F.Nome, C.DocumentoCarga, C.NumeroDocumento, C.NumeroLinha, C.LinhaMae, ROUND(C.Quantidade, 4), C.Unidade, C.Referencia, C.Artigo, C.DescricaoArtigo, C.Descricao, C.Formato, C.RefCor, C.Qual, C.TipoEmbalagem,
                        C.Superficie, C.TabEspessura, '', '', C.Decoracao, C.Acabamento, C.Coleccao, '',D.DataPrevista, B.VossaRef, B.NossaRef, D.VossaRef, B.NossaRef, C.DataEntrega, C.Quantidade, C.TotalPeso, C.TotalPeso2, C.TotalNVolumes, 0,
                        0, row_number() over(order by D.DataPrevista, D.Numero, C.Ordena)-1,''
                 from VdEncs B join Clientes      F on (B.Terceiro=F.Codigo)
                               join VdLEncs       C on (B.Numero=C.NumeroDocumento and C.NumeroLinha={$linha})
                               join PrGuias       D on (C.DocumentoCarga=D.Numero)
                 where isnull(C.DocumentoCarga,'')<>'' and isnull(C.Referencia,'')<>''
-                group by F.Nome, D.Numero, C.DocumentoCarga, C.NumeroDocumento, C.NumeroLinha, C.LinhaMae, C.Unidade, C.Referencia, C.Artigo, C.DescricaoArtigo, C.Descricao, C.Formato, C.RefCor, C.Qual, C.TipoEmbalagem, C.Superficie, C.TabEspessura,
+                group by F.Codigo, F.Nome, D.Numero, C.DocumentoCarga, C.NumeroDocumento, C.NumeroLinha, C.LinhaMae, C.Unidade, C.Referencia, C.Artigo, C.DescricaoArtigo, C.Descricao, C.Formato, C.RefCor, C.Qual, C.TipoEmbalagem, C.Superficie, C.TabEspessura,
          C.Decoracao, C.Acabamento, C.Coleccao, D.DataPrevista, B.VossaRef, B.NossaRef, D.VossaRef, B.NossaRef, C.DataEntrega, C.Quantidade, C.TotalPeso, C.TotalPeso2, C.TotalNVolumes, C.Ordena";
         $this->db->query($sql03);
         //echo $sql03;
@@ -169,7 +174,7 @@ class Preparacao_Carga extends CI_Model
         $this->db->query($sql06);
 
 
-        $sql07="SELECT Sel,Cliente,DocumentoCarga,NumeroDocumento,NumeroLinha,LinhaMae,Quantidade,Unidade,Referencia,Artigo,DescricaoArtigo,Apontamentos,Formato,RefCor,Qual,TipoEmbalagem,Superficie,
+        $sql07="SELECT Sel,CodCL,Cliente,DocumentoCarga,NumeroDocumento,NumeroLinha,LinhaMae,Quantidade,Unidade,Referencia,Artigo,DescricaoArtigo,Apontamentos,Formato,RefCor,Qual,TipoEmbalagem,Superficie,
                        TabEspessura,Lote,Calibre,Decoracao,Acabamento,Coleccao,Chave,DataPrevista,VossaRef,NossaRef,Responsavel,NossaRefGG,DataEntregaCliente,QtdLinhaEN,PesoLiquido,PesoBruto,TotalVolumes,
                        QtdPaletizada,QtdFalta,Id,UltimaEdicao
                 FROM ". $tbl03;
@@ -257,13 +262,13 @@ class Preparacao_Carga extends CI_Model
         $this->createTBL_StkAfeLinha($tbl04);
         $sql07="INSERT INTO ". $tbl04 ." (x, NumSeq, LinhaDocumento, Documento, Lote, Calibre, Quantidade, Unidade, Ordem)".
                "SELECT '.', B.NumSeq, B.LinhaDocumento, B.Documento, B.Lote, B.Calibre, round(B.Quantidade,4), A.Unidade, row_number() over(order by B.Lote asc)
-                from ".$tbl04." A join zx_StkAfetado B on (A.NumeroLinha=B.LinhaDocumento and A.NumeroDocumento=B.Documento) order by B.Lote asc";        
+                from ".$tbl03." A join zx_StkAfetado B on (A.NumeroLinha=B.LinhaDocumento and A.NumeroDocumento=B.Documento) order by B.Lote asc";        
         $this->db->query($sql07);
 
-
+       
         $sql08="SELECT x, NumSeq, LinhaDocumento, Documento, Lote, Calibre, Quantidade, Unidade, Ordem
                 FROM ". $tbl04;
-        //echo $sql08;
+        
         $query = $this->db->query($sql08);
         $result = $query->result();
         return $result;    
@@ -348,17 +353,19 @@ class Preparacao_Carga extends CI_Model
         $sql07="INSERT INTO ". $tbl04 ." (x, Lote, Calibre, Quantidade, Unidade)".
                "SELECT '.', A.Lote, A.Calibre, sum(case when A.TipoMovimento in ('00','01','02','03','04','05','06','07','08','09') then A.QuantidadeUnStock else A.QuantidadeUnStock*-1 end) Quantidade,
                        X.Unidade
-                from ".$tbl04." X join PlLDocs  B on (X.NumeroLinha=B.LinhaDocumento and substring(B.NumeroDocumento,1,3)='{$seriePL}')
-                                  join StkLDocs A on (B.NumeroDocumento=(case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end) and B.RefP=A.RefP and B.Lote=A.Lote and isnull(B.Calibre,'')=isnull(A.Calibre,''))
+                from ".$tbl03." X join PlLDocs  B on (X.NumeroLinha=B.LinhaDocumento)
+                                  join PlDocs   Z on (Z.Numero=B.NumeroDocumento and Z.Serie='{$seriePL}')
+                                  join StkLDocs A on (B.NumeroDocumento=(case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end) and B.RefP=A.RefP and isnull(B.Lote,'')=isnull(A.Lote,'') and isnull(B.Calibre,'')=isnull(A.Calibre,''))
                 where A.Sector in ({$setor})
                 group by A.Lote, A.Calibre, X.Unidade
                 having sum(case when A.TipoMovimento in ('00','01','02','03','04','05','06','07','08','09') then A.QuantidadeUnStock else A.QuantidadeUnStock*-1 end)>0";        
         $this->db->query($sql07);
 
+        //echo $sql07;
 
         $sql08="SELECT x, Lote, Calibre, Quantidade, Unidade
                 FROM ". $tbl04;
-        //echo $sql08;
+        
         $query = $this->db->query($sql08);
         $result = $query->result();
         return $result;    
@@ -509,6 +516,11 @@ class Preparacao_Carga extends CI_Model
             ),
             'Sel' => array(
                 'type' => 'INT',
+                'null' => TRUE
+            ),
+            'CodCL' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '25',
                 'null' => TRUE
             ),
             'Cliente' => array(

@@ -67,9 +67,9 @@ class Manage_Users extends CI_Model
             return $response;
         }else {
             $this->load->database('default');
-            $this->createOperador($userGPAC,$nome,$contacto,$email,$user_type);
             $this->insertGPAC($empresa_type,$userGPAC);            
-            $this->createSchema($userGPAC);
+           // $this->createOperador($userGPAC,$nome,$contacto,$email,$user_type);
+         //   $this->createSchema($userGPAC);
 
             $this->load->database('login');
             $this->db->query("INSERT into users (nome,telefone, email,username,password,funcionario_gpac,user_type, client, funcao, codigo_empresa, active)

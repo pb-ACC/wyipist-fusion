@@ -18,7 +18,7 @@ class Lista_Stock extends CI_Model
         //echo $sectors;
         set_time_limit(0);
         $sql01 = "SELECT count(F.LinhaPL) nLinhas
-                  FROM ( SELECT A.Sector, isnull(A.Local,'') Local, round(sum(case when A.TipoMovimento<='10' then A.Quantidade else -A.Quantidade end),2) Quantidade,
+                  FROM ( SELECT A.Sector, isnull(A.Local,'') Local, round(sum(case when A.TipoMovimento<='10' then A.Quantidade else -A.Quantidade end),8) Quantidade,
                                 case when isnull(B.Unidade,'')='' then 'M2' else B.Unidade end Unidade, A.RefP Referencia, A.Artigo, B.Descricao DescricaoArtigo, isnull(A.Lote,'') Lote,
                                 isnull(A.Calibre,'') Calibre, D.NumeroLinha LinhaPL, C.Numero DocPL, isnull(B.Formato,'') Formato, isnull(B.Qual,'') Qual,
                                 isnull(B.TipoEmbalagem,'') TipoEmbalagem, isnull(B.Superficie,'') Superficie, isnull(B.Decoracao,'') Decoracao, isnull(B.RefCor,'') RefCor,
@@ -52,7 +52,7 @@ class Lista_Stock extends CI_Model
             $fetch = $offset + 3500;
             set_time_limit(0);
             $this->db->db_pconnect();   
-            $sql = "SELECT A.Sector, isnull(A.Local,'') Local, round(sum(case when A.TipoMovimento<='10' then A.Quantidade else -A.Quantidade end),2) Quantidade,
+            $sql = "SELECT A.Sector, isnull(A.Local,'') Local, round(sum(case when A.TipoMovimento<='10' then A.Quantidade else -A.Quantidade end),8) Quantidade,
                                 case when isnull(B.Unidade,'')='' then 'M2' else B.Unidade end Unidade, A.RefP Referencia, A.Artigo, B.Descricao DescricaoArtigo, isnull(A.Lote,'') Lote,
                                 isnull(A.Calibre,'') Calibre, D.NumeroLinha LinhaPL, C.Numero DocPL, isnull(B.Formato,'') Formato, isnull(B.Qual,'') Qual,
                                 isnull(B.TipoEmbalagem,'') TipoEmbalagem, isnull(B.Superficie,'') Superficie, isnull(B.Decoracao,'') Decoracao, isnull(B.RefCor,'') RefCor,

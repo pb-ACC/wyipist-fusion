@@ -153,12 +153,14 @@
                             </a>
                         </li>    
 
+                        <!--
                         <li id="correc-carg01" class="nav-item">
                             <a id="correc-carg02" href="<?=base_url();?>load_plans/correction_of_load_preparation" class="nav-link">
                                 <i class="fas fa-redo nav-icon"></i>                        
                                 <p> Correção Prep. de Cargas</p>
                             </a>
-                        </li>                       
+                        </li>         
+                        -->              
                         
                     </ul>
                 </li>

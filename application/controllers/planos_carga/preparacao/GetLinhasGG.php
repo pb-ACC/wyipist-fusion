@@ -31,7 +31,7 @@ class GetLinhasGG extends CI_Controller
         }
     }
 
-    public function getLinhasGG($plano){
+    public function getLinhasGG($plano,$serie){
 
         $this->load->helper('url');
         $this->load->library('session');
@@ -41,14 +41,15 @@ class GetLinhasGG extends CI_Controller
             $session_data = $this->session->userdata('logged_in');            
             $username = $session_data['username'];
             $funcionario_gpac = $session_data['funcionario_gpac'];             
-
-            $serie = $this->input->get('serie');
+            
             if($serie == 'CG'){
                 $seriePL='C';
-            }else{
+            }else if($serie == 'CT'){
                 $seriePL='PC';
             }
             
+            //echo $seriePL;
+
             $this->load->model('planos_carga/preparacao/Preparacao_Carga');
             echo json_encode($this->Preparacao_Carga->getLinhasGG($plano,$seriePL,$username,$funcionario_gpac));
 

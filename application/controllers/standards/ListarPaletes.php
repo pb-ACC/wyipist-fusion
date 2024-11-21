@@ -989,112 +989,54 @@ class ListarPaletes extends CI_Controller
             $username = $session_data['username'];
             $funcionario_gpac = $session_data['funcionario_gpac'];     
             
-            $empresa= $this->getEmpresa();            
-            //vecho $empresa[0]->Empresa;
-            $this->load->model('standards/stocks/GetPalets');
-            switch ($empresa[0]->TipoEmpresa) {
-                case 1:
-                    $setor = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST015\', \'ST020\', \'CL007\'';               
-                    $this->load->model('standards/stocks/GetPalets');
-                    $paletes=$this->GetPalets->cargas($refp,$setor);
+            $data=[]; 
 
-                    if($serie == 'CG'){
-                        $seriePL='C';
-                    }else{
-                        $seriePL='PC';
-                    }                    
-                    $this->load->model('planos_carga/preparacao/Preparacao_Carga');
-                    $linhaGG=$this->Preparacao_Carga->getLinha($linha,$seriePL,$username,$funcionario_gpac);
-                    $linha_afetada=$this->Preparacao_Carga->getLinha_afetada($linha,$seriePL,$username,$funcionario_gpac);
-                    $lotes_gastos=$this->Preparacao_Carga->getLinha_lotesgastos($linha,$seriePL,$setor,$username,$funcionario_gpac);
-
-                    $data = array( 
-                        'paletes' => $paletes,
-                        'linhaGG' => $linhaGG,
-                        'linha_afetada' => $linha_afetada,
-                        'lotes_gastos' => $lotes_gastos,
-                    );                    
-                    echo json_encode($data);
-                    break;
-                case 2:
-                    $setor='\'FB003\',\'CL001\',\'ST017\'';
-                    $this->load->model('standards/stocks/GetPalets');
-                    $paletes=$this->GetPalets->cargas($refp,$setor);
+            if($serie == 'CG'){
+                $setor = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST015\', \'ST020\', \'ST017\',\'ST012\'';               
+                $this->load->model('standards/stocks/GetPalets');
+                $paletes=$this->GetPalets->cargas($refp,$setor);
+                $seriePL='C';
                 
-                    if($serie == 'CG'){
-                        $seriePL='C';
-                    }else{
-                        $seriePL='PC';
-                    }                    
-                    $this->load->model('planos_carga/preparacao/Preparacao_Carga');
-                    $linhaGG=$this->Preparacao_Carga->getLinha($linha,$seriePL,$username,$funcionario_gpac);
-                    $linha_afetada=$this->Preparacao_Carga->getLinha_afetada($linha,$seriePL,$username,$funcionario_gpac);
+                $this->load->model('planos_carga/preparacao/Preparacao_Carga');
+                $linhaGG=$this->Preparacao_Carga->getLinha($linha,$seriePL,$username,$funcionario_gpac);
+                $linha_afetada=$this->Preparacao_Carga->getLinha_afetada($linha,$seriePL,$username,$funcionario_gpac);
+                $lotes_gastos=$this->Preparacao_Carga->getLinha_lotesgastos($linha,$seriePL,$setor,$username,$funcionario_gpac);
 
-                    $data = array( 
-                        'paletes' => $paletes,
-                        'linhaGG' => $linhaGG,
-                        'linha_afetada' => $linha_afetada,
-                        'lotes_gastos' => $lotes_gastos,
-                    );        
-                    echo json_encode($data);
-                    break;
-                case 3:
-                    /*                    
-                    $st01='ST010';
-                    $st02='FB001';
-                    $setor = '\''.$st01.'\''.','.'\''.$st02.'\'';     
-                    */
-                    $setor = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST015\', \'ST020\', \'CL007\'';                          
-                    $this->load->model('standards/stocks/GetPalets');
-                    $paletes=$this->GetPalets->cargas($refp,$setor);
+                $this->load->model('standards/others/Buttons');
+                $button=$this->Buttons->modal_buttons_empresa_anular_palete_gg(1);
 
-                    if($serie == 'CG'){
-                        $seriePL='C';
-                    }else{
-                        $seriePL='PC';
-                    }                    
-                    $this->load->model('planos_carga/preparacao/Preparacao_Carga');
-                    $linhaGG=$this->Preparacao_Carga->getLinha($linha,$seriePL,$username,$funcionario_gpac);
-                    $linha_afetada=$this->Preparacao_Carga->getLinha_afetada($linha,$seriePL,$username,$funcionario_gpac);
-                    $lotes_gastos=$this->Preparacao_Carga->getLinha_lotesgastos($linha,$seriePL,$setor,$username,$funcionario_gpac);
+                $data = array( 
+                    'paletes' => $paletes,
+                    'linhaGG' => $linhaGG,
+                    'linha_afetada' => $linha_afetada,
+                    'lotes_gastos' => $lotes_gastos,
+                    'button' => $button
+                );     
 
-                    $data = array( 
-                        'paletes' => $paletes,
-                        'linhaGG' => $linhaGG,
-                        'linha_afetada' => $linha_afetada,
-                        'lotes_gastos' => $lotes_gastos,
-                    );        
-                    echo json_encode($data);
-                    break;
-                case 4:
-                    /*                    
-                    $st01='ST010';
-                    $st02='FB001';
-                    $setor = '\''.$st01.'\''.','.'\''.$st02.'\'';     
-                    */
-                    $setor = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST015\', \'ST020\', \'CL007\'';                                               
-                    $this->load->model('standards/stocks/GetPalets');
-                    $paletes=$this->GetPalets->cargas($refp,$setor);
+            }else if($serie == 'CT'){
+                $setor='\'FB003\',\'CL001\',\'CL007\',\'CL006\'';
+                $this->load->model('standards/stocks/GetPalets');
+                $paletes=$this->GetPalets->cargas($refp,$setor);
+                $seriePL='PC';           
+                
+                $this->load->model('planos_carga/preparacao/Preparacao_Carga');
+                $linhaGG=$this->Preparacao_Carga->getLinha($linha,$seriePL,$username,$funcionario_gpac);
+                $linha_afetada=$this->Preparacao_Carga->getLinha_afetada($linha,$seriePL,$username,$funcionario_gpac);
+                $lotes_gastos=$this->Preparacao_Carga->getLinha_lotesgastos($linha,$seriePL,$setor,$username,$funcionario_gpac);
 
-                    if($serie == 'CG'){
-                        $seriePL='C';
-                    }else{
-                        $seriePL='PC';
-                    }                    
-                    $this->load->model('planos_carga/preparacao/Preparacao_Carga');
-                    $linhaGG=$this->Preparacao_Carga->getLinha($linha,$seriePL,$username,$funcionario_gpac);
-                    $linha_afetada=$this->Preparacao_Carga->getLinha_afetada($linha,$seriePL,$username,$funcionario_gpac);
-                    $lotes_gastos=$this->Preparacao_Carga->getLinha_lotesgastos($linha,$seriePL,$setor,$username,$funcionario_gpac);
+                $this->load->model('standards/others/Buttons');
+                $button=$this->Buttons->modal_buttons_empresa_anular_palete_gg(1);
 
-                    $data = array( 
-                        'paletes' => $paletes,
-                        'linhaGG' => $linhaGG,
-                        'linha_afetada' => $linha_afetada,
-                        'lotes_gastos' => $lotes_gastos,
-                    );        
-                    echo json_encode($data);
-                    break;                    
+                $data = array( 
+                    'paletes' => $paletes,
+                    'linhaGG' => $linhaGG,
+                    'linha_afetada' => $linha_afetada,
+                    'lotes_gastos' => $lotes_gastos,
+                    'button' => $button
+                );  
+
             }
+            echo json_encode($data);                
 
         }else{
             redirect('start', 'refresh');
@@ -1197,5 +1139,75 @@ class ListarPaletes extends CI_Controller
             redirect('start', 'refresh');
         }   
     }  
-    
+ 
+    public function getPalets_gg_anulaPL($serie,$plano,$refp){
+        $this->load->helper('url');
+        $this->load->library('session');
+        if($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');            
+            $username = $session_data['username'];
+            $funcionario_gpac = $session_data['funcionario_gpac'];     
+            
+            $data=[]; 
+
+            if($serie == 'CG'){
+                $setor = '\'ST012\'';               
+                $seriePL='C';
+                $this->load->model('standards/stocks/GetPalets');
+                $paletes=$this->GetPalets->anula_palete_gg($seriePL,$refp,$setor,$plano,$username,$funcionario_gpac);
+                
+                $this->load->model('standards/others/Buttons');
+                $button=$this->Buttons->modal_buttons_empresa_anular_palete_gg(0);
+                
+                $data = array( 
+                    'paletes' => $paletes,
+                    'button' => $button
+                );     
+
+            }else if($serie == 'CT'){
+                $setor = '\'CL006\'';               
+                $seriePL='PC';           
+                $this->load->model('standards/stocks/GetPalets');
+                $paletes=$this->GetPalets->anula_palete_gg($seriePL,$refp,$setor,$plano,$username,$funcionario_gpac);
+                
+                $this->load->model('standards/others/Buttons');
+                $button=$this->Buttons->modal_buttons_empresa_anular_palete_gg(0);
+
+                $data = array( 
+                    'paletes' => $paletes,
+                    'button' => $button
+                );  
+            }
+            echo json_encode($data);  
+
+        }else{
+            redirect('start', 'refresh');
+        }   
+    }  
+
+    public function palete_plano_carga($serie,$linha,$refp){
+
+        $this->load->helper('url');
+        $this->load->library('session');
+
+        if($this->session->userdata('logged_in')) {
+
+            $docEN = $this->input->get('docEN');           
+            $plano = $this->input->get('plano');                       
+            $lote = $this->input->get('lote');  
+            $calibre = $this->input->get('calibre');  
+
+            $this->load->model('standards/stocks/GetPalets');
+            $paletes=$this->GetPalets->palete_plano_carga($serie,$linha,$docEN,$plano,$refp,$lote,$calibre);                      
+         
+            $data = array( 
+                'paletes' => $paletes
+            );  
+            echo json_encode($data);          
+            
+        }else{
+            redirect('start', 'refresh');
+        }
+
+    }
 }

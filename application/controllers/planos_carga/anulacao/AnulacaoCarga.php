@@ -30,4 +30,77 @@ class AnulacaoCarga extends CI_Controller
             redirect('start', 'refresh');
         }
     }
+    
+    public function valida_movimentosPL($palete){
+
+        $this->load->helper('url');
+        $this->load->library('session');
+
+        if($this->session->userdata('logged_in')) {
+
+            $this->load->model('planos_carga/anulacao/Anulacao_Carga');
+            $pl=$this->Anulacao_Carga->valida_movimentosPL($palete);    
+                        
+            $data = array( 
+                'palete' => $pl
+            );
+
+            echo json_encode($data);
+
+        }else{
+            redirect('start', 'refresh');
+        }
+    }   
+    
+    public function get_valor_reverte($palete){
+
+        $this->load->helper('url');
+        $this->load->library('session');
+
+        if($this->session->userdata('logged_in')) {
+
+            $this->load->model('planos_carga/anulacao/Anulacao_Carga');
+            $pl=$this->Anulacao_Carga->get_valor_reverte($palete);    
+                        
+            $data = array( 
+                'reverte' => $pl
+            );
+
+            echo json_encode($data);
+
+        }else{
+            redirect('start', 'refresh');
+        }
+    }   
+
+    public function anula_palete(){
+
+        $this->load->helper('url');
+        $this->load->library('session');
+
+        if($this->session->userdata('logged_in')) {
+
+            $session_data = $this->session->userdata('logged_in');            
+            $username = $session_data['username'];
+            $funcionario_gpac = $session_data['funcionario_gpac']; 
+                        
+            $cliente = $this->input->post('cliente');           
+            $encomenda = $this->input->post('encomenda');           
+            $linha = $this->input->post('linha');           
+            $palete_cliente = $this->input->post('palete_cliente');  
+            $palete_origem = $this->input->post('palete_origem');  
+            $setor_cliente = $this->input->post('setor_cliente');  
+            $setor_exp = $this->input->post('setor_exp');              
+            $reverte = $this->input->post('reverte');  
+            $movimenta = $this->input->post('movimenta');  
+
+            $this->load->model('planos_carga/anulacao/Anulacao_Carga');
+            $this->Anulacao_Carga->anula_palete($cliente,$encomenda,$linha,$palete_cliente,$palete_origem,$setor_cliente,$setor_exp,$reverte,$movimenta,$username,$funcionario_gpac);                      
+         
+            echo json_encode("inseriu");             
+            
+        }else{
+            redirect('start', 'refresh');
+        }
+    }    
 }

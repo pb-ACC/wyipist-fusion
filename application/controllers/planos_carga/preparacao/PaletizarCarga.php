@@ -67,19 +67,34 @@ class PaletizarCarga extends CI_Controller
                     $Unidade = $paletes[$i]['Unidade'];
                     $LinhaPL = $paletes[$i]['LinhaPL'];
                     $DocPL = $paletes[$i]['DocPL'];
-       
+                           
                     $this->Paletizar_Carga->paletizar_carga($serie,$flag,$Cliente,$DocumentoCarga,$NumeroDocumento,$NumeroLinha,$QtdEN,$QtdPaletizada,$QtdFalta,$Sector,$Local,$Artigo,
                                                             $Referencia,$DescricaoArtigo,$Lote,$Calibre,$Formato,$Qual,$TipoEmbalagem,$Superficie,$Decoracao,$RefCor,$TabEspessura,$Nivel,
-                                                            $Quantidade,$NovaQtd,$Unidade,$LinhaPL,$DocPL,$motivo,$codigomotivo,$obs,$seriePL,$setorDestino,$setorCarga,$username,$funcionario_gpac);                   
+                                                            $Quantidade,$NovaQtd,$Unidade,$LinhaPL,$DocPL,$motivo,$codigomotivo,$obs,$seriePL,$setorDestino,$setorCarga,$username,$funcionario_gpac);    
                  }
                  
-                 //envio de email
-                 //impressão de etiquetas
-                 //gestão documental
-                 //fecha encomenda e plano de carga
-
                  echo json_encode("conclui");
              }
+        }else{
+            redirect('start', 'refresh');
+        }
+    }  
+    
+    public function fecharGG($plano){
+
+        $this->load->helper('url');
+        $this->load->library('session');
+
+        if($this->session->userdata('logged_in')) {
+            
+            $session_data = $this->session->userdata('logged_in');            
+            $username = $session_data['username'];
+            $funcionario_gpac = $session_data['funcionario_gpac']; 
+
+            $this->load->model('planos_carga/preparacao/Paletizar_Carga');
+            $this->Paletizar_Carga->fecharGG($plano,$username,$funcionario_gpac);    
+                        
+            echo json_encode("conclui");
         }else{
             redirect('start', 'refresh');
         }

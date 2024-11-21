@@ -86,4 +86,16 @@ class Buttons extends CI_Model
                    </div>';
         return $value;
     }
+
+    public function modal_buttons_empresa_anular_palete_gg($parm){
+        $value='';
+        if($parm == 1){
+            $value='<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i> Cancelar</button>		
+                    <button onclick="save_paletes()" type="button" class="btn btn-success"><i class="fas fa-arrow-right"></i> Continuar</button>';
+        }else if($parm == 0){
+            $value='<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i> Cancelar</button>		
+                    <button onclick="cancell_sel_paletes()" type="button" class="btn btn-primary"><i class="fas fa-save"></i> Confirmar</button>';
+        }
+        return $value;
+    }
 }
