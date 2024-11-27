@@ -48,13 +48,39 @@
                                 <i class="fas fa-boxes nav-icon"></i>
                                 <p> Saída Produção</p>
                             </a>
-                        </li>                          
-                        <li id="gerar-pl01" class="nav-item">
-                            <a id="gerar-pl02" href="<?=base_url();?>stocks/generate_new_palette" class="nav-link">
-                                <i class="fas fa-file-circle-plus nav-icon"></i>
-                                <p> Gerar Nova Palete</p>
+                        </li>                                                
+
+                        <li id="menu-pls01" class="nav-item">
+                            <a id="menu-pls02" href="#" class="nav-link">
+                                <i class="fas fa-pallet nav-icon"></i>
+                                <p> Paletes <i class="right fas fa-angle-left"></i> </p>
                             </a>
-                        </li>                          
+
+                            <ul id="opcoes-pls01" class="nav nav-treeview" style="display: none;">
+
+                                <li id="gerar-pl01" class="nav-item">
+                                    <a id="gerar-pl02" href="<?=base_url();?>stocks/generate_new_palette" class="nav-link">
+                                        <i class="fas fa-file-circle-plus nav-icon"></i>
+                                        <p> Gerar Nova Palete</p>
+                                    </a>
+                                </li>   
+
+                                <li id="anula-pl01" class="nav-item">
+                                    <a id="anula-pl02" href="<?=base_url();?>stocks/manage_palettes/cancel_palettes" class="nav-link">
+                                        <i class="fas fa-box nav-icon"></i>
+                                        <p>Anular Paletes</p>
+                                    </a>
+                                </li> 
+
+                                <li id="reimprime-pl01" class="nav-item">
+                                    <a id="reimprime-pl02" href="<?=base_url();?>stocks/manage_palettes/reprint_pallets" class="nav-link">
+                                        <i class="fas fa-print nav-icon"></i>
+                                        <p>Reimprimir Paletes</p>
+                                    </a>
+                                </li> 
+                            </ul>
+                        </li>                                
+
                         <li id="menu-mov01" class="nav-item">
                             <a id="menu-mov02" href="#" class="nav-link">
                                 <i class="fas fa-exchange-alt nav-icon"></i>
@@ -76,12 +102,6 @@
                             </ul>
                         </li>
                         
-                        <li id="anula-pl01" class="nav-item">
-                            <a id="anula-pl02" href="<?=base_url();?>stocks/manage_palettes/cancel_palettes" class="nav-link">
-                                <i class="fas fa-box nav-icon"></i>
-                                <p>Anular Paletes</p>
-                            </a>
-                        </li> 
                         <li id="menu-stk01" class="nav-item">
                             <a id="menu-stk02" href="#" class="nav-link">
                                 <i class="fas fa-edit nav-icon"></i>

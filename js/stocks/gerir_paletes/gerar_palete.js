@@ -3,7 +3,9 @@ $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI); // para bloquear a pagin
 $("#menu-stocks01").addClass("menu-is-opening menu-open");
 $("#menu-stocks02").addClass("active");
 $('#menu-stocks03').attr("style", "display: block;" );
-
+$("#menu-pls01").addClass("menu-is-opening menu-open");
+$("#opcoes-pls01").addClass("menu-is-opening menu-open");
+$('#opcoes-pls01').attr("style", "display: block;" );
 $("#gerar-pl01").addClass("active");
 $("#gerar-pl02").addClass("active");
 

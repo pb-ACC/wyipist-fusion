@@ -682,5 +682,44 @@ class ListarFiltro extends CI_Controller
         }else{
             redirect('start', 'refresh');
         }   
-    }    
+    }   
+    
+    public function filtraPlZn_emanuel_reimprime($emp,$newSector){
+        $this->load->helper('url');
+        $this->load->library('session');
+        if($this->session->userdata('logged_in')) {            
+                       
+            $session_data = $this->session->userdata('logged_in');            
+            $user_type = $session_data['user_type'];
+
+            $emp = strtoupper($emp);
+            if($emp == 'CERAGNI'){                
+                //$empresa = '\''.$emp.'\'';
+               // echo $empresa;
+                //$setor = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST010\', \'ST011\', \'ST012\', \'ST013\', \'ST014\', \'ST015\', \'ST016\', \'ST020\', \'ST200\', \'ST201\', \'ST202\', \'ST203\', \'ST204\', \'ST205\', \'ST206\', \'ST207\', \'ST290\'';                               
+                $this->load->model('standards/stocks/GetPalets');
+                //$setor = '\''.$newSector.'\'';             
+                $paletes=$this->GetPalets->armazem02($emp,'>0');
+                
+                $data = array( 
+                    'paletes' => $paletes
+                );
+                
+            }else{
+                //$empresa = '\''.$emp.'\'';
+                //echo $empresa;                
+                //$setor = '\''.$newSector.'\'';                              
+                $this->load->model('standards/stocks/GetPalets');
+                //$setor = '\'FB001\', \'FB003\', \'CL001\'';                                
+                $paletes=$this->GetPalets->armazem02($emp,'>0');
+
+                $data = array(                                                         
+                    'paletes' => $paletes
+                );
+            }
+                echo json_encode($data);
+        }else{
+            redirect('start', 'refresh');
+        }   
+    }
 }

@@ -679,5 +679,97 @@ class GetPalets extends CI_Model
         
     }
 
+    public function armazem02($empresa,$condicao){
+        //echo $setor;
+        $sql01 = "SELECT count(A.id) nLinhas
+                  FROM ( SELECT cast(0 as int) Sel, A.Sector, isnull(A.Local,'') Local, round(sum(case when A.TipoMovimento<='10' then A.Quantidade else -A.Quantidade end),8) Quantidade, case when isnull(B.Unidade,'')='' then 'M2' else B.Unidade end Unidade,
+                            A.RefP Referencia, A.Artigo, B.Descricao DescricaoArtigo, isnull(A.Lote,'') Lote, isnull(A.Calibre,'') Calibre, D.NumeroLinha LinhaPL, C.Numero DocPL, B.Formato, B.Qual, B.TipoEmbalagem, B.Superficie, B.Decoracao,
+                            B.RefCor, B.TabEspessura, isnull(D.NivelPalete,'') Nivel, isnull(C.Serie,'') Serie, D.DataHoraMOV, C.NossaRef, C.VossaRef, CAST(ROW_NUMBER() OVER(ORDER BY C.Numero asc)-1 AS int) Id
+                         from StkLDocs A join Sectores X on (A.Sector=X.Codigo and X.Empresa=UPPER('{$empresa}'))
+                                         join ReferArt B on (A.RefP=B.Referencia and A.Artigo=B.Artigo)
+                                         join PlDocs   C on ((case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
+                                         join PllDocs  D on (C.Numero=D.NumeroDocumento)
+                        where C.Serie not in ('C','PC')
+                        group by A.Sector, isnull(A.Local,''), A.RefP, A.Artigo, isnull(A.Lote,''), isnull(A.Calibre,''), D.NumeroLinha, C.Numero, B.Formato, B.Qual, B.TipoEmbalagem,
+                                 B.Superficie, B.Decoracao, B.RefCor, B.TabEspessura, case when isnull(B.Unidade,'')='' then 'M2' else B.Unidade end, B.Descricao, isnull(D.NivelPalete,''),
+                                 isnull(C.Serie,''), D.DataHoraMOV, C.NossaRef, C.VossaRef
+                        having round(sum(case when A.TipoMovimento<='10' then A.Quantidade else -A.Quantidade end),8){$condicao}
+                     ) A";        
+        $query01 = $this->db->query($sql01);        
+        $tot  = $query01->result();
+        foreach ($tot as $val) {
+			$itemcount = $val->nLinhas;
+		}
 
+        $data = array();
+		$arr = [];
+        set_time_limit(0);
+        $this->db->db_pconnect();
+        $batches = $itemcount / 3500; // Number of while-loop calls - around 120.
+
+        for ($i = 0; $i <= $batches; $i++) {
+            $offset = $i * 3500; // MySQL Limit offset number
+            $fetch = $offset + 3500;
+            set_time_limit(0);
+            $this->db->db_pconnect();
+            $sql02 = "SELECT cast(0 as int) Sel, A.Sector, isnull(A.Local,'') Local, round(sum(case when A.TipoMovimento<='10' then A.Quantidade else -A.Quantidade end),8) Quantidade, case when isnull(B.Unidade,'')='' then 'M2' else B.Unidade end Unidade,
+                            A.RefP Referencia, A.Artigo, B.Descricao DescricaoArtigo, isnull(A.Lote,'') Lote, isnull(A.Calibre,'') Calibre, D.NumeroLinha LinhaPL, C.Numero DocPL, B.Formato, B.Qual, B.TipoEmbalagem, B.Superficie, B.Decoracao,
+                            B.RefCor, B.TabEspessura, isnull(D.NivelPalete,'') Nivel, isnull(C.Serie,'') Serie, D.DataHoraMOV, C.NossaRef, C.VossaRef, CAST(ROW_NUMBER() OVER(ORDER BY C.Numero asc)-1 AS int) Id
+                         from StkLDocs A join Sectores X on (A.Sector=X.Codigo and X.Empresa=UPPER('{$empresa}'))
+                                         join ReferArt B on (A.RefP=B.Referencia and A.Artigo=B.Artigo)
+                                         join PlDocs   C on ((case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
+                                         join PllDocs  D on (C.Numero=D.NumeroDocumento)                      
+                      where C.Serie not in ('C','PC')
+                      group by A.Sector, isnull(A.Local,''), A.RefP, A.Artigo, isnull(A.Lote,''), isnull(A.Calibre,''), D.NumeroLinha, C.Numero, B.Formato, B.Qual, B.TipoEmbalagem,
+                                B.Superficie, B.Decoracao, B.RefCor, B.TabEspessura, case when isnull(B.Unidade,'')='' then 'M2' else B.Unidade end, B.Descricao, isnull(D.NivelPalete,''),
+                                isnull(C.Serie,''), D.DataHoraMOV, C.NossaRef, C.VossaRef
+                      having round(sum(case when A.TipoMovimento<='10' then A.Quantidade else -A.Quantidade end),8){$condicao}
+                      Order by C.Numero ASC
+                      OFFSET ".$offset." ROWS
+                      FETCH NEXT ".$fetch ." ROWS ONLY";  
+            //and isnull(A.Local,'')<>'' 
+           // echo $sql02;
+            set_time_limit(0);
+            $this->db->db_pconnect();                                          
+            $query = $this->db->query($sql02);
+        
+                    // Verifique se a consulta foi bem-sucedida
+            if ($query) {
+                $result = $query->result();
+                        
+                        // Processa os resultados conforme necessário
+                foreach ($result as $row) {                    
+                    $arr['Sector']=$row->Sector;
+                    $arr['Local']=$row->Local;
+                    $arr['Quantidade']=$row->Quantidade;
+                    $arr['Unidade']=$row->Unidade;
+                    $arr['Referencia']=$row->Referencia;
+                    $arr['Artigo']=$row->Artigo;
+                    $arr['DescricaoArtigo']=$row->DescricaoArtigo;
+                    $arr['Lote']=$row->Lote;
+                    $arr['Calibre']=$row->Calibre;
+                    $arr['LinhaPL']=$row->LinhaPL;
+                    $arr['DocPL']=$row->DocPL;
+                    $arr['Formato']=$row->Formato;
+                    $arr['Serie']=$row->Serie;
+                    $arr['DataHoraMOV']=$row->DataHoraMOV;
+                    $arr['NossaRef']=$row->NossaRef;
+                    $arr['VossaRef']=$row->VossaRef;
+                    $arr['Id']=$row->Id;
+
+                    $data[]=$arr;
+                    unset($arr);
+                }
+        } else {
+            // Lida com o erro de consulta
+            $erro = $this->db->error();
+            log_message('error', 'Erro na consulta SQL: ' . $erro['message']);
+        }
+    
+        $this->db->close();
+    } 
+
+        $data = array_unique($data, SORT_REGULAR);        
+        return $data;
+    }
 }

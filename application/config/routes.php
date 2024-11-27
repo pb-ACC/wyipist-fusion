@@ -77,6 +77,7 @@ $route['stocks/production'] = 'stocks/producao/SaidaProducao';
 $route['stocks/internal_movements/change_location'] = 'stocks/movimentacoes_internas/troca_localizacao/MudaLocalizacao';
 $route['stocks/internal_movements/material_reception'] = 'stocks/movimentacoes_internas/rececao_material/RececaoMaterial';
 $route['stocks/manage_palettes/cancel_palettes'] = 'stocks/gerir_paletes/AnularPaletes';
+$route['stocks/manage_palettes/reprint_pallets'] = 'stocks/gerir_paletes/ReimprimirPaletes';
 $route['stocks/stock_list/all-stock']='stocks/listas/GetStock';
 $route['stocks/stock_list/stock-between-dates']='stocks/listas/GetStock_dates';
 $route['stocks/generate_new_palette']='stocks/gerir_paletes/GerarPaletes';
