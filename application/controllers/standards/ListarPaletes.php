@@ -979,7 +979,7 @@ class ListarPaletes extends CI_Controller
         }   
     }  
 
-    public function getPalets_prepararefs($serie,$linha,$refp){
+    public function getPalets_prepararefs($serie,$linha,$plano,$refp){
         $this->load->helper('url');
         $this->load->library('session');
         if($this->session->userdata('logged_in')) {
@@ -998,9 +998,9 @@ class ListarPaletes extends CI_Controller
                 $seriePL='C';
                 
                 $this->load->model('planos_carga/preparacao/Preparacao_Carga');
-                $linhaGG=$this->Preparacao_Carga->getLinha($linha,$seriePL,$username,$funcionario_gpac);
-                $linha_afetada=$this->Preparacao_Carga->getLinha_afetada($linha,$seriePL,$username,$funcionario_gpac);
-                $lotes_gastos=$this->Preparacao_Carga->getLinha_lotesgastos($linha,$seriePL,$setor,$username,$funcionario_gpac);
+                $linhaGG=$this->Preparacao_Carga->getLinha($linha,$plano,$seriePL,$username,$funcionario_gpac);
+                $linha_afetada=$this->Preparacao_Carga->getLinha_afetada($linha,$plano,$seriePL,$username,$funcionario_gpac);
+                $lotes_gastos=$this->Preparacao_Carga->getLinha_lotesgastos($linha,$plano,$seriePL,$setor,$username,$funcionario_gpac);
 
                 $this->load->model('standards/others/Buttons');
                 $button=$this->Buttons->modal_buttons_empresa_anular_palete_gg(1);
@@ -1020,9 +1020,9 @@ class ListarPaletes extends CI_Controller
                 $seriePL='PC';           
                 
                 $this->load->model('planos_carga/preparacao/Preparacao_Carga');
-                $linhaGG=$this->Preparacao_Carga->getLinha($linha,$seriePL,$username,$funcionario_gpac);
-                $linha_afetada=$this->Preparacao_Carga->getLinha_afetada($linha,$seriePL,$username,$funcionario_gpac);
-                $lotes_gastos=$this->Preparacao_Carga->getLinha_lotesgastos($linha,$seriePL,$setor,$username,$funcionario_gpac);
+                $linhaGG=$this->Preparacao_Carga->getLinha($linha,$plano,$seriePL,$username,$funcionario_gpac);
+                $linha_afetada=$this->Preparacao_Carga->getLinha_afetada($linha,$plano,$seriePL,$username,$funcionario_gpac);
+                $lotes_gastos=$this->Preparacao_Carga->getLinha_lotesgastos($linha,$plano,$seriePL,$setor,$username,$funcionario_gpac);
 
                 $this->load->model('standards/others/Buttons');
                 $button=$this->Buttons->modal_buttons_empresa_anular_palete_gg(1);
@@ -1149,8 +1149,14 @@ class ListarPaletes extends CI_Controller
             $funcionario_gpac = $session_data['funcionario_gpac'];     
             
             $data=[]; 
+            $empGG = $_COOKIE['empresa'];
+            if($empGG == 'CERAGNI'){
+                $nova_serie='CG';
+            }else if($empGG == 'CERTECA'){
+                $nova_serie='CT';
+            }   
 
-            if($serie == 'CG'){
+            if($nova_serie == 'CG'){
                 $setor = '\'ST012\'';               
                 $seriePL='C';
                 $this->load->model('standards/stocks/GetPalets');
@@ -1164,7 +1170,7 @@ class ListarPaletes extends CI_Controller
                     'button' => $button
                 );     
 
-            }else if($serie == 'CT'){
+            }else if($nova_serie == 'CT'){
                 $setor = '\'CL006\'';               
                 $seriePL='PC';           
                 $this->load->model('standards/stocks/GetPalets');

@@ -17,7 +17,7 @@ $(".card-footer .row").hide();
 
 $.ajax({
     type: "GET",
-    url: "http://127.0.0.1/wyipist-fusion/standards/ListarPaletes/getPalets_prepararefs/"+serie+"/"+linha+"/"+refp,
+    url: "http://127.0.0.1/wyipist-fusion/standards/ListarPaletes/getPalets_prepararefs/"+serie+"/"+linha+"/"+plano+"/"+refp,
     dataType: "json",
     success: function (data) {
         if (data === "kick") {
@@ -27,6 +27,7 @@ $.ajax({
 
             palets=Object.values(data['linhaGG']);
             linhaGG(Object.values(data['linhaGG']));
+            k_OG=parseFloat(data['linhaGG'][0]['QtdPaletizada']);
             linha_afetada(Object.values(data['linha_afetada']));
             paletsOG=Object.values(data['linha_afetada']);
             lotes_gastos(Object.values(data['lotes_gastos']));
@@ -35,7 +36,7 @@ $.ajax({
             $("#modal_buttons").empty();
             $("#modal_buttons").append(data['button']); 
             $(".card-body .m-0").show();
-            $(".card-footer .row").show();            
+            $(".card-footer .row").show();     
         }
     },
     error: function (e) {
@@ -113,8 +114,7 @@ $.ajax({
     }
 });
 
-//$("#selected-palets-table").show();
-
+//$("#selected-palets-table").show();        
 /*LINHA EN*/
 function linhaGG(data){
     tableLinha= new Tabulator("#line-table", {
@@ -152,7 +152,7 @@ function linhaGG(data){
             {title:"Terceiro", field:"CodCL", align:"center", visible:false},
             {title:"Id", field:"Id", align:"center", visible:false}
         ]
-    });    
+    });               
 }
 
 function linha_afetada(data){
@@ -258,9 +258,10 @@ function selectedPalets(data){
             },cellEdited: function(cell) {
                 // Obter os dados da célula editada
                 let editedData = cell.getData();
-
+                //alert(k_OG);
                 // Inicializar o valor QtdPaletizada em tableLinha
-                let k = parseFloat(tableLinha.getData()[0]['QtdPaletizada']);                
+                //let k = parseFloat(tableLinha.getData()[0]['QtdPaletizada']);                
+                let k = parseFloat(k_OG);                
                 let row = tableLinha.getRowFromPosition(1); // Ajuste para a linha específica conforme necessário
                 row.update({ QtdPaletizada: 0 });
                 row.update({ QtdFalta: 0 });
@@ -407,6 +408,9 @@ function selectedPalets(data){
     
 }
 
+function select_all_paletes(){        
+    tablePaletes.selectRow("visible"); //select all rows currently visible in the table viewport;     
+}
 /*BTNS*/
 function choose_palets(){  
     toastr.clear();
@@ -417,7 +421,7 @@ function choose_palets(){
     flag=1;
     $.ajax({
         type: "GET",
-        url: "http://127.0.0.1/wyipist-fusion/standards/ListarPaletes/getPalets_prepararefs/"+serie+"/"+linha+"/"+refp,
+        url: "http://127.0.0.1/wyipist-fusion/standards/ListarPaletes/getPalets_prepararefs/"+serie+"/"+linha+"/"+plano+"/"+refp,
         dataType: "json",
         success: function (data) {
             if (data === "kick") {
@@ -426,7 +430,7 @@ function choose_palets(){
             } else {                                            
 
                 flag=1;
-                k_OG=tableLinha.getData()[0]['QtdPaletizada'];                
+                k_OG=parseFloat(tableLinha.getData()[0]['QtdPaletizada']);                
                 paletsOG=Object.values(data['paletes']);
                 getPalets(1,Object.values(data['paletes']));
                 $("#modal_buttons").empty();
@@ -529,6 +533,12 @@ function getPalets(parm,data){
             {title:"Lote", field:"Lote", align:"center",headerFilter:"input"},
             {title:"Calibre", field:"Calibre", align:"center",headerFilter:"input"},
             {title:"QTD.", field:"Quantidade", align:"center"},
+            {title:"QTD. a Usar", field:"NovaQtd",  hozAlign:"center", editor:"input",formatter:function (cell) {
+                let val = cell.getValue();
+                let el = cell.getElement();        
+                el.style.backgroundColor = "#fdfd96";        
+                return val;
+            }}, 
             {title:"UNI.", field:"Unidade", align:"center"},
             {title:"Sector", field:"Sector", align:"center",headerFilter:"input"},
             {title:"Formato", field:"Formato", align:"center", visible:false},
@@ -539,7 +549,6 @@ function getPalets(parm,data){
             {title:"RefCor", field:"RefCor", align:"center", visible:false},
             {title:"Nivel", field:"Nivel", align:"center", visible:false},
             {title:"TabEspessura", field:"TabEspessura", align:"center", visible:false},   
-            {title:"NovaQtd", field:"NovaQtd", align:"center", visible:false},   
             {title:"Sel", field:"Sel", align:"center", visible:false},
             {title:"Id", field:"Id", align:"center", visible:false}
         ];
@@ -794,14 +803,14 @@ function paletes_associadas(data){
 
 /*ATUALIZA QTDS*/
 function atualiza_qtdPL(selected){    
-    let k = tableLinha.getData()[0]['QtdPaletizada'];
+    let k = parseFloat(tableLinha.getData()[0]['QtdPaletizada']);
 
     let row=tableLinha.getRowFromPosition(1);
-    row.update({QtdPaletizada: 0});
-    row.update({QtdFalta: 0});
+    row.update({QtdPaletizada: parseFloat(0)});
+    row.update({QtdFalta: parseFloat(0)});
         
     for (let i = 0; i < selected.length; i++) {
-        k=k+selected[i]['NovaQtd'];
+        k=parseFloat(k)+parseFloat(selected[i]['NovaQtd']);
     }    
     
     row.update({QtdPaletizada: k});
@@ -887,6 +896,8 @@ function confirm_paletizar(tblPL,tblLoc,tblLote,tblAfet){
                 setTimeout(function () {
                     $('#obs-stk').trigger('focus');
                 }, 850);
+            }else{
+                save_palletize();
             }
         });    
     }else{
@@ -899,72 +910,81 @@ function save_palletize(){
     let obs = document.getElementById('obs-stk').value;
     let codigomotivo = $("#mt-stk").val();
 
-    if(obs != '' && codigomotivo == 'MT999'){
-        $(".card-footer .row").hide();
-        // Inicializa a flag com um valor padrão, por exemplo, 0
-        let flag = 0;
-        // Obtém o valor do cliente
-        let cliente = tableLinha.getData()[0]['Cliente'];
-        // Verifica se o valor contém "Certeca" ou "Ceragni" e define a flag
-        if (cliente.includes("Ceragni")) {
-            flag = 1;
-        } else if (cliente.includes("Certeca")) {
-            flag = 2;
-        }    
-        mtt = $("#mt-stk option:selected").text();
-        mt = $.trim(mtt);    
-
-        if(serie === 'CG'){
-            seriePL='PLC';
-            setorDestino='ST012';
-            setorCarga='CL007';
+    if(obs != ''){
+        if(obs != '' && codigomotivo == 'MT999'){
+            palletize();
         }else{
-            seriePL='PLPC';
-            setorDestino='CL006';
-            setorCarga='ST017';
+            toastr["error"]("Ao escolher o motivo 'Outro' tem de preencher Observações!");    
         }
-        
-        $.ajax({
-            type: "POST",
-            url: "http://127.0.0.1/wyipist-fusion/planos_carga/preparacao/PaletizarCarga/paletizar_carga/"+serie+"/"+flag,
-            dataType: "json",
-            data:{
-                encomenda: tblLoc,
-                paletes: tblPL,
-                motivo: mt,
-                codigomotivo: codigomotivo,
-                obs: obs,
-                serie: serie,
-                seriePL: seriePL,
-                setorDestino: setorDestino,
-                setorCarga: setorCarga 
-            },
-            success: function (data) {
-                if (data === "kick") {
-                    //alert("Outro utilizador entrou com as suas credenciais, faça login de novo.");
-                    toastr["warning"]("Outro utilizador entrou com as suas credenciais, faça login de novo.");
-                    window.location = "home/logout";
-                } else {
-                    toastr["success"]("Dados gravados com Sucesso");                    
-                    $(".card-footer .row").show();
-                    if(parseFloat(tableLinha.getData()[0]['Quantidade']) === parseFloat(tableLinha.getData()[0]['QtdPaletizada'])){
-                        // Construct the URL based on the PHP code you provided
-                        window.history.back();
-                    }else{
-                        location.reload();
-                    }                
-                }
-            },
-            error: function (e) {
-                //alert(e);
-                alert('Request Status: ' + e.status + ' Status Text: ' + e.statusText + ' ' + e.responseText);
-                toastr["error"]("Erro ao gravar dados");    
-                //console.log(e);
-            }
-        });
     }else{
-        toastr["error"]("Ao escolher o motivo 'Outro' tem de preencher Observações!");    
+        palletize();
     }
+}
+
+function palletize(){
+
+    $(".card-footer .row").hide();
+    // Inicializa a flag com um valor padrão, por exemplo, 0
+    let flag = 0;
+    // Obtém o valor do cliente
+    let cliente = tableLinha.getData()[0]['Cliente'];
+    // Verifica se o valor contém "Certeca" ou "Ceragni" e define a flag
+    if (cliente.includes("Ceragni")) {
+        flag = 1;
+    } else if (cliente.includes("Certeca")) {
+        flag = 2;
+    }    
+    mtt = $("#mt-stk option:selected").text();
+    mt = $.trim(mtt);    
+
+    if(serie === 'CG'){
+        seriePL='PLC';
+        setorDestino='ST012';
+        setorCarga='CL007';
+    }else{
+        seriePL='PLPC';
+        setorDestino='CL006';
+        setorCarga='ST017';
+    }
+    
+    $.ajax({
+        type: "POST",
+        url: "http://127.0.0.1/wyipist-fusion/planos_carga/preparacao/PaletizarCarga/paletizar_carga/"+serie+"/"+flag,
+        dataType: "json",
+        data:{
+            encomenda: tblLoc,
+            paletes: tblPL,
+            motivo: mt,
+            codigomotivo: codigomotivo,
+            obs: obs,
+            serie: serie,
+            seriePL: seriePL,
+            setorDestino: setorDestino,
+            setorCarga: setorCarga 
+        },
+        success: function (data) {
+            if (data === "kick") {
+                //alert("Outro utilizador entrou com as suas credenciais, faça login de novo.");
+                toastr["warning"]("Outro utilizador entrou com as suas credenciais, faça login de novo.");
+                window.location = "home/logout";
+            } else {
+                toastr["success"]("Dados gravados com Sucesso");                    
+                $(".card-footer .row").show();
+                if(parseFloat(tableLinha.getData()[0]['Quantidade']) === parseFloat(tableLinha.getData()[0]['QtdPaletizada'])){
+                    // Construct the URL based on the PHP code you provided
+                    window.history.back();
+                }else{
+                    location.reload();
+                }                
+            }
+        },
+        error: function (e) {
+            //alert(e);
+            alert('Request Status: ' + e.status + ' Status Text: ' + e.statusText + ' ' + e.responseText);
+            toastr["error"]("Erro ao gravar dados");    
+            //console.log(e);
+        }
+    });
 }
 
 function cancel_palets(){

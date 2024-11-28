@@ -101,7 +101,7 @@
                                 </li>      
                             </ul>
                         </li>
-                        
+
                         <li id="menu-stk01" class="nav-item">
                             <a id="menu-stk02" href="#" class="nav-link">
                                 <i class="fas fa-edit nav-icon"></i>
@@ -166,13 +166,14 @@
                             </a>
                         </li>
                         
+                        <!--
                         <li id="anula-carg01" class="nav-item">
                             <a id="anula-carg02" href="<?=base_url();?>load_plans/cancellation_of_load_preparation" class="nav-link">
                                 <i class="fas fa-times-circle nav-icon"></i>
                                 <p> Anulação Prep. de Cargas</p>
                             </a>
                         </li>    
-
+                        -->
                         <!--
                         <li id="correc-carg01" class="nav-item">
                             <a id="correc-carg02" href="<?=base_url();?>load_plans/correction_of_load_preparation" class="nav-link">

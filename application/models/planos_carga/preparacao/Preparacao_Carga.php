@@ -18,7 +18,7 @@ class Preparacao_Carga extends CI_Model
                        row_number() over(order by D.DataPrevista, D.Numero)-1 Id, D.Serie, convert(char,D.Data,105) Data, cast(null as datetime) UltimaEdicao
                 from VdEncs B join Clientes      F on (B.Terceiro=F.Codigo)
                               join VdLEncs       C on (B.Numero=C.NumeroDocumento)
-                              join PrGuias       D on (C.DocumentoCarga=D.Numero and D.Estado='{$estado}' and D.Serie='{$serie}' and D.Codigo='{$tipoDoc}')
+                              join PrGuias       D on (C.DocumentoCarga=D.Numero and D.Estado='{$estado}' and D.Serie in ({$serie}) and D.Codigo='{$tipoDoc}')
                 where isnull(C.DocumentoCarga,'')<>'' and isnull(C.Referencia,'')<>''
                 group by F.Nome, D.Numero, D.DataPrevista, isnull(D.VossaRef,''), D.NossaRef, D.Serie, convert(char,D.Data,105)";
         $query = $this->db->query($sql);
@@ -41,8 +41,8 @@ class Preparacao_Carga extends CI_Model
         $this->createTBL_QtdPL($tbl01);
         $sql01="INSERT INTO ". $tbl01 ." (LinhaDocumento,Documento,Quantidade)".
                 "SELECT A.LinhaDocumento, A.Documento, round(sum(A.Quantidade),4) Quantidade
-                 from PlLDocs A join PlDocs B on (A.NumeroDocumento=B.Numero)
-                 where B.Serie='{$seriePL}' and B.Estado<>'A'
+                 from PlLDocs A join PlDocs B on (A.NumeroSerieInferior='{$plano}' and A.NumeroDocumento=B.Numero)
+                 where B.Estado<>'A'
                  group by A.LinhaDocumento, A.Documento";        
         $this->db->query($sql01);
         //echo $sql01;
@@ -111,7 +111,7 @@ class Preparacao_Carga extends CI_Model
                 */
     }
 
-    public function getLinha($linha,$seriePL,$username,$funcionario_gpac){
+    public function getLinha($linha,$plano,$seriePL,$username,$funcionario_gpac){
 
         $this->load->dbforge();
 
@@ -120,7 +120,7 @@ class Preparacao_Carga extends CI_Model
             $user=strtoupper($username);
         }        
         //RECOLHE_QTD_PALETE
-        $tbl01 = $user.'.MS_QtdPL';
+        /*$tbl01 = $user.'.MS_QtdPL';
         $this->createTBL_QtdPL($tbl01);
         $sql01="INSERT INTO ". $tbl01 ." (LinhaDocumento,Documento,Quantidade)".
                 "SELECT A.LinhaDocumento, A.Documento, round(sum(A.Quantidade),4) Quantidade
@@ -128,7 +128,16 @@ class Preparacao_Carga extends CI_Model
                  where B.Serie='{$seriePL}' and B.Estado<>'A'
                  group by A.LinhaDocumento, A.Documento";        
         $this->db->query($sql01);
-        //echo $query;
+        */
+        $tbl01 = $user.'.MS_QtdPL';
+        $this->createTBL_QtdPL($tbl01);
+        $sql01="INSERT INTO ". $tbl01 ." (LinhaDocumento,Documento,Quantidade)".
+                "SELECT A.LinhaDocumento, A.Documento, round(sum(A.Quantidade),4) Quantidade
+                 from PlLDocs A join PlDocs B on (A.NumeroSerieInferior='{$plano}' and A.NumeroDocumento=B.Numero)
+                 where B.Estado<>'A'
+                 group by A.LinhaDocumento, A.Documento";        
+        $this->db->query($sql01);
+        //echo $sql01;
 
         //RECOLHE_DATA HORA ÚLTIMA EDIÇÃO
         $tbl02 = $user.'.MS_UltimaEdicao';
@@ -194,7 +203,7 @@ class Preparacao_Carga extends CI_Model
                 */
     }
 
-    public function getLinha_afetada($linha,$seriePL,$username,$funcionario_gpac){
+    public function getLinha_afetada($linha,$plano,$seriePL,$username,$funcionario_gpac){
 
         $this->load->dbforge();
 
@@ -207,10 +216,20 @@ class Preparacao_Carga extends CI_Model
         $this->createTBL_QtdPL($tbl01);
         $sql01="INSERT INTO ". $tbl01 ." (LinhaDocumento,Documento,Quantidade)".
                 "SELECT A.LinhaDocumento, A.Documento, round(sum(A.Quantidade),4) Quantidade
+                 from PlLDocs A join PlDocs B on (A.NumeroSerieInferior='{$plano}' and A.NumeroDocumento=B.Numero)
+                 where B.Estado<>'A'
+                 group by A.LinhaDocumento, A.Documento";        
+        $this->db->query($sql01);
+        /*
+        $tbl01 = $user.'.MS_QtdPL';
+        $this->createTBL_QtdPL($tbl01);
+        $sql01="INSERT INTO ". $tbl01 ." (LinhaDocumento,Documento,Quantidade)".
+                "SELECT A.LinhaDocumento, A.Documento, round(sum(A.Quantidade),4) Quantidade
                  from PlLDocs A join PlDocs B on (A.NumeroDocumento=B.Numero)
                  where B.Serie='{$seriePL}' and B.Estado<>'A'
                  group by A.LinhaDocumento, A.Documento";        
         $this->db->query($sql01);
+        */
         //echo $query;
 
         //RECOLHE_DATA HORA ÚLTIMA EDIÇÃO
@@ -284,7 +303,7 @@ class Preparacao_Carga extends CI_Model
                 */
     }
 
-    public function getLinha_lotesgastos($linha,$seriePL,$setor,$username,$funcionario_gpac){
+    public function getLinha_lotesgastos($linha,$plano,$seriePL,$setor,$username,$funcionario_gpac){
 
         $this->load->dbforge();
 
@@ -297,10 +316,20 @@ class Preparacao_Carga extends CI_Model
         $this->createTBL_QtdPL($tbl01);
         $sql01="INSERT INTO ". $tbl01 ." (LinhaDocumento,Documento,Quantidade)".
                 "SELECT A.LinhaDocumento, A.Documento, round(sum(A.Quantidade),4) Quantidade
+                 from PlLDocs A join PlDocs B on (A.NumeroSerieInferior='{$plano}' and A.NumeroDocumento=B.Numero)
+                 where B.Estado<>'A'
+                 group by A.LinhaDocumento, A.Documento";        
+        $this->db->query($sql01);
+        /*
+        $tbl01 = $user.'.MS_QtdPL';
+        $this->createTBL_QtdPL($tbl01);
+        $sql01="INSERT INTO ". $tbl01 ." (LinhaDocumento,Documento,Quantidade)".
+                "SELECT A.LinhaDocumento, A.Documento, round(sum(A.Quantidade),4) Quantidade
                  from PlLDocs A join PlDocs B on (A.NumeroDocumento=B.Numero)
                  where B.Serie='{$seriePL}' and B.Estado<>'A'
                  group by A.LinhaDocumento, A.Documento";        
         $this->db->query($sql01);
+        */
         //echo $query;
 
         //RECOLHE_DATA HORA ÚLTIMA EDIÇÃO

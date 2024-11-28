@@ -39,7 +39,14 @@ class PreparaRef extends CI_Controller
 
             $session_data = $this->session->userdata('logged_in');
             $_SESSION["PlanoGG"]=$docGG;
-            $_SESSION["SerieGG"]=$serieGG;
+            
+            $empGG = $_COOKIE['empresa'];
+
+            if($empGG == 'CERAGNI'){
+                $_SESSION["SerieGG"]='CG';
+            }else if($empGG == 'CERTECA'){
+                $_SESSION["SerieGG"]='CT';
+            }                        
             $_SESSION["DocEN"]=$docEN;
             $_SESSION["Linha"]=$linha;
             $_SESSION["Referencia"]=$refp;

@@ -74,7 +74,7 @@ class Buttons extends CI_Model
         return $value;
     }
 
-    public function buttons_empresa_confirmar_palete(){
+    public function buttons_empresa_confirmar_palete($parm){
         //echo $empresa.'sdfvsdv';
         $value='<div class="row">        
                    <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
@@ -90,7 +90,8 @@ class Buttons extends CI_Model
     public function modal_buttons_empresa_anular_palete_gg($parm){
         $value='';
         if($parm == 1){
-            $value='<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i> Cancelar</button>		
+            $value='<button onclick="select_all_paletes()" id="select-all" type="button" class="btn btn-light" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;background-color:#E6D9A2;border-color:#D4C38F"><i class="fas fa-clipboard-check"></i> Selecionar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i> Cancelar</button>		
                     <button onclick="save_paletes()" type="button" class="btn btn-success"><i class="fas fa-arrow-right"></i> Continuar</button>';
         }else if($parm == 0){
             $value='<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i> Cancelar</button>		

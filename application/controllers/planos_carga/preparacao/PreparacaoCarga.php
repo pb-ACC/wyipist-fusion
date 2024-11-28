@@ -62,7 +62,8 @@ class PreparacaoCarga extends CI_Controller
             switch ($empresa[0]->TipoEmpresa) {
                 case 1:
                     $tipoDoc='GG';
-                    $serie='CG';                    
+                    //$serie='CG';                    
+                    $serie = '\'CG\', \'A\'';    
                     $estado='P';                   
                     $this->load->model('planos_carga/preparacao/Preparacao_Carga');
                     $carga=$this->Preparacao_Carga->getPreparacaoCarga($tipoDoc,$serie,$estado); 
@@ -75,7 +76,8 @@ class PreparacaoCarga extends CI_Controller
                     break;
                 case 2:
                     $tipoDoc='GG';
-                    $serie='CT';                    
+                    //$serie='CT';                    
+                    $serie = '\'CT\', \'A\'';    
                     $estado='P';
                     $this->load->model('planos_carga/preparacao/Preparacao_Carga');
                     $carga=$this->Preparacao_Carga->getPreparacaoCarga($tipoDoc,$serie,$estado); 
@@ -88,7 +90,8 @@ class PreparacaoCarga extends CI_Controller
                     break;
                 case 3:
                     $tipoDoc='GG';
-                    $serie='CG';                    
+                    //$serie='CG';                    
+                    $serie = '\'CG\', \'A\'';    
                     $estado='P';
                     $this->load->model('planos_carga/preparacao/Preparacao_Carga');
                     $carga=$this->Preparacao_Carga->getPreparacaoCarga($tipoDoc,$serie,$estado); 
@@ -105,7 +108,8 @@ class PreparacaoCarga extends CI_Controller
                     break;
                 case 4:
                     $tipoDoc='GG';
-                    $serie='CG';                    
+                    //$serie='CG';                    
+                    $serie = '\'CG\', \'A\'';    
                     $estado='P';     
                     $this->load->model('planos_carga/preparacao/Preparacao_Carga');
                     $carga=$this->Preparacao_Carga->getPreparacaoCarga($tipoDoc,$serie,$estado); 

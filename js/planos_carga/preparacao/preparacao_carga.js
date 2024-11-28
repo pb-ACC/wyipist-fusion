@@ -109,6 +109,20 @@ function getPlanoCarga(data){
         //e - the click event object
         //row - row component
         //alert(row.getData().DocumentoCarga);
+        emp = $.trim($("#empresasDP option:selected").text()).toUpperCase();
+        // Verificar se há uma empresa selecionada
+        if (emp == '') {
+            // Dependendo do código da empresa, atribuir valores padrão
+            if (codigoempresa == 1) {
+                emp = "CERAGNI";
+            } else if (codigoempresa == 2) {
+                emp = "CERTECA";
+            } else {
+                emp = "CERAGNI";
+            }
+        }        
+        // Define o cookie
+        document.cookie = `empresa=${emp}; path=/`;
         window.location.href = "load_preparation/"+row.getData().Serie+"/"+row.getData().DocumentoCarga;        
     });
 }

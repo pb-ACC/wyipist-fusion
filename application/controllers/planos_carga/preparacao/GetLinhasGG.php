@@ -19,7 +19,17 @@ class GetLinhasGG extends CI_Controller
             
             $session_data = $this->session->userdata('logged_in');            
             $_SESSION["PlanoGG"]=$plano;
-            $_SESSION["SerieGG"]=$serie;
+            
+            $empGG = $_COOKIE['empresa'];
+
+            if($empGG == 'CERAGNI'){
+                $serGG='CG';
+            }else if($empGG == 'CERTECA'){
+                $serGG='CT';
+            }
+
+            $_SESSION["SerieGG_OG"]=$serie;
+            $_SESSION["SerieGG"]=$serGG;
 
             $this->load->view('structure/header', $session_data);
             $this->load->view('structure/side_menu', $session_data);
