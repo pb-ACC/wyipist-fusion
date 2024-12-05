@@ -384,12 +384,12 @@ class Paletizar_Carga extends CI_Model
                                           QuantidadeUnidade, Referencia, Artigo, DescricaoArtigo, Formato, RefCor, Qual, TipoEmbalagem, Superficie, Lote, Calibre,
                                           Decoracao, Acabamento, Coleccao, TabEspessura, RefP, Unidade, Preco, PrecoNM, Desconto, Iva, TaxaIva,
                                           Local, KeyScript, Palete, DocPL, LinhaPL, TotalMercadoria, TotalDescontos, DescFin, TotalIliquido, TotalIva, TotalLiquido, TotalMercadoriaNM,
-                                          TotalDescontosNM, DescFinNM, TotalIliquidoNM, TotalIvaNM, TotalLiquidoNM, OperadorMOV, DataHoraMOV,UnidadeStock,RelUni,FactorRelUni,DataStockMOV,Status,Changed)".
+                                          TotalDescontosNM, DescFinNM, TotalIliquidoNM, TotalIvaNM, TotalLiquidoNM, OperadorMOV, DataHoraMOV,UnidadeStock,RelUni,FactorRelUni,DataStockMOV,Status,Changed,QuantidadeUnStock)".
                    "SELECT LinhaDocumento, 'SP', NumeroDocumento, Documento, TipoMovimento, Sector, NumeroSerieInferior, NumeroSerieSuperior, Quantidade, QuantidadeUnidade, Referencia, 
                            Artigo, DescricaoArtigo, Formato, RefCor, Qual, TipoEmbalagem, Superficie, Lote, Calibre, Decoracao, Acabamento, Coleccao, TabEspessura, RefP, 
                            Unidade, Preco, PrecoNM, Desconto, Iva, TaxaIva, Local, KeyScript, Palete, DocPL, LinhaPL, TotalMercadoria, TotalDescontos, DescFin, TotalIliquido, TotalIva, 
                            TotalLiquido, TotalMercadoriaNM, TotalDescontosNM, DescFinNM, TotalIliquidoNM, TotalIvaNM, TotalLiquidoNM, OperadorMOV, DataHoraMOV, Unidade, CONCAT(Unidade,' = ',Unidade), 1, 
-                           DataHoraMOV, 'SP', 1
+                           DataHoraMOV, 'SP', 1, Quantidade
                     FROM ".$tbl01."";
                     //echo $sql09;
             $this->db->query($sql13);
