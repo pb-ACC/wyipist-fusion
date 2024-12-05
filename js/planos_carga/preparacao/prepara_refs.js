@@ -525,7 +525,7 @@ function getPalets(parm,data){
     
     if(parm==1){
         columns=[
-            {title:"Palete", field:"DocPL", align:"center",headerFilter:"input"},
+            {title:"Palete", field:"DocPL", align:"center",headerFilter:"input", width:140},
             {title:"LinhaPL", field:"LinhaPL", align:"center", visible:false},                
             {title:"Referencia", field:"Referencia", align:"center",headerFilter:"input"},
             {title:"Artigo", field:"Artigo", align:"center", visible:false},
@@ -564,7 +564,7 @@ function getPalets(parm,data){
             {title:"Lote", field:"Lote", align:"center",headerFilter:"input"},
             {title:"Calibre", field:"Calibre", align:"center",headerFilter:"input"},
             {title:"QTD.", field:"Quantidade", align:"center",headerFilter:"input"},
-            {title:"Palete Origem", field:"PaleteOrigem", align:"center",headerFilter:"input"},
+            {title:"Palete Origem", field:"PaleteOrigem", align:"center",headerFilter:"input",width:140},
             {title:"DataHoraMOV", field:"DataHoraMOV", align:"center",headerFilter:"input"},
             {title:"Documento", field:"Documento", align:"center",headerFilter:"input",visible:false},
             {title:"Carga", field:"Carga", align:"center", visible:false},
