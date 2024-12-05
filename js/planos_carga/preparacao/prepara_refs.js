@@ -814,9 +814,9 @@ function atualiza_qtdPL(selected){
         k=parseFloat(k)+parseFloat(selected[i]['NovaQtd']);
     }    
     
-    row.update({QtdPaletizada: k});
+    row.update({QtdPaletizada: k.toFixed(2)});
     let j = tableLinha.getData()[0]['Quantidade'];
-    x=j-k;
+    x=(j-k).toFixed(2);
     row.update({QtdFalta: x});
 }
 
@@ -836,7 +836,7 @@ function atualiza_lotesConsumidos(selected){
             };
         }
         // 3. Sum the values
-        groupedData[key].Quantidade = parseFloat(groupedData[key].Quantidade) + parseFloat(row.Quantidade);
+        groupedData[key].Quantidade = (parseFloat(groupedData[key].Quantidade) + parseFloat(row.Quantidade)).toFixed(2);
     });
     
     // Convert groupedData object back to an array if needed
