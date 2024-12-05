@@ -29,12 +29,7 @@
                         <button class="btn btn-light btn-sm btn-flat" title="Atualizar Página" onclick="location.reload();" style="margin-right: 10px;float: right">Atualizar Página</button>
 					</div>
                 </div>
-                <div class="card-body">
-                    <div class="row">
-                        <h3 class="m-0">Linha da Encomenda</h3>
-                        <div id="line-table" class="table table-striped"  style="margin-top: 35px;box-shadow: 5px 10px 18px #888888;">
-                        </div>
-                    </div>  
+                <div class="card-body">  
                     <div class="row">        
                         <div class="col-sm-12 col-sm-push-6 col-xs-12 col-md-6 col-md-push-6 col-lg-6 col-lg-push-6">
                             <h3 class="m-0">Lotes Afetados</h3>
@@ -45,6 +40,11 @@
                             <h3 class="m-0">Lotes Consumidos</h3>
                             <div id="lotes_consumidos-table" class="table table-striped"  style="margin-top: 35px;box-shadow: 5px 10px 18px #888888;">
                             </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h3 class="m-0">Linha da Encomenda</h3>
+                        <div id="line-table" class="table table-striped"  style="margin-top: 35px;box-shadow: 5px 10px 18px #888888;">
                         </div>
                     </div>
                     <div class="row">
