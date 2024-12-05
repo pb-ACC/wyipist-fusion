@@ -51,7 +51,7 @@ class Anulacao_Carga extends CI_Model
 
         //faz movimento entre empresas 
         if($movimenta == 1){
-            $this->anula_mov_entre_empresas($tbl01,$palete_cliente,$setor_cliente,$user);
+            $this->anula_mov_entre_empresas($tbl01,$palete_cliente,$setor_cliente,$local,$user);
             $this->atualiza_reverte($palete_origem);
         }
 
