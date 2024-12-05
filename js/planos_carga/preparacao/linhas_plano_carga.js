@@ -88,7 +88,16 @@ function linhasPlanoCarga(data){
             {title:"Descrição", field:"DescricaoArtigo", align:"center", headerFilter:"input"},  
             {title:"Quantidade", field:"Quantidade", align:"center", headerFilter:"input",width:140},  
             {title:"Paletizado", field:"QtdPaletizada", align:"center", headerFilter:"input",width:140},
-            {title:"Falta", field:"QtdFalta", align:"center", headerFilter:"input",width:140},
+            {title:"Falta", field:"QtdFalta", align:"center", headerFilter:"input",width:140,
+                formatter:function (cell) {
+                    let val = cell.getValue();
+                    let el = cell.getElement();      
+                    if (val > 0) {
+                        el.style.backgroundColor = "#fd8f52";                                
+                    }
+                    return val;
+                }
+            },
             {title:"Uni.", field:"Unidade", align:"center", headerFilter:"input", width:78},  
             {title:"Apontamentos", field:"Descricao", align:"center", headerFilter:"input",visible:false},
             {title:"Artigo", field:"Artigo", align:"center",sorter:"date", headerFilter:"input",visible:false},  
