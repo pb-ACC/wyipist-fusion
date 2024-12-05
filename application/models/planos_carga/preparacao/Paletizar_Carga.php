@@ -12,7 +12,7 @@ class Paletizar_Carga extends CI_Model
         //$this->db->reconnect();
     }
 
-    public function paletizar_carga($serie,$flag,$Cliente,$DocumentoCarga,$NumeroDocumento,$NumeroLinha,$QtdEN,$QtdPaletizada,$QtdFalta,$Sector,$Local,$Artigo,$Referencia,
+    public function paletizar_carga($serie,$flag,$codigoCL,$nomeCL,$DocumentoCarga,$NumeroDocumento,$NumeroLinha,$QtdEN,$QtdPaletizada,$QtdFalta,$Sector,$Local,$Artigo,$Referencia,
                                     $DescricaoArtigo,$Lote,$Calibre,$Formato,$Qual,$TipoEmbalagem,$Superficie,$Decoracao,$RefCor,$TabEspessura,$Nivel,$Quantidade,$NovaQtd,$Unidade,
                                     $LinhaPL,$DocPL,$motivo,$codigomotivo,$obs,$serieEmp,$seriePL,$setorDestino,$setorCarga,$username,$funcionario_gpac){
         $this->load->dbforge();
@@ -21,11 +21,6 @@ class Paletizar_Carga extends CI_Model
             $user=strtoupper($username);
         }    
 
-        $iNomeCL=$this->getNomeCL($Cliente);
-        foreach ($iNomeCL as $val) {
-            $nomeCL = $val->Nome;
-        }
-        
         //DOC GERADOS
         $tbl01 = $user.'.MS_DocsGerados';
         $this->createTBL_DocsGerados($tbl01);
@@ -77,7 +72,7 @@ class Paletizar_Carga extends CI_Model
         $this->update_Series_SP($NumeradorSP,$CodigoSP,$SerieSP);
          
         //entrada em stock da PLS criada (Stkldocs)
-        $this->movimento_stock_paletes($NumeroSP,$CodigoSP,$NumeroPL,$CodigoPL,$serie,$flag,$Cliente,$DocumentoCarga,$NumeroDocumento,$NumeroLinha,$QtdEN,$QtdPaletizada,$QtdFalta,
+        $this->movimento_stock_paletes($NumeroSP,$CodigoSP,$NumeroPL,$CodigoPL,$serie,$flag,$DocumentoCarga,$NumeroDocumento,$NumeroLinha,$QtdEN,$QtdPaletizada,$QtdFalta,
                                        $Sector,$Local,$Artigo,$Referencia,$DescricaoArtigo,$Lote,$Calibre,$Formato,$Qual,$TipoEmbalagem,$Superficie,$Decoracao,$RefCor,$TabEspessura,
                                        $Nivel,$Quantidade,$NovaQtd,$Unidade,$LinhaPL,$DocPL,$motivo,$codigomotivo,$obs,$seriePL,$setorDestino,$setorCarga,$user);
 
@@ -311,7 +306,7 @@ class Paletizar_Carga extends CI_Model
         $this->db->close();
     }
 
-    public function movimento_stock_paletes($NumeroSP,$CodigoSP,$NumeroPL,$CodigoPL,$serie,$flag,$Cliente,$DocumentoCarga,$NumeroDocumento,$NumeroLinha,$QtdEN,$QtdPaletizada,$QtdFalta,
+    public function movimento_stock_paletes($NumeroSP,$CodigoSP,$NumeroPL,$CodigoPL,$serie,$flag,$DocumentoCarga,$NumeroDocumento,$NumeroLinha,$QtdEN,$QtdPaletizada,$QtdFalta,
                                             $Sector,$Local,$Artigo,$Referencia,$DescricaoArtigo,$Lote,$Calibre,$Formato,$Qual,$TipoEmbalagem,$Superficie,$Decoracao,$RefCor,
                                             $TabEspessura,$Nivel,$Quantidade,$NovaQtd,$Unidade,$LinhaPL,$DocPL,$motivo,$codigomotivo,$obs,$seriePL,$setorDestino,$setorCarga,$user){
         //$reluni='M2 = M2';

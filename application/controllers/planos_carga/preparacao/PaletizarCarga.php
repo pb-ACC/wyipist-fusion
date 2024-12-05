@@ -40,7 +40,8 @@ class PaletizarCarga extends CI_Controller
             $countTBL = count($paletes, COUNT_RECURSIVE);
             if ($countTBL > 2) {                
 
-                $Cliente = $encomenda[0]['Cliente'];
+                $codigoCL = $encomenda[0]['CodCL'];
+                $nomeCL = $encomenda[0]['Cliente'];
                 $DocumentoCarga = $encomenda[0]['DocumentoCarga'];
                 $NumeroDocumento = $encomenda[0]['NumeroDocumento'];
                 $NumeroLinha = $encomenda[0]['NumeroLinha'];
@@ -70,7 +71,7 @@ class PaletizarCarga extends CI_Controller
                     $LinhaPL = $paletes[$i]['LinhaPL'];
                     $DocPL = $paletes[$i]['DocPL'];
                            
-                    $this->Paletizar_Carga->paletizar_carga($serie,$flag,$Cliente,$DocumentoCarga,$NumeroDocumento,$NumeroLinha,$QtdEN,$QtdPaletizada,$QtdFalta,$Sector,$Local,$Artigo,
+                    $this->Paletizar_Carga->paletizar_carga($serie,$flag,$codigoCL,$nomeCL,$DocumentoCarga,$NumeroDocumento,$NumeroLinha,$QtdEN,$QtdPaletizada,$QtdFalta,$Sector,$Local,$Artigo,
                                                             $Referencia,$DescricaoArtigo,$Lote,$Calibre,$Formato,$Qual,$TipoEmbalagem,$Superficie,$Decoracao,$RefCor,$TabEspessura,$Nivel,
                                                             $Quantidade,$NovaQtd,$Unidade,$LinhaPL,$DocPL,$motivo,$codigomotivo,$obs,$serieEmp,$seriePL,$setorDestino,$setorCarga,$username,$funcionario_gpac);    
                  }
