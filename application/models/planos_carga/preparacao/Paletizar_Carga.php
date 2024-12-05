@@ -380,12 +380,12 @@ class Paletizar_Carga extends CI_Model
             $this->db->query($sql12);
             $this->db->close();
             
-            $sql13="INSERT INTO StkLDocs (LinhaDocumento, NumeroDocumento, Documento, TipoMovimento, Sector, NumeroSerieInferior, NumeroSerieSuperior, Quantidade,
+            $sql13="INSERT INTO StkLDocs (LinhaDocumento, CodigoDocumento, NumeroDocumento, Documento, TipoMovimento, Sector, NumeroSerieInferior, NumeroSerieSuperior, Quantidade,
                                           QuantidadeUnidade, Referencia, Artigo, DescricaoArtigo, Formato, RefCor, Qual, TipoEmbalagem, Superficie, Lote, Calibre,
                                           Decoracao, Acabamento, Coleccao, TabEspessura, RefP, Unidade, Preco, PrecoNM, Desconto, Iva, TaxaIva,
                                           Local, KeyScript, Palete, DocPL, LinhaPL, TotalMercadoria, TotalDescontos, DescFin, TotalIliquido, TotalIva, TotalLiquido, TotalMercadoriaNM,
                                           TotalDescontosNM, DescFinNM, TotalIliquidoNM, TotalIvaNM, TotalLiquidoNM, OperadorMOV, DataHoraMOV)".
-                   "SELECT LinhaDocumento, NumeroDocumento, Documento, TipoMovimento, Sector, NumeroSerieInferior, NumeroSerieSuperior, Quantidade, QuantidadeUnidade, Referencia, 
+                   "SELECT LinhaDocumento, 'SP', NumeroDocumento, Documento, TipoMovimento, Sector, NumeroSerieInferior, NumeroSerieSuperior, Quantidade, QuantidadeUnidade, Referencia, 
                            Artigo, DescricaoArtigo, Formato, RefCor, Qual, TipoEmbalagem, Superficie, Lote, Calibre, Decoracao, Acabamento, Coleccao, TabEspessura, RefP, 
                            Unidade, Preco, PrecoNM, Desconto, Iva, TaxaIva, Local, KeyScript, Palete, DocPL, LinhaPL, TotalMercadoria, TotalDescontos, DescFin, TotalIliquido, TotalIva, 
                            TotalLiquido, TotalMercadoriaNM, TotalDescontosNM, DescFinNM, TotalIliquidoNM, TotalIvaNM, TotalLiquidoNM, OperadorMOV, DataHoraMOV
