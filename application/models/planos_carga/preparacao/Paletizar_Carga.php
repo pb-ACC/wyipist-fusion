@@ -91,7 +91,7 @@ class Paletizar_Carga extends CI_Model
                   //  for($gg=$TotLinhas;$gg>0;$gg--){
         
                             //cria PLS
-                            $DocPLS=$this->getMax_PL($serie);
+                            $DocPLS=$this->getMax_PL($serieEmp);
                             //print_r($DocSP);
                             
                             foreach ($DocPLS as $val) {
@@ -318,29 +318,29 @@ class Paletizar_Carga extends CI_Model
         // PL | PLP
         $sql09="INSERT INTO ".$tbl01." (LinhaDocumento, NumeroDocumento, Documento, TipoMovimento, Sector, NumeroSerieInferior, NumeroSerieSuperior, Quantidade,
                                         QuantidadeUnidade, Referencia, Artigo, DescricaoArtigo, Formato, RefCor, Qual, TipoEmbalagem, Superficie, Lote, Calibre,
-                                        Decoracao, Acabamento, Coleccao, TabEspessura, RefP, Referencia, Unidade, Preco, PrecoNM, Desconto, Iva, TaxaIva,
+                                        Decoracao, Acabamento, Coleccao, TabEspessura, RefP, Unidade, Preco, PrecoNM, Desconto, Iva, TaxaIva,
                                         Local, KeyScript, Palete, DocPL, LinhaPL, TotalMercadoria, TotalDescontos, DescFin, TotalIliquido, TotalIva, TotalLiquido, TotalMercadoriaNM,
                                         TotalDescontosNM, DescFinNM, TotalIliquidoNM, TotalIvaNM, TotalLiquidoNM, OperadorMOV, DataHoraMOV)".
                 "SELECT 0, '{$NumeroSP}', '', '12', '{$Sector}', 'PALETIZAÇÃO CLIENTE 2', '', {$NovaQtd}, {$NovaQtd}, '{$Referencia}', '{$Artigo}', '{$DescricaoArtigo}', '{$Formato}', 
-                       '{$RefCor}', '{$Qual}', '{$TipoEmbalagem}', '{$Superficie}', '{$Lote}', '{$Calibre}', '{$Decoracao}', B.Acabamento', B.Coleccao, '{$TabEspessura}', '{$Referencia}', 
-                       '{$Unidade}', B.Custo, B.Custo, '0', '00', 0, '{$Local}', 'Paletizar_Carga#movimento_stock_paletes_sql09', '{$DocPL}', '{$DocPL}', {$LinhaPL}, B.Custo*{$NovaQtd}, 0, 0, 
-                       B.Custo*{$NovaQtd}, 0, B.Custo*{$NovaQtd}, B.Custo*{$NovaQtd}, 0, 0, B.Custo*{$NovaQtd}, 0, B.Custo*{$NovaQtd},'{$user}', getdate()
+                       '{$RefCor}', '{$Qual}', '{$TipoEmbalagem}', '{$Superficie}', '{$Lote}', '{$Calibre}', '{$Decoracao}', B.Acabamento, B.Coleccao, '{$TabEspessura}', '{$Referencia}', 
+                       '{$Unidade}', B.Preco, B.PrecoNM, '0', '00', 0, '{$Local}', 'Paletizar_Carga#movimento_stock_paletes_sql09', '{$DocPL}', '{$DocPL}', {$LinhaPL}, B.Preco*{$NovaQtd}, 0, 0, 
+                       B.PrecoNM*{$NovaQtd}, 0, B.PrecoNM*{$NovaQtd}, B.PrecoNM*{$NovaQtd}, 0, 0, B.PrecoNM*{$NovaQtd}, 0, B.PrecoNM*{$NovaQtd},'{$user}', getdate()
                 FROM PlLDocs B
                 where B.NumeroDocumento='{$DocPL}'";
-                //echo $sql09;
+            //echo $sql09;
             $this->db->query($sql09);
             $this->db->close();
 
             // PLC | PLPC
             $sql10="INSERT INTO ".$tbl01." (LinhaDocumento, NumeroDocumento, Documento, TipoMovimento, Sector, NumeroSerieInferior, NumeroSerieSuperior, Quantidade,
                                             QuantidadeUnidade, Referencia, Artigo, DescricaoArtigo, Formato, RefCor, Qual, TipoEmbalagem, Superficie, Lote, Calibre,
-                                            Decoracao, Acabamento, Coleccao, TabEspessura, RefP, Referencia, Unidade, Preco, PrecoNM, Desconto, Iva, TaxaIva,
+                                            Decoracao, Acabamento, Coleccao, TabEspessura, RefP, Unidade, Preco, PrecoNM, Desconto, Iva, TaxaIva,
                                             Local, KeyScript, Palete, DocPL, LinhaPL, TotalMercadoria, TotalDescontos, DescFin, TotalIliquido, TotalIva, TotalLiquido, TotalMercadoriaNM,
                                             TotalDescontosNM, DescFinNM, TotalIliquidoNM, TotalIvaNM, TotalLiquidoNM, OperadorMOV, DataHoraMOV)".
                 "SELECT 0, '{$NumeroSP}', '', '02', '{$setorDestino}', 'PALETIZAÇÃO CLIENTE 2', '', {$NovaQtd}, {$NovaQtd}, '{$Referencia}', '{$Artigo}', '{$DescricaoArtigo}', '{$Formato}', 
-                       '{$RefCor}', '{$Qual}', '{$TipoEmbalagem}', '{$Superficie}', '{$Lote}', '{$Calibre}', '{$Decoracao}', B.Acabamento', B.Coleccao, '{$TabEspessura}', '{$Referencia}', 
-                       '{$Unidade}', B.Custo, B.Custo, '0', '00', 0, '{$Local}', 'Paletizar_Carga#movimento_stock_paletes_sql09', '{$NumeroPL}', '{$NumeroPL}', {$NumeroLinha}, B.Custo*{$NovaQtd}, 0, 0, 
-                       B.Custo*{$NovaQtd}, 0, B.Custo*{$NovaQtd}, B.Custo*{$NovaQtd}, 0, 0, B.Custo*{$NovaQtd}, 0, B.Custo*{$NovaQtd},'{$user}', getdate()
+                       '{$RefCor}', '{$Qual}', '{$TipoEmbalagem}', '{$Superficie}', '{$Lote}', '{$Calibre}', '{$Decoracao}', B.Acabamento, B.Coleccao, '{$TabEspessura}', '{$Referencia}', 
+                       '{$Unidade}', B.Preco, B.PrecoNM, '0', '00', 0, '{$Local}', 'Paletizar_Carga#movimento_stock_paletes_sql09', '{$NumeroPL}', '{$NumeroPL}', {$NumeroLinha}, B.PrecoNM*{$NovaQtd}, 0, 0, 
+                       B.PrecoNM*{$NovaQtd}, 0, B.PrecoNM*{$NovaQtd}, B.PrecoNM*{$NovaQtd}, 0, 0, B.PrecoNM*{$NovaQtd}, 0, B.PrecoNM*{$NovaQtd},'{$user}', getdate()
                 FROM PlLDocs B
                 where B.NumeroDocumento='{$NumeroPL}'";
                     //echo $sql09;
@@ -351,13 +351,13 @@ class Paletizar_Carga extends CI_Model
             //se for ceragni dá entrada da PL no armazém da certeca
             $sql11="INSERT INTO ".$tbl01." (LinhaDocumento, NumeroDocumento, Documento, TipoMovimento, Sector, NumeroSerieInferior, NumeroSerieSuperior, Quantidade,
                                             QuantidadeUnidade, Referencia, Artigo, DescricaoArtigo, Formato, RefCor, Qual, TipoEmbalagem, Superficie, Lote, Calibre,
-                                            Decoracao, Acabamento, Coleccao, TabEspessura, RefP, Referencia, Unidade, Preco, PrecoNM, Desconto, Iva, TaxaIva,
+                                            Decoracao, Acabamento, Coleccao, TabEspessura, RefP, Unidade, Preco, PrecoNM, Desconto, Iva, TaxaIva,
                                             Local, KeyScript, Palete, DocPL, LinhaPL, TotalMercadoria, TotalDescontos, DescFin, TotalIliquido, TotalIva, TotalLiquido, TotalMercadoriaNM,
                                             TotalDescontosNM, DescFinNM, TotalIliquidoNM, TotalIvaNM, TotalLiquidoNM, OperadorMOV, DataHoraMOV)".
                    "SELECT 0, '{$NumeroSP}', '', '02', '{$setorCarga}', 'PALETIZAÇÃO CLIENTE 2', '', {$NovaQtd}, {$NovaQtd}, '{$Referencia}', '{$Artigo}', '{$DescricaoArtigo}', '{$Formato}', 
-                          '{$RefCor}', '{$Qual}', '{$TipoEmbalagem}', '{$Superficie}', '{$Lote}', '{$Calibre}', '{$Decoracao}', B.Acabamento', B.Coleccao, '{$TabEspessura}', '{$Referencia}', 
-                          '{$Unidade}', B.Custo, B.Custo, '0', '00', 0, '{$Local}', 'Paletizar_Carga#movimento_stock_paletes_sql09', '{$DocPL}', '{$DocPL}', {$LinhaPL}, B.Custo*{$NovaQtd}, 0, 0, 
-                          B.Custo*{$NovaQtd}, 0, B.Custo*{$NovaQtd}, B.Custo*{$NovaQtd}, 0, 0, B.Custo*{$NovaQtd}, 0, B.Custo*{$NovaQtd},'{$user}', getdate()
+                          '{$RefCor}', '{$Qual}', '{$TipoEmbalagem}', '{$Superficie}', '{$Lote}', '{$Calibre}', '{$Decoracao}', B.Acabamento, B.Coleccao, '{$TabEspessura}', '{$Referencia}', 
+                          '{$Unidade}', B.Preco, B.PrecoNM, '0', '00', 0, '{$Local}', 'Paletizar_Carga#movimento_stock_paletes_sql09', '{$DocPL}', '{$DocPL}', {$LinhaPL}, B.PrecoNM*{$NovaQtd}, 0, 0, 
+                          B.PrecoNM*{$NovaQtd}, 0, B.PrecoNM*{$NovaQtd}, B.PrecoNM*{$NovaQtd}, 0, 0, B.PrecoNM*{$NovaQtd}, 0, B.PrecoNM*{$NovaQtd},'{$user}', getdate()
                     FROM PlLDocs B
                     where B.NumeroDocumento='{$DocPL}' and {$flag}=1";
                     //echo $sql09;
@@ -367,13 +367,13 @@ class Paletizar_Carga extends CI_Model
             //se for certeca dá entrada da PLP no armazém da ceragni
             $sql12="INSERT INTO ".$tbl01." (LinhaDocumento, NumeroDocumento, Documento, TipoMovimento, Sector, NumeroSerieInferior, NumeroSerieSuperior, Quantidade,
                                             QuantidadeUnidade, Referencia, Artigo, DescricaoArtigo, Formato, RefCor, Qual, TipoEmbalagem, Superficie, Lote, Calibre,
-                                            Decoracao, Acabamento, Coleccao, TabEspessura, RefP, Referencia, Unidade, Preco, PrecoNM, Desconto, Iva, TaxaIva,
+                                            Decoracao, Acabamento, Coleccao, TabEspessura, RefP, Unidade, Preco, PrecoNM, Desconto, Iva, TaxaIva,
                                             Local, KeyScript, Palete, DocPL, LinhaPL, TotalMercadoria, TotalDescontos, DescFin, TotalIliquido, TotalIva, TotalLiquido, TotalMercadoriaNM,
                                             TotalDescontosNM, DescFinNM, TotalIliquidoNM, TotalIvaNM, TotalLiquidoNM, OperadorMOV, DataHoraMOV)".
                    "SELECT 0, '{$NumeroSP}', '', '02', '{$setorCarga}', 'PALETIZAÇÃO CLIENTE 2', '', {$NovaQtd}, {$NovaQtd}, '{$Referencia}', '{$Artigo}', '{$DescricaoArtigo}', '{$Formato}', 
-                          '{$RefCor}', '{$Qual}', '{$TipoEmbalagem}', '{$Superficie}', '{$Lote}', '{$Calibre}', '{$Decoracao}', B.Acabamento', B.Coleccao, '{$TabEspessura}', '{$Referencia}', 
-                          '{$Unidade}', B.Custo, B.Custo, '0', '00', 0, '{$Local}', 'Paletizar_Carga#movimento_stock_paletes_sql09', '{$DocPL}', '{$DocPL}', {$LinhaPL}, B.Custo*{$NovaQtd}, 0, 0, 
-                          B.Custo*{$NovaQtd}, 0, B.Custo*{$NovaQtd}, B.Custo*{$NovaQtd}, 0, 0, B.Custo*{$NovaQtd}, 0, B.Custo*{$NovaQtd},'{$user}', getdate()
+                          '{$RefCor}', '{$Qual}', '{$TipoEmbalagem}', '{$Superficie}', '{$Lote}', '{$Calibre}', '{$Decoracao}', B.Acabamento, B.Coleccao, '{$TabEspessura}', '{$Referencia}', 
+                          '{$Unidade}', B.Preco, B.PrecoNM, '0', '00', 0, '{$Local}', 'Paletizar_Carga#movimento_stock_paletes_sql09', '{$DocPL}', '{$DocPL}', {$LinhaPL}, B.PrecoNM*{$NovaQtd}, 0, 0, 
+                          B.PrecoNM*{$NovaQtd}, 0, B.PrecoNM*{$NovaQtd}, B.PrecoNM*{$NovaQtd}, 0, 0, B.PrecoNM*{$NovaQtd}, 0, B.PrecoNM*{$NovaQtd},'{$user}', getdate()
                     FROM PlLDocs B
                     where B.NumeroDocumento='{$DocPL}' and {$flag}=2";
                     //echo $sql09;
