@@ -495,7 +495,7 @@ class GetPalets extends CI_Model
         set_time_limit(0);
         $sql01 = "SELECT count(A.id) nLinhas
                   FROM ( SELECT cast(0 as bit) Sel, D.NumeroDocumento, D.Quantidade, D.Referencia, B.Artigo, B.Descricao DescricaoArtigo, isnull(D.Lote,'') Lote, isnull(D.Calibre,'') Calibre, D.PaleteOrigem, D.DataHoraMOV, 
-                                D.LinhaDocumento, D.Documento, cast('{$plano}' as varchar(20)) Carga, CAST(ROW_NUMBER() OVER(ORDER BY D.NumeroDocumento desc)-1 AS int) Id
+                                D.LinhaDocumento, D.Documento, cast('{$plano}' as varchar(20)) Carga, max(a.Local) Local, CAST(ROW_NUMBER() OVER(ORDER BY D.NumeroDocumento desc)-1 AS int) Id
                          from StkLDocs A join ReferArt B on (A.RefP=B.Referencia and A.Artigo=B.Artigo)
                                          join PlDocs   C on (C.Estado not in ('A') and (case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
                                          join PllDocs  D on (C.Numero=D.NumeroDocumento and D.NumeroSerieInferior='{$plano}')
@@ -527,7 +527,7 @@ class GetPalets extends CI_Model
             $this->db->db_pconnect();    
         
             $sql = "SELECT cast(0 as bit) Sel, D.NumeroDocumento, D.Quantidade, D.Referencia, B.Artigo, B.Descricao DescricaoArtigo, isnull(D.Lote,'') Lote, isnull(D.Calibre,'') Calibre, D.PaleteOrigem, D.DataHoraMOV, 
-                                D.LinhaDocumento, D.Documento, cast('{$plano}' as varchar(20)) Carga, CAST(ROW_NUMBER() OVER(ORDER BY D.NumeroDocumento desc)-1 AS int) Id
+                                D.LinhaDocumento, D.Documento, cast('{$plano}' as varchar(20)) Carga, max(a.Local) Local, CAST(ROW_NUMBER() OVER(ORDER BY D.NumeroDocumento desc)-1 AS int) Id
                     from StkLDocs A join ReferArt B on (A.RefP=B.Referencia and A.Artigo=B.Artigo)
                                     join PlDocs   C on (C.Estado not in ('A') and (case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
                                     join PllDocs  D on (C.Numero=D.NumeroDocumento and D.NumeroSerieInferior='{$plano}')
@@ -561,6 +561,7 @@ class GetPalets extends CI_Model
                     $arr['LinhaDocumento'] = $row->LinhaDocumento;
                     $arr['Documento'] = $row->Documento;
                     $arr['Carga'] = $row->Carga;
+                    $arr['Local'] = $row->Local;
                     $arr['Id'] = $row->Id;
                     
                     $data[] = $arr;

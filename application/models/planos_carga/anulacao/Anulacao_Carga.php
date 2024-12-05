@@ -36,7 +36,7 @@ class Anulacao_Carga extends CI_Model
         return $result;   
     }
 
-    public function anula_palete($cliente,$encomenda,$linha,$palete_cliente,$palete_origem,$setor_cliente,$setor_exp,$reverte,$movimenta,$username,$funcionario_gpac){
+    public function anula_palete($cliente,$encomenda,$linha,$palete_cliente,$palete_origem,$setor_cliente,$setor_exp,$reverte,$movimenta,$local,$username,$funcionario_gpac){
 
         $this->load->dbforge();
         $user=strtoupper($funcionario_gpac);        
@@ -46,8 +46,8 @@ class Anulacao_Carga extends CI_Model
         $tbl01 = $user.'.MS_ExeSP';
         $this->createTBL_exesp($tbl01);
 
-        $this->reentrada_paleteorigem($tbl01,$palete_cliente,$user);
-        $this->anula_paletecliente($tbl01,$palete_cliente,$setor_exp,$user);
+        $this->reentrada_paleteorigem($tbl01,$palete_cliente,$local,$user);
+        $this->anula_paletecliente($tbl01,$palete_cliente,$setor_exp,$local,$user);
 
         //faz movimento entre empresas 
         if($movimenta == 1){
@@ -103,14 +103,14 @@ class Anulacao_Carga extends CI_Model
         */
     }
 
-    public function reentrada_paleteorigem($tbl,$palete_cliente,$user){
+    public function reentrada_paleteorigem($tbl,$palete_cliente,$local,$user){
         $sql = "INSERT into ". $tbl ."(LinhaDocumento, NumeroDocumento, Documento, TipoMovimento, Sector, NumeroSerieInferior, NumeroSerieSuperior, Quantidade, QuantidadeUnidade, 
                                        Referencia, Artigo, DescricaoArtigo, Formato, RefCor, Qual, TipoEmbalagem, Superficie, Lote, Calibre, Decoracao, Acabamento, Coleccao, 
                                        TabEspessura, RefP, Unidade, Preco, PrecoNM, Desconto, Iva, TaxaIva, Local, KeyScript, Palete, TotalMercadoria, TotalDescontos, DescFin, 
                                        TotalIliquido, TotalIva, TotalLiquido, TotalMercadoriaNM, TotalDescontosNM, DescFinNM, TotalIliquidoNM, TotalIvaNM, TotalLiquidoNM, OperadorMOV, 
                                        DataHoraMOV)".
                "SELECT 0, '', '', '02', Sector, 'ANULAÇÃO PLC TERMINAL', '', Quantidade, Quantidade, Referencia, Artigo, DescricaoArtigo, Formato, RefCor, Qual, TipoEmbalagem, 
-                       Superficie, Lote, Calibre, Decoracao, Acabamento, Coleccao, TabEspessura, Referencia, Unidade, PrecoNM, PrecoNM, '0', '00', 0, Local, 
+                       Superficie, Lote, Calibre, Decoracao, Acabamento, Coleccao, TabEspessura, Referencia, Unidade, PrecoNM, PrecoNM, '0', '00', 0, '{$local}', 
                        'Anulacao_Carga#reentrada_paleteorigem', PaleteOrigem, Quantidade*PrecoNM, 0, 0, Quantidade*PrecoNM, 0, Quantidade*PrecoNM, Quantidade*PrecoNM, 0, 0, 
                        Quantidade*PrecoNM, 0, Quantidade*PrecoNM, '{$user}', getdate()
                 from PlLDocs
@@ -119,14 +119,14 @@ class Anulacao_Carga extends CI_Model
         $this->db->close();        
     }
 
-    public function anula_paletecliente($tbl,$palete_cliente,$setor_exp,$user){
+    public function anula_paletecliente($tbl,$palete_cliente,$setor_exp,$local,$user){
         $sql = "INSERT into ". $tbl ."(LinhaDocumento, NumeroDocumento, Documento, TipoMovimento, Sector, NumeroSerieInferior, NumeroSerieSuperior, Quantidade, QuantidadeUnidade, 
                                        Referencia, Artigo, DescricaoArtigo, Formato, RefCor, Qual, TipoEmbalagem, Superficie, Lote, Calibre, Decoracao, Acabamento, Coleccao, 
                                        TabEspessura, RefP, Unidade, Preco, PrecoNM, Desconto, Iva, TaxaIva, Local, KeyScript, Palete, TotalMercadoria, TotalDescontos, DescFin, 
                                        TotalIliquido, TotalIva, TotalLiquido, TotalMercadoriaNM, TotalDescontosNM, DescFinNM, TotalIliquidoNM, TotalIvaNM, TotalLiquidoNM, OperadorMOV, 
                                        DataHoraMOV)".
                "SELECT 0, '', '', '12', '{$setor_exp}', 'ANULAÇÃO PLC TERMINAL', '', Quantidade, Quantidade, Referencia, Artigo, DescricaoArtigo, Formato, RefCor, Qual, TipoEmbalagem, 
-                       Superficie, Lote, Calibre, Decoracao, Acabamento, Coleccao, TabEspessura, Referencia, Unidade, PrecoNM, PrecoNM, Desconto, '00', 0, '', 
+                       Superficie, Lote, Calibre, Decoracao, Acabamento, Coleccao, TabEspessura, Referencia, Unidade, PrecoNM, PrecoNM, Desconto, '00', 0, '{$local}', 
                        'Anulacao_Carga#anula_paletecliente', NumeroDocumento, Quantidade*PrecoNM, 0, 0, Quantidade*PrecoNM, 0, Quantidade*PrecoNM, Quantidade*PrecoNM, 0, 0, 
                        Quantidade*PrecoNM, 0, Quantidade*PrecoNM, '{$user}', getdate()
                 from PlLDocs
@@ -135,7 +135,7 @@ class Anulacao_Carga extends CI_Model
         $this->db->close();        
     }
 
-    public function anula_mov_entre_empresas($tbl,$palete_cliente,$setor_cliente,$user){
+    public function anula_mov_entre_empresas($tbl,$palete_cliente,$setor_cliente,$local,$user){
         $sql = "INSERT into ". $tbl ."(LinhaDocumento, NumeroDocumento, Documento, TipoMovimento, Sector, NumeroSerieInferior, NumeroSerieSuperior, Quantidade, QuantidadeUnidade, 
                                        Referencia, Artigo, DescricaoArtigo, Formato, RefCor, Qual, TipoEmbalagem, Superficie, Lote, Calibre, Decoracao, Acabamento, Coleccao, 
                                        TabEspessura, RefP, Unidade, Preco, PrecoNM, Desconto, Iva, TaxaIva, Local, KeyScript, Palete, TotalMercadoria, TotalDescontos, DescFin, 
@@ -143,7 +143,7 @@ class Anulacao_Carga extends CI_Model
                                        DataHoraMOV)".
                  "SELECT 0, '', '', '12', '{$setor_cliente}', 'ANULAÇÃO PLC TERMINAL', '', A.Quantidade, A.Quantidade, A.Referencia, A.Artigo, A.DescricaoArtigo, A.Formato, A.RefCor, A.Qual, 
                          A.TipoEmbalagem, A.Superficie, A.Lote, A.Calibre, A.Decoracao, A.Acabamento, A.Coleccao, A.TabEspessura, A.Referencia, A.Unidade, A.PrecoNM, A.PrecoNM, '0', 
-                         '00', 0, '', 'Anulacao_Carga#anula_mov_entre_empresas', A.PaleteOrigem, A.Quantidade*A.PrecoNM, 0, 0, A.Quantidade*A.PrecoNM, 0, A.Quantidade*A.PrecoNM, 
+                         '00', 0, '{$local}', 'Anulacao_Carga#anula_mov_entre_empresas', A.PaleteOrigem, A.Quantidade*A.PrecoNM, 0, 0, A.Quantidade*A.PrecoNM, 0, A.Quantidade*A.PrecoNM, 
                          A.Quantidade*A.PrecoNM, 0, 0, A.Quantidade*A.PrecoNM, 0, A.Quantidade*A.PrecoNM, '{$user}', getdate()
                   from PlLDocs A
                   where A.NumeroDocumento='{$palete_cliente}'";

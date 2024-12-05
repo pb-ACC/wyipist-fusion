@@ -567,6 +567,7 @@ function getPalets(parm,data){
             {title:"Palete Origem", field:"PaleteOrigem", align:"center",headerFilter:"input",width:140},
             {title:"DataHoraMOV", field:"DataHoraMOV", align:"center",headerFilter:"input"},
             {title:"Documento", field:"Documento", align:"center",headerFilter:"input",visible:false},
+            {title:"Local", field:"Local", align:"center", visible:false},
             {title:"Carga", field:"Carga", align:"center", visible:false},
             {title:"Sel", field:"Sel", align:"center", visible:false},
             {title:"Id", field:"Id", align:"center", visible:false}
@@ -1151,6 +1152,7 @@ function avanca_anualacao(tblPL,tblLoc,tblLote,tblAfet){
             linha: tblLoc[0]['NumeroLinha'],
             palete_cliente: tblPL[0]['NumeroDocumento'],
             palete_origem: tblPL[0]['PaleteOrigem'],
+            local: tblPL[0]['Local'],
             setor_cliente: setor_cliente,
             setor_exp: setor_exp,
             reverte: label,
