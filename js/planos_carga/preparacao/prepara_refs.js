@@ -918,7 +918,7 @@ function save_palletize(){
             toastr["error"]("Ao escolher o motivo 'Outro' tem de preencher Observações!");    
         }
     }else{
-        palletize(obs,codigomotivo);
+        palletize('','');
     }
 }
 
@@ -939,10 +939,12 @@ function palletize(obs,codigomotivo){
     mt = $.trim(mtt);    
 
     if(serie === 'CG'){
+        serieEmp='C';
         seriePL='PLC';
         setorDestino='ST012';
         setorCarga='CL007';
     }else{
+        serieEmp='PC';
         seriePL='PLPC';
         setorDestino='CL006';
         setorCarga='ST017';
@@ -959,6 +961,7 @@ function palletize(obs,codigomotivo){
             codigomotivo: codigomotivo,
             obs: obs,
             serie: serie,
+            serieEmp: serieEmp,
             seriePL: seriePL,
             setorDestino: setorDestino,
             setorCarga: setorCarga 

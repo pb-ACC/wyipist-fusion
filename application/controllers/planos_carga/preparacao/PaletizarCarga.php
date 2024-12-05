@@ -28,7 +28,9 @@ class PaletizarCarga extends CI_Controller
             $codigomotivo = $this->input->post('codigomotivo');           
             $obs = $this->input->post('obs');           
 
-            $seriePL = $this->input->post('seriePL');           
+            $seriePL = $this->input->post('seriePL');         
+            $serieEmp = $this->input->post('serieEmp');         
+              
             $setorDestino = $this->input->post('setorDestino');           
             $setorCarga = $this->input->post('setorCarga');           
            
@@ -70,7 +72,7 @@ class PaletizarCarga extends CI_Controller
                            
                     $this->Paletizar_Carga->paletizar_carga($serie,$flag,$Cliente,$DocumentoCarga,$NumeroDocumento,$NumeroLinha,$QtdEN,$QtdPaletizada,$QtdFalta,$Sector,$Local,$Artigo,
                                                             $Referencia,$DescricaoArtigo,$Lote,$Calibre,$Formato,$Qual,$TipoEmbalagem,$Superficie,$Decoracao,$RefCor,$TabEspessura,$Nivel,
-                                                            $Quantidade,$NovaQtd,$Unidade,$LinhaPL,$DocPL,$motivo,$codigomotivo,$obs,$seriePL,$setorDestino,$setorCarga,$username,$funcionario_gpac);    
+                                                            $Quantidade,$NovaQtd,$Unidade,$LinhaPL,$DocPL,$motivo,$codigomotivo,$obs,$serieEmp,$seriePL,$setorDestino,$setorCarga,$username,$funcionario_gpac);    
                  }
                  
                  echo json_encode("conclui");

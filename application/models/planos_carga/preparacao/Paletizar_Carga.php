@@ -14,7 +14,7 @@ class Paletizar_Carga extends CI_Model
 
     public function paletizar_carga($serie,$flag,$Cliente,$DocumentoCarga,$NumeroDocumento,$NumeroLinha,$QtdEN,$QtdPaletizada,$QtdFalta,$Sector,$Local,$Artigo,$Referencia,
                                     $DescricaoArtigo,$Lote,$Calibre,$Formato,$Qual,$TipoEmbalagem,$Superficie,$Decoracao,$RefCor,$TabEspessura,$Nivel,$Quantidade,$NovaQtd,$Unidade,
-                                    $LinhaPL,$DocPL,$motivo,$codigomotivo,$obs,$seriePL,$setorDestino,$setorCarga,$username,$funcionario_gpac){
+                                    $LinhaPL,$DocPL,$motivo,$codigomotivo,$obs,$serieEmp,$seriePL,$setorDestino,$setorCarga,$username,$funcionario_gpac){
         $this->load->dbforge();
         $user=strtoupper($funcionario_gpac);        
         if($user==''){
@@ -31,7 +31,7 @@ class Paletizar_Carga extends CI_Model
         $this->createTBL_DocsGerados($tbl01);
 
         //cria PL de cliente
-        $iDoc=$this->getMax_PL($seriePL);
+        $iDoc=$this->getMax_PL($serieEmp);
         foreach ($iDoc as $val) {
             $CodigoPL = $val->Documento;
             $SeriePL = $val->Serie;  
@@ -46,8 +46,8 @@ class Paletizar_Carga extends CI_Model
         
 
         /*PLAETES*/
-        $this->createPL($NumeroPL,$CodigoPL,$SeriePL,$user);
-        $this->update_Serie_PL($NumeradorPL,$CodigoPL,$SeriePL);
+        $this->createPL($NumeroPL,$CodigoPL,$serieEmp,$user);
+        $this->update_Serie_PL($NumeradorPL,$CodigoPL,$serieEmp);
         //doclog
         $this->insert_doclogPL($NumeroPL,$CodigoPL,$user);
 
