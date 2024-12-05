@@ -541,6 +541,7 @@ function getPalets(parm,data){
             }}, 
             {title:"UNI.", field:"Unidade", align:"center"},
             {title:"Sector", field:"Sector", align:"center",headerFilter:"input"},
+            {title:"Local", field:"Local", align:"center",headerFilter:"input"},
             {title:"Formato", field:"Formato", align:"center", visible:false},
             {title:"Qual", field:"Qual", align:"center", visible:false},
             {title:"TipoEmbalagem", field:"TipoEmbalagem", align:"center", visible:false},
@@ -912,16 +913,16 @@ function save_palletize(){
 
     if(obs != ''){
         if(obs != '' && codigomotivo == 'MT999'){
-            palletize();
+            palletize(obs,codigomotivo);
         }else{
             toastr["error"]("Ao escolher o motivo 'Outro' tem de preencher Observações!");    
         }
     }else{
-        palletize();
+        palletize(obs,codigomotivo);
     }
 }
 
-function palletize(){
+function palletize(obs,codigomotivo){
 
     $(".card-footer .row").hide();
     // Inicializa a flag com um valor padrão, por exemplo, 0
