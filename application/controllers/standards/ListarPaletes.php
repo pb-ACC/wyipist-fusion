@@ -992,7 +992,7 @@ class ListarPaletes extends CI_Controller
             $data=[]; 
 
             if($serie == 'CG'){
-                $setor = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST015\', \'ST020\', \'ST017\',\'ST012\'';               
+                $setor = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST015\', \'ST020\', \'ST017\',\'ST012\',\'ST010\'';               
                 $this->load->model('standards/stocks/GetPalets');
                 $paletes=$this->GetPalets->cargas($refp,$setor);
                 $seriePL='C';
@@ -1014,7 +1014,7 @@ class ListarPaletes extends CI_Controller
                 );     
 
             }else if($serie == 'CT'){
-                $setor='\'FB003\',\'CL001\',\'CL007\',\'CL006\'';
+                $setor='\'FB003\',\'CL001\',\'CL007\',\'CL006\',\'FB001\'';
                 $this->load->model('standards/stocks/GetPalets');
                 $paletes=$this->GetPalets->cargas($refp,$setor);
                 $seriePL='PC';           

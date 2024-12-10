@@ -123,6 +123,7 @@ function getPlanoCarga(data){
         }        
         // Define o cookie
         document.cookie = `empresa=${emp}; path=/`;
+        document.cookie = `nomeCliente_GG=${row.getData().Cliente}; path=/`;
         window.location.href = "load_preparation/"+row.getData().Serie+"/"+row.getData().DocumentoCarga;        
     });
 }

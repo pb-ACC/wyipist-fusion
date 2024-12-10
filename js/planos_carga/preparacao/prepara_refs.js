@@ -250,7 +250,15 @@ function selectedPalets(data){
             {title:"Lote", field:"Lote", align:"center"},
             {title:"Calibre", field:"Calibre", align:"center"},                
             {title:"QTD.", field:"Quantidade", align:"center",bottomCalc:"sum", bottomCalcParams:{precision:2}},
-            {title:"QTD. a Usar", field:"NovaQtd",  hozAlign:"center", editor:"input",bottomCalc:"sum", bottomCalcParams:{precision:2},formatter:function (cell) {
+            {title:"QTD. a Usar", field:"NovaQtd",  hozAlign:"center", bottomCalc:"sum", bottomCalcParams:{precision:2}, editor:"input", editable: function(cell) {
+                // Verifica o valor da coluna "Sector" da mesma linha
+                var sector = cell.getRow().getData().Sector;
+                // Impede a edição se o valor da coluna "Sector" for "FB001" ou "ST010"
+                if (sector === "FB001" || sector === "ST010") {
+                    return false;  // Desabilita a edição
+                }
+                return true;  // Permite a edição
+            },formatter:function (cell) {
                 let val = cell.getValue();
                 let el = cell.getElement();        
                 el.style.backgroundColor = "#fdfd96";        
@@ -533,11 +541,28 @@ function getPalets(parm,data){
             {title:"Lote", field:"Lote", align:"center",headerFilter:"input"},
             {title:"Calibre", field:"Calibre", align:"center",headerFilter:"input"},
             {title:"QTD.", field:"Quantidade", align:"center"},
-            {title:"QTD. a Usar", field:"NovaQtd",  hozAlign:"center", editor:"input",formatter:function (cell) {
+            {title:"QTD. a Usar", field:"NovaQtd",  hozAlign:"center", editor:"input", editable: function(cell) {
+                // Verifica o valor da coluna "Sector" da mesma linha
+                var sector = cell.getRow().getData().Sector;
+
+                // Impede a edição se o valor da coluna "Sector" for "FB001" ou "ST010"
+                if (sector === "FB001" || sector === "ST010") {
+                    return false;  // Desabilita a edição
+                }
+                return true;  // Permite a edição
+            },formatter:function (cell) {
                 let val = cell.getValue();
                 let el = cell.getElement();        
                 el.style.backgroundColor = "#fdfd96";        
                 return val;
+            },cellEdited: function(cell) {
+                  // Este evento agora é apenas para capturar ações após a edição
+                  var sector = cell.getRow().getData().Sector;
+                  if (sector === "FB001" || sector === "ST010") {
+                      toastr["error"]("Não pode editar quantidade de paletes em produção!");
+                      // Reverte o valor para o anterior, caso a edição seja inválida
+                      cell.setValue(cell.getOldValue());
+                   }
             }}, 
             {title:"UNI.", field:"Unidade", align:"center"},
             {title:"Sector", field:"Sector", align:"center",headerFilter:"input"},
