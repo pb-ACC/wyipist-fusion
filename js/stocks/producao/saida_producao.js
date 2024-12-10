@@ -6,9 +6,10 @@ $('#menu-stocks03').attr("style", "display: block;" );
 $("#saida-prod01").addClass("active");
 $("#saida-prod02").addClass("active");
 
-let tablePaletes, tableSelPaletes, tableLocal_fabric, tableLocal_logistic, tableLocal_warehouse, selectedData=[], OG, dt, dtt, count=0, count2=0, count3=0, count4=0, local='';
+let tablePaletes, tableSelPaletes, tableLocal_fabric, tableLocal_logistic, tableLocal_warehouse, tableLocal_samplesCG, tableLocal_samplesCT, selectedData=[], OG, dt, dtt, dttt, count=0, count2=0, count3=0, count4=0, count5=0, count6=0, local='';
 let type='', title='', text='', text1='', text2='', action='', xposition='', campo='',valor='',tblPL=[], tblLoc=[], tblLote=[], tblAfet=[];
 let palets=[], paletsOG=[], marosca=[];
+let gbSector;
 selectedPalets(data=[]);
 
 toastr.clear();
@@ -55,6 +56,7 @@ $.ajax({
         } else {
             dt = Object.values(data);
             dtt = Object.values(data);
+            dttt = Object.values(data);
             listLocal(Object.values(data));
         }
     },
@@ -524,6 +526,130 @@ function listLocal(data){
                 {title:"id", field:"id", align:"center", visible:false}
             ]
         });     
+
+        dataAM_CT=data;
+        for (let i = 0; i < dataAM_CT.length; i++) {
+                if(dataAM_CT[i]['Sector'] != 'CL888'){ 
+                    dataAM_CT.splice(i, 1);
+                    i--; // Ajustar o índice após a remoção
+                }                        
+            }
+        tableLocal_samplesCT= new Tabulator("#local-table-samples-CT", {
+            data:dataAM_CT, //assign data to table            
+            selectableRows:true, //make rows selectable
+            headerSort:false, //disable header sort for all columns
+            placeholder:"Sem Dados Disponíveis",   
+            pagination:"local",
+            paginationSize:25,
+            paginationSizeSelector:[25,50,75,100],
+            layout:"fitColumns", //fit columns to width of table (optional)
+            locale: true, // enable locale support
+            langs: {
+                "pt-pt": ptLocale
+            },
+            initialLocale: "pt-pt",
+            rowFormatter: function(row) {
+                var data = row.getData();
+                
+                // Verifica se a linha deve ser marcada como selecionada
+                if (data.Sel == 1) {
+                    // Aplica classes CSS específicas para seleção
+                    row.getElement().classList.add("tabulator-selected");
+                    row.getElement().classList.add("tabulator-selectable");
+                } else {
+                    // Remove as classes CSS de seleção se não estiver selecionada
+                    row.getElement().classList.remove("tabulator-selected");
+                    row.getElement().classList.remove("tabulator-selectable");
+                }
+        
+                // Adiciona classes para linhas ímpares e pares automaticamente pelo Tabulator
+                if (row.getIndex() % 2 === 0) {
+                    row.getElement().classList.add("tabulator-row-even");
+                    row.getElement().classList.remove("tabulator-row-odd");
+                } else {
+                    row.getElement().classList.add("tabulator-row-odd");
+                    row.getElement().classList.remove("tabulator-row-even");
+                }
+        
+                // Outros estilos ou classes podem ser adicionados conforme necessário
+            },
+            rowClick: function(row){
+                var data = row.getData();
+                data.Sel = 1;
+            },
+            columns:[
+                {title:"Zona", field:"Zona", align:"center",visible:true,headerFilter:"input"},
+                {title:"Celula", field:"Celula", align:"center",visible:true,headerFilter:"input"},
+                {title:"CodigoBarras", field:"CodigoBarras", align:"center",visible:true,headerFilter:"input"},      
+                {title:"Sector", field:"Sector", align:"center", visible:false},
+                {title:"Identificador", field:"Identificador", align:"center", visible:false},
+                {title:"Sel", field:"Sel", align:"center", visible:false},
+                {title:"id", field:"id", align:"center", visible:false}
+            ]
+        });  
+
+    dataAM_CG=dtt;
+    for (let i = 0; i < dataAM_CG.length; i++) {
+            if(dataAM_CG[i]['Sector'] != 'ST888'){ 
+                dataAM_CG.splice(i, 1);
+                i--; // Ajustar o índice após a remoção
+            }                        
+        }
+        tableLocal_samplesCG= new Tabulator("#local-table-samples-CG", {
+            data:dataAM_CG, //assign data to table            
+            selectableRows:true, //make rows selectable
+            headerSort:false, //disable header sort for all columns
+            placeholder:"Sem Dados Disponíveis",   
+            pagination:"local",
+                paginationSize:25,
+                paginationSizeSelector:[25,50,75,100],
+            layout:"fitColumns", //fit columns to width of table (optional)
+            locale: true, // enable locale support
+            langs: {
+                "pt-pt": ptLocale
+            },
+            initialLocale: "pt-pt",
+            rowFormatter: function(row) {
+                var data = row.getData();
+                
+                // Verifica se a linha deve ser marcada como selecionada
+                if (data.Sel == 1) {
+                    // Aplica classes CSS específicas para seleção
+                    row.getElement().classList.add("tabulator-selected");
+                    row.getElement().classList.add("tabulator-selectable");
+                } else {
+                    // Remove as classes CSS de seleção se não estiver selecionada
+                    row.getElement().classList.remove("tabulator-selected");
+                    row.getElement().classList.remove("tabulator-selectable");
+                }
+        
+                // Adiciona classes para linhas ímpares e pares automaticamente pelo Tabulator
+                if (row.getIndex() % 2 === 0) {
+                    row.getElement().classList.add("tabulator-row-even");
+                    row.getElement().classList.remove("tabulator-row-odd");
+                } else {
+                    row.getElement().classList.add("tabulator-row-odd");
+                    row.getElement().classList.remove("tabulator-row-even");
+                }
+        
+                // Outros estilos ou classes podem ser adicionados conforme necessário
+            },
+            rowClick: function(row){
+                var data = row.getData();
+                data.Sel = 1;
+            },
+            columns:[
+                {title:"Armazém", field:"Sector", align:"center",visible:true,headerFilter:"input"},
+                {title:"Setor", field:"Codigo", align:"center",visible:true,headerFilter:"input"},
+                {title:"Fila", field:"Fila", align:"center",visible:true,headerFilter:"input"},
+                {title:"Posicao", field:"Posicao", align:"center",visible:true,headerFilter:"input"},
+                {title:"CodigoBarras", field:"CodigoBarras", align:"center",visible:true,headerFilter:"input"},   
+                {title:"Identificador", field:"Identificador", align:"center", visible:false},
+                {title:"Sel", field:"Sel", align:"center", visible:false},
+                {title:"id", field:"id", align:"center", visible:false}
+            ]
+        });     
+
 }
 
 function pick_local_fabric() {
@@ -676,6 +802,105 @@ function pick_local_warehouse() {
     }
 }
 
+function pick_local_samples() {
+    let rows01 = tableLocal_samplesCG.searchRows("CodigoBarras", "=", $("#localCB").val());
+
+    if (rows01.length > 0) {
+        let tbl = rows[0].getData();
+        let localOG = tableLocal_samplesCG.getData();
+        let picadas = [];
+
+        if (user_type == 1 || count45< 1) {
+            for (let i = 0; i < localOG.length; i++) {
+                if (localOG[i]['CodigoBarras'] == tbl['CodigoBarras']) {
+                    localOG[i]['Sel'] = 1; // Marcar a palete como selecionada
+                    picadas.push(localOG[i]);
+                    localOG.splice(i, 1);
+                    i--; // Ajustar o índice após a remoção
+                }
+            }
+
+            // Reordenar a tabela: colocar as paletes picadas no início
+            let reorderedData = picadas.concat(localOG);
+            tableLocal_samplesCG.setData(reorderedData);
+
+            // Limpar seleção atual    
+            tableLocal_samplesCG.deselectRow();
+
+            // Selecionar apenas as paletes marcadas como selecionadas
+            setTimeout(() => { // Adicionado um pequeno delay para garantir que a tabela seja renderizada antes de selecionar as linhas
+                tableLocal_samplesCG.getData().forEach(local => {
+                    if (local.Sel == 1) {
+                        tableLocal_samplesCG.selectRow(local.id); // Selecionar a linha da palete
+                    }
+                });
+            }, 100);
+
+            tableLocal_samplesCG.clearFilter(true);
+            $("#localCB").val('');
+
+            if (user_type != 1) {
+                count5++;
+            }
+        } else {
+            toastr["error"]("Só pode picar um local!");
+        }
+    } else {
+        toastr["error"]("Localização inexistente!");
+        $("#localCB").val('');
+        $('#localCB').trigger('focus');    
+    }
+
+
+    let rows02 = tableLocal_samplesCT.searchRows("CodigoBarras", "=", $("#localCB").val());
+
+    if (rows02.length > 0) {
+        let tbl = rows[0].getData();
+        let localOG = tableLocal_samplesCT.getData();
+        let picadas = [];
+
+        if (user_type == 1 || count6 < 1) {
+            for (let i = 0; i < localOG.length; i++) {
+                if (localOG[i]['CodigoBarras'] == tbl['CodigoBarras']) {
+                    localOG[i]['Sel'] = 1; // Marcar a palete como selecionada
+                    picadas.push(localOG[i]);
+                    localOG.splice(i, 1);
+                    i--; // Ajustar o índice após a remoção
+                }
+            }
+
+            // Reordenar a tabela: colocar as paletes picadas no início
+            let reorderedData = picadas.concat(localOG);
+            tableLocal_samplesCT.setData(reorderedData);
+
+            // Limpar seleção atual    
+            tableLocal_samplesCG.deselectRow();
+
+            // Selecionar apenas as paletes marcadas como selecionadas
+            setTimeout(() => { // Adicionado um pequeno delay para garantir que a tabela seja renderizada antes de selecionar as linhas
+                tableLocal_samplesCT.getData().forEach(local => {
+                    if (local.Sel == 1) {
+                        tableLocal_samplesCT.selectRow(local.id); // Selecionar a linha da palete
+                    }
+                });
+            }, 100);
+
+            tableLocal_samplesCT.clearFilter(true);
+            $("#localCB").val('');
+
+            if (user_type != 1) {
+                count6++;
+            }
+        } else {
+            toastr["error"]("Só pode picar um local!");
+        }
+    } else {
+        toastr["error"]("Localização inexistente!");
+        $("#localCB").val('');
+        $('#localCB').trigger('focus');    
+    }
+}
+
 function clearLocal_fabric(){
     tableLocal_fabric.deselectRow();
     count2=0;
@@ -689,6 +914,13 @@ function clearLocal_logistic(){
 function clearLocal_warehouse(){
     tableLocal_warehouse.deselectRow();
     count4=0;
+}
+
+function clearLocal_samples(){
+    tableLocal_samplesCG.deselectRow();
+    count5=0;
+    tableLocal_samplesCT.deselectRow();
+    count6=0;
 }
 
 /*BTNS*/
@@ -744,6 +976,23 @@ function send_to_warehouse(){
     if(sizeofTBL.length>0){
         setTimeout(function () {  
             $("#escolha_local_arm").modal("show");
+        }, 350);
+
+        setTimeout(function () {            
+            $('#localCB').trigger('focus');  
+        }, 850);
+    }
+    else{
+        toastr["error"]("Não foi picada nenhuma palete!");
+    }
+}
+
+function go_send_to_samples(){
+
+    sizeofTBL=tableSelPaletes.getData();   
+    if(sizeofTBL.length>0){
+        setTimeout(function () {  
+            $("#escolha_local_amost").modal("show");
         }, 350);
 
         setTimeout(function () {            
@@ -839,6 +1088,50 @@ function save_local_warehouse(){
     tblAfet=[];
     fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
 
+}
+
+function save_local_samples(){
+    
+    type='success';
+    title='Tem a certeza que pretende continuar?';
+    text2='';
+    action='save_local_samples';
+    xposition='center';
+    tblPL=tableSelPaletes.getData();    
+    
+    let selected=[];    
+    if(gbSector === 'ST888'){  
+        sel = tableLocal_samplesCG.getSelectedData();
+    }else{
+        sel = tableLocal_samplesCT.getSelectedData();
+    }
+    
+    if(sel.length>0){
+        selected=sel;
+    }
+    else{              
+        for (let i = 0; i < sel.length; i++) {
+            if (sel[i]['Sel'] == 1) {
+                selected.push(sel[i]);
+            }
+        }
+    }
+
+    tblLoc=selected;
+    tblLote=[];
+    tblAfet=[];
+    fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
+
+}
+
+function send_to_samples(sector){
+    gbSector=sector;
+    if(gbSector === 'ST888'){       
+        $("#local-table-samples-CT").empty();        
+    }else{
+        $("#local-table-samples-CG").empty();        
+    }
+    go_send_to_samples();
 }
 
 /*FILTRO*/
