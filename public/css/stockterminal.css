@@ -505,3 +505,13 @@ input[type=range] {
 #sectores .select2-selection.select2-selection--multiple {
     height: 37.99px !important;
 }
+
+#desclas:hover{
+    background-color: #8A7BB4 !important;
+    border-color:  #8A7A9D !important;
+}
+
+#reclama:hover{
+    background-color: #C4B28B !important;
+    border-color:  #B39B75 !important;
+}

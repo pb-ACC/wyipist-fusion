@@ -188,6 +188,38 @@
   </div>
 </div>
 
+<div id="escolha_local_amost" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl"role="document" style="width:auto">
+    <div class="modal-content">
+            <div class="modal-header">
+				<button id="btnclose" type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+
+			<!--<div class="modal-body" style="max-height: calc(100vh - 210px);overflow-y:scroll;overflow-x:scroll;">-->
+            <div class="modal-body" style="width: auto; height:auto;">
+			            
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Localização</label>
+                    <div class="input-group">            
+                        <input type="text" class="col-6 form-control" id="localCB" onchange="pick_local_samples()" placeholder="Código Barras" autofocus>            
+                        <button onclick="clearLocal_samples()" type="button" class="col-4 btn btn-warning" style="margin-left: 5px;max-height: 38px;"><i class="fas fa-eraser"></i> Limpar</button>				
+                    </div>
+                </div>
+
+                <div id="local-table-samples-CG" class="table table-striped"></div>
+                <div id="local-table-samples-CT" class="table table-striped"></div>
+
+			</div>
+
+			<div class="modal-footer">		
+                <button id="save_local_samples" onclick="save_local_samples()" type="button" class="btn btn-primary"><i class="fas fa-save"></i> Gravar</button>	
+			</div>    
+    </div>
+  </div>
+</div>
+
 <div id="motivo" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">

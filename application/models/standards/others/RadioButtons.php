@@ -27,6 +27,10 @@ class RadioButtons extends CI_Model
                     '<div class="form-check">'.
                     '<input class="form-check-input" type="radio" name="radio3" value="3" style="width: 20px;height: 20px;">'.
                     '<label class="form-check-label" style="margin-left: 15px;font-size: 18px;">Produto com Defeito - Armazém</label>'.
+                    '</div>'.
+                    '<div class="form-check">'.
+                    '<input class="form-check-input" type="radio" name="radio4" value="4" style="width: 20px;height: 20px;">'.
+                    '<label class="form-check-label" style="margin-left: 15px;font-size: 18px;">Armazém Amostras</label>'.
                     '</div>';    
         }
         return $value;
@@ -50,6 +54,10 @@ class RadioButtons extends CI_Model
                     '<div class="form-check">'.
                     '<input class="form-check-input" type="radio" name="radio4" value="4" style="width: 20px;height: 20px;">'.
                     '<label class="form-check-label" style="margin-left: 15px;font-size: 18px;">Saída de Produção</label>'.
+                    '</div>'.
+                    '<div class="form-check">'.
+                    '<input class="form-check-input" type="radio" name="radio5" value="5" style="width: 20px;height: 20px;">'.
+                    '<label class="form-check-label" style="margin-left: 15px;font-size: 18px;">Armazém Amostras</label>'.
                     '</div>';    
         }
         return $value;
