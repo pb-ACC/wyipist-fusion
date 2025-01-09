@@ -3,26 +3,22 @@ $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI); // para bloquear a pagin
 $("#menu-stocks01").addClass("menu-is-opening menu-open");
 $("#menu-stocks02").addClass("active");
 $('#menu-stocks03').attr("style", "display: block;" );
-$("#menu-mov01").addClass("menu-is-opening menu-open");
-$("#opcoes-mov01").addClass("menu-is-opening menu-open");
-$('#opcoes-mov01').attr("style", "display: block;" );
-$("#troca-loc01").addClass("active");
-$("#troca-loc02").addClass("active");
+$("#saida-prod01").addClass("active");
+$("#saida-prod02").addClass("active");
 
 let tablePaletes, tableSelPaletes, tableLocal_fabric, tableLocal_logistic, tableLocal_warehouse, tableLocal_samplesCG, tableLocal_samplesCT, selectedData=[], OG, dt, dtt, dttt, count=0, count2=0, count3=0, count4=0, count5=0, count6=0, local='';
 let type='', title='', text='', text1='', text2='', action='', xposition='', campo='',valor='',tblPL=[], tblLoc=[], tblLote=[], tblAfet=[];
 let palets=[], paletsOG=[], marosca=[];
-let no_change=0;
 let gbSector;
-
 selectedPalets(data=[]);
 
 toastr.clear();
 toastr["info"]("A carregar paletes...");
+//$("#choose_palets").prop("disabled",true);
 
 $.ajax({
     type: "GET",
-    url: "http://127.0.0.1/wyipist-fusion/standards/ListarPaletes/getPalets_trocaLocal",
+    url: "http://127.0.0.1/wyipist-fusion/standards/ListarPaletes/getPalets",
     dataType: "json",
     success: function (data) {
         if (data === "kick") {
@@ -30,11 +26,10 @@ $.ajax({
             window.location = "home/logout";
         } else {                                            
             if (data['select'].length > 0) 
-                $("#select").append(data['select']);                
+                $("#radioButtons").append(data['select']);                
                 $('#empresasDP').select2();
-            if (data['radio'].length > 0) 
-                $("#radioButtons").append(data['radio']);                                    
-            radioButtons();                 
+                $("#radioButtons").show();
+
             if (data['button'].length > 0) 
                 $("#buttons").append(data['button']); 
             //alert(data);
@@ -48,6 +43,7 @@ $.ajax({
             }
 });
 
+
 $.ajax({
     type: "GET",
     url: "http://127.0.0.1/wyipist-fusion/standards/ListarSetores/getZonas",
@@ -60,6 +56,7 @@ $.ajax({
         } else {
             dt = Object.values(data);
             dtt = Object.values(data);
+            dttt = Object.values(data);
             listLocal(Object.values(data));
         }
     },
@@ -97,7 +94,7 @@ $.ajax({
             toastr.clear();
             toastr["success"]("Paletes carregadas com sucesso.");
             toastr.clear();
-            $("#choose_palets").prop("disabled",false);  
+            //$("#choose_palets").prop("disabled",false);  
         }
     },
     error: function (e) {
@@ -125,7 +122,7 @@ function getPalets(data){
         langs: {
             "pt-pt": ptLocale
         },
-        initialLocale: "pt-pt",
+        initialLocale: 'pt-pt',
         rowFormatter: function(row) {
             var data = row.getData();
             
@@ -163,19 +160,18 @@ function getPalets(data){
             {title:"Descrição", field:"DescricaoArtigo", align:"center",headerFilter:"input"},
             {title:"QTD.", field:"Quantidade", align:"center",headerFilter:"input"},
             {title:"UNI.", field:"Unidade", align:"center", visible:false},
-            {title:"Sector", field:"Sector", align:"center",headerFilter:"input"},                
-            {title:"Formato", field:"Formato", align:"center", headerFilter:"input"},
+            {title:"Sector", field:"Sector", align:"center", visible:false},                
+            {title:"Formato", field:"Formato", align:"center",headerFilter:"input"},
             {title:"Qual", field:"Qual", align:"center", visible:false},
             {title:"TipoEmbalagem", field:"TipoEmbalagem", align:"center", visible:false},
             {title:"Superficie", field:"Superficie", align:"center", visible:false},
             {title:"Decoracao", field:"Decoracao", align:"center", visible:false},
             {title:"RefCor", field:"RefCor", align:"center", visible:false},
-            {title:"Lote", field:"Lote", align:"center", headerFilter:"input"},
-            {title:"Nivel", field:"Nivel", align:"center", visible:false},                
+            {title:"Lote", field:"Lote", align:"center",headerFilter:"input"},
+            {title:"Nivel", field:"Nivel", align:"center", visible:false},
             {title:"TabEspessura", field:"TabEspessura", align:"center", visible:false},                                
-            {title:"Calibre", field:"Calibre", align:"center",headerFilter:"input"},
+            {title:"Calibre", field:"Calibre", align:"center",headerFilter:"input"},                
             {title:"Sel", field:"Sel", align:"center", visible:false},
-            {title:"Local", field:"Local", align:"center",headerFilter:"input"},
             {title:"Id", field:"Id", align:"center", visible:false}
         ]
     });
@@ -226,6 +222,7 @@ function selectedPalets(data){
     let deleteUser = function(cell, formatterParams){ //plain text value
         return "<i class='fas fa-trash-alt' style='color: red' title='Remover'></i>";
     };
+
     tableSelPaletes= new Tabulator("#selected-palets-table", {
         data:data, //assign data to table                 
         selectableRows:true, //make rows selectable
@@ -251,19 +248,18 @@ function selectedPalets(data){
             {title:"Descrição", field:"DescricaoArtigo", align:"center",headerFilter:"input"},
             {title:"QTD.", field:"Quantidade", align:"center",headerFilter:"input"},
             {title:"UNI.", field:"Unidade", align:"center", visible:false},
-            {title:"Sector", field:"Sector", align:"center",headerFilter:"input"},
-            {title:"Formato", field:"Formato", align:"center", headerFilter:"input"},
+            {title:"Sector", field:"Sector", align:"center", visible:false},                
+            {title:"Formato", field:"Formato", align:"center",headerFilter:"input"},
             {title:"Qual", field:"Qual", align:"center", visible:false},
             {title:"TipoEmbalagem", field:"TipoEmbalagem", align:"center", visible:false},
             {title:"Superficie", field:"Superficie", align:"center", visible:false},
             {title:"Decoracao", field:"Decoracao", align:"center", visible:false},
             {title:"RefCor", field:"RefCor", align:"center", visible:false},
-            {title:"Lote", field:"Lote", align:"center", headerFilter:"input"},
-            {title:"Nivel", field:"Nivel", align:"center", visible:false},                
+            {title:"Lote", field:"Lote", align:"center",headerFilter:"input"},
+            {title:"Nivel", field:"Nivel", align:"center", visible:false},
             {title:"TabEspessura", field:"TabEspessura", align:"center", visible:false},                                
-            {title:"Calibre", field:"Calibre", align:"center", headerFilter:"input"},
+            {title:"Calibre", field:"Calibre", align:"center",headerFilter:"input"},                
             {title:"Sel", field:"Sel", align:"center", visible:false},
-            {title:"Local", field:"Local", align:"center",headerFilter:"input"},
             {title:"Id", field:"Id", align:"center", visible:false},
             {title:" ",formatter:deleteUser, width:50, align:"center",tooltip:true, cellClick:function(e, cell){
                 let row01 = cell.getRow();
@@ -290,7 +286,7 @@ function pick_palete() {
         let tbl = rows[0].getData();
         let paletsOG = tablePaletes.getData();
         let picadas = [];
-
+        
         if ( (user_type == 1 || user_type == 2 || user_type == 4) || count < 2) {
             for (let i = 0; i < paletsOG.length; i++) {
                 if (paletsOG[i]['DocPL'] == tbl['DocPL']) {
@@ -475,10 +471,7 @@ function listLocal(data){
                 dataAR.splice(i, 1);
                 i--; // Ajustar o índice após a remoção
             }                        
-    }
-
-    //alert(dataAR);
-
+        }
         tableLocal_warehouse= new Tabulator("#local-table-warehouse", {
             data:dataAR, //assign data to table            
             selectableRows:true, //make rows selectable
@@ -532,9 +525,8 @@ function listLocal(data){
                 {title:"Sel", field:"Sel", align:"center", visible:false},
                 {title:"id", field:"id", align:"center", visible:false}
             ]
-        });   
-        
-        
+        });     
+
         dataAM_CT=data;
         for (let i = 0; i < dataAM_CT.length; i++) {
                 if(dataAM_CT[i]['Sector'] != 'CL888'){ 
@@ -995,16 +987,6 @@ function send_to_warehouse(){
     }
 }
 
-function send_to_samples(sector){
-    gbSector=sector;
-    if(gbSector === 'ST888'){       
-        $("#local-table-samples-CT").empty();        
-    }else{
-        $("#local-table-samples-CG").empty();        
-    }
-    go_send_to_samples();
-}
-
 function go_send_to_samples(){
 
     sizeofTBL=tableSelPaletes.getData();   
@@ -1020,39 +1002,6 @@ function go_send_to_samples(){
     else{
         toastr["error"]("Não foi picada nenhuma palete!");
     }
-}
-
-function save_local_samples(){
-    
-    type='success';
-    title='Tem a certeza que pretende continuar?';
-    text2='';
-    action='save_local_samples';
-    xposition='center';
-    tblPL=tableSelPaletes.getData();    
-    
-    let selected=[];    
-    if(gbSector === 'ST888'){  
-        sel = tableLocal_samplesCG.getSelectedData();
-    }else{
-        sel = tableLocal_samplesCT.getSelectedData();
-    }
-    
-    if(sel.length>0){
-        selected=sel;
-    }
-    else{              
-        for (let i = 0; i < sel.length; i++) {
-            if (sel[i]['Sel'] == 1) {
-                selected.push(sel[i]);
-            }
-        }
-    }
-
-    tblLoc=selected;
-    tblLote=[];
-    tblAfet=[];
-    fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
 }
 
 function save_local_fabric(){
@@ -1109,7 +1058,7 @@ function save_local_logistic(){
 
     tblLote=[];
     tblAfet=[];
-    fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet);   
+    fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
 }
 
 function save_local_warehouse(){
@@ -1135,205 +1084,54 @@ function save_local_warehouse(){
         }
     }
     tblLoc=selected;
-
     tblLote=[];
     tblAfet=[];
     fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
 
 }
 
-/*RADIO BTNS*/
-function radioButtons(){
-    $('#radioButtons input:radio').click(function() {
-       // toastr.clear();
-        //toastr["info"]("A carregar paletes...");
-        $("#open_picking_modal").prop("disabled",true);
+function save_local_samples(){
     
-        if ($(this).val() === '1') {
-            sizeofTBL=tableSelPaletes.getData();        
-            if(sizeofTBL.length>0){          
-                type='success';
-                title='Dados da tabela serão perdidos';
-                text2='Tem a certeza que pretende continuar?';
-                action='radioButtons';
-                xposition='center';            
-                campo='FB003';
-                valor=this;
-                tblPL=[];
-                tblLoc=[];
-                tblLote=[];
-                tblAfet=[];
-                fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
-            }else{
-                no_change=1;
-                $('.form-check-input').prop('checked', false); // Unchecks it    
-                $(this).prop('checked', true); // Checks it              
-                newSector='FB003';  
-                change_sector_emp(newSector);    
-                no_change=0;                                
-            }                
-        }else if ($(this).val() === '2') {
-            sizeofTBL=tableSelPaletes.getData();        
-            if(sizeofTBL.length>0){            
-                type='success';
-                title='Dados da tabela serão perdidos';
-                text2='Tem a certeza que pretende continuar?';
-                action='radioButtons';
-                xposition='center';            
-                campo='CL001';
-                valor=this;
-                tblPL=[];
-                tblLoc=[];
-                tblLote=[];
-                tblAfet=[];
-                fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
-            }else{
-                no_change=1;
-                $('.form-check-input').prop('checked', false); // Unchecks it    
-                $(this).prop('checked', true); // Checks it             
-                newSector='CL001';
-                change_sector_emp(newSector);    
-                no_change=0;                
-            }                
-        }else if ($(this).val() === '3') {
+    type='success';
+    title='Tem a certeza que pretende continuar?';
+    text2='';
+    action='save_local_samples';
+    xposition='center';
+    tblPL=tableSelPaletes.getData();    
     
-            sizeofTBL=tableSelPaletes.getData();        
-            if(sizeofTBL.length>0){
-                
-                type='success';
-                title='Dados da tabela serão perdidos';
-                text2='Tem a certeza que pretende continuar?';
-                action='radioButtons';
-                xposition='center';            
-                campo='CL777';
-                valor=this;
-                tblPL=[];
-                tblLoc=[];
-                tblLote=[];
-                tblAfet=[];
-                fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
-            }else{
-                no_change=1;
-                $('.form-check-input').prop('checked', false); // Unchecks it    
-                $(this).prop('checked', true); // Checks it             
-                newSector='CL777';
-                change_sector_emp(newSector); 
-                no_change=0;                                   
-            }                
-        }else if ($(this).val() === '4') {
+    let selected=[];    
+    if(gbSector === 'ST888'){  
+        sel = tableLocal_samplesCG.getSelectedData();
+    }else{
+        sel = tableLocal_samplesCT.getSelectedData();
+    }
     
-            sizeofTBL=tableSelPaletes.getData();        
-            if(sizeofTBL.length>0){
-                
-                type='success';
-                title='Dados da tabela serão perdidos';
-                text2='Tem a certeza que pretende continuar?';
-                action='radioButtons';
-                xposition='center';            
-                campo='CL888';
-                valor=this;
-                tblPL=[];
-                tblLoc=[];
-                tblLote=[];
-                tblAfet=[];
-                fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
-            }else{
-                no_change=1;
-                $('.form-check-input').prop('checked', false); // Unchecks it    
-                $(this).prop('checked', true); // Checks it             
-                newSector='CL888';
-                change_sector_emp(newSector); 
-                no_change=0;                                   
-            }                
-        }else if ($(this).val() === '5') {
-    
-            sizeofTBL=tableSelPaletes.getData();        
-            if(sizeofTBL.length>0){
-                
-                type='success';
-                title='Dados da tabela serão perdidos';
-                text2='Tem a certeza que pretende continuar?';
-                action='radioButtons';
-                xposition='center';            
-                campo='CL666';
-                valor=this;
-                tblPL=[];
-                tblLoc=[];
-                tblLote=[];
-                tblAfet=[];
-                fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
-            }else{
-                no_change=1;
-                $('.form-check-input').prop('checked', false); // Unchecks it    
-                $(this).prop('checked', true); // Checks it             
-                newSector='CL666';
-                change_sector_emp(newSector); 
-                no_change=0;                                   
-            }                
-        }                  
-    });    
+    if(sel.length>0){
+        selected=sel;
+    }
+    else{              
+        for (let i = 0; i < sel.length; i++) {
+            if (sel[i]['Sel'] == 1) {
+                selected.push(sel[i]);
+            }
+        }
+    }
+
+    tblLoc=selected;
+    tblLote=[];
+    tblAfet=[];
+    fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
+
 }
 
-function change_sector_emp(newSector){
-
-    // Obter e ajustar o nome da empresa selecionada
-    emp = $.trim($("#empresasDP option:selected").text()).toUpperCase();
-    // Verificar se há uma empresa selecionada
-    if (emp == '') {
-        // Dependendo do código da empresa, atribuir valores padrão
-        if (codigoempresa == 1) {
-            emp = "CERAGNI";
-        } else if (codigoempresa == 2) {
-            emp = "CERTECA";
-        } else {
-            emp = "CERAGNI";
-        }
-    } 
-
-    toastr.clear();
-    toastr["info"]("A carregar paletes...");
-    tableSelPaletes.alert("A processar...");
-    $('#empresasDP').prop('disabled', true);
-    $("#buttons button").attr("disabled", true);
-    $("input[type=radio]").attr('disabled', true);
-    
-    $.ajax({
-        type: "POST",
-        url: "http://127.0.0.1/wyipist-fusion/standards/ListarFiltro/filtraPlZn_emanuel_trocalocalizacao/"+emp+"/"+newSector,
-        dataType: "json",
-        success: function (data) {
-            if (data === "kick") {
-                toastr["warning"]("Outro utilizador entrou com as suas credenciais, faça login de novo.");
-                window.location = "home/logout";
-            } else {    
-
-
-                paletsOG=Object.values(data['paletes']);
-                getPalets(Object.values(data['paletes']));
-                
-                
-                    dt = Object.values(data['zonas']);
-                    dtt = Object.values(data['zonas']);
-                    listLocal(Object.values(data['zonas']));                    
-
-
-                    tableSelPaletes.clearAlert();
-                    $('#empresasDP').prop('disabled', false);
-                    $("#buttons button").attr("disabled", false);
-                    $("input[type=radio]").attr('disabled', false);
-
-                    selectedPalets(data=[]);
-    
-                    toastr.clear();
-                    toastr["success"]("Paletes carregadas com sucesso.");
-                    toastr.clear();  
-            }
-        },
-        error: function (e) {
-                    alert('Request Status: ' + e.status + ' Status Text: ' + e.statusText + ' ' + e.responseText);
-                    console.log(e);
-                }
-    });
+function send_to_samples(sector){
+    gbSector=sector;
+    if(gbSector === 'ST888'){       
+        $("#local-table-samples-CT").empty();        
+    }else{
+        $("#local-table-samples-CG").empty();        
+    }
+    go_send_to_samples();
 }
 
 /*FILTRO*/
@@ -1380,17 +1178,16 @@ function confirm_changeEmpresa(){
         }
     }
 
+    //$("#choose_palets").prop("disabled",true);    
     toastr.clear();
     toastr["info"]("A carregar paletes...");
     tableSelPaletes.alert("A processar...");
     $('#empresasDP').prop('disabled', true);
-    $("#buttons button").attr("disabled", true);
-    $("input[type=radio]").attr('disabled', true);
-
+    $("#buttons button").attr("disabled", true);    
+    
     $.ajax({
         type: "POST",
-        //url: "http://127.0.0.1/wyipist-fusion/standards/ListarFiltro/filtraPlZn_emanuel/"+emp+"/"+newSector,
-        url: "http://127.0.0.1/wyipist-fusion/standards/ListarFiltro/filtraPlZn_emanuel_trocalocalizacao/"+emp+"/"+newSector,
+        url: "http://127.0.0.1/wyipist-fusion/standards/ListarFiltro/filtraPlZn/"+emp,
         dataType: "json",
         success: function (data) {
             if (data === "kick") {
@@ -1406,22 +1203,13 @@ function confirm_changeEmpresa(){
                     dtt = Object.values(data['zonas']);
                     listLocal(Object.values(data['zonas']));
 
-                    $("#radioButtons").empty();
-                    if (data['radio'].length > 0)                         
-                        $("#radioButtons").append(data['radio']); 
-                    radioButtons();                    
-
                     if (data['button'].length > 0) 
                         $("#buttons").empty();
-                        $("#buttons").append(data['button']);                         
+                        $("#buttons").append(data['button']);    
 
                 tableSelPaletes.clearAlert();
                 $('#empresasDP').prop('disabled', false);
-                $("#buttons button").attr("disabled", false);
-                $("input[type=radio]").attr('disabled', false);
-
-                
-                selectedPalets(data=[]);
+                $("#buttons button").attr("disabled", false);                
 
                 toastr.clear();
                 toastr["success"]("Paletes carregadas com sucesso.");
@@ -1438,18 +1226,17 @@ function confirm_changeEmpresa(){
 
 /*GRAVAR DADOS NA BD*/
 function confirm_save(tblPL,tblLoc){
-    //alert(tblLoc[0]['CodigoBarras']);
+
     tableSelPaletes.alert("A gravar...");
     $('#empresasDP').prop('disabled', true);
     $("#buttons button").attr("disabled", true);   
-    $("input[type=radio]").attr('disabled', false);
     $("#save_local").prop('disabled', true);
     $("#save_local_logistic").prop('disabled', true);
     $("#save_local_warehouse").prop('disabled', true);
-    
+
     $.ajax({
-        type: "POST",        
-        url: "http://127.0.0.1/wyipist-fusion/stocks/movimentacoes_internas/troca_localizacao/Gravar_MudaLocalizacao/save_new_position",
+        type: "POST",
+        url: "http://127.0.0.1/wyipist-fusion/stocks/producao/Gravar_SaidaProducao/save_production",
         dataType: "json",
         data:{
             palete: tblPL,
@@ -1463,7 +1250,8 @@ function confirm_save(tblPL,tblLoc){
                 toastr["warning"]("Outro utilizador entrou com as suas credenciais, faça login de novo.");
                 window.location = "home/logout";
             } else {
-                toastr["success"]("Dados gravados com Sucesso");                
+                toastr["success"]("Dados gravados com Sucesso");                     
+
                 setTimeout(function(){
                     location.reload();
                 },2500);

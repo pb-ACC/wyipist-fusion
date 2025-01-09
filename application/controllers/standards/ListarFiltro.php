@@ -164,7 +164,7 @@ class ListarFiltro extends CI_Controller
                 $paletes=$this->GetPalets->armazem($setor,'>0');
 
                 $this->load->model('standards/others/Buttons');
-                $button=$this->Buttons->buttons_empresa(1);
+                $button=$this->Buttons->buttons_empresa_movimentacao(1);
 
                 $data = array( 
                     'zonas' => $zonas,                                          
@@ -189,7 +189,7 @@ class ListarFiltro extends CI_Controller
                 $paletes=$this->GetPalets->armazem($setor02,'>0');
 
                 $this->load->model('standards/others/Buttons');
-                $button=$this->Buttons->buttons_empresa(2);
+                $button=$this->Buttons->buttons_empresa_movimentacao(2);
 
                 $data = array( 
                     'zonas' => $zonas,                                          
@@ -725,4 +725,65 @@ class ListarFiltro extends CI_Controller
             redirect('start', 'refresh');
         }   
     }
+
+    public function filtraPlZn_emanuel_reabilitapalete($emp){
+        $this->load->helper('url');
+        $this->load->library('session');
+        if($this->session->userdata('logged_in')) {            
+                       
+            $session_data = $this->session->userdata('logged_in');            
+            $user_type = $session_data['user_type'];
+
+            $emp = strtoupper($emp);
+            if($emp == 'CERAGNI'){                
+                $empresa = '\''.$emp.'\'';
+               // echo $empresa;
+
+               $setor='\'ST300\'';
+               $this->load->model('standards/others/GetZonas');                
+               $zonas=$this->GetZonas->zonaCelula($empresa,$emp,$setor,'CT');
+               
+               $this->load->model('standards/stocks/GetPalets');
+               
+               $paletes=$this->GetPalets->producao($setor);
+
+                $this->load->model('standards/others/Buttons');
+                $button=$this->Buttons->buttons_empresa_confirmar_palete(1);
+
+                $data = array( 
+                    'zonas' => $zonas,                                          
+                    'paletes' => $paletes,
+                    'radio' => '',
+                    'button' => $button
+                );
+                
+            }else{
+                $empresa = '\''.$emp.'\'';
+                //echo $empresa;
+                $this->load->model('standards/others/RadioButtons');
+                $radio=$this->RadioButtons->escolha_setores_empresa(2,$user_type);
+
+                $setor='\'FB008\'';
+                $this->load->model('standards/others/GetZonas');                
+                $zonas=$this->GetZonas->zonaCelula($empresa,$emp,$setor,'FB');
+                
+                $this->load->model('standards/stocks/GetPalets');
+                $paletes=$this->GetPalets->producao($setor);
+
+                $this->load->model('standards/others/Buttons');
+                $button=$this->Buttons->buttons_empresa_confirmar_palete(2);
+
+                $data = array( 
+                    'zonas' => $zonas,                                          
+                    'paletes' => $paletes,                    
+                    'radio' => $radio,
+                    'button' => $button
+                );
+            }
+                echo json_encode($data);
+        }else{
+            redirect('start', 'refresh');
+        }   
+    }   
+    
 }

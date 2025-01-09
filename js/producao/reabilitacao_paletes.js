@@ -3,8 +3,9 @@ $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI); // para bloquear a pagin
 $("#menu-prod01").addClass("menu-is-opening menu-open");
 $("#menu-prod02").addClass("active");
 $('#menu-prod03').attr("style", "display: block;" );
-$("#valida-pl01").addClass("active");
-$("#valida-pl02").addClass("active");
+$("#reabilita-pl01").addClass("active");
+$("#reabilita-pl02").addClass("active");
+
 
 let tablePaletes, tableSelPaletes, tableLocal_fabric, tableLocal_logistic, tableLocal_warehouse, selectedData=[], OG, dt, dtt, count=0, count2=0, count3=0, count4=0, local='';
 let type='', title='', text='', text1='', text2='', action='', xposition='', campo='',valor='',tblPL=[], tblLoc=[], tblLote=[], tblAfet=[];
@@ -17,7 +18,7 @@ toastr["info"]("A carregar paletes...");
 
 $.ajax({
     type: "GET",
-    url: "http://127.0.0.1/wyipist-fusion/standards/ListarPaletes/getPalets_validaPL",
+    url: "http://127.0.0.1/wyipist-fusion/standards/ListarPaletes/getPalets_reabilitaPL",
     dataType: "json",
     success: function (data) {
         if (data === "kick") {
@@ -135,6 +136,13 @@ function getPalets(data){
             {title:"Artigo", field:"Artigo", align:"center", visible:false},
             {title:"Descrição", field:"DescricaoArtigo", align:"center",headerFilter:"input"},
             {title:"QTD.", field:"Quantidade", align:"center",headerFilter:"input"},
+            {title:"QTD. a Usar", field:"NovaQtd",  hozAlign:"center", editor:"input", formatter:function (cell) {
+                    let val = cell.getValue();
+                    let el = cell.getElement();        
+                    el.style.backgroundColor = "#fdfd96";        
+                    return val;
+                }
+            },
             {title:"UNI.", field:"Unidade", align:"center", visible:false},
             {title:"Sector", field:"Sector", align:"center", visible:false},                
             {title:"Formato", field:"Formato", align:"center",headerFilter:"input"},
@@ -223,6 +231,13 @@ function selectedPalets(data){
             {title:"Artigo", field:"Artigo", align:"center", visible:false},
             {title:"Descrição", field:"DescricaoArtigo", align:"center",headerFilter:"input"},
             {title:"QTD.", field:"Quantidade", align:"center",headerFilter:"input"},
+            {title:"QTD. a Usar", field:"NovaQtd",  hozAlign:"center", editor:"input", formatter:function (cell) {
+                    let val = cell.getValue();
+                    let el = cell.getElement();        
+                    el.style.backgroundColor = "#fdfd96";        
+                    return val;
+                }
+            },
             {title:"UNI.", field:"Unidade", align:"center", visible:false},
             {title:"Sector", field:"Sector", align:"center", visible:false},                
             {title:"Formato", field:"Formato", align:"center",headerFilter:"input"},
@@ -334,7 +349,7 @@ function save_confirm_palette(){
         type='success';
         title='Tem a certeza que pretende continuar?';
         text2='';
-        action='save_confirm_palette';
+        action='save_rehabilitates_palette';
         xposition='center';
         tblPL=tableSelPaletes.getData();    
         tblLoc=[];
@@ -399,7 +414,7 @@ function confirm_changeEmpresa(){
     
     $.ajax({
         type: "POST",
-        url: "http://127.0.0.1/wyipist-fusion/standards/ListarFiltro/filtraPlZn_emanuel_confirmapalete/"+emp,
+        url: "http://127.0.0.1/wyipist-fusion/standards/ListarFiltro/filtraPlZn_emanuel_reabilitapalete/"+emp,
         dataType: "json",
         success: function (data) {
             if (data === "kick") {
@@ -432,7 +447,7 @@ function confirm_changeEmpresa(){
 } 
 
 /*GRAVAR DADOS NA BD*/
-function confirm_palette(tblPL){
+function rehabilitates_palette(tblPL){
 
     tableSelPaletes.alert("A gravar...");
     $('#empresasDP').prop('disabled', true);
@@ -440,7 +455,7 @@ function confirm_palette(tblPL){
 
     $.ajax({
         type: "POST",
-        url: "http://127.0.0.1/wyipist-fusion/producao/confirmacao/Gravar_ConfirmacaoPaletes/save_confirmation",
+        url: "http://127.0.0.1/wyipist-fusion/producao/reabilitacao/Gravar_RebilitacaoPaletes/save_rehabilitation",
         dataType: "json",
         data:{
             palete: tblPL

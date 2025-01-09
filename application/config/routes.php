@@ -63,10 +63,13 @@ $route['translate_uri_dashes'] = FALSE;
 
 /*
 | -------------------------------------------------------------------------
-| STOCKS
+| PRODUCTION
 | -------------------------------------------------------------------------
 */
-$route['production/confirm_palettes'] = 'producao/ConfirmacaoPaletes';
+$route['production/confirm_palettes'] = 'producao/confirmacao/ConfirmacaoPaletes';
+$route['production/rehabilitates_pallets'] = 'producao/reabilitacao/RebilitaPaletes';
+$route['production/reselection_pallets'] = 'producao/reescolha/ReescolhaPaletes';
+
 
 /*
 | -------------------------------------------------------------------------
@@ -74,6 +77,7 @@ $route['production/confirm_palettes'] = 'producao/ConfirmacaoPaletes';
 | -------------------------------------------------------------------------
 */
 $route['stocks/production'] = 'stocks/producao/SaidaProducao';
+$route['stocks/rehabilitates'] = 'stocks/reabilitados/PosicionarReabilitados';
 $route['stocks/internal_movements/change_location'] = 'stocks/movimentacoes_internas/troca_localizacao/MudaLocalizacao';
 $route['stocks/internal_movements/material_reception'] = 'stocks/movimentacoes_internas/rececao_material/RececaoMaterial';
 $route['stocks/manage_palettes/cancel_palettes'] = 'stocks/gerir_paletes/AnularPaletes';

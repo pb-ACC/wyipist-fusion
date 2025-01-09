@@ -30,8 +30,22 @@
                     <ul id="menu-prod03" class="nav nav-treeview" style="display: none;">
                         <li id="valida-pl01" class="nav-item">
                             <a id="valida-pl02" href="<?=base_url();?>production/confirm_palettes" class="nav-link">
-                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-check-circle nav-icon"></i>
                                 <p> Confirmação Paletes</p>
+                            </a>
+                        </li>
+
+                        <li id="reescolha-pl01" class="nav-item">
+                            <a id="reescolha-pl02" href="<?=base_url();?>production/reselection_pallets" class="nav-link">
+                            <i class="fas fa-pencil-ruler nav-icon"></i>
+                                <p> Reescolha</p>
+                            </a>
+                        </li>
+
+                        <li id="reabilita-pl01" class="nav-item">
+                            <a id="reabilita-pl02" href="<?=base_url();?>production/rehabilitates_pallets" class="nav-link">
+                            <i class="fas fa-recycle nav-icon"></i>
+                                <p> Reabilitados</p>
                             </a>
                         </li>
                     </ul>
@@ -48,7 +62,14 @@
                                 <i class="fas fa-boxes nav-icon"></i>
                                 <p> Saída Produção</p>
                             </a>
-                        </li>                                                
+                        </li>  
+                        
+                        <li id="reab-pl01" class="nav-item">
+                            <a id="reab-pl02" href="<?=base_url();?>stocks/rehabilitates" class="nav-link">
+                            <i class="fas fa-recycle nav-icon"></i>
+                                <p> Reabilitados</p>
+                            </a>
+                        </li>
 
                         <li id="menu-pls01" class="nav-item">
                             <a id="menu-pls02" href="#" class="nav-link">

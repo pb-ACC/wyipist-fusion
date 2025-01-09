@@ -321,4 +321,22 @@ function fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tbl
             }
         })
     }
+    if(action==='save_rehabilitates_palette') {
+        Swal.fire({
+                icon: type,
+                iconHtml: '?',
+                iconColor: '#f8bb86',
+                title: title,
+                //html: '<p  style="font-family: Arial, Helvetica, sans-serif; font-size: 14px;color: #333">Deseja continuar?</p>',
+                showDenyButton: true,
+                confirmButtonText: '<i class="fa fa-thumbs-up"></i> Sim',
+                denyButtonText: '<i class="fa fa-thumbs-down"></i> Não'
+            }
+        ).then((result) => {
+            if (result.isConfirmed) {            
+                rehabilitates_palette(tblPL);
+            } else if (result.isDenied) {            
+            }
+        })
+    }
 }
