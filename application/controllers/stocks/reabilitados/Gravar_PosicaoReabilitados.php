@@ -1,6 +1,6 @@
 <?php
 
-class Gravar_SaidaProducao extends CI_Controller
+class Gravar_PosicaoReabilitados extends CI_Controller
 {
 
 

@@ -2,7 +2,7 @@
 
 use LDAP\Result;
 
-class SaidaProducao extends CI_Model
+class PosicionarReabilitados extends CI_Model
 {
 
 
@@ -79,7 +79,7 @@ class SaidaProducao extends CI_Model
                                       Script, DocumentoOrigem, LinhaDocumentoOrigem, Calibre, LinhaPL, DocPL, NivelPalete)".
                 "VALUES(0,'{$Codigo}', '{$Numero}', '', '12', '{$Sector}', 0, 'REMOÇÃO DA PALETE', {$Quantidade}, {$Quantidade}, '{$Referencia}', '{$Artigo}', '{$DescricaoArtigo}', 0, 0, 0,
                        '{$Unidade}', 0, 0, 0, '0', '00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'SP','{$user}',getdate(), 0, 0, 0, 0, 0, 0, -1, 0, 0, 
-                       {$Quantidade},'{$Unidade}', '{$reluni}' , 1, 0, getdate(), 1, 0, 0, '', 'SaidaProducao#remove_palete_producao', '{$Formato}', '{$Qual}', '{$TipoEmbalagem}',
+                       {$Quantidade},'{$Unidade}', '{$reluni}' , 1, 0, getdate(), 1, 0, 0, '', 'PosicionarReabilitados#remove_palete_reabilitados', '{$Formato}', '{$Qual}', '{$TipoEmbalagem}',
                        '{$Superficie}', '{$Decoracao}', '{$RefCor}', '{$Lote}', '{$TabEspessura}', '{$DocPL}', '', '{$Referencia}', '', -1, '', 0, '{$Calibre}', {$LinhaPL},
                        '{$DocPL}','{$Nivel}')";       
 
@@ -116,7 +116,7 @@ class SaidaProducao extends CI_Model
                                       Script, DocumentoOrigem, LinhaDocumentoOrigem, Calibre, LinhaPL, DocPL, NivelPalete)".
                 "VALUES(0,'{$Codigo}', '{$Numero}', '', '02', '{$novo_sector}', 0, 'INSERÇÃO DA PALETE', {$Quantidade}, {$Quantidade}, '{$Referencia}', '{$Artigo}', '{$DescricaoArtigo}', 0, 0, 0,
                 '{$Unidade}', 0, 0, 0, '0', '00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'SP','{$user}',getdate(), 0, 0, 0, 0, 0, 0, -1, 0, 0, 
-                {$Quantidade},'{$Unidade}', '{$reluni}' , 1, 0, getdate(), 1, 0, 0, '{$local}', 'SaidaProducao#insere_palete_novosector', '{$Formato}', '{$Qual}', '{$TipoEmbalagem}',
+                {$Quantidade},'{$Unidade}', '{$reluni}' , 1, 0, getdate(), 1, 0, 0, '{$local}', 'PosicionarReabilitados#insere_palete_novosector', '{$Formato}', '{$Qual}', '{$TipoEmbalagem}',
                 '{$Superficie}', '{$Decoracao}', '{$RefCor}', '{$Lote}', '{$TabEspessura}', '{$DocPL}', '', '{$Referencia}', '', -1, '', 0, '{$Calibre}', {$LinhaPL},
                 '{$DocPL}', '{$Nivel}')";        
 

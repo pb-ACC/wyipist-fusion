@@ -4,13 +4,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Saída Produção</h1>
+                    <h1 class="m-0">Reabilitados</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><i class="nav-icon fa-solid fa-house"></i><a href="<?php echo base_url(); ?>home"> Página Inicial</a></li>
                         <li class="breadcrumb-item"><i class="nav-icon fa-solid fa-boxes-packing"></i> Stocks</li>    
-                        <li class="breadcrumb-item active"><i class="fas fa-boxes"></i> Saída Produção</li>
+                        <li class="breadcrumb-item active"><i class="fa-solid fa-recycle"></i> Reabilitados</li>
                     </ol>
                 </div>
             </div>
@@ -252,4 +252,4 @@ let codigoempresa=<?php echo $codigoempresa;?>;
 </script>
 
 <script src="<?=base_url();?>js/reload.js"></script>
-<script src="<?=base_url();?>js/stocks/producao/saida_producao.js"></script>
+<script src="<?=base_url();?>js/stocks/reabilitados/posicionar_reabilitados.js"></script>

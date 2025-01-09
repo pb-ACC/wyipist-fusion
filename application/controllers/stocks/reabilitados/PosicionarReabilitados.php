@@ -1,6 +1,6 @@
 <?php
 
-class SaidaProducao extends CI_Controller
+class PosicionarReabilitados extends CI_Controller
 {
 
 
@@ -25,7 +25,7 @@ class SaidaProducao extends CI_Controller
 
             $this->load->view('structure/header', $session_data);
             $this->load->view('structure/side_menu', $session_data);
-            $this->load->view('template/stocks/producao/saida_producao', $session_data);
+            $this->load->view('template/stocks/reabilitados/posicionar_reabilitados', $session_data);
             $this->load->view('structure/footer', $session_data);
 
         }else{

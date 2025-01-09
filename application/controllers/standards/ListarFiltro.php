@@ -739,16 +739,17 @@ class ListarFiltro extends CI_Controller
                 $empresa = '\''.$emp.'\'';
                // echo $empresa;
 
-               $setor='\'ST300\'';
+               $setor01 = '\'ST008\', \'ST009\', \'ST009A\', \'ST009B\', \'ST009C\', \'ST009D\', \'ST009E\', \'ST011\', \'ST012\', \'ST013\', \'ST014\', \'ST015\', \'ST016\', \'ST020\', \'ST200\', \'ST201\', \'ST202\', \'ST203\', \'ST204\', \'ST205\', \'ST206\', \'ST207\', \'ST290\', \'ST888\'';                              
                $this->load->model('standards/others/GetZonas');                
-               $zonas=$this->GetZonas->zonaCelula($empresa,$emp,$setor,'CT');
+               $zonas=$this->GetZonas->zonaCelula($empresa,$emp,$setor01,'CT');
                
                $this->load->model('standards/stocks/GetPalets');
                
-               $paletes=$this->GetPalets->producao($setor);
+               $setor02='\'ST301\'';
+               $paletes=$this->GetPalets->producao($setor02);
 
-                $this->load->model('standards/others/Buttons');
-                $button=$this->Buttons->buttons_empresa_confirmar_palete(1);
+               $this->load->model('standards/others/Buttons');
+               $button=$this->Buttons->buttons_empresa(1);
 
                 $data = array( 
                     'zonas' => $zonas,                                          
@@ -763,15 +764,16 @@ class ListarFiltro extends CI_Controller
                 $this->load->model('standards/others/RadioButtons');
                 $radio=$this->RadioButtons->escolha_setores_empresa(2,$user_type);
 
-                $setor='\'FB008\'';
+                $setor01 = '\'FB003\', \'CL001\', \'CL888\'';
                 $this->load->model('standards/others/GetZonas');                
-                $zonas=$this->GetZonas->zonaCelula($empresa,$emp,$setor,'FB');
+                $zonas=$this->GetZonas->zonaCelula($empresa,$emp,$setor01,'FB');
                 
+                $setor02='\'FB009\'';
                 $this->load->model('standards/stocks/GetPalets');
-                $paletes=$this->GetPalets->producao($setor);
+                $paletes=$this->GetPalets->producao($setor02);
 
                 $this->load->model('standards/others/Buttons');
-                $button=$this->Buttons->buttons_empresa_confirmar_palete(2);
+                $button=$this->Buttons->buttons_empresa(2);
 
                 $data = array( 
                     'zonas' => $zonas,                                          

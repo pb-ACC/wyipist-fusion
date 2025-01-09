@@ -3,8 +3,8 @@ $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI); // para bloquear a pagin
 $("#menu-stocks01").addClass("menu-is-opening menu-open");
 $("#menu-stocks02").addClass("active");
 $('#menu-stocks03').attr("style", "display: block;" );
-$("#saida-prod01").addClass("active");
-$("#saida-prod02").addClass("active");
+$("#reab-pl01").addClass("active");
+$("#reab-pl02").addClass("active");
 
 let tablePaletes, tableSelPaletes, tableLocal_fabric, tableLocal_logistic, tableLocal_warehouse, tableLocal_samplesCG, tableLocal_samplesCT, selectedData=[], OG, dt, dtt, dttt, count=0, count2=0, count3=0, count4=0, count5=0, count6=0, local='';
 let type='', title='', text='', text1='', text2='', action='', xposition='', campo='',valor='',tblPL=[], tblLoc=[], tblLote=[], tblAfet=[];
@@ -18,7 +18,7 @@ toastr["info"]("A carregar paletes...");
 
 $.ajax({
     type: "GET",
-    url: "http://127.0.0.1/wyipist-fusion/standards/ListarPaletes/getPalets",
+    url: "http://127.0.0.1/wyipist-fusion/standards/ListarPaletes/getPalets_reabilitaPL",
     dataType: "json",
     success: function (data) {
         if (data === "kick") {
@@ -1187,7 +1187,7 @@ function confirm_changeEmpresa(){
     
     $.ajax({
         type: "POST",
-        url: "http://127.0.0.1/wyipist-fusion/standards/ListarFiltro/filtraPlZn/"+emp,
+        url: "http://127.0.0.1/wyipist-fusion/standards/ListarFiltro/filtraPlZn_emanuel_reabilitapalete/"+emp,
         dataType: "json",
         success: function (data) {
             if (data === "kick") {
@@ -1236,7 +1236,7 @@ function confirm_save(tblPL,tblLoc){
 
     $.ajax({
         type: "POST",
-        url: "http://127.0.0.1/wyipist-fusion/stocks/producao/Gravar_SaidaProducao/save_production",
+        url: "http://127.0.0.1/wyipist-fusion/stocks/reabilitados/Gravar_PosicaoReabilitados/save_production",
         dataType: "json",
         data:{
             palete: tblPL,

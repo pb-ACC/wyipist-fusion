@@ -1310,13 +1310,13 @@ class ListarPaletes extends CI_Controller
             $this->load->model('standards/stocks/GetPalets');
             switch ($empresa[0]->TipoEmpresa) {
                 case 1:
-                    $setor='\'ST300\'';                    
+                    $setor='\'ST301\'';                    
                     
                     $this->load->model('standards/stocks/GetPalets');
                     $paletes=$this->GetPalets->producao($setor);
 
                     $this->load->model('standards/others/Buttons');
-                    $button=$this->Buttons->buttons_empresa_confirmar_palete($empresa[0]->TipoEmpresa);
+                    $button=$this->Buttons->buttons_empresa($empresa[0]->TipoEmpresa);
 
                     $data = array( 
                         'select' => '',     
@@ -1326,12 +1326,12 @@ class ListarPaletes extends CI_Controller
                     echo json_encode($data);
                     break;
                 case 2:
-                    $setor='\'FB008\'';
+                    $setor='\'FB009\'';
                     $this->load->model('standards/stocks/GetPalets');
                     $paletes=$this->GetPalets->producao($setor);
 
                     $this->load->model('standards/others/Buttons');
-                    $button=$this->Buttons->buttons_empresa_confirmar_palete($empresa[0]->TipoEmpresa);
+                    $button=$this->Buttons->buttons_empresa($empresa[0]->TipoEmpresa);
 
                     $data = array( 
                         'select' => '', 
@@ -1346,7 +1346,7 @@ class ListarPaletes extends CI_Controller
                     $st02='FB001';
                     $setor = '\''.$st01.'\''.','.'\''.$st02.'\'';     
                     */
-                    $setor='\'ST300\''; 
+                    $setor='\'ST301\''; 
                     $this->load->model('standards/others/Dropdowns');
                     $select=$this->Dropdowns->escolha_empresa($empresa[0]->TipoEmpresa);
             
@@ -1354,7 +1354,7 @@ class ListarPaletes extends CI_Controller
                     $paletes=$this->GetPalets->producao($setor);
 
                     $this->load->model('standards/others/Buttons');
-                    $button=$this->Buttons->buttons_empresa_confirmar_palete($empresa[0]->TipoEmpresa);
+                    $button=$this->Buttons->buttons_empresa($empresa[0]->TipoEmpresa);
 
                     $data = array(
                         'select' => $select,
@@ -1370,7 +1370,7 @@ class ListarPaletes extends CI_Controller
                     $st02='FB001';
                     $setor = '\''.$st01.'\''.','.'\''.$st02.'\'';     
                     */
-                    $setor='\'ST300\''; 
+                    $setor='\'ST301\''; 
                     $this->load->model('standards/others/Dropdowns');
                     $select=$this->Dropdowns->escolha_empresa($empresa[0]->TipoEmpresa);
             
@@ -1378,8 +1378,7 @@ class ListarPaletes extends CI_Controller
                     $paletes=$this->GetPalets->producao($setor);
 
                     $this->load->model('standards/others/Buttons');
-                    $button=$this->Buttons->buttons_empresa_confirmar_palete($empresa[0]->TipoEmpresa);
-
+                    $button=$this->Buttons->buttons_empresa($empresa[0]->TipoEmpresa);
                     $data = array(
                         'select' => $select,
                         'button' => $button,
