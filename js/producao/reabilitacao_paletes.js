@@ -7,9 +7,10 @@ $("#reabilita-pl01").addClass("active");
 $("#reabilita-pl02").addClass("active");
 
 
-let tablePaletes, tableSelPaletes, tableLocal_fabric, tableLocal_logistic, tableLocal_warehouse, selectedData=[], OG, dt, dtt, count=0, count2=0, count3=0, count4=0, local='';
+let tablePaletes, tableSelPaletes, tableRefs, tableLocal_fabric, tableLocal_logistic, tableLocal_warehouse, selectedData=[], OG, dt, dtt, count=0, count2=0, count3=0, count4=0, local='';
 let type='', title='', text='', text1='', text2='', action='', xposition='', campo='',valor='',tblPL=[], tblLoc=[], tblLote=[], tblAfet=[];
 let palets=[], paletsOG=[], marosca=[];
+let idValue;
 selectedPalets(data=[]);
 
 toastr.clear();
@@ -18,7 +19,7 @@ toastr["info"]("A carregar paletes...");
 
 $.ajax({
     type: "GET",
-    url: "http://127.0.0.1/wyipist-fusion/standards/ListarPaletes/getPalets_reabilitaPL",
+    url: "http://127.0.0.1/wyipist-fusion/standards/ListarPaletes/getPalets_prodReabilitaPL",
     dataType: "json",
     success: function (data) {
         if (data === "kick") {
@@ -35,6 +36,24 @@ $.ajax({
             //alert(data);
             paletsOG=Object.values(data['paletes']);
             getPalets(Object.values(data['paletes']));
+        }
+    },
+    error: function (e) {
+                alert('Request Status: ' + e.status + ' Status Text: ' + e.statusText + ' ' + e.responseText);
+                console.log(e);
+            }
+});
+
+$.ajax({
+    type: "GET",
+    url: "http://127.0.0.1/wyipist-fusion/standards/ListarReferencias/getReferencias_segunda",
+    dataType: "json",
+    success: function (data) {
+        if (data === "kick") {
+            toastr["warning"]("Outro utilizador entrou com as suas credenciais, faça login de novo.");
+            window.location = "home/logout";
+        } else {                                      
+            getRefs2(Object.values(data['refs']));
         }
     },
     error: function (e) {
@@ -136,14 +155,35 @@ function getPalets(data){
             {title:"Artigo", field:"Artigo", align:"center", visible:false},
             {title:"Descrição", field:"DescricaoArtigo", align:"center",headerFilter:"input"},
             {title:"QTD.", field:"Quantidade", align:"center",headerFilter:"input"},
-            {title:"QTD. a Usar", field:"NovaQtd",  hozAlign:"center", editor:"input", formatter:function (cell) {
+            {title:"QTD. OK", field:"Qtd_OK",  hozAlign:"center", editor:"input", formatter:function (cell) {
                     let val = cell.getValue();
                     let el = cell.getElement();        
                     el.style.backgroundColor = "#fdfd96";        
-                    return val;
-                }
+                    return val;                
+            },cellEdited: function(cell) {
+                atualiza_qtdPL(data,tablePaletes);  
+            }
             },
+            {title:"QTD. NOK", field:"Qtd_NOK",  hozAlign:"center", editor:"input", formatter:function (cell) {
+                let val = cell.getValue();
+                let el = cell.getElement();        
+                el.style.backgroundColor = "#fdfd96";        
+                return val;
+            },cellEdited: function(cell) {
+                atualiza_qtdPL(data,tablePaletes);  
+            }
+            },
+            {title:"Qtd. Caco", field:"Qtd_Caco", align:"center", formatter:function (cell) {
+                let val = cell.getValue();
+                let el = cell.getElement();        
+                el.style.backgroundColor = "#fdfd96";        
+                return val;
+            }
+            },
+            {title:"RefSeg", field:"RefSeg", align:"center", visible:false},
+            {title:"DescRefSeg", field:"DescRefSeg", align:"center", visible:false},
             {title:"UNI.", field:"Unidade", align:"center", visible:false},
+            {title:"Local", field:"Local", align:"center"},                
             {title:"Sector", field:"Sector", align:"center", visible:false},                
             {title:"Formato", field:"Formato", align:"center",headerFilter:"input"},
             {title:"Qual", field:"Qual", align:"center", visible:false},
@@ -153,6 +193,7 @@ function getPalets(data){
             {title:"RefCor", field:"RefCor", align:"center", visible:false},
             {title:"Lote", field:"Lote", align:"center",headerFilter:"input"},
             {title:"Nivel", field:"Nivel", align:"center", visible:false},
+            {title:"Serie", field:"Serie", align:"center", visible:false},
             {title:"TabEspessura", field:"TabEspessura", align:"center", visible:false},                                
             {title:"Calibre", field:"Calibre", align:"center",headerFilter:"input"},                
             {title:"Sel", field:"Sel", align:"center", visible:false},
@@ -200,6 +241,7 @@ function save_paletes(){
           toastr["error"]("Só pode picar duas paletes de cada vez!");
       } 
     }  
+    atualiza_qtdPL(selected,tablePaletes);  
 }
 
 function selectedPalets(data){
@@ -231,14 +273,41 @@ function selectedPalets(data){
             {title:"Artigo", field:"Artigo", align:"center", visible:false},
             {title:"Descrição", field:"DescricaoArtigo", align:"center",headerFilter:"input"},
             {title:"QTD.", field:"Quantidade", align:"center",headerFilter:"input"},
-            {title:"QTD. a Usar", field:"NovaQtd",  hozAlign:"center", editor:"input", formatter:function (cell) {
-                    let val = cell.getValue();
-                    let el = cell.getElement();        
-                    el.style.backgroundColor = "#fdfd96";        
-                    return val;
-                }
+            {title:"QTD. OK", field:"Qtd_OK",  hozAlign:"center", editor:"input", formatter:function (cell) {
+                let val = cell.getValue();
+                let el = cell.getElement();        
+                el.style.backgroundColor = "#fdfd96";        
+                return val;
+            },cellEdited: function(cell) {
+                atualiza_qtdPL(data,tableSelPaletes);  
             },
+            },
+            {title:"QTD. NOK", field:"Qtd_NOK",  hozAlign:"center", editor:"input", formatter:function (cell) {
+                let val = cell.getValue();
+                let el = cell.getElement();        
+                el.style.backgroundColor = "#fdfd96";        
+                return val;
+            },cellEdited: function(cell) {
+                atualiza_qtdPL(data,tableSelPaletes);  
+            },
+            },
+            {title:"Qtd. Caco", field:"Qtd_Caco", align:"center", formatter:function (cell) {
+                let val = cell.getValue();
+                let el = cell.getElement();        
+                el.style.backgroundColor = "#fdfd96";        
+                return val;
+            }
+            },
+            {title:"Ref. Segunda", field:"RefSeg", align:"center", formatter:function (cell) {
+                let val = cell.getValue();
+                let el = cell.getElement();        
+                el.style.backgroundColor = "#fdfd96";        
+                return val;
+            }
+            },
+            {title:"DescRefSeg", field:"DescRefSeg", align:"center", visible:false},
             {title:"UNI.", field:"Unidade", align:"center", visible:false},
+            {title:"Local", field:"Local", align:"center"},                
             {title:"Sector", field:"Sector", align:"center", visible:false},                
             {title:"Formato", field:"Formato", align:"center",headerFilter:"input"},
             {title:"Qual", field:"Qual", align:"center", visible:false},
@@ -248,6 +317,7 @@ function selectedPalets(data){
             {title:"RefCor", field:"RefCor", align:"center", visible:false},
             {title:"Lote", field:"Lote", align:"center",headerFilter:"input"},
             {title:"Nivel", field:"Nivel", align:"center", visible:false},
+            {title:"Serie", field:"Serie", align:"center", visible:false},
             {title:"TabEspessura", field:"TabEspessura", align:"center", visible:false},                                
             {title:"Calibre", field:"Calibre", align:"center",headerFilter:"input"},                
             {title:"Sel", field:"Sel", align:"center", visible:false},
@@ -260,6 +330,18 @@ function selectedPalets(data){
         ]
     });
 
+    tableSelPaletes.on("cellDblClick", function(e, cell){ 
+        // Verificar se a célula pertence a uma coluna específica
+        if (cell.getColumn().getField() === "RefSeg") {
+            // Obter o valor da célula
+            let cellValue = cell.getValue();
+                // Obter os dados da linha correspondente
+            let rowData = cell.getRow().getData();    
+            // Obter o valor da coluna "Id" nessa linha
+            idValue = rowData.Id + 1;
+            $("#escolha_segref").modal("show");
+        }
+    });
 }
 
 function clearPaletes(){
@@ -330,6 +412,95 @@ function select_all_paletes(){
     tablePaletes.selectRow("visible"); //select all rows currently visible in the table viewport;     
 }
 
+/*Refs*/
+function getRefs2(data){    
+    tableRefs= new Tabulator("#tableRefs2", {
+        data:data, //assign data to table                 
+        selectableRows:true, //make rows selectable
+        headerSort:false, //disable header sort for all columns
+        placeholder:"Sem Dados Disponíveis",   
+        layout:"fitColumns",      //fit columns to width of table
+        responsiveLayout:"hide",  //hide columns that don't fit on the table        
+        pagination:"local",       //paginate the data
+        paginationSize:10,         //allow 7 rows per page of data        
+        columnDefaults:{
+            tooltip:true,         //show tool tips on cells
+        },
+        locale: true, // enable locale support
+        langs: {
+            "pt-pt": ptLocale
+        },
+        initialLocale: 'pt-pt',
+        rowFormatter: function(row) {
+            var data = row.getData();
+            
+            // Verifica se a linha deve ser marcada como selecionada
+            if (data.Sel == 1) {
+                // Aplica classes CSS específicas para seleção
+                row.getElement().classList.add("tabulator-selected");
+                row.getElement().classList.add("tabulator-selectable");
+            } else {
+                // Remove as classes CSS de seleção se não estiver selecionada
+                row.getElement().classList.remove("tabulator-selected");
+                row.getElement().classList.remove("tabulator-selectable");
+            }
+    
+            // Adiciona classes para linhas ímpares e pares automaticamente pelo Tabulator
+            if (row.getIndex() % 2 === 0) {
+                row.getElement().classList.add("tabulator-row-even");
+                row.getElement().classList.remove("tabulator-row-odd");
+            } else {
+                row.getElement().classList.add("tabulator-row-odd");
+                row.getElement().classList.remove("tabulator-row-even");
+            }
+    
+            // Outros estilos ou classes podem ser adicionados conforme necessário
+        },
+        rowClick: function(row){
+            var data = row.getData();
+            data.Sel = 1;
+        },
+        columns:[                
+            {title:"Artigo", field:"Artigo", align:"center", visible:false},
+            {title:"Referencia", field:"Referencia", align:"center",headerFilter:"input"},            
+            {title:"Descrição", field:"Descricao", align:"center",headerFilter:"input"},            
+            {title:"Sel", field:"Sel", align:"center", visible:false},
+            {title:"Id", field:"Id", align:"center", visible:false}
+        ]
+    });
+
+    //tablePaletes.setData(data);
+   // tablePaletes.redraw(true);            
+    //tablePaletes.setData(Object.values(data));
+}
+
+function save_refs(){
+
+    let selected=[];
+    sel = tableRefs.getSelectedData();
+
+    if(sel.length>0){
+        selected=sel;
+    }
+    else{        
+        let sel = tableRefs.getData();        
+        for (let i = 0; i < sel.length; i++) {
+            if (sel[i]['Sel'] == 1) {
+                selected.push(sel[i]);
+            }
+        }
+    }
+
+    if(selected.length<=1){            
+        let row=tableSelPaletes.getRowFromPosition(idValue);
+        row.update({RefSeg: selected[0]['Referencia'], DescRefSeg: selected[0]['Descricao']});
+        $('#escolha_segref').modal('hide')     
+    }
+     else{
+          toastr["error"]("Só pode picar uma referência de cada vez!");
+      } 
+}
+
 /*BTNS*/
 function choose_palets(){    
     setTimeout(function () {  
@@ -341,24 +512,6 @@ function choose_palets(){
         $('#paleteCB').trigger('focus');
     //    tablePaletes.redraw(true);            
     }, 850);
-}
-
-function save_confirm_palette(){
-    sizeofTBL=tableSelPaletes.getData();   
-    if(sizeofTBL.length>0){
-        type='success';
-        title='Tem a certeza que pretende continuar?';
-        text2='';
-        action='save_rehabilitates_palette';
-        xposition='center';
-        tblPL=tableSelPaletes.getData();    
-        tblLoc=[];
-        tblLote=[];
-        tblAfet=[];
-        fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
-    }else{
-        toastr["error"]("Não picou nenhuma palete!");
-    }
 }
 
 /*FILTRO*/
@@ -414,7 +567,7 @@ function confirm_changeEmpresa(){
     
     $.ajax({
         type: "POST",
-        url: "http://127.0.0.1/wyipist-fusion/standards/ListarFiltro/filtraPlZn_emanuel_reabilitapalete/"+emp,
+        url: "http://127.0.0.1/wyipist-fusion/standards/ListarFiltro/filtraPlZn_emanuel_reabilitapalete_prod/"+emp,
         dataType: "json",
         success: function (data) {
             if (data === "kick") {
@@ -446,38 +599,85 @@ function confirm_changeEmpresa(){
     
 } 
 
+/*ATUALIZA QTDS*/
+function atualiza_qtdPL(selected,table){        
+    for(i=1; i<=selected.length; i++){        
+        let row=table.getRowFromPosition(i);        
+
+        if(parseFloat(table.getData()[i-1]['Qtd_OK']) < 0 || parseFloat(table.getData()[i-1]['Qtd_NOK']) < 0){
+            toastr["error"]("Não pode colocar quantidades negativas!");
+            row.update({Qtd_OK:0, Qtd_NOK:0, Qtd_Caco: 0}); 
+        }
+        else{            
+            k = parseFloat(table.getData()[i-1]['Quantidade']) - (parseFloat(table.getData()[i-1]['Qtd_OK'])+parseFloat(table.getData()[i-1]['Qtd_NOK']));        
+            if(k < 0){
+                toastr["error"]("Está a tentar colocar linhas cuja Qtd OK + Qtd NOK é superior à quantidade da palete!");
+                row.update({Qtd_OK:0, Qtd_NOK:0, Qtd_Caco: 0});                    
+            }else{
+                row.update({Qtd_Caco: parseFloat(k)});        
+            }
+        }        
+    }
+}
+
 /*GRAVAR DADOS NA BD*/
-function rehabilitates_palette(tblPL){
+function send_to_rehabilitates(setor){
+    
+    let tbl = tableSelPaletes.getData();    
+    let hasEmptyRefSeg = tbl.some((_, i) => 
+        !tableSelPaletes.getData()[i]['RefSeg'] && tableSelPaletes.getData()[i]['Qtd_NOK'] > 0
+    );        
+    if (hasEmptyRefSeg) {
+        toastr.error("Há linhas em que pretende colocar Qtd NOK e a referência de segunda não foi selecionada!");
+    } else {
+        valite_sending_to_rehabilitates(setor,tbl);
+    }             
+}
 
-    tableSelPaletes.alert("A gravar...");
-    $('#empresasDP').prop('disabled', true);
-    $("#buttons button").attr("disabled", true);
+function valite_sending_to_rehabilitates(setor,tbl){
+    if(tbl.length>0){
+        type='success';
+        title='Tem a certeza que pretende continuar?';
+        text2='';
+        action='valida_reabilitados';
+        xposition='center';
+        tblPL=tableSelPaletes.getData();
+        tblLoc=[];
+        tblLote=[];
+        tblAfet=[];
+        valor=setor;
+        fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
+    }else{
+        toastr["error"]("Não picou nenhuma palete!");
+    }     
+}
 
+function confirm_save_rehabilitates(tblPL,valor){
     $.ajax({
         type: "POST",
         url: "http://127.0.0.1/wyipist-fusion/producao/reabilitacao/Gravar_RebilitacaoPaletes/save_rehabilitation",
         dataType: "json",
         data:{
-            palete: tblPL
+            paletes: tblPL,
+            setor: valor
         },
         success: function (data) {
-
             if (data === "kick") {
                 //alert("Outro utilizador entrou com as suas credenciais, faça login de novo.");
                 toastr["warning"]("Outro utilizador entrou com as suas credenciais, faça login de novo.");
                 window.location = "home/logout";
             } else {
-                toastr["success"]("Dados gravados com Sucesso");                
-                setTimeout(function(){
-                    location.reload();
-                },2500);
+                toastr["success"]("Dados gravados com Sucesso");                    
+                location.reload();
             }
         },
         error: function (e) {
+            //alert(e);
             alert('Request Status: ' + e.status + ' Status Text: ' + e.statusText + ' ' + e.responseText);
-            console.log(e);
+            toastr["error"]("Erro ao gravar dados");    
+            //console.log(e);
         }
-    });  
+    });    
 }
 
 function save_motivo(){

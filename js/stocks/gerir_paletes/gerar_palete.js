@@ -115,8 +115,9 @@ function getRefs(data){
         selectableRows:true, //make rows selectable
         headerSort:false, //disable header sort for all columns
         placeholder:"Sem Dados Disponíveis",   
-        layout:"fitColumns",      //fit columns to width of table
-        responsiveLayout:"hide",  //hide columns that don't fit on the table        
+        //layout:"fitColumns",      //fit columns to width of table
+        layout:window.innerWidth > 800 ? "fitColumns" : "fitDataFill",
+        //responsiveLayout:"hide",  //hide columns that don't fit on the table        
         pagination:"local",       //paginate the data
         paginationSize:25,         //allow 7 rows per page of data        
         columnDefaults:{

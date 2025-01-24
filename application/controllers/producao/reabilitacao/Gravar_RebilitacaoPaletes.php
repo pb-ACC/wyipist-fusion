@@ -25,7 +25,8 @@ class Gravar_RebilitacaoPaletes extends CI_Controller
             $username = $session_data['username'];
             $funcionario_gpac = $session_data['funcionario_gpac']; 
             
-            $tbl = $this->input->post('palete');
+            $tbl = $this->input->post('paletes');
+            $novoST = $this->input->post('valor');
 
             $countTBL = count($tbl, COUNT_RECURSIVE);
 
@@ -38,9 +39,9 @@ class Gravar_RebilitacaoPaletes extends CI_Controller
                     $Artigo = $tbl[$i]['Artigo'];
                     $DescricaoArtigo = $tbl[$i]['DescricaoArtigo'];
                     $Quantidade = $tbl[$i]['Quantidade'];
-                    $NovaQtd = $tbl[$i]['NovaQtd'];
                     $Unidade = $tbl[$i]['Unidade'];
                     $Sector = $tbl[$i]['Sector'];
+                    $Local = $tbl[$i]['Local'];
                     $Formato = $tbl[$i]['Formato'];
                     $Qual = $tbl[$i]['Qual'];
                     $TipoEmbalagem = $tbl[$i]['TipoEmbalagem'];
@@ -51,17 +52,25 @@ class Gravar_RebilitacaoPaletes extends CI_Controller
                     $TabEspessura = $tbl[$i]['TabEspessura'];
                     $Calibre = $tbl[$i]['Calibre'];                    
                     $Nivel = $tbl[$i]['Nivel'];
-
-                    if($Sector == 'ST300'){
-                        $novoST = 'ST301';
-                    }else{
-                        $novoST = 'FB009';
+                    $RefSeg = $tbl[$i]['RefSeg'];
+                    $DescRefSeg = $tbl[$i]['DescRefSeg'];
+                    $Qtd_Caco = $tbl[$i]['Qtd_Caco'];
+                    $Qtd_NOK = $tbl[$i]['Qtd_NOK'];
+                    $Qtd_OK = $tbl[$i]['Qtd_OK'];
+                    $Serie = $tbl[$i]['Serie'];
+                    
+                    if($Serie == 'P'){                        
+                        $stPL = 'FB009';                        
+                        $stCaco = 'FB992';                        
+                    }else{                        
+                        $stPL='ST301';
+                        $stCaco='ST992';
                     }
-                  
+
                     $this->load->model('producao/Reabilitacao_Paletes');
-                    $this->Reabilitacao_Paletes->save_rehabilitation($DocPL,$LinhaPL,$Referencia,$Artigo,$DescricaoArtigo,$Quantidade,$NovaQtd,$Unidade,$Sector,$Formato,$Qual,
-                                                                     $TipoEmbalagem,$Superficie,$Decoracao,$RefCor,$Lote,$TabEspessura,$Calibre,$Nivel,$novoST,$username,
-                                                                     $funcionario_gpac);                   
+                    $this->Reabilitacao_Paletes->save_rehabilitation($DocPL,$LinhaPL,$Referencia,$Artigo,$DescricaoArtigo,$Quantidade,$Unidade,$Sector,$Local,$Formato,$Qual,$TipoEmbalagem,$Superficie,$Decoracao,$RefCor,
+                                                                     $Lote,$TabEspessura,$Calibre,$Nivel,$RefSeg,$DescRefSeg,$Qtd_Caco,$Qtd_NOK,$Qtd_OK,$stPL,$Serie,$stCaco,$username,$funcionario_gpac);                   
+                    
                  }
                  echo json_encode("inseriu");
              }                

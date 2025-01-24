@@ -86,6 +86,35 @@
   </div>
 </div>
 
+<div id="escolha_segref" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl"role="document" style="width:auto">
+    <div class="modal-content">
+    <div class="modal-header">
+            <h5 class="modal-title">Referências de Segunda</h5>
+				<button id="btnclose" type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+
+			<!--<div class="modal-body" style="max-height: calc(100vh - 210px);overflow-y:scroll;overflow-x:scroll;">-->
+            <div class="modal-body" style="width: auto; height:auto;">
+			
+            <div id="tableRefs2" class="table table-striped"></div>
+			</div>
+			<div class="modal-footer">
+                <div class="row">        	                    
+                    <div class="col-sm-12 col-sm-push-6 col-xs-12 col-md-6 col-md-push-6 col-lg-6 col-lg-push-6">
+                        <button type="button" class="btn btn-danger" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;" data-dismiss="modal"><i class="fas fa-times"></i> Cancelar</button>		
+                    </div>
+                    <div class="col-sm-12 col-sm-push-6 col-xs-12 col-md-6 col-md-push-6 col-lg-6 col-lg-push-6">
+                        <button onclick="save_refs()" type="button" class="btn btn-success" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"><i class="fas fa-arrow-right"></i> Continuar</button>
+                    </div>
+                </div>
+			</div>    
+    </div>
+  </div>
+</div>
+
 <div id="motivo" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">

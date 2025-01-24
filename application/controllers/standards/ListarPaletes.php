@@ -1393,4 +1393,100 @@ class ListarPaletes extends CI_Controller
             redirect('start', 'refresh');
         }   
     }  
+
+    public function getPalets_prodReabilitaPL(){
+        $this->load->helper('url');
+        $this->load->library('session');
+        if($this->session->userdata('logged_in')) {
+            
+            //$user_type= $session_data['user_type'];
+
+            $empresa= $this->getEmpresa();            
+            //echo $empresa[0]->TipoEmpresa;
+            $this->load->model('standards/stocks/GetPalets');
+            switch ($empresa[0]->TipoEmpresa) {
+                case 1:
+                    $setor='\'ST300\'';                    
+                    
+                    $this->load->model('standards/stocks/GetPalets');
+                    $paletes=$this->GetPalets->reabilitados($setor);
+
+                    $this->load->model('standards/others/Buttons');
+                    $button=$this->Buttons->buttons_empresa_producao($empresa[0]->TipoEmpresa);
+
+                    $data = array( 
+                        'select' => '',     
+                        'button' => $button,                
+                        'paletes' => $paletes
+                    );
+                    echo json_encode($data);
+                    break;
+                case 2:
+                    $setor='\'FB008\'';
+                    $this->load->model('standards/stocks/GetPalets');
+                    $paletes=$this->GetPalets->reabilitados($setor);
+
+                    $this->load->model('standards/others/Buttons');
+                    $button=$this->Buttons->buttons_empresa_producao($empresa[0]->TipoEmpresa);
+
+                    $data = array( 
+                        'select' => '', 
+                        'button' => $button,  
+                        'paletes' => $paletes
+                    );
+                    echo json_encode($data);
+                    break;
+                case 3:
+                    /*                    
+                    $st01='ST010';
+                    $st02='FB001';
+                    $setor = '\''.$st01.'\''.','.'\''.$st02.'\'';     
+                    */
+                    $setor='\'ST300\''; 
+                    $this->load->model('standards/others/Dropdowns');
+                    $select=$this->Dropdowns->escolha_empresa($empresa[0]->TipoEmpresa);
+            
+                    $this->load->model('standards/stocks/GetPalets');
+                    $paletes=$this->GetPalets->reabilitados($setor);
+
+                    $this->load->model('standards/others/Buttons');
+                    $button=$this->Buttons->buttons_empresa_producao($empresa[0]->TipoEmpresa);
+
+                    $data = array(
+                        'select' => $select,
+                        'button' => $button,  
+                        'paletes' => $paletes
+                    );
+                    //print_r($data['paletes']);
+                    echo json_encode($data);
+                    break;
+                case 4:
+                    /*                    
+                    $st01='ST010';
+                    $st02='FB001';
+                    $setor = '\''.$st01.'\''.','.'\''.$st02.'\'';     
+                    */
+                    $setor='\'ST300\''; 
+                    $this->load->model('standards/others/Dropdowns');
+                    $select=$this->Dropdowns->escolha_empresa($empresa[0]->TipoEmpresa);
+            
+                    $this->load->model('standards/stocks/GetPalets');
+                    $paletes=$this->GetPalets->reabilitados($setor);
+
+                    $this->load->model('standards/others/Buttons');
+                    $button=$this->Buttons->buttons_empresa_producao($empresa[0]->TipoEmpresa);
+                    $data = array(
+                        'select' => $select,
+                        'button' => $button,
+                        'paletes' => $paletes
+                    );
+                    //print_r($data['paletes']);
+                    echo json_encode($data);
+                    break;                    
+            }
+
+        }else{
+            redirect('start', 'refresh');
+        }   
+    }  
 }

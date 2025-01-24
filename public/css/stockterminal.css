@@ -515,3 +515,8 @@ input[type=range] {
     background-color: #C4B28B !important;
     border-color:  #B39B75 !important;
 }
+
+#rehabCG:hover, #rehabCT:hover {
+    background-color: #6f441f !important;
+    border-color: #603b1b !important;
+}

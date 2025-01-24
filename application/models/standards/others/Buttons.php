@@ -77,11 +77,14 @@ class Buttons extends CI_Model
                    <button id="amostras" onclick="send_to_samples(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b05574; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST888">Enviar Armazém Amostras</button>
                    </div> 
 
-                    <div class="col-12 col-md-6 col-lg-6">
+                    <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
                     <button id="desclas" onclick="send_to_disqualified(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b6a3f7; color:white; border-color:#A99ED6; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST777">Enviar Armazém de Material Desclassificado</button>
                     </div> 
-                    <div class="col-12 col-md-6 col-lg-6">
+                    <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
                     <button id="reclama" onclick="send_to_complaints(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#dabf90; color:white; border-color:#C1B88A; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST666">Enviar Armazém de Reclamações</button>
+                    </div> 
+                    <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                    <button id="rehabCG" onclick="send_to_rehabilitates(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#7f4f24; color:white; border-color:#6f441f; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST300">Enviar Armazém Reabilitado</button>
                     </div> 
 
                    </div>';
@@ -101,12 +104,16 @@ class Buttons extends CI_Model
                             <button id="amostras" onclick="send_to_samples(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b05574; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="CL888">Enviar Armazém Amostras</button>
                         </div> 
                         
-                        <div class="col-12 col-md-6 col-lg-6">
+                        <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
                             <button id="desclas" onclick="send_to_disqualified(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b6a3f7; color:white; border-color:#A99ED6; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="CL777">Enviar Armazém de Material Desclassificado</button>
                         </div> 
-                        <div class="col-12 col-md-6 col-lg-6">
+                        <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
                             <button id="reclama" onclick="send_to_complaints(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#dabf90; color:white; border-color:#C1B88A; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="CL666">Enviar Armazém de Reclamações</button>
                         </div> 
+                        <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                            <button id="rehabCT" onclick="send_to_rehabilitates(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#7f4f24; color:white; border-color:#6f441f; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="FB008">Enviar Armazém Reabilitado</button>
+                        </div>
+                        
                     </div>';
         
         }      
@@ -122,11 +129,14 @@ class Buttons extends CI_Model
                    <button id="amostras" onclick="send_to_samples(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b05574; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST888">Enviar Armazém Amostras</button>
                    </div> 
 
-                    <div class="col-12 col-md-6 col-lg-6">
+                    <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
                     <button id="desclas" onclick="send_to_disqualified(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b6a3f7; color:white; border-color:#A99ED6; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="CL888">Enviar Armazém de Material Desclassificado</button>
                     </div> 
-                    <div class="col-12 col-md-6 col-lg-6">
+                    <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
                     <button id="reclama" onclick="send_to_complaints(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#dabf90; color:white; border-color:#C1B88A; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="CL888">Enviar Armazém de Reclamações</button>
+                    </div> 
+                    <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                    <button id="rehabCG" onclick="send_to_rehabilitates(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#7f4f24; color:white; border-color:#6f441f; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST300">Enviar Armazém Reabilitado</button>
                     </div> 
 
                    </div>';
@@ -171,6 +181,43 @@ class Buttons extends CI_Model
             $value='<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i> Cancelar</button>		
                     <button onclick="cancell_sel_paletes()" type="button" class="btn btn-primary"><i class="fas fa-save"></i> Confirmar</button>';
         }
+        return $value;
+    }
+
+    public function buttons_empresa_producao($empresa){
+        //echo $empresa.'sdfvsdv';
+        $value='';
+        if($empresa == 1){
+            $value='<div class="row">        
+                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                   <button id="choose_palets" onclick="choose_palets()" type="button" class="btn btn-dark" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Picar Palete</button>
+                   </div>                   
+                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                   <button id="rehabCG" onclick="send_to_rehabilitates(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#7f4f24; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST301">Enviar Armazém Reabilitado</button>
+                   </div> 
+                   </div>';
+         }
+         else if($empresa == 2){
+            $value = '<div class="row">        
+                        <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                            <button id="choose_palets" onclick="choose_palets()" type="button" class="btn btn-dark" style="width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">Picar Palete</button>
+                        </div>
+                        <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                            <button id="rehabCT" onclick="send_to_rehabilitates(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#7f4f24; color:white; border-color:#6f441f; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="FB009">Enviar Armazém Reabilitado</button>
+                        </div>
+                    </div>';
+        
+        }      
+        else if($empresa == 3 || $empresa == 4){
+            $value='<div class="row">        
+                        <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                            <button id="choose_palets" onclick="choose_palets()" type="button" class="btn btn-dark" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Picar Palete</button>
+                        </div>                   
+                        <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                            <button id="rehabCG" onclick="send_to_rehabilitates(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#7f4f24; color:white; border-color:#6f441f; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST301">Enviar Armazém Reabilitado</button>
+                        </div> 
+                    </div>';
+         }
         return $value;
     }
 }
