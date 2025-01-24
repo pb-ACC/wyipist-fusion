@@ -1142,6 +1142,27 @@ function save_local_warehouse(){
 
 }
 
+function send_to_rehabilitates(sector){
+    sizeofTBL=tableSelPaletes.getData();   
+
+    if(sizeofTBL.length>0){
+        type='success';
+        title='Tem a certeza que pretende continuar?';
+        text2='';
+        action='send_to_rehabilitates';
+        xposition='center';
+        tblPL=tableSelPaletes.getData();    
+        tblLoc=[];    
+        tblLote=[];
+        tblAfet=[];
+        valor=sector;
+       fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet);          
+    }
+    else{
+        toastr["error"]("Não foi picada nenhuma palete!");
+    }
+}
+
 /*RADIO BTNS*/
 function radioButtons(){
     $('#radioButtons input:radio').click(function() {
@@ -1475,6 +1496,46 @@ function confirm_save(tblPL,tblLoc){
         }
     });  
 }
+
+function go_send_to_rehabilitates(tblPL,sector){
+    //alert(tblLoc[0]['CodigoBarras']);
+    tableSelPaletes.alert("A gravar...");
+    $('#empresasDP').prop('disabled', true);
+    $("#buttons button").attr("disabled", true);   
+    $("input[type=radio]").attr('disabled', false);
+    $("#save_local").prop('disabled', true);
+    $("#save_local_logistic").prop('disabled', true);
+    $("#save_local_warehouse").prop('disabled', true);
+    
+    $.ajax({
+        type: "POST",        
+        url: "http://127.0.0.1/wyipist-fusion/stocks/movimentacoes_internas/troca_localizacao/Gravar_MudaLocalizacao/save_new_position",
+        dataType: "json",
+        data:{
+            palete: tblPL,
+            setor: sector,
+            local: ''
+        },
+        success: function (data) {
+
+            if (data === "kick") {
+                //alert("Outro utilizador entrou com as suas credenciais, faça login de novo.");
+                toastr["warning"]("Outro utilizador entrou com as suas credenciais, faça login de novo.");
+                window.location = "home/logout";
+            } else {
+                toastr["success"]("Dados gravados com Sucesso");                
+                setTimeout(function(){
+                    location.reload();
+                },2500);
+            }
+        },
+        error: function (e) {
+            alert('Request Status: ' + e.status + ' Status Text: ' + e.statusText + ' ' + e.responseText);
+            console.log(e);
+        }
+    });      
+}
+
 
 function save_motivo(){
         

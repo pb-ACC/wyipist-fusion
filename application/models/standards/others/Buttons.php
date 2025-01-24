@@ -189,12 +189,12 @@ class Buttons extends CI_Model
         $value='';
         if($empresa == 1){
             $value='<div class="row">        
-                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
-                   <button id="choose_palets" onclick="choose_palets()" type="button" class="btn btn-dark" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Picar Palete</button>
-                   </div>                   
-                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
-                   <button id="rehabCG" onclick="send_to_rehabilitates(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#7f4f24; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST301">Enviar Armazém Reabilitado</button>
-                   </div> 
+                        <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                            <button id="choose_palets" onclick="choose_palets()" type="button" class="btn btn-dark" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Picar Palete</button>
+                        </div>                   
+                        <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                            <button onclick="send_to_rehabilitates(this.getAttribute(\'data-id\'))" type="button" class="btn btn-success" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;" data-id="ST301">Continuar</button>                   
+                        </div> 
                    </div>';
          }
          else if($empresa == 2){
@@ -203,7 +203,7 @@ class Buttons extends CI_Model
                             <button id="choose_palets" onclick="choose_palets()" type="button" class="btn btn-dark" style="width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">Picar Palete</button>
                         </div>
                         <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
-                            <button id="rehabCT" onclick="send_to_rehabilitates(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#7f4f24; color:white; border-color:#6f441f; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="FB009">Enviar Armazém Reabilitado</button>
+                            <button onclick="send_to_rehabilitates(this.getAttribute(\'data-id\'))" type="button" class="btn btn-success" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;" data-id="FB009">Continuar</button>                   
                         </div>
                     </div>';
         
@@ -214,7 +214,7 @@ class Buttons extends CI_Model
                             <button id="choose_palets" onclick="choose_palets()" type="button" class="btn btn-dark" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Picar Palete</button>
                         </div>                   
                         <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
-                            <button id="rehabCG" onclick="send_to_rehabilitates(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#7f4f24; color:white; border-color:#6f441f; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST301">Enviar Armazém Reabilitado</button>
+                            <button onclick="send_to_rehabilitates(this.getAttribute(\'data-id\'))" type="button" class="btn btn-success" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;" data-id="ST301">Continuar</button>                   
                         </div> 
                     </div>';
          }
