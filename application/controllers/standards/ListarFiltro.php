@@ -424,7 +424,7 @@ class ListarFiltro extends CI_Controller
                 $this->load->model('standards/others/RadioButtons');
                 $radio=$this->RadioButtons->escolha_setores_empresa_anularPL(2);
 
-                $setor = '\'FB003\', \'CL001\', \'ST555\', \'CL007\', \'FB001\',';                                                         
+                $setor = '\'FB003\', \'CL001\', \'ST555\', \'CL007\', \'FB001\'';                                                         
                 $this->load->model('standards/others/GetZonas');                
                 $zonas=$this->GetZonas->zonaCelula($empresa,$emp,$setor,'FB');
 
