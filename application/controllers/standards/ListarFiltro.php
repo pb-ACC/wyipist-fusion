@@ -424,7 +424,7 @@ class ListarFiltro extends CI_Controller
                 $this->load->model('standards/others/RadioButtons');
                 $radio=$this->RadioButtons->escolha_setores_empresa_anularPL(2);
 
-                $setor = '\'FB003\', \'CL001\', \'ST555\', \'CL007\'';                                                         
+                $setor = '\'FB003\', \'CL001\', \'ST555\', \'CL007\', \'FB001\',';                                                         
                 $this->load->model('standards/others/GetZonas');                
                 $zonas=$this->GetZonas->zonaCelula($empresa,$emp,$setor,'FB');
 
@@ -495,6 +495,10 @@ class ListarFiltro extends CI_Controller
         $this->load->library('session');
         if($this->session->userdata('logged_in')) {        
             
+            $session_data = $this->session->userdata('logged_in');            
+            $username = $session_data['username'];
+            $funcionario_gpac = $session_data['funcionario_gpac'];
+
             $emp = strtoupper($emp);
             if($emp == 'CERAGNI'){                
                 $empresa = '\''.$emp.'\'';                
@@ -505,7 +509,7 @@ class ListarFiltro extends CI_Controller
                 $zonas=$this->GetZonas->zonaCelula($empresa,$emp,$setor,'CT');
                 
                 $this->load->model('standards/stocks/GetReferences');
-                $refs=$this->GetReferences->referencias($emp);                                
+                $refs=$this->GetReferences->referencias($emp, $username, $funcionario_gpac);                            
 
                 $data = array( 
                     'zonas' => $zonas,                                          
@@ -520,7 +524,7 @@ class ListarFiltro extends CI_Controller
                 $zonas=$this->GetZonas->zonaCelula($empresa,$emp,$setor,'FB');
 
                 $this->load->model('standards/stocks/GetReferences');
-                $refs=$this->GetReferences->referencias($emp);                                
+                $refs=$this->GetReferences->referencias($emp, $username, $funcionario_gpac);                            
 
                 $data = array( 
                     'zonas' => $zonas,                                          

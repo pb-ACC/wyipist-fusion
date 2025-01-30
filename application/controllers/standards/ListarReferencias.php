@@ -36,6 +36,9 @@ class ListarReferencias extends CI_Controller
         if($this->session->userdata('logged_in')) {
             
             //$user_type= $session_data['user_type'];
+            $session_data = $this->session->userdata('logged_in');            
+            $username = $session_data['username'];
+            $funcionario_gpac = $session_data['funcionario_gpac'];
 
             $empresa= $this->getEmpresa();            
             //vecho $empresa[0]->Empresa;
@@ -44,7 +47,7 @@ class ListarReferencias extends CI_Controller
                 case 1:
                     $empresa='CERAGNI';
                     $this->load->model('standards/stocks/GetReferences');
-                    $refs=$this->GetReferences->referencias($empresa);
+                    $refs=$this->GetReferences->referencias($empresa, $username, $funcionario_gpac);                            
                     
                     $data = array( 
                         'select' => '',     
@@ -55,7 +58,7 @@ class ListarReferencias extends CI_Controller
                 case 2:
                     $empresa='CERTECA';
                     $this->load->model('standards/stocks/GetReferences');
-                    $refs=$this->GetReferences->referencias($empresa);
+                    $refs=$this->GetReferences->referencias($empresa, $username, $funcionario_gpac);                            
 
                     $data = array( 
                         'select' => '', 
@@ -74,7 +77,7 @@ class ListarReferencias extends CI_Controller
             
                     $empresa='CERAGNI';
                     $this->load->model('standards/stocks/GetReferences');
-                    $refs=$this->GetReferences->referencias($empresa);
+                    $refs=$this->GetReferences->referencias($empresa, $username, $funcionario_gpac);                            
                     
                     $data = array(
                         'select' => $select,
@@ -94,7 +97,7 @@ class ListarReferencias extends CI_Controller
             
                     $empresa='CERAGNI';
                     $this->load->model('standards/stocks/GetReferences');
-                    $refs=$this->GetReferences->referencias($empresa);
+                    $refs=$this->GetReferences->referencias($empresa, $username, $funcionario_gpac);                            
 
                     $data = array(
                         'select' => $select,                    
