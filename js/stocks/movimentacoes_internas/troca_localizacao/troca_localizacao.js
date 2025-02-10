@@ -1434,7 +1434,8 @@ function confirm_changeEmpresa(){
     // Verificar se há uma empresa selecionada
     if (emp != '') {
         if (emp === 'CERTECA') {
-            newSector = 'FB003';
+            //newSector = 'FB003';
+            newSector = 'CL001';
         } else {
             newSector = 'ST010';
         }
@@ -1445,7 +1446,8 @@ function confirm_changeEmpresa(){
             newSector = 'ST010';
         } else if (codigoempresa == 2) {
             emp = "CERTECA";
-            newSector = 'FB003';
+            //newSector = 'FB003';
+            newSector = 'CL001';
         } else {
             emp = "CERAGNI";
             newSector = 'ST010';
