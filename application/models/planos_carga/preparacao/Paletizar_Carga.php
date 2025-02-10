@@ -48,7 +48,7 @@ class Paletizar_Carga extends CI_Model
 
         //insere linhas PLS
         $this->insert_linhas_PL($NumeroPL,$CodigoPL,$DocumentoCarga,$NumeroDocumento,$NumeroLinha,$Sector,$Local,$Artigo,$Referencia,$DescricaoArtigo,$Lote,$Calibre,$Formato,$Qual,
-                                $TipoEmbalagem,$Superficie,$Decoracao,$RefCor,$TabEspessura,$Nivel,$NovaQtd,$Unidade,$user,$nomeCL,$DocPL);
+                                $TipoEmbalagem,$Superficie,$Decoracao,$RefCor,$TabEspessura,$Nivel,$NovaQtd,$Unidade,$user,$nomeCL,$codigoCL,$DocPL);
         //estadolog
         $this->insert_estadologPL($NumeroPL,$user);                              
 
@@ -183,7 +183,7 @@ class Paletizar_Carga extends CI_Model
     }
 
     public function insert_linhas_PL($NumeroPL,$CodigoPL,$DocumentoCarga,$NumeroDocumento,$NumeroLinha,$Sector,$Local,$Artigo,$Referencia,$DescricaoArtigo,$Lote,$Calibre,$Formato,
-                                     $Qual,$TipoEmbalagem,$Superficie,$Decoracao,$RefCor,$TabEspessura,$Nivel,$NovaQtd,$Unidade,$user,$nomeCL,$DocPL){
+                                     $Qual,$TipoEmbalagem,$Superficie,$Decoracao,$RefCor,$TabEspessura,$Nivel,$NovaQtd,$Unidade,$user,$nomeCL,$codigoCL,$DocPL){
 
         $sql04="INSERT INTO PlLDocs (CodigoDocumento, NumeroDocumento, LinhaDocumento, Documento, TipoMovimento, Quantidade, Sector, DataEntrega, NumeroSerieInferior, 
                                      NumeroSerieSuperior, Referencia, Artigo, DescricaoArtigo, Comprimento, Largura, Espessura, Acabamento, Especificidade, Versao, 
@@ -195,7 +195,7 @@ class Paletizar_Carga extends CI_Model
                                      RazaoIsencao, Comissao, TotalComissao, TotalComissaoNM, NumeroOperacao, ProcessaEtiqueta, ProcessaLinha, CompilaInterface, 
                                      GuardaIdenti, Plataforma, LinhaPai, Ordena, FCor, FStilo, LinhaArtCliForn, TabelaPreco, LinhaCBarra, Formato, Qual, TipoEmbalagem, 
                                      Superficie, Decoracao, RefCor, Lote, Peso2, TotalPeso2, QtdCaixa, TabEspessura, PaleteOrigem, KeyScript, Local, RefP, Calibre, PHC, NivelPalete)".
-                "SELECT '{$CodigoPL}', '{$NumeroPL}', {$NumeroLinha}, '{$NumeroDocumento}', '00', {$NovaQtd}, '{$Sector}', null, '{$DocumentoCarga}', '{$nomeCL}', '{$Referencia}', A.Artigo, '{$DescricaoArtigo}', 0, 0, 0, A.Acabamento, 
+                "SELECT '{$CodigoPL}', '{$NumeroPL}', {$NumeroLinha}, '{$NumeroDocumento}', '00', {$NovaQtd}, '{$Sector}', null, '{$DocumentoCarga}', (SELECT TOP 1 Nome FROM Clientes WHERE Codigo='{$codigoCL}'), '{$Referencia}', A.Artigo, '{$DescricaoArtigo}', 0, 0, 0, A.Acabamento, 
                         '', '', '', '', A.Unidade, 0, '{$DescricaoArtigo}', 0, 0, '','00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '{$user}', 
                         getdate(), {$NovaQtd}, 0, '00001', convert(char(8),getdate(),112), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', A.Coleccao, '', '0', 0, 0, 0, 0, 0, 0, 
                         0, '', 0, 0, 0, '', 0, '', '', '{$Formato}', A.Qual, A.TipoEmbalagem, '', '', A.RefCor, UPPER('{$Lote}'), 0, 0, 1, A.TabEspessura, '{$DocPL}', '', '', 

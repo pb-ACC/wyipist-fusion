@@ -375,5 +375,24 @@ function fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tbl
             }
         })
     }
+    if(action==='send_to_complaints_disqualified_divergences') {
+        Swal.fire({
+                icon: type,
+                iconHtml: '?',
+                iconColor: '#f8bb86',
+                title: title,
+                //html: '<p  style="font-family: Arial, Helvetica, sans-serif; font-size: 14px;color: #333">Deseja continuar?</p>',
+                showDenyButton: true,
+                confirmButtonText: '<i class="fa fa-thumbs-up"></i> Sim',
+                denyButtonText: '<i class="fa fa-thumbs-down"></i> Não'
+            }
+        ).then((result) => {
+            if (result.isConfirmed) {            
+                go_send_to_complaints_disqualified_divergences(tblPL,valor);
+            } else if (result.isDenied) {            
+            }
+        })
+    }
+    
 
 }

@@ -1251,31 +1251,6 @@ function radioButtons(){
                 text2='Tem a certeza que pretende continuar?';
                 action='radioButtons';
                 xposition='center';            
-                campo='CL888';
-                valor=this;
-                tblPL=[];
-                tblLoc=[];
-                tblLote=[];
-                tblAfet=[];
-                fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
-            }else{
-                no_change=1;
-                $('.form-check-input').prop('checked', false); // Unchecks it    
-                $(this).prop('checked', true); // Checks it             
-                newSector='CL888';
-                change_sector_emp(newSector); 
-                no_change=0;                                   
-            }                
-        }else if ($(this).val() === '5') {
-    
-            sizeofTBL=tableSelPaletes.getData();        
-            if(sizeofTBL.length>0){
-                
-                type='success';
-                title='Dados da tabela serão perdidos';
-                text2='Tem a certeza que pretende continuar?';
-                action='radioButtons';
-                xposition='center';            
                 campo='CL666';
                 valor=this;
                 tblPL=[];
@@ -1291,7 +1266,83 @@ function radioButtons(){
                 change_sector_emp(newSector); 
                 no_change=0;                                   
             }                
+        }else if ($(this).val() === '5') {
+    
+            sizeofTBL=tableSelPaletes.getData();        
+            if(sizeofTBL.length>0){
+                
+                type='success';
+                title='Dados da tabela serão perdidos';
+                text2='Tem a certeza que pretende continuar?';
+                action='radioButtons';
+                xposition='center';            
+                campo='ST555';
+                valor=this;
+                tblPL=[];
+                tblLoc=[];
+                tblLote=[];
+                tblAfet=[];
+                fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
+            }else{
+                no_change=1;
+                $('.form-check-input').prop('checked', false); // Unchecks it    
+                $(this).prop('checked', true); // Checks it             
+                newSector='ST555';
+                change_sector_emp(newSector); 
+                no_change=0;                                   
+            }                
+        }else if ($(this).val() === '6') {
+    
+            sizeofTBL=tableSelPaletes.getData();        
+            if(sizeofTBL.length>0){
+                
+                type='success';
+                title='Dados da tabela serão perdidos';
+                text2='Tem a certeza que pretende continuar?';
+                action='radioButtons';
+                xposition='center';            
+                campo='ST554';
+                valor=this;
+                tblPL=[];
+                tblLoc=[];
+                tblLote=[];
+                tblAfet=[];
+                fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
+            }else{
+                no_change=1;
+                $('.form-check-input').prop('checked', false); // Unchecks it    
+                $(this).prop('checked', true); // Checks it             
+                newSector='ST554';
+                change_sector_emp(newSector); 
+                no_change=0;                                   
+            }                
+        }else if ($(this).val() === '7') {
+    
+            sizeofTBL=tableSelPaletes.getData();        
+            if(sizeofTBL.length>0){
+                
+                type='success';
+                title='Dados da tabela serão perdidos';
+                text2='Tem a certeza que pretende continuar?';
+                action='radioButtons';
+                xposition='center';            
+                campo='FB008';
+                valor=this;
+                tblPL=[];
+                tblLoc=[];
+                tblLote=[];
+                tblAfet=[];
+                fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
+            }else{
+                no_change=1;
+                $('.form-check-input').prop('checked', false); // Unchecks it    
+                $(this).prop('checked', true); // Checks it             
+                newSector='FB008';
+                change_sector_emp(newSector); 
+                no_change=0;                                   
+            }                
         }                  
+
     });    
 }
 
@@ -1457,6 +1508,106 @@ function confirm_changeEmpresa(){
     
 } 
 
+function send_to_disqualified(sector){
+    sizeofTBL=tableSelPaletes.getData();   
+    if(sizeofTBL.length>0){
+        type='success';
+        title='Tem a certeza que pretende continuar?';
+        text2='';
+        action='send_to_complaints_disqualified_divergences';
+        xposition='center';
+        tblPL=[];
+        tblLoc=[];
+        tblLote=[];
+        tblAfet=[];
+        valor=sector;
+        fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
+    }
+    else{
+        toastr["error"]("Não foi picada nenhuma palete!");
+    }    
+}
+ 
+function send_to_disqualified_cl(sector){
+    sizeofTBL=tableSelPaletes.getData();   
+    if(sizeofTBL.length>0){
+        type='success';
+        title='Tem a certeza que pretende continuar?';
+        text2='';
+        action='send_to_complaints_disqualified_divergences';
+        xposition='center';
+        tblPL=[];
+        tblLoc=[];
+        tblLote=[];
+        tblAfet=[];
+        valor=sector;
+        fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
+    }
+    else{
+        toastr["error"]("Não foi picada nenhuma palete!");
+    }    
+}
+
+function send_to_complaints(sector){
+    sizeofTBL=tableSelPaletes.getData();   
+    if(sizeofTBL.length>0){
+        type='success';
+        title='Tem a certeza que pretende continuar?';
+        text2='';
+        action='send_to_complaints_disqualified_divergences';
+        xposition='center';
+        tblPL=[];
+        tblLoc=[];
+        tblLote=[];
+        tblAfet=[];
+        valor=sector;
+        fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
+    }
+    else{
+        toastr["error"]("Não foi picada nenhuma palete!");
+    }  
+}
+
+function  send_to_divergences_fb(sector){
+    sizeofTBL=tableSelPaletes.getData();   
+    if(sizeofTBL.length>0){
+        type='success';
+        title='Tem a certeza que pretende continuar?';
+        text2='';
+        action='send_to_complaints_disqualified_divergences';
+        xposition='center';
+        tblPL=[];
+        tblLoc=[];
+        tblLote=[];
+        tblAfet=[];
+        valor=sector;
+        fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
+    }
+    else{
+        toastr["error"]("Não foi picada nenhuma palete!");
+    }  
+}
+
+function send_to_divergences_cl(sector){
+    sizeofTBL=tableSelPaletes.getData();   
+    if(sizeofTBL.length>0){
+        type='success';
+        title='Tem a certeza que pretende continuar?';
+        text2='';
+        action='send_to_complaints_disqualified_divergences';
+        xposition='center';
+        tblPL=[];
+        tblLoc=[];
+        tblLote=[];
+        tblAfet=[];
+        valor=sector;
+        fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
+    }
+    else{
+        toastr["error"]("Não foi picada nenhuma palete!");
+    }  
+}
+
 /*GRAVAR DADOS NA BD*/
 function confirm_save(tblPL,tblLoc){
     //alert(tblLoc[0]['CodigoBarras']);
@@ -1534,6 +1685,48 @@ function go_send_to_rehabilitates(tblPL,sector){
             console.log(e);
         }
     });      
+}
+
+
+function go_send_to_complaints_disqualified_divergences(tblPL,sector){
+    //alert(sector);
+    
+    tableSelPaletes.alert("A gravar...");
+    $('#empresasDP').prop('disabled', true);
+    $("#buttons button").attr("disabled", true);   
+    $("input[type=radio]").attr('disabled', false);
+    $("#save_local").prop('disabled', true);
+    $("#save_local_logistic").prop('disabled', true);
+    $("#save_local_warehouse").prop('disabled', true);
+    
+    $.ajax({
+        type: "POST",        
+        url: "http://127.0.0.1/wyipist-fusion/stocks/movimentacoes_internas/troca_localizacao/Gravar_MudaLocalizacao/save_new_position",
+        dataType: "json",
+        data:{
+            palete: tblPL,
+            setor: sector,
+            local: ''
+        },
+        success: function (data) {
+
+            if (data === "kick") {
+                //alert("Outro utilizador entrou com as suas credenciais, faça login de novo.");
+                toastr["warning"]("Outro utilizador entrou com as suas credenciais, faça login de novo.");
+                window.location = "home/logout";
+            } else {
+                toastr["success"]("Dados gravados com Sucesso");                
+                setTimeout(function(){
+                    location.reload();
+                },2500);
+            }
+        },
+        error: function (e) {
+            alert('Request Status: ' + e.status + ' Status Text: ' + e.statusText + ' ' + e.responseText);
+            console.log(e);
+        }
+    });      
+    
 }
 
 

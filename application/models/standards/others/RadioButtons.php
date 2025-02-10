@@ -29,11 +29,19 @@ class RadioButtons extends CI_Model
                     '<label class="form-check-label" style="margin-left: 15px;font-size: 18px;">Material Desclassificado - Armazém</label>'.
                     '</div>'.
                     '<div class="form-check">'.
-                    '<input class="form-check-input" type="radio" name="radio5" value="5" style="width: 20px;height: 20px;">'.
+                    '<input class="form-check-input" type="radio" name="radio4" value="4" style="width: 20px;height: 20px;">'.
                     '<label class="form-check-label" style="margin-left: 15px;font-size: 18px;">Armazém de Reclamações</label>'.
                     '</div>'.
                     '<div class="form-check">'.
-                    '<input class="form-check-input" type="radio" name="radio4" value="4" style="width: 20px;height: 20px;">'.
+                    '<input class="form-check-input" type="radio" name="radio5" value="5" style="width: 20px;height: 20px;">'.
+                    '<label class="form-check-label" style="margin-left: 15px;font-size: 18px;">Divergências Centro Logístico - Armazém</label>'.
+                    '</div>'.   
+                    '<div class="form-check">'.
+                    '<input class="form-check-input" type="radio" name="radio6" value="6" style="width: 20px;height: 20px;">'.
+                    '<label class="form-check-label" style="margin-left: 15px;font-size: 18px;">Divergências Fábrica - Armazém</label>'.
+                    '</div>'.   
+                    '<div class="form-check">'.
+                    '<input class="form-check-input" type="radio" name="radio7" value="7" style="width: 20px;height: 20px;">'.
                     '<label class="form-check-label" style="margin-left: 15px;font-size: 18px;">Armazém Amostras</label>'.
                     '</div>';    
         }
