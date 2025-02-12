@@ -1518,7 +1518,7 @@ function send_to_disqualified(sector){
         text2='';
         action='send_to_complaints_disqualified_divergences';
         xposition='center';
-        tblPL=[];
+        tblPL=tableSelPaletes.getData();    
         tblLoc=[];
         tblLote=[];
         tblAfet=[];
@@ -1538,7 +1538,7 @@ function send_to_disqualified_cl(sector){
         text2='';
         action='send_to_complaints_disqualified_divergences';
         xposition='center';
-        tblPL=[];
+        tblPL=tableSelPaletes.getData();    
         tblLoc=[];
         tblLote=[];
         tblAfet=[];
@@ -1558,7 +1558,7 @@ function send_to_complaints(sector){
         text2='';
         action='send_to_complaints_disqualified_divergences';
         xposition='center';
-        tblPL=[];
+        tblPL=tableSelPaletes.getData();    
         tblLoc=[];
         tblLote=[];
         tblAfet=[];
@@ -1570,7 +1570,7 @@ function send_to_complaints(sector){
     }  
 }
 
-function  send_to_divergences_fb(sector){
+function send_to_divergences_fb(sector){
     sizeofTBL=tableSelPaletes.getData();   
     if(sizeofTBL.length>0){
         type='success';
@@ -1578,7 +1578,7 @@ function  send_to_divergences_fb(sector){
         text2='';
         action='send_to_complaints_disqualified_divergences';
         xposition='center';
-        tblPL=[];
+        tblPL=tableSelPaletes.getData();    
         tblLoc=[];
         tblLote=[];
         tblAfet=[];
@@ -1598,7 +1598,7 @@ function send_to_divergences_cl(sector){
         text2='';
         action='send_to_complaints_disqualified_divergences';
         xposition='center';
-        tblPL=[];
+        tblPL=tableSelPaletes.getData();    
         tblLoc=[];
         tblLote=[];
         tblAfet=[];

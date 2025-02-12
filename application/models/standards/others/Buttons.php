@@ -22,10 +22,10 @@ class Buttons extends CI_Model
                    <button id="choose_palets" onclick="choose_palets()" type="button" class="btn btn-dark" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Picar Palete</button>
                    </div>
                    <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
-                   <button onclick="send_to_warehouse()" type="button" class="btn btn-secondary" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Enviar Armazém</button>
+                   <button onclick="send_to_warehouse()" type="button" class="btn btn-secondary" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Enviar Arm.</button>
                    </div> 
                    <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
-                   <button id="amostras" onclick="send_to_samples(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b05574; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST888">Enviar Armazém Amostras</button>
+                   <button id="amostras" onclick="send_to_samples(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b05574; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST888">Enviar Arm. Amostras</button>
                    </div> 
                    </div>';
          }
@@ -35,13 +35,13 @@ class Buttons extends CI_Model
                             <button id="choose_palets" onclick="choose_palets()" type="button" class="btn btn-dark" style="width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">Picar Palete</button>
                         </div>
                         <div class="col-12 col-md-3 col-lg-3">
-                            <button onclick="send_to_factory()" type="button" class="btn btn-info" style="width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">Enviar Armazém Fábrica</button>
+                            <button onclick="send_to_factory()" type="button" class="btn btn-info" style="width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">Enviar Arm. Fábrica</button>
                         </div>
                         <div class="col-12 col-md-3 col-lg-3">
                             <button onclick="send_to_logistic()" type="button" class="btn btn-light" style="background-color:teal; color:white; border-color:teal; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">Enviar Centro Logístico</button>
                         </div> 
                         <div class="col-12 col-md-3 col-lg-3">
-                            <button id="amostras" onclick="send_to_samples(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b05574; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="CL888">Enviar Armazém Amostras</button>
+                            <button id="amostras" onclick="send_to_samples(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b05574; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="CL888">Enviar Arm. Amostras</button>
                         </div> 
                     </div>';
         
@@ -52,10 +52,10 @@ class Buttons extends CI_Model
                    <button id="choose_palets" onclick="choose_palets()" type="button" class="btn btn-dark" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Picar Palete</button>
                    </div>
                    <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
-                   <button onclick="send_to_warehouse()" type="button" class="btn btn-secondary" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Enviar Armazém</button>
+                   <button onclick="send_to_warehouse()" type="button" class="btn btn-secondary" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Enviar Arm.</button>
                    </div> 
                    <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
-                   <button id="amostras" onclick="send_to_samples(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b05574; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST888">Enviar Armazém Amostras</button>
+                   <button id="amostras" onclick="send_to_samples(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b05574; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST888">Enviar Arm. Amostras</button>
                    </div> 
                    </div>';
          }
@@ -71,20 +71,20 @@ class Buttons extends CI_Model
                    <button id="choose_palets" onclick="choose_palets()" type="button" class="btn btn-dark" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Picar Palete</button>
                    </div>
                    <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
-                   <button onclick="send_to_warehouse()" type="button" class="btn btn-secondary" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Enviar Armazém</button>
+                   <button onclick="send_to_warehouse()" type="button" class="btn btn-secondary" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Enviar Arm.</button>
                    </div> 
                    <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
-                   <button id="amostras" onclick="send_to_samples(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b05574; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST888">Enviar Armazém Amostras</button>
+                   <button id="amostras" onclick="send_to_samples(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b05574; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST888">Enviar Arm. Amostras</button>
                    </div> 
 
                     <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
-                    <button id="desclas" onclick="send_to_disqualified(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b6a3f7; color:white; border-color:#A99ED6; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST777">Enviar Armazém de Material Desclassificado</button>
+                    <button id="desclas" onclick="send_to_disqualified(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b6a3f7; color:white; border-color:#A99ED6; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST777">Enviar Arm. Mat. Desclass.</button>
                     </div> 
                     <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
-                    <button id="reclama" onclick="send_to_complaints(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#dabf90; color:white; border-color:#C1B88A; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST666">Enviar Armazém de Reclamações</button>
+                    <button id="reclama" onclick="send_to_complaints(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#dabf90; color:white; border-color:#C1B88A; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST666">Enviar Arm. Reclamações</button>
                     </div> 
                     <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
-                    <button id="rehabCG" onclick="send_to_rehabilitates(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#7f4f24; color:white; border-color:#6f441f; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST300">Enviar Armazém Reabilitado</button>
+                    <button id="rehabCG" onclick="send_to_rehabilitates(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#7f4f24; color:white; border-color:#6f441f; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST300">Enviar Arm. Reabilitado</button>
                     </div> 
 
                    </div>';
@@ -95,28 +95,28 @@ class Buttons extends CI_Model
                             <button id="choose_palets" onclick="choose_palets()" type="button" class="btn btn-dark" style="width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">Picar Palete</button>
                         </div>
                         <div class="col-sm-12 col-sm-push-2 col-xs-12 col-md-2 col-md-push-2 col-lg-2 col-lg-push-2">
-                            <button onclick="send_to_factory()" type="button" class="btn btn-info" style="width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">Enviar Armazém Fábrica</button>
+                            <button onclick="send_to_factory()" type="button" class="btn btn-info" style="width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">Enviar Arm. Fábrica</button>
                         </div>
                         <div class="col-sm-12 col-sm-push-2 col-xs-12 col-md-2 col-md-push-2 col-lg-2 col-lg-push-2">
                             <button onclick="send_to_logistic()" type="button" class="btn btn-light" style="background-color:teal; color:white; border-color:teal; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">Enviar Centro Logístico</button>
                         </div> 
                         <div class="col-sm-12 col-sm-push-2 col-xs-12 col-md-2 col-md-push-2 col-lg-2 col-lg-push-2">
-                            <button id="amostras" onclick="send_to_samples(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b05574; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="CL888">Enviar Armazém Amostras</button>
+                            <button id="amostras" onclick="send_to_samples(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b05574; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="CL888">Enviar Arm. Amostras</button>
                         </div>                                                  
                         <div class="col-sm-12 col-sm-push-2 col-xs-12 col-md-2 col-md-push-2 col-lg-2 col-lg-push-2">
-                            <button id="desclas" onclick="send_to_disqualified_cl(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b6a3f7; color:white; border-color:#A99ED6; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="CL777">Enviar Arm. Material Desclass.</button>
+                            <button id="desclas" onclick="send_to_disqualified_cl(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b6a3f7; color:white; border-color:#A99ED6; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="CL777">Enviar Arm. Mat. Desclass.</button>
                         </div> 
                         <div class="col-sm-12 col-sm-push-2 col-xs-12 col-md-2 col-md-push-2 col-lg-2 col-lg-push-2">
-                            <button id="reclama" onclick="send_to_complaints(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#dabf90; color:white; border-color:#C1B88A; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="CL666">Enviar Armazém de Reclamações</button>
+                            <button id="reclama" onclick="send_to_complaints(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#dabf90; color:white; border-color:#C1B88A; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="CL666">Enviar Arm. Reclamações</button>
                         </div> 
                         <div class="col-sm-12 col-sm-push-4 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
-                            <button id="divergeFB" onclick="send_to_divergences_fb(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#FF7F50; color:white; border-color:#D15F40; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST554">Enviar Arm. Divergências - Fábrica</button>
+                            <button id="divergeFB" onclick="send_to_divergences_fb(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#FF7F50; color:white; border-color:#D15F40; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST554">Enviar Arm. Diverg. - Fábrica</button>
                         </div>
                         <div class="col-sm-12 col-sm-push-4 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
-                            <button id="divergeCL" onclick="send_to_divergences_cl(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#FF7F50; color:white; border-color:#D15F40; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST555">Enviar Arm. Divergências - Centro Logístico</button>
+                            <button id="divergeCL" onclick="send_to_divergences_cl(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#FF7F50; color:white; border-color:#D15F40; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST555">Enviar Arm. Diverg. - CL</button>
                         </div>
                         <div class="col-sm-12 col-sm-push-4 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
-                            <button id="rehabCT" onclick="send_to_rehabilitates(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#7f4f24; color:white; border-color:#6f441f; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="FB008">Enviar Armazém Reabilitado</button>
+                            <button id="rehabCT" onclick="send_to_rehabilitates(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#7f4f24; color:white; border-color:#6f441f; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="FB008">Enviar Arm. Reabilitado</button>
                         </div>
                         
                     </div>';
@@ -128,20 +128,20 @@ class Buttons extends CI_Model
                    <button id="choose_palets" onclick="choose_palets()" type="button" class="btn btn-dark" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Picar Palete</button>
                    </div>
                    <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
-                   <button onclick="send_to_warehouse()" type="button" class="btn btn-secondary" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Enviar Armazém</button>
+                   <button onclick="send_to_warehouse()" type="button" class="btn btn-secondary" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Enviar Arm.</button>
                    </div> 
                    <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
-                   <button id="amostras" onclick="send_to_samples(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b05574; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST888">Enviar Armazém Amostras</button>
+                   <button id="amostras" onclick="send_to_samples(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b05574; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST888">Enviar Arm. Amostras</button>
                    </div> 
 
                     <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
-                    <button id="desclas" onclick="send_to_disqualified(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b6a3f7; color:white; border-color:#A99ED6; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="CL888">Enviar Armazém de Material Desclassificado</button>
+                    <button id="desclas" onclick="send_to_disqualified(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b6a3f7; color:white; border-color:#A99ED6; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="CL888">Enviar Arm. Mat. Desclass.</button>
                     </div> 
                     <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
-                    <button id="reclama" onclick="send_to_complaints(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#dabf90; color:white; border-color:#C1B88A; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="CL888">Enviar Armazém de Reclamações</button>
+                    <button id="reclama" onclick="send_to_complaints(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#dabf90; color:white; border-color:#C1B88A; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="CL888">Enviar Arm. Reclamações</button>
                     </div> 
                     <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
-                    <button id="rehabCG" onclick="send_to_rehabilitates(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#7f4f24; color:white; border-color:#6f441f; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST300">Enviar Armazém Reabilitado</button>
+                    <button id="rehabCG" onclick="send_to_rehabilitates(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#7f4f24; color:white; border-color:#6f441f; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST300">Enviar Arm. Reabilitado</button>
                     </div> 
 
                    </div>';
