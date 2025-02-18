@@ -36,7 +36,8 @@ $.ajax({
             $("#modal_buttons").empty();
             $("#modal_buttons").append(data['button']); 
             $(".card-body .m-0").show();
-            $(".card-footer .row").show();     
+            $(".card-footer .row").show();  
+            $("#colorEN").css("background-color", "#f2ffcc");
         }
     },
     error: function (e) {

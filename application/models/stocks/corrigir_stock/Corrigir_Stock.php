@@ -178,6 +178,31 @@ class Corrigir_Stock extends CI_Model
                  where NumeroDocumento='{$NumeroGS}' and isnull(Lote,'')<>'' and isnull(LoteInt,'')=''";
         $this->db->query($sql06);
         $this->db->close();  
+
+        $check_status=$this->getPL_status($DocPL);        
+        foreach ($check_status as $val) {
+            $Numero = $val->Numero;
+            $Estado = $val->Estado;  
+        }
+        $sql07 ="UPDATE PlDocs
+                 SET Estado=(case when '{$Estado}'='A' then 'F' else '{$Estado}' end)
+                 where Numero='{$Numero}'";
+        $this->db->query($sql07);
+        $this->db->close(); 
         
+    }
+
+    public function getPL_status($DocPL) {
+
+        $sql="SELECT C.Numero, C.Estado
+              from StkLDocs A join PlDocs C on ((case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
+              where c.numero='{$DocPL}'
+              group by C.Numero, C.Estado
+              having round(sum(case when A.TipoMovimento<='10' then A.Quantidade else -A.Quantidade end),8)>0";         
+        //echo $sql;
+        $query = $this->db->query($sql);        
+        $result = $query->result();
+
+        return $result;
     }
 }
