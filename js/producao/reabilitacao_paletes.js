@@ -155,7 +155,7 @@ function getPalets(data){
             {title:"Artigo", field:"Artigo", align:"center", visible:false},
             {title:"Descrição", field:"DescricaoArtigo", align:"center",headerFilter:"input"},
             {title:"QTD.", field:"Quantidade", align:"center",headerFilter:"input"},
-            {title:"QTD. OK", field:"Qtd_OK",  hozAlign:"center", editor:"input", formatter:function (cell) {
+            {title:"QTD. OK", field:"Qtd_OK",  hozAlign:"center", editor:"number", formatter:function (cell) {
                     let val = cell.getValue();
                     let el = cell.getElement();        
                     el.style.backgroundColor = "#fdfd96";        
@@ -164,7 +164,7 @@ function getPalets(data){
                 atualiza_qtdPL(data,tablePaletes);  
             }
             },
-            {title:"QTD. NOK", field:"Qtd_NOK",  hozAlign:"center", editor:"input", formatter:function (cell) {
+            {title:"QTD. NOK", field:"Qtd_NOK",  hozAlign:"center", editor:"number", formatter:function (cell) {
                 let val = cell.getValue();
                 let el = cell.getElement();        
                 el.style.backgroundColor = "#fdfd96";        
@@ -273,7 +273,7 @@ function selectedPalets(data){
             {title:"Artigo", field:"Artigo", align:"center", visible:false},
             {title:"Descrição", field:"DescricaoArtigo", align:"center",headerFilter:"input"},
             {title:"QTD.", field:"Quantidade", align:"center",headerFilter:"input"},
-            {title:"QTD. OK", field:"Qtd_OK",  hozAlign:"center", editor:"input", formatter:function (cell) {
+            {title:"QTD. OK", field:"Qtd_OK",  hozAlign:"center", editor:"number", formatter:function (cell) {
                 let val = cell.getValue();
                 let el = cell.getElement();        
                 el.style.backgroundColor = "#fdfd96";        
@@ -282,7 +282,7 @@ function selectedPalets(data){
                 atualiza_qtdPL(data,tableSelPaletes);  
             },
             },
-            {title:"QTD. NOK", field:"Qtd_NOK",  hozAlign:"center", editor:"input", formatter:function (cell) {
+            {title:"QTD. NOK", field:"Qtd_NOK",  hozAlign:"center", editor:"number", formatter:function (cell) {
                 let val = cell.getValue();
                 let el = cell.getElement();        
                 el.style.backgroundColor = "#fdfd96";        

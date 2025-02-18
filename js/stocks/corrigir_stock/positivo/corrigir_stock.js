@@ -226,7 +226,7 @@ function selectedPalets(data){
             {title:"Sel", field:"Sel", align:"center", visible:false},
             {title:"Local", field:"Local", align:"center",headerFilter:"input",headerFilter:"input"},                
             {title:"QTD.", field:"Quantidade", align:"center",headerFilter:"input"},                
-            {title:"QTD. Acertada", field:"NovaQtd",  hozAlign:"center", editor:"input",formatter:function (cell) {
+            {title:"QTD. Acertada", field:"NovaQtd",  hozAlign:"center", editor:"number",formatter:function (cell) {
                 let val = cell.getValue();
                 let el = cell.getElement();        
                 el.style.backgroundColor = "#fdfd96";        

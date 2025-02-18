@@ -393,6 +393,24 @@ function fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tbl
             }
         })
     }
+    if(action==='valida_lote_calibre') {
+        Swal.fire({
+                icon: type,
+                iconHtml: '!',
+                iconColor: '#f88686',
+                title: title,
+                html: '<p  style="font-family: Arial, Helvetica, sans-serif; font-size: 20px;color: #333">'+text2+'</p>',
+                showDenyButton: true,
+                confirmButtonText: '<i class="fa fa-thumbs-up"></i> Sim',
+                denyButtonText: '<i class="fa fa-thumbs-down"></i> Não'
+            }
+        ).then((result) => {
+            if (result.isConfirmed) {            
+                confirm_paletizar(tblPL,tblLoc,tblLote,tblAfet);
+            } else if (result.isDenied) {            
+            }
+        })
+    }
     
 
 }

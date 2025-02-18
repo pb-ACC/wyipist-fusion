@@ -176,7 +176,7 @@ function linha_afetada(data){
         columns:[
             {title:"Lote", field:"Lote", align:"center", headerFilter:"input"},  
             {title:"Calibre", field:"Calibre", align:"center", headerFilter:"input"},  
-            {title:"Quantidade", field:"Quantidade", align:"center", headerFilter:"input",bottomCalc:"sum", bottomCalcParams:{precision:2}},
+            {title:"Quantidade", field:"Quantidade", align:"center", headerFilter:"input",bottomCalc:"sum", bottomCalcParams:{precision:3}},
             {title:"Unidade", field:"Unidade", align:"center", headerFilter:"input"},
             {title:"LinhaDocumento", field:"LinhaDocumento", align:"center", visible:false},
             {title:"Documento", field:"Documento", align:"center", visible:false},
@@ -209,7 +209,7 @@ function lotes_gastos(data){
         columns:[
             {title:"Lote", field:"Lote", align:"center", headerFilter:"input"},  
             {title:"Calibre", field:"Calibre", align:"center", headerFilter:"input"},  
-            {title:"Quantidade", field:"Quantidade", align:"center", headerFilter:"input",bottomCalc:"sum", bottomCalcParams:{precision:2}},
+            {title:"Quantidade", field:"Quantidade", align:"center", headerFilter:"input",bottomCalc:"sum", bottomCalcParams:{precision:3}},
             {title:"Unidade", field:"Unidade", align:"center", headerFilter:"input"},
             {title:" ",formatter:verPaletes, width:50, align:"center",tooltip:true, cellClick:function(e, cell){     
                 mostra_paletes(serie,linha,docEN,plano,refp,cell.getRow().getData().Lote,cell.getRow().getData().Calibre);
@@ -250,8 +250,8 @@ function selectedPalets(data){
             {title:"Descrição", field:"DescricaoArtigo", align:"center"},
             {title:"Lote", field:"Lote", align:"center"},
             {title:"Calibre", field:"Calibre", align:"center"},                
-            {title:"QTD.", field:"Quantidade", align:"center",bottomCalc:"sum", bottomCalcParams:{precision:2}},
-            {title:"QTD. a Usar", field:"NovaQtd",  hozAlign:"center", bottomCalc:"sum", bottomCalcParams:{precision:2}, editor:"input", editable: function(cell) {
+            {title:"QTD.", field:"Quantidade", align:"center",bottomCalc:"sum", bottomCalcParams:{precision:3}},
+            {title:"QTD. a Usar", field:"NovaQtd",  hozAlign:"center", bottomCalc:"sum", bottomCalcParams:{precision:3}, editor:"number", editable: function(cell) {
                 // Verifica o valor da coluna "Sector" da mesma linha
                 var sector = cell.getRow().getData().Sector;
                 // Impede a edição se o valor da coluna "Sector" for "FB001" ou "ST010"
@@ -259,7 +259,8 @@ function selectedPalets(data){
                     return false;  // Desabilita a edição
                 }
                 return true;  // Permite a edição
-            },formatter:function (cell) {
+            },
+            formatter:function (cell) {
                 let val = cell.getValue();
                 let el = cell.getElement();        
                 el.style.backgroundColor = "#fdfd96";        
@@ -511,8 +512,39 @@ function paletizar(){
     } else if (parseFloat(tableLinha.getData()[0]['QtdPaletizada']) < 0) {
         toastr["error"]("Não pode colocar quantidades negativas!");
     } else {
-        segue_para_paletizar();
+        valida_lote_calibre();
     }    
+}
+
+function valida_lote_calibre(){
+    // Supondo que a tua tabela Tabulator já esteja inicializada como "table"
+    let data = tableSelPaletes.getData(); // Obtém todos os dados da tabela
+    // Obter valores únicos para "lote" e "calibre"
+    let lotes = new Set();
+    let calibres = new Set();
+    data.forEach(row => {
+        lotes.add(row.Lote);
+        calibres.add(row.Calibre);
+    });
+    
+    // Verificar se há valores diferentes
+    if (lotes.size > 1 || calibres.size > 1) {
+        //console.log(lotes);
+        type='success';                    
+        title='ATENÇÃO: Foram picadas paletes de Lotes e/ou Calibres diferentes!';
+        text2='Tem a certeza que a pretende continuar?';
+        action='valida_lote_calibre';
+        xposition='center';        
+        campo='';
+        valor='';
+        tblPL=tableSelPaletes.getData();    
+        tblLoc=tableLinha.getData();
+        tblLote=tableLotes.getData();
+        tblAfet=tableAfetada.getData();
+        fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
+    } else {
+        segue_para_paletizar();
+    }
 }
 
 function segue_para_paletizar(){
@@ -542,7 +574,7 @@ function getPalets(parm,data){
             {title:"Lote", field:"Lote", align:"center",headerFilter:"input"},
             {title:"Calibre", field:"Calibre", align:"center",headerFilter:"input"},
             {title:"QTD.", field:"Quantidade", align:"center"},
-            {title:"QTD. a Usar", field:"NovaQtd",  hozAlign:"center", editor:"input", editable: function(cell) {
+            {title:"QTD. a Usar", field:"NovaQtd",  hozAlign:"center", editor:"number", editable: function(cell) {
                 // Verifica o valor da coluna "Sector" da mesma linha
                 var sector = cell.getRow().getData().Sector;
 
@@ -821,7 +853,7 @@ function paletes_associadas(data){
             {title:"Palete", field:"PaleteOrigem", align:"center", headerFilter:"input"},  
             {title:"Lote", field:"Lote", align:"center", headerFilter:"input"},  
             {title:"Calibre", field:"Calibre", align:"center", headerFilter:"input"},  
-            {title:"Quantidade", field:"Quantidade", align:"center", headerFilter:"input",bottomCalc:"sum", bottomCalcParams:{precision:2}},
+            {title:"Quantidade", field:"Quantidade", align:"center", headerFilter:"input",bottomCalc:"sum", bottomCalcParams:{precision:3}},
             {title:"Unidade", field:"Unidade", align:"center", headerFilter:"input"},
             {title:"Id", field:"Id", align:"center", visible:false}
             
@@ -977,6 +1009,8 @@ function palletize(obs,codigomotivo){
         setorCarga='ST017';
     }
     
+    /*
+    
     $.ajax({
         type: "POST",
         url: "http://127.0.0.1/wyipist-fusion/planos_carga/preparacao/PaletizarCarga/paletizar_carga/"+serie+"/"+flag,
@@ -1016,6 +1050,7 @@ function palletize(obs,codigomotivo){
             //console.log(e);
         }
     });
+    */
 }
 
 function cancel_palets(){
