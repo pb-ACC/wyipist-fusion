@@ -87,19 +87,25 @@ class AnulacaoCarga extends CI_Controller
             $cliente = $this->input->post('cliente');           
             $encomenda = $this->input->post('encomenda');           
             $linha = $this->input->post('linha');           
-            $palete_cliente = $this->input->post('palete_cliente');  
-            $palete_origem = $this->input->post('palete_origem');  
-            $local = $this->input->post('local');  
+            $paletes = $this->input->post('paletes');    
             $setor_cliente = $this->input->post('setor_cliente');  
             $setor_exp = $this->input->post('setor_exp');              
             $reverte = $this->input->post('reverte');  
             $movimenta = $this->input->post('movimenta');  
 
             $this->load->model('planos_carga/anulacao/Anulacao_Carga');
-            $this->Anulacao_Carga->anula_palete($cliente,$encomenda,$linha,$palete_cliente,$palete_origem,$setor_cliente,$setor_exp,$reverte,$movimenta,$local,$username,$funcionario_gpac);                      
-         
-            echo json_encode("inseriu");             
-            
+
+            $countTBL = count($paletes, COUNT_RECURSIVE);
+            if ($countTBL > 2) {                
+                for ($i = 0; $i < count($paletes); $i++) {
+                    $palete_cliente = $paletes[$i]['NumeroDocumento'];
+                    $palete_origem = $paletes[$i]['PaleteOrigem'];
+                    $local = $paletes[$i]['Local'];
+
+                    $this->Anulacao_Carga->anula_palete($cliente,$encomenda,$linha,$palete_cliente,$palete_origem,$setor_cliente,$setor_exp,$reverte,$movimenta,$local,$username,$funcionario_gpac);  
+                }
+                echo json_encode("inseriu");                  
+            } 
         }else{
             redirect('start', 'refresh');
         }

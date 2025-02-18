@@ -1009,8 +1009,6 @@ function palletize(obs,codigomotivo){
         setorCarga='ST017';
     }
     
-    /*
-    
     $.ajax({
         type: "POST",
         url: "http://127.0.0.1/wyipist-fusion/planos_carga/preparacao/PaletizarCarga/paletizar_carga/"+serie+"/"+flag,
@@ -1050,7 +1048,6 @@ function palletize(obs,codigomotivo){
             //console.log(e);
         }
     });
-    */
 }
 
 function cancel_palets(){
@@ -1211,9 +1208,7 @@ function avanca_anualacao(tblPL,tblLoc,tblLote,tblAfet){
             cliente: tblLoc[0]['CodCL'],
             encomenda: tblLoc[0]['NumeroDocumento'],
             linha: tblLoc[0]['NumeroLinha'],
-            palete_cliente: tblPL[0]['NumeroDocumento'],
-            palete_origem: tblPL[0]['PaleteOrigem'],
-            local: tblPL[0]['Local'],
+            paletes: tblPL,
             setor_cliente: setor_cliente,
             setor_exp: setor_exp,
             reverte: label,
