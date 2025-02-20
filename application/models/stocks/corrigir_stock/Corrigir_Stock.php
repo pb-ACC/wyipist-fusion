@@ -180,16 +180,17 @@ class Corrigir_Stock extends CI_Model
         $this->db->close();  
 
         $check_status=$this->getPL_status($DocPL);        
-        foreach ($check_status as $val) {
-            $Numero = $val->Numero;
-            $Estado = $val->Estado;  
+        if (!empty($check_status)) { // Verifica se há resultados
+            foreach ($check_status as $val) {
+                $Numero = $val->Numero;
+                $Estado = $val->Estado;
+            }
+            $sql07 = "UPDATE PlDocs
+                      SET Estado = (CASE WHEN '{$Estado}' = 'A' THEN 'F' ELSE '{$Estado}' END)
+                      WHERE Numero = '{$Numero}'";        
+            $this->db->query($sql07);
         }
-        $sql07 ="UPDATE PlDocs
-                 SET Estado=(case when '{$Estado}'='A' then 'F' else '{$Estado}' end)
-                 where Numero='{$Numero}'";
-        $this->db->query($sql07);
-        $this->db->close(); 
-        
+        $this->db->close();         
     }
 
     public function getPL_status($DocPL) {
