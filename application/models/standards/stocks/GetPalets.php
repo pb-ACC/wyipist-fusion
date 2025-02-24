@@ -23,7 +23,7 @@ class GetPalets extends CI_Model
                                 round(sum(case when A.TipoMovimento<='10' then A.Quantidade else -A.Quantidade end),8) NovaQtd, isnull(D.NivelPalete,'') Nivel, cast(0 as float) Qtd_OK, cast(0 as float) Qtd_NOK, cast(0 as float) Qtd_Caco,
                                 cast('' as varchar(50)) RefSeg, cast('' as varchar(255)) DescRefSeg, CAST(ROW_NUMBER() OVER(ORDER BY C.Numero asc)-1 AS int) Id
                          from StkLDocs A join ReferArt B on (A.RefP=B.Referencia and A.Artigo=B.Artigo)
-                                         join PlDocs   C on (C.Estado='F' and (case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
+                                         join PlDocs   C on ((case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
                                          join PllDocs  D on (C.Numero=D.NumeroDocumento)
                         where A.Sector in ({$setor}) and C.Serie not in ('C','PC')
                         group by A.Sector, A.RefP, A.Artigo, isnull(A.Lote,''), isnull(A.Calibre,''), D.NumeroLinha, C.Numero,B.Formato, B.Qual, B.TipoEmbalagem, B.Superficie, B.Decoracao,
@@ -49,7 +49,7 @@ class GetPalets extends CI_Model
                             isnull(D.NivelPalete,'') Nivel, round(sum(case when A.TipoMovimento<='10' then A.Quantidade else -A.Quantidade end),8) NovaQtd, cast(0 as float) Qtd_OK, cast(0 as float) Qtd_NOK, cast(0 as float) Qtd_Caco,
                             cast('' as varchar(50)) RefSeg, cast('' as varchar(255)) DescRefSeg, CAST(ROW_NUMBER() OVER(ORDER BY C.Numero asc)-1 AS int) Id
                       from StkLDocs A join ReferArt B on (A.RefP=B.Referencia and A.Artigo=B.Artigo)
-                                      join PlDocs   C on (C.Estado='F' and (case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
+                                      join PlDocs   C on ((case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
                                       join PllDocs  D on (C.Numero=D.NumeroDocumento)
                       where A.Sector in ({$setor}) and C.Serie not in ('C','PC')
                       group by A.Sector, A.RefP, A.Artigo, isnull(A.Lote,''), isnull(A.Calibre,''), D.NumeroLinha, C.Numero,B.Formato, B.Qual, B.TipoEmbalagem, B.Superficie, B.Decoracao,
@@ -205,7 +205,7 @@ class GetPalets extends CI_Model
                             A.RefP Referencia, A.Artigo, B.Descricao DescricaoArtigo, isnull(A.Lote,'') Lote, isnull(A.Calibre,'') Calibre, D.NumeroLinha LinhaPL, C.Numero DocPL, B.Formato, B.Qual, B.TipoEmbalagem, B.Superficie, B.Decoracao,
                             B.RefCor, B.TabEspessura, isnull(D.NivelPalete,'') Nivel, round(sum(case when A.TipoMovimento<='10' then A.Quantidade else -A.Quantidade end),8) NovaQtd, CAST(ROW_NUMBER() OVER(ORDER BY C.Numero asc)-1 AS int) Id
                          from StkLDocs A join ReferArt B on (A.RefP=B.Referencia and A.Artigo=B.Artigo)
-                                         join PlDocs   C on (C.Estado='F' and (case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
+                                         join PlDocs   C on ((case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
                                          join PllDocs  D on (C.Numero=D.NumeroDocumento)
                         where A.Refp='{$refp}' and A.Sector in ({$setor}) and C.Serie not in ('C','PC')
                          -- and isnull(A.Local,'')<>''
@@ -231,7 +231,7 @@ class GetPalets extends CI_Model
                             A.RefP Referencia, A.Artigo, B.Descricao DescricaoArtigo, isnull(A.Lote,'') Lote, isnull(A.Calibre,'') Calibre, D.NumeroLinha LinhaPL, C.Numero DocPL, B.Formato, B.Qual, B.TipoEmbalagem, B.Superficie, B.Decoracao,
                             B.RefCor, B.TabEspessura, isnull(D.NivelPalete,'') Nivel, round(sum(case when A.TipoMovimento<='10' then A.Quantidade else -A.Quantidade end),8) NovaQtd, cast(0 as int) Reabilitado, CAST(ROW_NUMBER() OVER(ORDER BY C.Numero asc)-1 AS int) Id
                       from StkLDocs A join ReferArt B on (A.RefP=B.Referencia and A.Artigo=B.Artigo)
-                                      join PlDocs   C on (C.Estado='F' and (case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
+                                      join PlDocs   C on ((case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
                                       join PllDocs  D on (C.Numero=D.NumeroDocumento)
                       where A.Refp='{$refp}' and A.Sector in ({$setor}) and C.Serie not in ('C','PC')
                       group by A.Sector, isnull(A.Local,''), A.RefP, A.Artigo, isnull(A.Lote,''), isnull(A.Calibre,''), D.NumeroLinha, C.Numero, B.Formato, B.Qual, B.TipoEmbalagem,
@@ -292,7 +292,7 @@ class GetPalets extends CI_Model
                                 isnull(B.TabEspessura,'') TabEspessura, isnull(E.Tipo,'') Tipo, CAST(ROW_NUMBER() OVER(ORDER BY C.Numero asc)-1 AS int) Id
                          from StkLDocs A join Sectores     X on (A.Sector=X.Codigo and X.Empresa=UPPER('{$empresa}'))
                                          join ReferArt     B on (A.RefP=B.Referencia and A.Artigo=B.Artigo)
-                                         join PlDocs       C on (C.Estado='F' and (case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
+                                         join PlDocs       C on ((case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
                                          join PllDocs      D on (C.Numero=D.NumeroDocumento)
                                     left join NiveisPalete E on (D.NivelPalete=E.Codigo)
                          group by A.Sector, isnull(A.Local,''), A.RefP, A.Artigo, isnull(A.Lote,''), isnull(A.Calibre,''), D.NumeroLinha, C.Numero, B.Formato, B.Qual, B.TipoEmbalagem,
@@ -329,7 +329,7 @@ class GetPalets extends CI_Model
                            isnull(B.TabEspessura,'') TabEspessura, isnull(E.Tipo,'') Tipo, CAST(ROW_NUMBER() OVER(ORDER BY C.Numero asc)-1 AS int) Id
                     from StkLDocs A join Sectores     X on (A.Sector=X.Codigo and X.Empresa=UPPER('{$empresa}'))
                                     join ReferArt     B on (A.RefP=B.Referencia and A.Artigo=B.Artigo)
-                                    join PlDocs       C on (C.Estado='F' and (case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
+                                    join PlDocs       C on ((case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
                                     join PllDocs      D on (C.Numero=D.NumeroDocumento)
                                left join NiveisPalete E on (D.NivelPalete=E.Codigo)
                     group by A.Sector, isnull(A.Local,''), A.RefP, A.Artigo, isnull(A.Lote,''), isnull(A.Calibre,''), D.NumeroLinha, C.Numero, B.Formato, B.Qual, B.TipoEmbalagem,
@@ -393,7 +393,7 @@ class GetPalets extends CI_Model
                                 isnull(B.TabEspessura,'') TabEspessura, isnull(E.Tipo,'') Tipo, CAST(ROW_NUMBER() OVER(ORDER BY C.Numero asc)-1 AS int) Id
                          from StkLDocs A join Sectores     X on (A.Sector=X.Codigo and X.Empresa=UPPER('{$empresa}'))
                                          join ReferArt     B on (A.RefP=B.Referencia and A.Artigo=B.Artigo)
-                                         join PlDocs       C on (C.Estado='F' and (case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
+                                         join PlDocs       C on ((case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
                                          join PllDocs      D on (C.Numero=D.NumeroDocumento)
                                     left join NiveisPalete E on (D.NivelPalete=E.Codigo)
                         where convert(char,A.DataHoraMOV,112)>='{$idata}' AND convert(char,A.DataHoraMOV,112)<='{$fdata}'
@@ -431,7 +431,7 @@ class GetPalets extends CI_Model
                            isnull(B.TabEspessura,'') TabEspessura, isnull(E.Tipo,'') Tipo, CAST(ROW_NUMBER() OVER(ORDER BY C.Numero asc)-1 AS int) Id
                     from StkLDocs A join Sectores     X on (A.Sector=X.Codigo and X.Empresa=UPPER('{$empresa}'))
                                     join ReferArt     B on (A.RefP=B.Referencia and A.Artigo=B.Artigo)
-                                    join PlDocs       C on (C.Estado='F' and (case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
+                                    join PlDocs       C on ((case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
                                     join PllDocs      D on (C.Numero=D.NumeroDocumento)
                                left join NiveisPalete E on (D.NivelPalete=E.Codigo)
                     where convert(char,A.DataHoraMOV,112)>='{$idata}' AND convert(char,A.DataHoraMOV,112)<='{$fdata}'

@@ -24,7 +24,7 @@ class Lista_Stock extends CI_Model
                                 isnull(B.TipoEmbalagem,'') TipoEmbalagem, isnull(B.Superficie,'') Superficie, isnull(B.Decoracao,'') Decoracao, isnull(B.RefCor,'') RefCor,
                                 isnull(B.TabEspessura,'') TabEspessura, isnull(E.Tipo,'') Tipo, CAST(ROW_NUMBER() OVER(ORDER BY C.Numero asc)-1 AS int) Id
                          from StkLDocs A join ReferArt     B on (A.RefP=B.Referencia and A.Artigo=B.Artigo)
-                                         join PlDocs       C on (C.Estado='F' and (case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
+                                         join PlDocs       C on ((case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
                                          join PllDocs      D on (C.Numero=D.NumeroDocumento)
                                     left join NiveisPalete E on (D.NivelPalete=E.Codigo)
                          where A.Sector in ({$sectors})
@@ -58,7 +58,7 @@ class Lista_Stock extends CI_Model
                                 isnull(B.TipoEmbalagem,'') TipoEmbalagem, isnull(B.Superficie,'') Superficie, isnull(B.Decoracao,'') Decoracao, isnull(B.RefCor,'') RefCor,
                                 isnull(B.TabEspessura,'') TabEspessura, isnull(E.Tipo,'') Tipo, CAST(ROW_NUMBER() OVER(ORDER BY C.Numero asc)-1 AS int) Id
                     from StkLDocs A join ReferArt     B on (A.RefP=B.Referencia and A.Artigo=B.Artigo)
-                                         join PlDocs       C on (C.Estado='F' and (case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
+                                         join PlDocs       C on ((case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
                                          join PllDocs      D on (C.Numero=D.NumeroDocumento)
                                     left join NiveisPalete E on (D.NivelPalete=E.Codigo)
                     where A.Sector in ({$sectors})
@@ -119,7 +119,7 @@ class Lista_Stock extends CI_Model
                     round(sum(case when A.TipoMovimento<='10' then A.Quantidade else -A.Quantidade end) over (order by A.DataHoraMOV, A.NumeroLInha ROWS between unbounded preceding and current row),2) Acumulado,
                     row_number() over (order by A.Palete, A.LinhaPL, A.DataHoraMOV, A.NumeroLinha) Ordem
               from StkLDocs A join ReferArt     B on (A.RefP=B.Referencia)
-                              join PlDocs       C on (C.Estado='F' and (case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
+                              join PlDocs       C on ((case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
                               join PllDocs      E on (C.Numero=E.NumeroDocumento)
                          left join NiveisPalete D on (E.NivelPalete=D.Codigo)
               where C.Numero='{$palete}'";  
