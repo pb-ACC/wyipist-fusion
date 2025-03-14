@@ -873,9 +873,9 @@ function atualiza_qtdPL(selected){
         k=parseFloat(k)+parseFloat(selected[i]['NovaQtd']);
     }    
     
-    row.update({QtdPaletizada: k.toFixed(2)});
+    row.update({QtdPaletizada: k.toFixed(3)});
     let j = tableLinha.getData()[0]['Quantidade'];
-    x=(j-k).toFixed(2);
+    x=(j-k).toFixed(3);
     row.update({QtdFalta: x});
 }
 
@@ -895,7 +895,7 @@ function atualiza_lotesConsumidos(selected){
             };
         }
         // 3. Sum the values
-        groupedData[key].Quantidade = (parseFloat(groupedData[key].Quantidade) + parseFloat(row.Quantidade)).toFixed(2);
+        groupedData[key].Quantidade = (parseFloat(groupedData[key].Quantidade) + parseFloat(row.Quantidade)).toFixed(3);
     });
     
     // Convert groupedData object back to an array if needed
@@ -989,11 +989,12 @@ function palletize(obs,codigomotivo){
     // Obtém o valor do cliente
     let cliente = tableLinha.getData()[0]['Cliente'];
     // Verifica se o valor contém "Certeca" ou "Ceragni" e define a flag
-    if (cliente.includes("Ceragni")) {
+    if (cliente.toLowerCase().includes("ceragni")) {
         flag = 1;
-    } else if (cliente.includes("Certeca")) {
+    } else if (cliente.toLowerCase().includes("certeca")) {
         flag = 2;
     }    
+    
     mtt = $("#mt-stk option:selected").text();
     mt = $.trim(mtt);    
 
