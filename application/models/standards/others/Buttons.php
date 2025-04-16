@@ -43,6 +43,9 @@ class Buttons extends CI_Model
                         <div class="col-12 col-md-3 col-lg-3">
                             <button id="amostras" onclick="send_to_samples(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b05574; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="CL888">Enviar Arm. Amostras</button>
                         </div> 
+                        <div class="col-12 col-md-3 col-lg-3">
+                            <button id="divergePD" onclick="send_to_divergences_prod(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#FF7F50; color:white; border-color:#D15F40; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST553">Enviar Arm. Diverg. - Prod.</button>
+                        </div>
                     </div>';
         
         }      

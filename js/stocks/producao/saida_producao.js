@@ -987,6 +987,26 @@ function send_to_warehouse(){
     }
 }
 
+function send_to_divergences_prod(sector){
+    sizeofTBL=tableSelPaletes.getData();   
+    if(sizeofTBL.length>0){
+        type='success';
+        title='Tem a certeza que pretende continuar?';
+        text2='';
+        action='send_to_divergences_production';
+        xposition='center';
+        tblPL=tableSelPaletes.getData();    
+        tblLoc=[];
+        tblLote=[];
+        tblAfet=[];
+        valor=sector;
+        fire_annotation(type,title,text2,action,xposition,campo,valor,tblPL,tblLoc,tblLote,tblAfet); 
+    }
+    else{
+        toastr["error"]("Não foi picada nenhuma palete!");
+    }  
+}
+
 function go_send_to_samples(){
 
     sizeofTBL=tableSelPaletes.getData();   
@@ -1002,6 +1022,43 @@ function go_send_to_samples(){
     else{
         toastr["error"]("Não foi picada nenhuma palete!");
     }
+}
+
+function go_send_to_divergences_production(tblPL,sector){
+    //alert(sector);    
+    tableSelPaletes.alert("A gravar...");
+    $('#empresasDP').prop('disabled', true);
+    $("#buttons button").attr("disabled", true);   
+    $("input[type=radio]").attr('disabled', false);
+    
+    $.ajax({
+        type: "POST",        
+        url: "http://127.0.0.1/wyipist-fusion/stocks/producao/Gravar_SaidaProducao/save_production",
+        dataType: "json",
+        data:{
+            palete: tblPL,
+            setor: sector,
+            local: ''
+        },
+        success: function (data) {
+
+            if (data === "kick") {
+                //alert("Outro utilizador entrou com as suas credenciais, faça login de novo.");
+                toastr["warning"]("Outro utilizador entrou com as suas credenciais, faça login de novo.");
+                window.location = "home/logout";
+            } else {
+                toastr["success"]("Dados gravados com Sucesso");                
+                setTimeout(function(){
+                    location.reload();
+                },2500);
+            }
+        },
+        error: function (e) {
+            alert('Request Status: ' + e.status + ' Status Text: ' + e.statusText + ' ' + e.responseText);
+            console.log(e);
+        }
+    });      
+    
 }
 
 function save_local_fabric(){
