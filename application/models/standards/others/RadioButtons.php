@@ -41,6 +41,10 @@ class RadioButtons extends CI_Model
                     '<label class="form-check-label" style="margin-left: 15px;font-size: 18px;">Divergências Fábrica - Armazém</label>'.
                     '</div>'.   
                     '<div class="form-check">'.
+                    '<input class="form-check-input" type="radio" name="radio8" value="8" style="width: 20px;height: 20px;">'.
+                    '<label class="form-check-label" style="margin-left: 15px;font-size: 18px;">Divergências Produção - Armazém</label>'.
+                    '</div>'. 
+                    '<div class="form-check">'.
                     '<input class="form-check-input" type="radio" name="radio7" value="7" style="width: 20px;height: 20px;">'.
                     '<label class="form-check-label" style="margin-left: 15px;font-size: 18px;">Armazém Amostras</label>'.
                     '</div>';    
