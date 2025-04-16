@@ -2,7 +2,7 @@
        <strong>Copyright &copy; <?php echo date("Y"); ?> <a href="http://www.accsystems.biz">ACCSystems</a>.</strong> All rights
     reserved.
     <div style="float: right">
-        <b>Version</b> 6.5.13
+        <b>Version</b> 6.5.14
     </div>
 </footer>
 
