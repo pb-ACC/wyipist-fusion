@@ -31,7 +31,7 @@ class AnulacaoCarga extends CI_Controller
         }
     }
     
-    public function valida_movimentosPL($palete){
+    public function valida_movimentosPL(){
 
         $this->load->helper('url');
         $this->load->library('session');
@@ -39,14 +39,18 @@ class AnulacaoCarga extends CI_Controller
         if($this->session->userdata('logged_in')) {
 
             $this->load->model('planos_carga/anulacao/Anulacao_Carga');
-            $pl=$this->Anulacao_Carga->valida_movimentosPL($palete);    
-                        
-            $data = array( 
-                'palete' => $pl
-            );
+            $paletes = $this->input->post('paletes');    
 
-            echo json_encode($data);
-
+            $countTBL = count($paletes, COUNT_RECURSIVE);
+            if ($countTBL > 2) {   
+                $data = [];             
+                foreach ($paletes as $item) {
+                    $palete = $item['NumeroDocumento'];
+                    $pl = $this->Anulacao_Carga->valida_movimentosPL($palete);  
+                    $data[] = ['palete' => $pl];
+                }
+                echo json_encode($data); 
+            }                
         }else{
             redirect('start', 'refresh');
         }
@@ -89,8 +93,7 @@ class AnulacaoCarga extends CI_Controller
             $linha = $this->input->post('linha');           
             $paletes = $this->input->post('paletes');    
             $setor_cliente = $this->input->post('setor_cliente');  
-            $setor_exp = $this->input->post('setor_exp');              
-            $reverte = $this->input->post('reverte');  
+            $setor_exp = $this->input->post('setor_exp'); 
             $movimenta = $this->input->post('movimenta');  
 
             $this->load->model('planos_carga/anulacao/Anulacao_Carga');
@@ -102,7 +105,7 @@ class AnulacaoCarga extends CI_Controller
                     $palete_origem = $paletes[$i]['PaleteOrigem'];
                     $local = $paletes[$i]['Local'];
 
-                    $this->Anulacao_Carga->anula_palete($cliente,$encomenda,$linha,$palete_cliente,$palete_origem,$setor_cliente,$setor_exp,$reverte,$movimenta,$local,$username,$funcionario_gpac);  
+                    $this->Anulacao_Carga->anula_palete($cliente,$encomenda,$linha,$palete_cliente,$palete_origem,$setor_cliente,$setor_exp,$movimenta,$local,$username,$funcionario_gpac);  
                 }
                 echo json_encode("inseriu");                  
             } 

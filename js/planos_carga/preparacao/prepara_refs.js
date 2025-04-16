@@ -421,6 +421,7 @@ function selectedPalets(data){
 function select_all_paletes(){        
     tablePaletes.selectRow("visible"); //select all rows currently visible in the table viewport;     
 }
+
 /*BTNS*/
 function choose_palets(){  
     toastr.clear();
@@ -985,7 +986,7 @@ function palletize(obs,codigomotivo){
 
     $(".card-footer .row .btn").prop("disabled", true);
     $(".card-header .btn").prop("disabled", true);
-    $(".card-footer .row").hide();
+    $(".modal-footer .btn").prop("disabled", true);
     // Inicializa a flag com um valor padrão, por exemplo, 0
     let flag = 0;
     // Obtém o valor do cliente
@@ -1034,10 +1035,10 @@ function palletize(obs,codigomotivo){
                 toastr["warning"]("Outro utilizador entrou com as suas credenciais, faça login de novo.");
                 window.location = "home/logout";
             } else {
-                toastr["success"]("Dados gravados com Sucesso");                    
-                $(".card-footer .row").show();
+                toastr["success"]("Dados gravados com Sucesso");                                    
                 $(".card-footer .row .btn").prop("disabled", false);
                 $(".card-header .btn").prop("disabled", false);
+                $(".modal-footer .btn").prop("disabled", false);
                 if(parseFloat(tableLinha.getData()[0]['Quantidade']) === parseFloat(tableLinha.getData()[0]['QtdPaletizada'])){
                     // Construct the URL based on the PHP code you provided
                     window.history.back();
@@ -1108,11 +1109,7 @@ function cancell_sel_paletes(){
             }
         }
         //alert(selected);
-        if(selected.length<=1){
-            valida_anulacao(selected);            
-        }else{
-              toastr["error"]("Só pode picar uma palete de cada vez!");
-        } 
+        valida_anulacao(selected);            
 }
 
 function valida_anulacao(selected){
@@ -1135,35 +1132,17 @@ function valida_anulacao(selected){
 function confirma_anualacao(tblPL,tblLoc,tblLote,tblAfet){      
     $.ajax({
         type: "POST",
-        url: "http://127.0.0.1/wyipist-fusion/planos_carga/anulacao/AnulacaoCarga/get_valor_reverte/"+tblPL[0]['PaleteOrigem'],
-        dataType: "json",
-        success: function (data) {
-            if (data === "kick") {
-                toastr["warning"]("Outro utilizador entrou com as suas credenciais, faça login de novo.");
-                window.location = "home/logout";
-            } else {                                           
-                label=data['reverte'][0]['Reverte'];      
-            }
+        url: "http://127.0.0.1/wyipist-fusion/planos_carga/anulacao/AnulacaoCarga/valida_movimentosPL",
+        data:{
+            paletes: tblPL
         },
-        error: function (e) {
-            //alert(e);
-            alert('Request Status: ' + e.status + ' Status Text: ' + e.statusText + ' ' + e.responseText);
-            toastr["error"]("Erro ao gravar dados");    
-            //console.log(e);
-        }
-    });
-
-
-    $.ajax({
-        type: "POST",
-        url: "http://127.0.0.1/wyipist-fusion/planos_carga/anulacao/AnulacaoCarga/valida_movimentosPL/"+tblPL[0]['NumeroDocumento'],
         dataType: "json",
         success: function (data) {
             if (data === "kick") {
                 toastr["warning"]("Outro utilizador entrou com as suas credenciais, faça login de novo.");
                 window.location = "home/logout";
             } else {                                           
-                if (data['palete'].length > 0){
+                if (data.some(item => item.palete.length > 0)) {                
                     type='success';                    
                     title='ATENÇÃO: Ao anular a palete não será mais possivel fazer a leitura do seu código de barras!';
                     text2='Esta palete já tem movimentos de stock. Tem a certeza que a pretende anular?';
@@ -1204,7 +1183,10 @@ function avanca_anualacao(tblPL,tblLoc,tblLote,tblAfet){
     } else {
         movimenta=0;
     }    
-    
+    toastr.clear();
+    toastr["info"]("A gravar dados...");  
+    $("#modal_buttons .btn").prop("disabled", true);
+
     $.ajax({
         type: "POST",
         url: "http://127.0.0.1/wyipist-fusion/planos_carga/anulacao/AnulacaoCarga/anula_palete",
@@ -1216,7 +1198,6 @@ function avanca_anualacao(tblPL,tblLoc,tblLote,tblAfet){
             paletes: tblPL,
             setor_cliente: setor_cliente,
             setor_exp: setor_exp,
-            reverte: label,
             movimenta: movimenta
         },
         success: function (data) {
@@ -1225,6 +1206,7 @@ function avanca_anualacao(tblPL,tblLoc,tblLote,tblAfet){
                 toastr["warning"]("Outro utilizador entrou com as suas credenciais, faça login de novo.");
                 window.location = "home/logout";
             } else {
+                $("#modal_buttons .btn").prop("disabled", false);
                 toastr["success"]("Dados gravados com Sucesso");                    
                 location.reload();
             }

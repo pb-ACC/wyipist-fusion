@@ -36,7 +36,7 @@ class Anulacao_Carga extends CI_Model
         return $result;   
     }
 
-    public function anula_palete($cliente,$encomenda,$linha,$palete_cliente,$palete_origem,$setor_cliente,$setor_exp,$reverte,$movimenta,$local,$username,$funcionario_gpac){
+    public function anula_palete($cliente,$encomenda,$linha,$palete_cliente,$palete_origem,$setor_cliente,$setor_exp,$movimenta,$local,$username,$funcionario_gpac){
 
         $this->load->dbforge();
         $user=strtoupper($funcionario_gpac);        
