@@ -983,6 +983,8 @@ function save_palletize(){
 
 function palletize(obs,codigomotivo){
 
+    $(".card-footer .row .btn").prop("disabled", true);
+    $(".card-header .btn").prop("disabled", true);
     $(".card-footer .row").hide();
     // Inicializa a flag com um valor padrão, por exemplo, 0
     let flag = 0;
@@ -1034,6 +1036,8 @@ function palletize(obs,codigomotivo){
             } else {
                 toastr["success"]("Dados gravados com Sucesso");                    
                 $(".card-footer .row").show();
+                $(".card-footer .row .btn").prop("disabled", false);
+                $(".card-header .btn").prop("disabled", false);
                 if(parseFloat(tableLinha.getData()[0]['Quantidade']) === parseFloat(tableLinha.getData()[0]['QtdPaletizada'])){
                     // Construct the URL based on the PHP code you provided
                     window.history.back();
