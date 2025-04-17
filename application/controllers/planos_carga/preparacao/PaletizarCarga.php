@@ -33,7 +33,7 @@ class PaletizarCarga extends CI_Controller
               
             $setorDestino = $this->input->post('setorDestino');           
             $setorCarga = $this->input->post('setorCarga');           
-           
+
             //print_r($encomenda);
             //print_r($paletes);
             $this->load->model('planos_carga/preparacao/Paletizar_Carga');

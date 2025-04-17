@@ -13,7 +13,7 @@ class Buttons extends CI_Model
         //$this->db->reconnect();
     }
 
-    public function buttons_empresa($empresa){
+    public function buttons_empresa($empresa,$parm){
         //echo $empresa.'sdfvsdv';
         $value='';
         if($empresa == 1){
@@ -30,23 +30,40 @@ class Buttons extends CI_Model
                    </div>';
          }
          else if($empresa == 2){
-            $value = '<div class="row">        
-                        <div class="col-12 col-md-3 col-lg-3">
-                            <button id="choose_palets" onclick="choose_palets()" type="button" class="btn btn-dark" style="width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">Picar Palete</button>
-                        </div>
-                        <div class="col-12 col-md-3 col-lg-3">
-                            <button onclick="send_to_factory()" type="button" class="btn btn-info" style="width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">Enviar Arm. Fábrica</button>
-                        </div>
-                        <div class="col-12 col-md-3 col-lg-3">
-                            <button onclick="send_to_logistic()" type="button" class="btn btn-light" style="background-color:teal; color:white; border-color:teal; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">Enviar Centro Logístico</button>
-                        </div> 
-                        <div class="col-12 col-md-3 col-lg-3">
-                            <button id="amostras" onclick="send_to_samples(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b05574; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="CL888">Enviar Arm. Amostras</button>
-                        </div> 
-                        <div class="col-12 col-md-3 col-lg-3">
-                            <button id="divergePD" onclick="send_to_divergences_prod(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#FF7F50; color:white; border-color:#D15F40; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST553">Enviar Arm. Diverg. - Prod.</button>
-                        </div>
-                    </div>';
+            if($parm == 1){
+                $value = '<div class="row">        
+                            <div class="col-12 col-md-3 col-lg-3">
+                                <button id="choose_palets" onclick="choose_palets()" type="button" class="btn btn-dark" style="width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">Picar Palete</button>
+                            </div>
+                            <div class="col-12 col-md-3 col-lg-3">
+                                <button onclick="send_to_factory()" type="button" class="btn btn-info" style="width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">Enviar Arm. Fábrica</button>
+                            </div>
+                            <div class="col-12 col-md-3 col-lg-3">
+                                <button onclick="send_to_logistic()" type="button" class="btn btn-light" style="background-color:teal; color:white; border-color:teal; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">Enviar Centro Logístico</button>
+                            </div> 
+                            <div class="col-12 col-md-3 col-lg-3">
+                                <button id="amostras" onclick="send_to_samples(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b05574; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="CL888">Enviar Arm. Amostras</button>
+                            </div>
+                        </div>';
+            }else if($parm == 2){
+                $value = '<div class="row">        
+                            <div class="col-12 col-md-3 col-lg-3">
+                                <button id="choose_palets" onclick="choose_palets()" type="button" class="btn btn-dark" style="width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">Picar Palete</button>
+                            </div>
+                            <div class="col-12 col-md-3 col-lg-3">
+                                <button onclick="send_to_factory()" type="button" class="btn btn-info" style="width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">Enviar Arm. Fábrica</button>
+                            </div>
+                            <div class="col-12 col-md-3 col-lg-3">
+                                <button onclick="send_to_logistic()" type="button" class="btn btn-light" style="background-color:teal; color:white; border-color:teal; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">Enviar Centro Logístico</button>
+                            </div> 
+                            <div class="col-12 col-md-3 col-lg-3">
+                                <button id="amostras" onclick="send_to_samples(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b05574; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="CL888">Enviar Arm. Amostras</button>
+                            </div> 
+                            <div class="col-12 col-md-3 col-lg-3">
+                                <button id="divergePD" onclick="send_to_divergences_prod(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#FF7F50; color:white; border-color:#D15F40; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST553">Enviar Arm. Diverg. - Prod.</button>
+                            </div>
+                        </div>';
+            }
         
         }      
         else if($empresa == 3 || $empresa == 4){

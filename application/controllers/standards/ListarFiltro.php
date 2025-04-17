@@ -35,7 +35,7 @@ class ListarFiltro extends CI_Controller
                 $paletes=$this->GetPalets->producao($setor02);
 
                 $this->load->model('standards/others/Buttons');
-                $button=$this->Buttons->buttons_empresa(1);
+                $button=$this->Buttons->buttons_empresa(1,2);
 
                 $data = array( 
                     'zonas' => $zonas,                                          
@@ -60,7 +60,7 @@ class ListarFiltro extends CI_Controller
                 $paletes=$this->GetPalets->producao($setor02);
 
                 $this->load->model('standards/others/Buttons');
-                $button=$this->Buttons->buttons_empresa(2);
+                $button=$this->Buttons->buttons_empresa(2,2);
 
                 $data = array( 
                     'zonas' => $zonas,                                          
@@ -98,7 +98,7 @@ class ListarFiltro extends CI_Controller
                 $paletes=$this->GetPalets->armazem($setor,'>0');
 
                 $this->load->model('standards/others/Buttons');
-                $button=$this->Buttons->buttons_empresa(1);
+                $button=$this->Buttons->buttons_empresa(1,1);
 
                 $data = array( 
                     'zonas' => $zonas,                                          
@@ -126,7 +126,7 @@ class ListarFiltro extends CI_Controller
                 $paletes=$this->GetPalets->armazem($setor02,'>0');
 
                 $this->load->model('standards/others/Buttons');
-                $button=$this->Buttons->buttons_empresa(2);
+                $button=$this->Buttons->buttons_empresa(2,1);
 
                 $data = array( 
                     'zonas' => $zonas,                                          
@@ -559,7 +559,7 @@ class ListarFiltro extends CI_Controller
                 $paletes=$this->GetPalets->armazem($setor02,'>0');
 
                 $this->load->model('standards/others/Buttons');
-                $button=$this->Buttons->buttons_empresa(1);
+                $button=$this->Buttons->buttons_empresa(1,1);
 
                 $data = array( 
                     'zonas' => $zonas,                                          
@@ -581,7 +581,7 @@ class ListarFiltro extends CI_Controller
                 $paletes=$this->GetPalets->armazem($setor02,'>0');
 
                 $this->load->model('standards/others/Buttons');
-                $button=$this->Buttons->buttons_empresa(2);
+                $button=$this->Buttons->buttons_empresa(2,1);
 
                 $data = array( 
                     'zonas' => $zonas,                                          
@@ -753,7 +753,7 @@ class ListarFiltro extends CI_Controller
                $paletes=$this->GetPalets->producao($setor02);
 
                $this->load->model('standards/others/Buttons');
-               $button=$this->Buttons->buttons_empresa(1);
+               $button=$this->Buttons->buttons_empresa(1,1);
 
                 $data = array( 
                     'zonas' => $zonas,                                          
@@ -777,7 +777,7 @@ class ListarFiltro extends CI_Controller
                 $paletes=$this->GetPalets->producao($setor02);
 
                 $this->load->model('standards/others/Buttons');
-                $button=$this->Buttons->buttons_empresa(2);
+                $button=$this->Buttons->buttons_empresa(2,1);
 
                 $data = array( 
                     'zonas' => $zonas,                                          

@@ -339,7 +339,7 @@ class Paletizar_Carga extends CI_Model
                                             TotalDescontosNM, DescFinNM, TotalIliquidoNM, TotalIvaNM, TotalLiquidoNM, OperadorMOV, DataHoraMOV)".
                 "SELECT 0, '{$NumeroSP}', '', '02', '{$setorDestino}', 'PALETIZAÇÃO CLIENTE 2', '', {$NovaQtd}, {$NovaQtd}, '{$Referencia}', '{$Artigo}', '{$DescricaoArtigo}', '{$Formato}', 
                        '{$RefCor}', '{$Qual}', '{$TipoEmbalagem}', '{$Superficie}', '{$Lote}', '{$Calibre}', '{$Decoracao}', B.Acabamento, B.Coleccao, '{$TabEspessura}', '{$Referencia}', 
-                       '{$Unidade}', B.Preco, B.PrecoNM, '0', '00', 0, '{$Local}', 'Paletizar_Carga#movimento_stock_paletes_sql09', '{$NumeroPL}', '{$NumeroPL}', {$NumeroLinha}, B.PrecoNM*{$NovaQtd}, 0, 0, 
+                       '{$Unidade}', B.Preco, B.PrecoNM, '0', '00', 0, '{$Local}', 'Paletizar_Carga#movimento_stock_paletes_sql10', '{$NumeroPL}', '{$NumeroPL}', {$NumeroLinha}, B.PrecoNM*{$NovaQtd}, 0, 0, 
                        B.PrecoNM*{$NovaQtd}, 0, B.PrecoNM*{$NovaQtd}, B.PrecoNM*{$NovaQtd}, 0, 0, B.PrecoNM*{$NovaQtd}, 0, B.PrecoNM*{$NovaQtd},'{$user}', getdate()
                 FROM PlLDocs B
                 where B.NumeroDocumento='{$NumeroPL}'";
@@ -356,7 +356,7 @@ class Paletizar_Carga extends CI_Model
                                             TotalDescontosNM, DescFinNM, TotalIliquidoNM, TotalIvaNM, TotalLiquidoNM, OperadorMOV, DataHoraMOV)".
                    "SELECT 0, '{$NumeroSP}', '', '02', '{$setorCarga}', 'PALETIZAÇÃO CLIENTE 3', '', {$NovaQtd}, {$NovaQtd}, '{$Referencia}', '{$Artigo}', '{$DescricaoArtigo}', '{$Formato}', 
                           '{$RefCor}', '{$Qual}', '{$TipoEmbalagem}', '{$Superficie}', '{$Lote}', '{$Calibre}', '{$Decoracao}', B.Acabamento, B.Coleccao, '{$TabEspessura}', '{$Referencia}', 
-                          '{$Unidade}', B.Preco, B.PrecoNM, '0', '00', 0, '{$Local}', 'Paletizar_Carga#movimento_stock_paletes_sql09', '{$DocPL}', '{$DocPL}', {$LinhaPL}, B.PrecoNM*{$NovaQtd}, 0, 0, 
+                          '{$Unidade}', B.Preco, B.PrecoNM, '0', '00', 0, '{$Local}', 'Paletizar_Carga#movimento_stock_paletes_sql11', '{$DocPL}', '{$DocPL}', {$LinhaPL}, B.PrecoNM*{$NovaQtd}, 0, 0, 
                           B.PrecoNM*{$NovaQtd}, 0, B.PrecoNM*{$NovaQtd}, B.PrecoNM*{$NovaQtd}, 0, 0, B.PrecoNM*{$NovaQtd}, 0, B.PrecoNM*{$NovaQtd},'{$user}', getdate()
                     FROM PlLDocs B
                     where B.NumeroDocumento='{$DocPL}' and {$flag}=1";
@@ -372,7 +372,7 @@ class Paletizar_Carga extends CI_Model
                                             TotalDescontosNM, DescFinNM, TotalIliquidoNM, TotalIvaNM, TotalLiquidoNM, OperadorMOV, DataHoraMOV)".
                    "SELECT 0, '{$NumeroSP}', '', '02', '{$setorCarga}', 'PALETIZAÇÃO CLIENTE 3', '', {$NovaQtd}, {$NovaQtd}, '{$Referencia}', '{$Artigo}', '{$DescricaoArtigo}', '{$Formato}', 
                           '{$RefCor}', '{$Qual}', '{$TipoEmbalagem}', '{$Superficie}', '{$Lote}', '{$Calibre}', '{$Decoracao}', B.Acabamento, B.Coleccao, '{$TabEspessura}', '{$Referencia}', 
-                          '{$Unidade}', B.Preco, B.PrecoNM, '0', '00', 0, '{$Local}', 'Paletizar_Carga#movimento_stock_paletes_sql09', '{$DocPL}', '{$DocPL}', {$LinhaPL}, B.PrecoNM*{$NovaQtd}, 0, 0, 
+                          '{$Unidade}', B.Preco, B.PrecoNM, '0', '00', 0, '{$Local}', 'Paletizar_Carga#movimento_stock_paletes_sql12', '{$DocPL}', '{$DocPL}', {$LinhaPL}, B.PrecoNM*{$NovaQtd}, 0, 0, 
                           B.PrecoNM*{$NovaQtd}, 0, B.PrecoNM*{$NovaQtd}, B.PrecoNM*{$NovaQtd}, 0, 0, B.PrecoNM*{$NovaQtd}, 0, B.PrecoNM*{$NovaQtd},'{$user}', getdate()
                     FROM PlLDocs B
                     where B.NumeroDocumento='{$DocPL}' and {$flag}=2";

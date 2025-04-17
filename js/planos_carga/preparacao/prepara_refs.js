@@ -922,48 +922,47 @@ function atualiza_lotesConsumidos(selected){
 /*GRAVAR DADOS NA BD*/
 function confirm_paletizar(tblPL,tblLoc,tblLote,tblAfet){    
 
-    if (tblAfet.length > 0) {        
-        tblLote.forEach(consumidoRow => {
-            let lote = consumidoRow.Lote;
-            let calibre = consumidoRow.Calibre;
+    if (tblAfet.length > 0) {
 
-            // Check if lote and calibre exist in "Paletes a Paletizar" and "Lotes Afetados"
-            let existsInPaletes = tblPL.some(paleteRow => paleteRow.Lote === lote && paleteRow.Calibre === calibre);
-            let existsInLotesAfetados = tblAfet.some(loteAfetadoRow => loteAfetadoRow.Lote === lote && loteAfetadoRow.Calibre === calibre);
-
-            if (!existsInPaletes || !existsInLotesAfetados) {
-                
+        // Verifica se existe alguma linha com mismatch
+            let hasMismatch = tblLote.some(consumidoRow => {
+                let lote = consumidoRow.Lote;
+                let calibre = consumidoRow.Calibre;
+        
+                let existsInPaletes = tblPL.some(paleteRow => paleteRow.Lote === lote && paleteRow.Calibre === calibre);
+                let existsInLotesAfetados = tblAfet.some(loteAfetadoRow => loteAfetadoRow.Lote === lote && loteAfetadoRow.Calibre === calibre);
+        
+                return !existsInPaletes || !existsInLotesAfetados;
+            });
+        
+            if (hasMismatch) {
                 $('#current_count').text(0);
-
-                $('#obs-stk').keyup(function() {                        
-                    var characterCount = $(this).val().length,
-                    current_count = $('#current_count'),
-                    maximum_count = $('#maximum_count'),
-                    count = $('#count');    
-                    current_count.text(characterCount);  
-                    
-                    if(parseInt(characterCount) > 255){
+        
+                // Garante que só adicionas o handler uma vez
+                $('#obs-stk').off('keyup').on('keyup', function () {
+                    var characterCount = $(this).val().length;
+                    $('#current_count').text(characterCount);
+        
+                    if (characterCount > 255) {
                         $('#current_count').css('color', 'red');
-                    }else{
+                    } else {
                         $('#current_count').css('color', 'black');
                     }
                 });
-            
-                // Handle the mismatch - for example, by logging it or highlighting the row                
-                setTimeout(function () {
+        
+                setTimeout(() => {
                     $("#lotes_diff").modal();
                 }, 350);
         
-                setTimeout(function () {
+                setTimeout(() => {
                     $('#obs-stk').trigger('focus');
                 }, 850);
-            }else{
+            } else {
                 save_palletize();
             }
-        });    
-    }else{
-        save_palletize();
-    }
+        } else {
+            save_palletize();
+        }        
 }
 
 function save_palletize(){    
@@ -1012,7 +1011,7 @@ function palletize(obs,codigomotivo){
         setorDestino='CL006';
         setorCarga='ST017';
     }
-    
+        
     $.ajax({
         type: "POST",
         url: "http://127.0.0.1/wyipist-fusion/planos_carga/preparacao/PaletizarCarga/paletizar_carga/"+serie+"/"+flag,
@@ -1023,7 +1022,6 @@ function palletize(obs,codigomotivo){
             motivo: mt,
             codigomotivo: codigomotivo,
             obs: obs,
-            serie: serie,
             serieEmp: serieEmp,
             seriePL: seriePL,
             setorDestino: setorDestino,
@@ -1038,7 +1036,7 @@ function palletize(obs,codigomotivo){
                 toastr["success"]("Dados gravados com Sucesso");                                    
                 $(".card-footer .row .btn").prop("disabled", false);
                 $(".card-header .btn").prop("disabled", false);
-                $(".modal-footer .btn").prop("disabled", false);
+                $(".modal-footer .btn").prop("disabled", true);
                 if(parseFloat(tableLinha.getData()[0]['Quantidade']) === parseFloat(tableLinha.getData()[0]['QtdPaletizada'])){
                     // Construct the URL based on the PHP code you provided
                     window.history.back();
@@ -1108,7 +1106,11 @@ function cancell_sel_paletes(){
                 }
             }
         }
-        //alert(selected);
+        // Remover duplicados com base no campo 'DocPL'
+        selected = selected.filter((item, index, self) =>
+            index === self.findIndex((t) => t.DocPL === item.DocPL)
+        );
+        //alert(selected);        
         valida_anulacao(selected);            
 }
 
