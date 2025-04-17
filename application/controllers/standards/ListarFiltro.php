@@ -606,7 +606,7 @@ class ListarFiltro extends CI_Controller
             if($emp == 'CERAGNI'){                
                 $tipoDoc='GG';
                 //$serie='CG';                    
-                $serie = '\'CG\', \'A\'';   
+                $serie = '\'CG\', \'ACG\'';   
                 $estado='P';                                    
                 $carga=$this->Preparacao_Carga->getPreparacaoCarga($tipoDoc,$serie,$estado);
 

@@ -63,7 +63,7 @@ class PreparacaoCarga extends CI_Controller
                 case 1:
                     $tipoDoc='GG';
                     //$serie='CG';                    
-                    $serie = '\'CG\', \'A\'';    
+                    $serie = '\'CG\', \'ACG\'';    
                     $estado='P';                   
                     $this->load->model('planos_carga/preparacao/Preparacao_Carga');
                     $carga=$this->Preparacao_Carga->getPreparacaoCarga($tipoDoc,$serie,$estado); 
@@ -91,7 +91,7 @@ class PreparacaoCarga extends CI_Controller
                 case 3:
                     $tipoDoc='GG';
                     //$serie='CG';                    
-                    $serie = '\'CG\', \'A\'';    
+                    $serie = '\'CG\', \'ACG\'';    
                     $estado='P';
                     $this->load->model('planos_carga/preparacao/Preparacao_Carga');
                     $carga=$this->Preparacao_Carga->getPreparacaoCarga($tipoDoc,$serie,$estado); 
@@ -109,7 +109,7 @@ class PreparacaoCarga extends CI_Controller
                 case 4:
                     $tipoDoc='GG';
                     //$serie='CG';                    
-                    $serie = '\'CG\', \'A\'';    
+                    $serie = '\'CG\', \'ACG\'';    
                     $estado='P';     
                     $this->load->model('planos_carga/preparacao/Preparacao_Carga');
                     $carga=$this->Preparacao_Carga->getPreparacaoCarga($tipoDoc,$serie,$estado); 
