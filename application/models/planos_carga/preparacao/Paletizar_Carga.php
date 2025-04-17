@@ -320,11 +320,11 @@ class Paletizar_Carga extends CI_Model
                                         QuantidadeUnidade, Referencia, Artigo, DescricaoArtigo, Formato, RefCor, Qual, TipoEmbalagem, Superficie, Lote, Calibre,
                                         Decoracao, Acabamento, Coleccao, TabEspessura, RefP, Unidade, Preco, PrecoNM, Desconto, Iva, TaxaIva,
                                         Local, KeyScript, Palete, DocPL, LinhaPL, TotalMercadoria, TotalDescontos, DescFin, TotalIliquido, TotalIva, TotalLiquido, TotalMercadoriaNM,
-                                        TotalDescontosNM, DescFinNM, TotalIliquidoNM, TotalIvaNM, TotalLiquidoNM, OperadorMOV, DataHoraMOV)".
+                                        TotalDescontosNM, DescFinNM, TotalIliquidoNM, TotalIvaNM, TotalLiquidoNM, OperadorMOV, DataHoraMOV, PaleteCliente, DocGG)".
                 "SELECT 0, '{$NumeroSP}', '', '12', '{$Sector}', 'PALETIZAÇÃO CLIENTE 2', '', {$NovaQtd}, {$NovaQtd}, '{$Referencia}', '{$Artigo}', '{$DescricaoArtigo}', '{$Formato}', 
                        '{$RefCor}', '{$Qual}', '{$TipoEmbalagem}', '{$Superficie}', '{$Lote}', '{$Calibre}', '{$Decoracao}', B.Acabamento, B.Coleccao, '{$TabEspessura}', '{$Referencia}', 
                        '{$Unidade}', B.Preco, B.PrecoNM, '0', '00', 0, '{$Local}', 'Paletizar_Carga#movimento_stock_paletes_sql09', '{$DocPL}', '{$DocPL}', {$LinhaPL}, B.Preco*{$NovaQtd}, 0, 0, 
-                       B.PrecoNM*{$NovaQtd}, 0, B.PrecoNM*{$NovaQtd}, B.PrecoNM*{$NovaQtd}, 0, 0, B.PrecoNM*{$NovaQtd}, 0, B.PrecoNM*{$NovaQtd},'{$user}', getdate()
+                       B.PrecoNM*{$NovaQtd}, 0, B.PrecoNM*{$NovaQtd}, B.PrecoNM*{$NovaQtd}, 0, 0, B.PrecoNM*{$NovaQtd}, 0, B.PrecoNM*{$NovaQtd},'{$user}', getdate(), '{$NumeroPL}', '{$DocumentoCarga}'
                 FROM PlLDocs B
                 where B.NumeroDocumento='{$DocPL}'";
             //echo $sql09;
@@ -336,11 +336,11 @@ class Paletizar_Carga extends CI_Model
                                             QuantidadeUnidade, Referencia, Artigo, DescricaoArtigo, Formato, RefCor, Qual, TipoEmbalagem, Superficie, Lote, Calibre,
                                             Decoracao, Acabamento, Coleccao, TabEspessura, RefP, Unidade, Preco, PrecoNM, Desconto, Iva, TaxaIva,
                                             Local, KeyScript, Palete, DocPL, LinhaPL, TotalMercadoria, TotalDescontos, DescFin, TotalIliquido, TotalIva, TotalLiquido, TotalMercadoriaNM,
-                                            TotalDescontosNM, DescFinNM, TotalIliquidoNM, TotalIvaNM, TotalLiquidoNM, OperadorMOV, DataHoraMOV)".
+                                            TotalDescontosNM, DescFinNM, TotalIliquidoNM, TotalIvaNM, TotalLiquidoNM, OperadorMOV, DataHoraMOV, PaleteCliente, DocGG)".
                 "SELECT 0, '{$NumeroSP}', '', '02', '{$setorDestino}', 'PALETIZAÇÃO CLIENTE 2', '', {$NovaQtd}, {$NovaQtd}, '{$Referencia}', '{$Artigo}', '{$DescricaoArtigo}', '{$Formato}', 
                        '{$RefCor}', '{$Qual}', '{$TipoEmbalagem}', '{$Superficie}', '{$Lote}', '{$Calibre}', '{$Decoracao}', B.Acabamento, B.Coleccao, '{$TabEspessura}', '{$Referencia}', 
                        '{$Unidade}', B.Preco, B.PrecoNM, '0', '00', 0, '{$Local}', 'Paletizar_Carga#movimento_stock_paletes_sql10', '{$NumeroPL}', '{$NumeroPL}', {$NumeroLinha}, B.PrecoNM*{$NovaQtd}, 0, 0, 
-                       B.PrecoNM*{$NovaQtd}, 0, B.PrecoNM*{$NovaQtd}, B.PrecoNM*{$NovaQtd}, 0, 0, B.PrecoNM*{$NovaQtd}, 0, B.PrecoNM*{$NovaQtd},'{$user}', getdate()
+                       B.PrecoNM*{$NovaQtd}, 0, B.PrecoNM*{$NovaQtd}, B.PrecoNM*{$NovaQtd}, 0, 0, B.PrecoNM*{$NovaQtd}, 0, B.PrecoNM*{$NovaQtd},'{$user}', getdate(), '{$NumeroPL}', '{$DocumentoCarga}' 
                 FROM PlLDocs B
                 where B.NumeroDocumento='{$NumeroPL}'";
                     //echo $sql09;
@@ -353,11 +353,11 @@ class Paletizar_Carga extends CI_Model
                                             QuantidadeUnidade, Referencia, Artigo, DescricaoArtigo, Formato, RefCor, Qual, TipoEmbalagem, Superficie, Lote, Calibre,
                                             Decoracao, Acabamento, Coleccao, TabEspessura, RefP, Unidade, Preco, PrecoNM, Desconto, Iva, TaxaIva,
                                             Local, KeyScript, Palete, DocPL, LinhaPL, TotalMercadoria, TotalDescontos, DescFin, TotalIliquido, TotalIva, TotalLiquido, TotalMercadoriaNM,
-                                            TotalDescontosNM, DescFinNM, TotalIliquidoNM, TotalIvaNM, TotalLiquidoNM, OperadorMOV, DataHoraMOV)".
+                                            TotalDescontosNM, DescFinNM, TotalIliquidoNM, TotalIvaNM, TotalLiquidoNM, OperadorMOV, DataHoraMOV, PaleteCliente, DocGG)".
                    "SELECT 0, '{$NumeroSP}', '', '02', '{$setorCarga}', 'PALETIZAÇÃO CLIENTE 3', '', {$NovaQtd}, {$NovaQtd}, '{$Referencia}', '{$Artigo}', '{$DescricaoArtigo}', '{$Formato}', 
                           '{$RefCor}', '{$Qual}', '{$TipoEmbalagem}', '{$Superficie}', '{$Lote}', '{$Calibre}', '{$Decoracao}', B.Acabamento, B.Coleccao, '{$TabEspessura}', '{$Referencia}', 
                           '{$Unidade}', B.Preco, B.PrecoNM, '0', '00', 0, '{$Local}', 'Paletizar_Carga#movimento_stock_paletes_sql11', '{$DocPL}', '{$DocPL}', {$LinhaPL}, B.PrecoNM*{$NovaQtd}, 0, 0, 
-                          B.PrecoNM*{$NovaQtd}, 0, B.PrecoNM*{$NovaQtd}, B.PrecoNM*{$NovaQtd}, 0, 0, B.PrecoNM*{$NovaQtd}, 0, B.PrecoNM*{$NovaQtd},'{$user}', getdate()
+                          B.PrecoNM*{$NovaQtd}, 0, B.PrecoNM*{$NovaQtd}, B.PrecoNM*{$NovaQtd}, 0, 0, B.PrecoNM*{$NovaQtd}, 0, B.PrecoNM*{$NovaQtd},'{$user}', getdate(), '{$NumeroPL}', '{$DocumentoCarga}'
                     FROM PlLDocs B
                     where B.NumeroDocumento='{$DocPL}' and {$flag}=1";
                     //echo $sql11;
@@ -369,11 +369,11 @@ class Paletizar_Carga extends CI_Model
                                             QuantidadeUnidade, Referencia, Artigo, DescricaoArtigo, Formato, RefCor, Qual, TipoEmbalagem, Superficie, Lote, Calibre,
                                             Decoracao, Acabamento, Coleccao, TabEspessura, RefP, Unidade, Preco, PrecoNM, Desconto, Iva, TaxaIva,
                                             Local, KeyScript, Palete, DocPL, LinhaPL, TotalMercadoria, TotalDescontos, DescFin, TotalIliquido, TotalIva, TotalLiquido, TotalMercadoriaNM,
-                                            TotalDescontosNM, DescFinNM, TotalIliquidoNM, TotalIvaNM, TotalLiquidoNM, OperadorMOV, DataHoraMOV)".
+                                            TotalDescontosNM, DescFinNM, TotalIliquidoNM, TotalIvaNM, TotalLiquidoNM, OperadorMOV, DataHoraMOV, PaleteCliente, DocGG)".
                    "SELECT 0, '{$NumeroSP}', '', '02', '{$setorCarga}', 'PALETIZAÇÃO CLIENTE 3', '', {$NovaQtd}, {$NovaQtd}, '{$Referencia}', '{$Artigo}', '{$DescricaoArtigo}', '{$Formato}', 
                           '{$RefCor}', '{$Qual}', '{$TipoEmbalagem}', '{$Superficie}', '{$Lote}', '{$Calibre}', '{$Decoracao}', B.Acabamento, B.Coleccao, '{$TabEspessura}', '{$Referencia}', 
                           '{$Unidade}', B.Preco, B.PrecoNM, '0', '00', 0, '{$Local}', 'Paletizar_Carga#movimento_stock_paletes_sql12', '{$DocPL}', '{$DocPL}', {$LinhaPL}, B.PrecoNM*{$NovaQtd}, 0, 0, 
-                          B.PrecoNM*{$NovaQtd}, 0, B.PrecoNM*{$NovaQtd}, B.PrecoNM*{$NovaQtd}, 0, 0, B.PrecoNM*{$NovaQtd}, 0, B.PrecoNM*{$NovaQtd},'{$user}', getdate()
+                          B.PrecoNM*{$NovaQtd}, 0, B.PrecoNM*{$NovaQtd}, B.PrecoNM*{$NovaQtd}, 0, 0, B.PrecoNM*{$NovaQtd}, 0, B.PrecoNM*{$NovaQtd},'{$user}', getdate(), '{$NumeroPL}', '{$DocumentoCarga}'
                     FROM PlLDocs B
                     where B.NumeroDocumento='{$DocPL}' and {$flag}=2";
                     //echo $sql12;
@@ -384,12 +384,12 @@ class Paletizar_Carga extends CI_Model
                                           QuantidadeUnidade, Referencia, Artigo, DescricaoArtigo, Formato, RefCor, Qual, TipoEmbalagem, Superficie, Lote, Calibre,
                                           Decoracao, Acabamento, Coleccao, TabEspessura, RefP, Unidade, Preco, PrecoNM, Desconto, Iva, TaxaIva,
                                           Local, KeyScript, Palete, DocPL, LinhaPL, TotalMercadoria, TotalDescontos, DescFin, TotalIliquido, TotalIva, TotalLiquido, TotalMercadoriaNM,
-                                          TotalDescontosNM, DescFinNM, TotalIliquidoNM, TotalIvaNM, TotalLiquidoNM, OperadorMOV, DataHoraMOV,UnidadeStock,RelUni,FactorRelUni,DataStockMOV,Status,Changed,QuantidadeUnStock)".
+                                          TotalDescontosNM, DescFinNM, TotalIliquidoNM, TotalIvaNM, TotalLiquidoNM, OperadorMOV, DataHoraMOV,UnidadeStock,RelUni,FactorRelUni,DataStockMOV,Status,Changed,QuantidadeUnStock,PaleteCliente,DocGG)".
                    "SELECT LinhaDocumento, 'SP', NumeroDocumento, Documento, TipoMovimento, Sector, NumeroSerieInferior, NumeroSerieSuperior, Quantidade, QuantidadeUnidade, Referencia, 
                            Artigo, DescricaoArtigo, Formato, RefCor, Qual, TipoEmbalagem, Superficie, Lote, Calibre, Decoracao, Acabamento, Coleccao, TabEspessura, RefP, 
                            Unidade, Preco, PrecoNM, Desconto, Iva, TaxaIva, Local, KeyScript, Palete, DocPL, LinhaPL, TotalMercadoria, TotalDescontos, DescFin, TotalIliquido, TotalIva, 
                            TotalLiquido, TotalMercadoriaNM, TotalDescontosNM, DescFinNM, TotalIliquidoNM, TotalIvaNM, TotalLiquidoNM, OperadorMOV, DataHoraMOV, Unidade, CONCAT(Unidade,' = ',Unidade), 1, 
-                           DataHoraMOV, 'SP', 1, Quantidade
+                           DataHoraMOV, 'SP', 1, Quantidade, PaleteCliente, DocGG
                     FROM ".$tbl01."";
                     //echo $sql09;
             $this->db->query($sql13);
@@ -644,6 +644,11 @@ class Paletizar_Carga extends CI_Model
                 'type' => 'DATETIME',
                 'null' => TRUE,
             ),
+            'PaleteCliente' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '17',
+                'null' => TRUE,
+            )
         );
         // Adiciona os campos à tabela
         $this->dbforge->add_field($fields);
