@@ -1106,10 +1106,6 @@ function cancell_sel_paletes(){
                 }
             }
         }
-        // Remover duplicados com base no campo 'DocPL'
-        selected = selected.filter((item, index, self) =>
-            index === self.findIndex((t) => t.DocPL === item.DocPL)
-        );
         //alert(selected);        
         valida_anulacao(selected);            
 }
@@ -1188,7 +1184,7 @@ function avanca_anualacao(tblPL,tblLoc,tblLote,tblAfet){
     toastr.clear();
     toastr["info"]("A gravar dados...");  
     $("#modal_buttons .btn").prop("disabled", true);
-
+   
     $.ajax({
         type: "POST",
         url: "http://127.0.0.1/wyipist-fusion/planos_carga/anulacao/AnulacaoCarga/anula_palete",

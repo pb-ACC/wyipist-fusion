@@ -318,9 +318,7 @@ class Anulacao_Carga extends CI_Model
         $this->db->close();         
     }
 
-    /*
-    * CREATE TABLEs
-    */
+    /* CREATE TABLEs */
     public function createTBL_exesp($tbl){
                         
         $this->dbforge->drop_table($tbl,TRUE);
