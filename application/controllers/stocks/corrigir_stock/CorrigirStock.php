@@ -68,4 +68,23 @@ class CorrigirStock extends CI_Controller
             redirect('start', 'refresh');
         }
     }
+
+    function agrupado(){
+
+        $this->load->helper('url');
+        $this->load->library('session');
+
+        if($this->session->userdata('logged_in')) {
+
+            $session_data = $this->session->userdata('logged_in');
+
+            $this->load->view('structure/header', $session_data);
+            $this->load->view('structure/side_menu', $session_data);
+            $this->load->view('template/stocks/corrigir_stock/corrigir_stock', $session_data);
+            $this->load->view('structure/footer', $session_data);
+
+        }else{
+            redirect('start', 'refresh');
+        }
+    }
 }

@@ -123,32 +123,14 @@
                             </ul>
                         </li>
 
-                        <li id="menu-stk01" class="nav-item">
-                            <a id="menu-stk02" href="#" class="nav-link">
+                        <li id="corrige-stk01" class="nav-item">
+                            <a id="corrige-stk02" href="<?=base_url();?>stocks/stock_correction" class="nav-link">
                                 <i class="fas fa-edit nav-icon"></i>
-                                <p> Correção de Stock <i class="right fas fa-angle-left"></i> </p>
+                                <p>  Correção de Stock</p>
                             </a>
-                            <ul id="opcoes-stk1" class="nav nav-treeview" style="display: none;">
-                                <li id="list-stk01" class="nav-item">
-                                    <a id="list-stk02" href="<?=base_url();?>stocks/stock_correction/positive" class="nav-link">
-                                    <i class="fas fa-plus-circle nav-icon nav-child-indent"></i>
-                                        <p>Positivo</p>
-                                    </a>
-                                </li>                  
-                                <li id="list-stk03" class="nav-item">
-                                <a id="list-stk04" href="<?=base_url();?>stocks/stock_correction/negative" class="nav-link">
-                                    <i class="fas fa-minus-circle nav-icon nav-child-indent"></i>
-                                        <p>Negativo</p>
-                                    </a>
-                                </li>  
-                                <li id="list-stk05" class="nav-item">
-                                <a id="list-stk06" href="<?=base_url();?>stocks/stock_correction/zero" class="nav-link">
-                                    <i class="fab fa-creative-commons-zero nav-icon nav-child-indent"></i>
-                                        <p>Zero</p>
-                                    </a>
-                                </li>                  
-                            </ul>
-                        </li>
+                        </li>  
+                        
+                        
                         <?php if($user_type == 1 || $user_type == 2){ ?>
                         <li id="menu-list01" class="nav-item">
                             <a id="menu-list02" href="#" class="nav-link">

@@ -246,4 +246,23 @@ class Buttons extends CI_Model
          }
         return $value;
     }
+
+    public function buttons_empresa_corrigir_stock($parm){
+        //echo $empresa.'sdfvsdv';
+        $value='';
+        if($parm == 1){
+            $value='<div class="row">        
+                    <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                    <button id="save_paletes" onclick="save_paletes()" type="button" class="btn btn-dark" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Filtrar Dados</button>
+                    </div>
+                    </div>';
+        }else if($parm == 2){
+            $value='<div class="row">       
+                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                   <button onclick="cancel_palette()" type="button" class="btn btn-success" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Continuar</button>
+                   </div> 
+                   </div>';
+        }
+        return $value;
+    }
 }
