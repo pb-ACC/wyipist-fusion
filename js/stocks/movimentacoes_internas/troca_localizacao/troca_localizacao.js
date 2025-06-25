@@ -537,7 +537,7 @@ function listLocal(data){
         
         dataAM_CT=data;
         for (let i = 0; i < dataAM_CT.length; i++) {
-                if(dataAM_CT[i]['Sector'] != 'CL888'){ 
+                if(dataAM_CT[i]['Sector'] != 'FB888'){ 
                     dataAM_CT.splice(i, 1);
                     i--; // Ajustar o índice após a remoção
                 }                        
@@ -1326,7 +1326,7 @@ function radioButtons(){
                 text2='Tem a certeza que pretende continuar?';
                 action='radioButtons';
                 xposition='center';            
-                campo='FB008';
+                campo='FB888';
                 valor=this;
                 tblPL=[];
                 tblLoc=[];
@@ -1337,7 +1337,7 @@ function radioButtons(){
                 no_change=1;
                 $('.form-check-input').prop('checked', false); // Unchecks it    
                 $(this).prop('checked', true); // Checks it             
-                newSector='FB008';
+                newSector='FB888';
                 change_sector_emp(newSector); 
                 no_change=0;                                   
             }                

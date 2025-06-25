@@ -529,7 +529,7 @@ function listLocal(data){
 
         dataAM_CT=data;
         for (let i = 0; i < dataAM_CT.length; i++) {
-                if(dataAM_CT[i]['Sector'] != 'CL888'){ 
+                if(dataAM_CT[i]['Sector'] != 'FB888'){ 
                     dataAM_CT.splice(i, 1);
                     i--; // Ajustar o índice após a remoção
                 }                        

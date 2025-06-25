@@ -42,7 +42,7 @@ class Buttons extends CI_Model
                                 <button onclick="send_to_logistic()" type="button" class="btn btn-light" style="background-color:teal; color:white; border-color:teal; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">Enviar Centro Logístico</button>
                             </div> 
                             <div class="col-12 col-md-3 col-lg-3">
-                                <button id="amostras" onclick="send_to_samples(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b05574; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="CL888">Enviar Arm. Amostras</button>
+                                <button id="amostras" onclick="send_to_samples(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b05574; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="FB888">Enviar Arm. Amostras</button>
                             </div>
                         </div>';
             }else if($parm == 2){
@@ -57,7 +57,7 @@ class Buttons extends CI_Model
                                 <button onclick="send_to_logistic()" type="button" class="btn btn-light" style="background-color:teal; color:white; border-color:teal; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">Enviar Centro Logístico</button>
                             </div> 
                             <div class="col-12 col-md-3 col-lg-3">
-                                <button id="amostras" onclick="send_to_samples(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b05574; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="CL888">Enviar Arm. Amostras</button>
+                                <button id="amostras" onclick="send_to_samples(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b05574; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="FB888">Enviar Arm. Amostras</button>
                             </div> 
                             <div class="col-12 col-md-3 col-lg-3">
                                 <button id="divergePD" onclick="send_to_divergences_prod(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#FF7F50; color:white; border-color:#D15F40; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST553">Enviar Arm. Diverg. - Prod.</button>
@@ -121,7 +121,7 @@ class Buttons extends CI_Model
                             <button onclick="send_to_logistic()" type="button" class="btn btn-light" style="background-color:teal; color:white; border-color:teal; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">Enviar Centro Logístico</button>
                         </div> 
                         <div class="col-sm-12 col-sm-push-2 col-xs-12 col-md-2 col-md-push-2 col-lg-2 col-lg-push-2">
-                            <button id="amostras" onclick="send_to_samples(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b05574; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="CL888">Enviar Arm. Amostras</button>
+                            <button id="amostras" onclick="send_to_samples(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b05574; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="FB888">Enviar Arm. Amostras</button>
                         </div>                                                  
                         <div class="col-sm-12 col-sm-push-2 col-xs-12 col-md-2 col-md-push-2 col-lg-2 col-lg-push-2">
                             <button id="desclas" onclick="send_to_disqualified_cl(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b6a3f7; color:white; border-color:#A99ED6; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="CL777">Enviar Arm. Mat. Desclass.</button>
@@ -155,10 +155,10 @@ class Buttons extends CI_Model
                    </div> 
 
                     <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
-                    <button id="desclas" onclick="send_to_disqualified(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b6a3f7; color:white; border-color:#A99ED6; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="CL888">Enviar Arm. Mat. Desclass.</button>
+                    <button id="desclas" onclick="send_to_disqualified(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b6a3f7; color:white; border-color:#A99ED6; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST777">Enviar Arm. Mat. Desclass.</button>
                     </div> 
                     <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
-                    <button id="reclama" onclick="send_to_complaints(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#dabf90; color:white; border-color:#C1B88A; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="CL888">Enviar Arm. Reclamações</button>
+                    <button id="reclama" onclick="send_to_complaints(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#dabf90; color:white; border-color:#C1B88A; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST666">Enviar Arm. Reclamações</button>
                     </div> 
                     <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
                     <button id="rehabCG" onclick="send_to_rehabilitates(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#7f4f24; color:white; border-color:#6f441f; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST300">Enviar Arm. Reabilitado</button>

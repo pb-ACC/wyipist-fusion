@@ -111,3 +111,13 @@ $route['load_plans/correction_of_load_preparation']='planos_carga/correcao/Corre
 $route['users/all-users'] = 'users/GetUsers';
 $route['users/add-user'] = 'users/ManageUsers';
 $route['users/add-user/submit'] = 'users/ManageUsers/addUsers';
+
+
+
+/*
+| -------------------------------------------------------------------------
+| COMERCIAL
+| -------------------------------------------------------------------------
+*/
+$route['commercial/terminal_flash'] = 'comercial/flash/TerminalFlash';
+$route['commercial/terminal_flash/(:any)'] = 'comercial/flash/TerminalFlash/getStock/$1';

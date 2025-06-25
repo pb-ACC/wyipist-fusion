@@ -50,7 +50,7 @@ class ListarFiltro extends CI_Controller
                 $this->load->model('standards/others/RadioButtons');
                 $radio=$this->RadioButtons->escolha_setores_empresa(2,$user_type);
 
-                $setor01 = '\'FB003\', \'CL001\', \'CL888\'';
+                $setor01 = '\'FB003\', \'CL001\', \'FB888\'';
                 $this->load->model('standards/others/GetZonas');                
                 $zonas=$this->GetZonas->zonaCelula($empresa,$emp,$setor01,'FB');
                 
@@ -115,7 +115,7 @@ class ListarFiltro extends CI_Controller
 
                 //$setor = '\''.$newSector.'\'';                                              
                 //$setor01 = '\''.$newSector.'\', \'ST555\', \'CL001\', \'CL888\'';  
-                $setor01 = '\''.$newSector.'\', \'CL001\', \'CL888\'';  
+                $setor01 = '\''.$newSector.'\', \'CL001\', \'FB888\'';  
                 $this->load->model('standards/others/GetZonas');                
                 $zonas=$this->GetZonas->zonaCelula($empresa,$emp,$setor01,$newSector);
 
@@ -180,7 +180,7 @@ class ListarFiltro extends CI_Controller
                 $radio=$this->RadioButtons->escolha_setores_empresa(2,$user_type);
 
                          
-                $setor01 = '\'FB003\', \'CL001\', \'CL888\''; 
+                $setor01 = '\'FB003\', \'CL001\', \'FB888\''; 
                 $this->load->model('standards/others/GetZonas');                
                 $zonas=$this->GetZonas->zonaCelula($empresa,$emp,$setor01,$newSector);
 
@@ -768,7 +768,7 @@ class ListarFiltro extends CI_Controller
                 $this->load->model('standards/others/RadioButtons');
                 $radio=$this->RadioButtons->escolha_setores_empresa(2,$user_type);
 
-                $setor01 = '\'FB003\', \'CL001\', \'CL888\'';
+                $setor01 = '\'FB003\', \'CL001\', \'FB888\'';
                 $this->load->model('standards/others/GetZonas');                
                 $zonas=$this->GetZonas->zonaCelula($empresa,$emp,$setor01,'FB');
                 
@@ -830,7 +830,7 @@ class ListarFiltro extends CI_Controller
                 $this->load->model('standards/others/RadioButtons');
                 $radio=$this->RadioButtons->escolha_setores_empresa(2,$user_type);
 
-                $setor01 = '\'FB003\', \'CL001\', \'CL888\'';
+                $setor01 = '\'FB003\', \'CL001\', \'FB888\'';
                 $this->load->model('standards/others/GetZonas');                
                 $zonas=$this->GetZonas->zonaCelula($empresa,$emp,$setor01,'FB');
                 

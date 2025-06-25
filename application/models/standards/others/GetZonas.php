@@ -17,7 +17,7 @@ class GetZonas extends CI_Model
 
         if($emp == 'CERTECA'){
             $sql = "SELECT Codigo,Sector,Zona,Celula,Fila,Posicao,case when Empresa='CERAGNI' then Codigo else CONCAT(Zona,Celula) end CodigoBarras, cast(0 as int) Sel,
-                       Identificador, (row_number() over(order by Codigo asc)-1) id              
+                       Identificador, (row_number() over(order by zona, celula, fila, posicao asc)-1) id              
                 FROM zx_Locais 
                 WHERE Empresa in ({$empresa}) and Sector in ({$setor}) and isnull(Zona,'')<>'' and isnull(Celula,'') not in ('','*')";
         }

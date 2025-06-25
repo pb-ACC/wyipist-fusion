@@ -46,7 +46,7 @@ class ListarSetores extends CI_Controller
                     break;
                 case 2:
                     $empresa='\'CERTECA\''; 
-                    $setor='\'FB003\', \'CL001\', \'CL888\'';                                 
+                    $setor='\'FB003\', \'CL001\', \'FB888\'';                                 
                     echo json_encode($this->GetZonas->zonaCelula($empresa,'CERTECA',$setor,'FB'));
                     break;
                 case 3:                    
