@@ -127,6 +127,7 @@ function selectedPalets(data){
                 let row01 = cell.getRow();
                 // Deleta a linha
                 row01.delete();
+                selectedData=tableSelPaletes.getData();
             }}
         ]
     });
@@ -190,7 +191,31 @@ function save_paletes(){
                 } else {                    
                     tableSelPaletes.clearAlert();
                     //selectedPalets(tablePaletes.getSelectedData());
-                    selectedData.push(...data['paletes']); // espalha os objetos
+
+                    
+                    let paletes = data['paletes'];
+
+                    let ultimaComQuantidade = null;
+
+                    // Percorre de trás para frente para encontrar o último com Quantidade > 0
+                    for (let i = paletes.length - 1; i >= 0; i--) {
+                        if (paletes[i].Quantidade > 0) {
+                            ultimaComQuantidade = paletes[i];
+                            break;
+                        }
+                    }
+
+                    // Se encontrou algum com quantidade > 0, usa esse
+                    // Caso contrário, usa o último do array (mesmo que quantidade seja 0)
+                    let resultado = ultimaComQuantidade ?? paletes[paletes.length - 1];
+
+                    // Adiciona ao selectedData se houver resultado
+                    if (resultado) {
+                        selectedData.push(resultado);
+                    }
+                    
+
+                    //selectedData.push(...data['paletes']); // espalha os objetos
                     console.log(selectedData);
     
                     selectedPalets(selectedData);

@@ -8,20 +8,50 @@ $("#flash02").addClass("active");
 
 let tableplanoGG, tableSelplanoGG, tableLocal_fabric, tableLocal_logistic, tableLocal_warehouse, selectedData=[], OG, dt, dtt, count=0, count2=0, count3=0, count4=0, local='';
 let type='', title='', text='', text1='', text2='', action='', xposition='', campo='',valor='',tblPL=[], tblLoc=[], tblLote=[], tblAfet=[];
-let planoCarga=[], planoCargaOG=[], marosca=[];
+let planoCarga=[], planoCargaOG=[], marosca=[], data=[], emp='';
 
 toastr.clear();
 toastr["info"]("A carregar empresas...");
 //$("#choose_planoCarga").prop("disabled",true);
 
 $( document ).ready(function() {
-    const data = [
-    { id: 1, nome: "Ceragni" },
-    { id: 2, nome: "Certeca" },
-    { id: 3, nome: "Ambas" }
-    ];
-    
-    tableplanoGG= new Tabulator("#empresas-table", {
+        
+    if (codigoempresa === 1){   
+        $(".card-header").empty();
+        let html = '<h3 class="card-title">Listagem <i>Stock</i></h3>'+
+                    '<div class="pull pull-right" style="float: right;">'+									
+                    '<button class="btn btn-light btn-sm btn-flat" title="Atualizar Página" onclick="location.reload();" style="margin-right: 10px; float: right;">Atualizar Página'+
+                    '</button>'+
+                    '</div>';
+        $(".card-header").append(html);
+
+        emp='Ceragni';
+        document.cookie = `empresa=${emp}; path=/`;
+        window.location.href = "terminal_flash/"+emp;
+    }
+    else if (codigoempresa === 2){
+        $(".card-header").empty();
+        let html = '<h3 class="card-title">Listagem <i>Stock</i></h3>'+
+                    '<div class="pull pull-right" style="float: right;">'+									
+                    '<button class="btn btn-light btn-sm btn-flat" title="Atualizar Página" onclick="location.reload();" style="margin-right: 10px; float: right;">Atualizar Página'+
+                    '</button>'+
+                    '</div>';
+        $(".card-header").append(html);
+
+        emp='Certeca';
+        document.cookie = `empresa=${emp}; path=/`;
+        window.location.href = "terminal_flash/"+emp;
+    }
+    else{
+
+        data = [ { id: 1, nome: "Ceragni" }, { id: 2, nome: "Certeca" }, { id: 3, nome: "Ambas" } ];
+        drawTable(data);
+    }
+});
+
+function drawTable(data){
+        $("#box-empresa").show();
+        tableplanoGG= new Tabulator("#empresas-table", {
         data:data, //assign data to table                 
         selectableRows:true, //make rows selectable
         headerSort:false, //disable header sort for all columns
@@ -70,8 +100,8 @@ $( document ).ready(function() {
             }
         },        
         columns:[
-            {title:"", field:"nome", align:"center", headerFilter:"input"},  
-            {title:"ID", field:"id", align:"center", headerFilter:"input",visible:false},     
+            {title:"", field:"nome", align:"center",headerSort:false},  
+            {title:"ID", field:"id", align:"center",visible:false},     
         ]
     });
 
@@ -90,4 +120,5 @@ $( document ).ready(function() {
         document.cookie = `empresa=${emp}; path=/`;
         window.location.href = "terminal_flash/"+emp;
     });
-});
+}
+
