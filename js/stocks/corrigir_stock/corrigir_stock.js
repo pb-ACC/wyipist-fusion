@@ -203,17 +203,27 @@ function save_paletes(){
 
                     for (let i = 0; i < paletes.length; i++) {
                         const item = paletes[i];
-                        const docPL = item.DocPL;
+                        const docPL = item.DocPL ?? "";      // agora aceita vazio
+                        const sector = item.Sector ?? "";    // agrupa também por setor
+                        const local = item.Local;
+                        const chave = `${docPL}||${sector}`; // chave composta
 
-                        if (!docPLMap.has(docPL)) {
-                            docPLMap.set(docPL, item);
+                        const existente = docPLMap.get(chave);
+
+                        if (!existente) {
+                            docPLMap.set(chave, item);
                         } else {
-                            const existente = docPLMap.get(docPL);
-                            if (!existente.Local && item.Local) {
-                                docPLMap.set(docPL, item);
-                            } else if (!existente.Local && !item.Local) {
-                                docPLMap.set(docPL, item); // mais recente
+                            const existenteTemLocal = !isVazio(existente.Local);
+                            const itemTemLocal = !isVazio(local);
+
+                            if (itemTemLocal) {
+                                // Substitui SEMPRE se o novo tem Local
+                                docPLMap.set(chave, item);
+                            } else if (!existenteTemLocal) {
+                                // Ambos sem local → fica o mais recente
+                                docPLMap.set(chave, item);
                             }
+                            // Se existente já tem Local e item não → mantém o existente
                         }
                     }
 
