@@ -17,40 +17,24 @@ toastr["info"]("A carregar empresas...");
 $( document ).ready(function() {
         
     if (codigoempresa === 1){   
-        $(".card-header").empty();
-        let html = '<h3 class="card-title">Listagem <i>Stock</i></h3>'+
-                    '<div class="pull pull-right" style="float: right;">'+									
-                    '<button class="btn btn-light btn-sm btn-flat" title="Atualizar Página" onclick="location.reload();" style="margin-right: 10px; float: right;">Atualizar Página'+
-                    '</button>'+
-                    '</div>';
-        $(".card-header").append(html);
-
-        emp='Ceragni';
-        document.cookie = `empresa=${emp}; path=/`;
-        window.location.href = "terminal_flash/"+emp;
+        data = [ { id: 1, nome: "Ceragni", sel: 1}, { id: 2, nome: "Certeca", sel: 0 }, { id: 3, nome: "Ambas", sel: 0 } ];  
     }
     else if (codigoempresa === 2){
-        $(".card-header").empty();
-        let html = '<h3 class="card-title">Listagem <i>Stock</i></h3>'+
-                    '<div class="pull pull-right" style="float: right;">'+									
-                    '<button class="btn btn-light btn-sm btn-flat" title="Atualizar Página" onclick="location.reload();" style="margin-right: 10px; float: right;">Atualizar Página'+
-                    '</button>'+
-                    '</div>';
-        $(".card-header").append(html);
-
-        emp='Certeca';
-        document.cookie = `empresa=${emp}; path=/`;
-        window.location.href = "terminal_flash/"+emp;
+        data = [ { id: 1, nome: "Ceragni", sel: 0}, { id: 2, nome: "Certeca", sel: 1 }, { id: 3, nome: "Ambas", sel: 0 } ];  
+    }
+        else if (codigoempresa === 4){
+        data = [ { id: 1, nome: "Ceragni", sel: 0}, { id: 2, nome: "Certeca", sel: 0 }, { id: 3, nome: "Ambas", sel: 1 } ];  
     }
     else{
-
-        data = [ { id: 1, nome: "Ceragni" }, { id: 2, nome: "Certeca" }, { id: 3, nome: "Ambas" } ];
-        drawTable(data);
+        data = [ { id: 1, nome: "Ceragni", sel: 1}, { id: 2, nome: "Certeca", sel: 0 }, { id: 3, nome: "Ambas", sel: 0 } ];        
     }
+
+    drawTable(data);
+    
 });
 
 function drawTable(data){
-        $("#box-empresa").show();
+        
         tableplanoGG= new Tabulator("#empresas-table", {
         data:data, //assign data to table                 
         selectableRows:true, //make rows selectable
@@ -72,7 +56,7 @@ function drawTable(data){
             var data = row.getData();
             
             // Verifica se a linha deve ser marcada como selecionada
-            if (data.Sel == 1) {
+            if (data.sel === 1) {
                 // Aplica classes CSS específicas para seleção
                 row.getElement().classList.add("tabulator-selected");
                 row.getElement().classList.add("tabulator-selectable");
@@ -93,8 +77,8 @@ function drawTable(data){
     
             // Outros estilos ou classes podem ser adicionados conforme necessário
 
-            if (data.Responsavel == '') {
-                row.getElement().style.backgroundColor = "lightcoral";
+            if (data.sel === 1) {
+                row.getElement().style.backgroundColor = "lightskyblue";
             } else {
                 row.getElement().style.backgroundColor = ""; // Reseta o estilo se necessário
             }

@@ -75,6 +75,9 @@ $.ajax({
     }
 });
 
+window.addEventListener(
+  "keydown", (event) => { if(event.key === 'Enter') save_paletes(); }
+);
 /*PALETES*/
 function selectedPalets(data){
     
@@ -193,27 +196,32 @@ function save_paletes(){
                     //selectedPalets(tablePaletes.getSelectedData());
 
                     
-                    let paletes = data['paletes'];
+                   let paletes = data['paletes'];
 
-                    let ultimaComQuantidade = null;
+                    // 1. Remove duplicados de DocPL, preferindo os com Local
+                    const docPLMap = new Map();
 
-                    // Percorre de trás para frente para encontrar o último com Quantidade > 0
-                    for (let i = paletes.length - 1; i >= 0; i--) {
-                        if (paletes[i].Quantidade > 0) {
-                            ultimaComQuantidade = paletes[i];
-                            break;
+                    for (let i = 0; i < paletes.length; i++) {
+                        const item = paletes[i];
+                        const docPL = item.DocPL;
+
+                        if (!docPLMap.has(docPL)) {
+                            docPLMap.set(docPL, item);
+                        } else {
+                            const existente = docPLMap.get(docPL);
+                            if (!existente.Local && item.Local) {
+                                docPLMap.set(docPL, item);
+                            } else if (!existente.Local && !item.Local) {
+                                docPLMap.set(docPL, item); // mais recente
+                            }
                         }
                     }
 
-                    // Se encontrou algum com quantidade > 0, usa esse
-                    // Caso contrário, usa o último do array (mesmo que quantidade seja 0)
-                    let resultado = ultimaComQuantidade ?? paletes[paletes.length - 1];
+                    // 2. Trabalha com a lista filtrada
+                    let paletesFiltradas = Array.from(docPLMap.values());
 
-                    // Adiciona ao selectedData se houver resultado
-                    if (resultado) {
-                        selectedData.push(resultado);
-                    }
-                    
+                    selectedData.push(...paletesFiltradas);
+
 
                     //selectedData.push(...data['paletes']); // espalha os objetos
                     console.log(selectedData);

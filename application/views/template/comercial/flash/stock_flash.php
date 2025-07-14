@@ -59,32 +59,34 @@
                             <div class="card-header p-0 border-bottom-0" style="background-color: whitesmoke">
                                 <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill" href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home" aria-selected="true">Home</a>
+                                        <a class="nav-link active" id="custom-tabs-four-enc-tab" data-toggle="pill" href="#custom-tabs-four-enc" role="tab" aria-controls="custom-tabs-four-enc" aria-selected="true">Encomendas em carteira</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill" href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile" aria-selected="false">Profile</a>
+                                        <a class="nav-link" id="custom-tabs-four-lotpal-tab" data-toggle="pill" href="#custom-tabs-four-lotpal" role="tab" aria-controls="custom-tabs-four-lotpal" aria-selected="false">Lotes e Paletes</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="custom-tabs-four-messages-tab" data-toggle="pill" href="#custom-tabs-four-messages" role="tab" aria-controls="custom-tabs-four-messages" aria-selected="false">Messages</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="custom-tabs-four-settings-tab" data-toggle="pill" href="#custom-tabs-four-settings" role="tab" aria-controls="custom-tabs-four-settings" aria-selected="false">Settings</a>
+                                        <a class="nav-link" id="custom-tabs-four-preenc-tab" data-toggle="pill" href="#custom-tabs-four-preenc" role="tab" aria-controls="custom-tabs-four-preenc" aria-selected="false">Pré-Encomendas Pendentes</a>
                                     </li>
                                 </ul>
                             </div>
                             <div class="card-body">
                                 <div class="tab-content" id="custom-tabs-four-tabContent">
-                                    <div class="tab-pane fade active show" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin malesuada lacus ullamcorper dui molestie, sit amet congue quam finibus. Etiam ultricies nunc non magna feugiat commodo. Etiam odio magna, mollis auctor felis vitae, ullamcorper ornare ligula. Proin pellentesque tincidunt nisi, vitae ullamcorper felis aliquam id. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin id orci eu lectus blandit suscipit. Phasellus porta, ante et varius ornare, sem enim sollicitudin eros, at commodo leo est vitae lacus. Etiam ut porta sem. Proin porttitor porta nisl, id tempor risus rhoncus quis. In in quam a nibh cursus pulvinar non consequat neque. Mauris lacus elit, condimentum ac condimentum at, semper vitae lectus. Cras lacinia erat eget sapien porta consectetur.
+                                    <div class="tab-pane fade active show" id="custom-tabs-four-enc" role="tabpanel" aria-labelledby="custom-tabs-four-enc-tab">
+                                        <div id="enc-table" class="table table-striped"  style="box-shadow: 5px 10px 18px #888888;">
+                                        </div>
                                     </div>
-                                    <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel" aria-labelledby="custom-tabs-four-profile-tab">
-                                         Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
+                                    <div class="tab-pane fade" id="custom-tabs-four-lotpal" role="tabpanel" aria-labelledby="custom-tabs-four-lotpal-tab">
+                                        <h2 class="card-title"><i>Stock</i> por Lote</h2>
+                                        <div id="lotes-table" class="table table-striped"  style="box-shadow: 5px 10px 18px #888888; margin-top: 5px;">
+                                        </div>
+                                        <br><br>
+                                        <h2 class="card-title">Paletes</h2>
+                                        <div id="paletes-table" class="table table-striped"  style="box-shadow: 5px 10px 18px #888888; margin-top: 5px;">
+                                        </div>
                                     </div>
-                                    <div class="tab-pane fade" id="custom-tabs-four-messages" role="tabpanel" aria-labelledby="custom-tabs-four-messages-tab">
-                                        Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna.
-                                    </div>
-                                    <div class="tab-pane fade" id="custom-tabs-four-settings" role="tabpanel" aria-labelledby="custom-tabs-four-settings-tab">
-                                        Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
+                                    <div class="tab-pane fade" id="custom-tabs-four-preenc" role="tabpanel" aria-labelledby="custom-tabs-four-preenc-tab">
+                                        <div id="preenc-table" class="table table-striped"  style="box-shadow: 5px 10px 18px #888888;">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -99,7 +101,8 @@
   </div>
 </div>
 
-
+<div id="modal-blocker" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.6); z-index: 9999; cursor: not-allowed; display: none;">
+</div>
 
 <script>
 let user_type=<?php echo $user_type;?>;
