@@ -18,14 +18,17 @@ class Buttons extends CI_Model
         $value='';
         if($empresa == 1){
             $value='<div class="row">        
-                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-3 col-md-push-3 col-lg-3 col-lg-push-3">
                    <button id="choose_palets" onclick="choose_palets()" type="button" class="btn btn-dark" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Picar Palete</button>
                    </div>
-                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-3 col-md-push-3 col-lg-3 col-lg-push-3">
                    <button onclick="send_to_warehouse()" type="button" class="btn btn-secondary" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Enviar Arm.</button>
                    </div> 
-                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-3 col-md-push-3 col-lg-3 col-lg-push-3">
                    <button id="amostras" onclick="send_to_samples(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b05574; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST888">Enviar Arm. Amostras</button>
+                   </div>                    
+                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-3 col-md-push-3 col-lg-3 col-lg-push-3">
+                   <button id="divergePD" onclick="send_to_divergences_prod(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#FF7F50; color:white; border-color:#D15F40; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST440">Enviar Arm. Diverg. - Prod.</button>
                    </div> 
                    </div>';
          }
@@ -47,19 +50,19 @@ class Buttons extends CI_Model
                         </div>';
             }else if($parm == 2){
                 $value = '<div class="row">        
-                            <div class="col-12 col-md-3 col-lg-3">
+                            <div class="col-sm-12 col-sm-push-4 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
                                 <button id="choose_palets" onclick="choose_palets()" type="button" class="btn btn-dark" style="width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">Picar Palete</button>
                             </div>
-                            <div class="col-12 col-md-3 col-lg-3">
+                            <div class="col-sm-12 col-sm-push-4 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
                                 <button onclick="send_to_factory()" type="button" class="btn btn-info" style="width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">Enviar Arm. Fábrica</button>
                             </div>
-                            <div class="col-12 col-md-3 col-lg-3">
+                            <div class="col-sm-12 col-sm-push-4 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
                                 <button onclick="send_to_logistic()" type="button" class="btn btn-light" style="background-color:teal; color:white; border-color:teal; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">Enviar Centro Logístico</button>
                             </div> 
-                            <div class="col-12 col-md-3 col-lg-3">
+                            <div class="col-sm-12 col-sm-push-6 col-xs-12 col-md-6 col-md-push-6 col-lg-6 col-lg-push-6">
                                 <button id="amostras" onclick="send_to_samples(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b05574; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="FB888">Enviar Arm. Amostras</button>
                             </div> 
-                            <div class="col-12 col-md-3 col-lg-3">
+                            <div class="col-sm-12 col-sm-push-6 col-xs-12 col-md-6 col-md-push-6 col-lg-6 col-lg-push-6">
                                 <button id="divergePD" onclick="send_to_divergences_prod(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#FF7F50; color:white; border-color:#D15F40; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST553">Enviar Arm. Diverg. - Prod.</button>
                             </div>
                         </div>';
@@ -68,14 +71,17 @@ class Buttons extends CI_Model
         }      
         else if($empresa == 3 || $empresa == 4){
             $value='<div class="row">        
-                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-3 col-md-push-3 col-lg-3 col-lg-push-3">
                    <button id="choose_palets" onclick="choose_palets()" type="button" class="btn btn-dark" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Picar Palete</button>
                    </div>
-                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-3 col-md-push-3 col-lg-3 col-lg-push-3">
                    <button onclick="send_to_warehouse()" type="button" class="btn btn-secondary" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Enviar Arm.</button>
                    </div> 
-                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-3 col-md-push-3 col-lg-3 col-lg-push-3">
                    <button id="amostras" onclick="send_to_samples(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b05574; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST888">Enviar Arm. Amostras</button>
+                   </div> 
+                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-3 col-md-push-3 col-lg-3 col-lg-push-3">
+                   <button id="divergePD" onclick="send_to_divergences_prod(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#FF7F50; color:white; border-color:#D15F40; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST440">Enviar Arm. Diverg. - Prod.</button>
                    </div> 
                    </div>';
          }
@@ -87,17 +93,16 @@ class Buttons extends CI_Model
         $value='';
         if($empresa == 1){
             $value='<div class="row">        
-                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-3 col-md-push-3 col-lg-3 col-lg-push-3">
                    <button id="choose_palets" onclick="choose_palets()" type="button" class="btn btn-dark" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Picar Palete</button>
                    </div>
-                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-3 col-md-push-3 col-lg-3 col-lg-push-3">
                    <button onclick="send_to_warehouse()" type="button" class="btn btn-secondary" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Enviar Arm.</button>
                    </div> 
-                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-3 col-md-push-3 col-lg-3 col-lg-push-3">
                    <button id="amostras" onclick="send_to_samples(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b05574; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST888">Enviar Arm. Amostras</button>
                    </div> 
-
-                    <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                    <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-3 col-md-push-3 col-lg-3 col-lg-push-3">
                     <button id="desclas" onclick="send_to_disqualified(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b6a3f7; color:white; border-color:#A99ED6; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST777">Enviar Arm. Mat. Desclass.</button>
                     </div> 
                     <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
@@ -105,6 +110,9 @@ class Buttons extends CI_Model
                     </div> 
                     <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
                     <button id="rehabCG" onclick="send_to_rehabilitates(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#7f4f24; color:white; border-color:#6f441f; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST300">Enviar Arm. Reabilitado</button>
+                    </div> 
+                    <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                    <button id="divergePD" onclick="send_to_divergences_cl(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#FF7F50; color:white; border-color:#D15F40; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST441">Enviar Arm. Diverg.</button>
                     </div> 
 
                    </div>';
@@ -144,17 +152,16 @@ class Buttons extends CI_Model
         }      
         else if($empresa == 3 || $empresa == 4){
             $value='<div class="row">        
-                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-3 col-md-push-3 col-lg-3 col-lg-push-3">
                    <button id="choose_palets" onclick="choose_palets()" type="button" class="btn btn-dark" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Picar Palete</button>
                    </div>
-                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-3 col-md-push-3 col-lg-3 col-lg-push-3">
                    <button onclick="send_to_warehouse()" type="button" class="btn btn-secondary" style="width:inherit;margin-left: 5px;margin-right: 5px;margin-bottom: 5px;"> Enviar Arm.</button>
                    </div> 
-                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                   <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-3 col-md-push-3 col-lg-3 col-lg-push-3">
                    <button id="amostras" onclick="send_to_samples(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b05574; color:white; border-color:#9c4c68; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST888">Enviar Arm. Amostras</button>
                    </div> 
-
-                    <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                    <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-3 col-md-push-3 col-lg-3 col-lg-push-3">
                     <button id="desclas" onclick="send_to_disqualified(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#b6a3f7; color:white; border-color:#A99ED6; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST777">Enviar Arm. Mat. Desclass.</button>
                     </div> 
                     <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
@@ -162,6 +169,9 @@ class Buttons extends CI_Model
                     </div> 
                     <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
                     <button id="rehabCG" onclick="send_to_rehabilitates(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#7f4f24; color:white; border-color:#6f441f; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST300">Enviar Arm. Reabilitado</button>
+                    </div> 
+                    <div class="col-sm-12 col-sm-push-3 col-xs-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+                    <button id="divergePD" onclick="send_to_divergences_cl(this.getAttribute(\'data-id\'))" type="button" class="btn" style="background-color:#FF7F50; color:white; border-color:#D15F40; width:inherit; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" data-id="ST441">Enviar Arm. Diverg.</button>
                     </div> 
 
                    </div>';

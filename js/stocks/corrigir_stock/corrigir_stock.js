@@ -91,7 +91,8 @@ function selectedPalets(data){
         headerSort:false, //disable header sort for all columns
         placeholder:"Sem Dados Disponíveis",   
         layout:"fitColumns",      //fit columns to width of table
-        responsiveLayout:"hide",  //hide columns that don't fit on the table        
+        //responsiveLayout:"hide",  //hide columns that don't fit on the table   
+        renderHorizontal:"virtual",     
         pagination:"local",       //paginate the data
         paginationSize:25,         //allow 7 rows per page of data        
         columnDefaults:{
@@ -102,7 +103,7 @@ function selectedPalets(data){
             {title:"LinhaPL", field:"LinhaPL", align:"center", visible:false},                
             {title:"Referencia", field:"Referencia", align:"center",headerFilter:"input"},                
             {title:"Artigo", field:"Artigo", align:"center", visible:false},
-            {title:"Descrição", field:"DescricaoArtigo", align:"center",headerFilter:"input"},                
+            {title:"Descrição", field:"DescricaoArtigo", align:"center",headerFilter:"input", width: 500},                
             {title:"UNI.", field:"Unidade", align:"center", visible:false},
             {title:"Sector", field:"Sector", align:"center",headerFilter:"input"},                                
             {title:"Formato", field:"Formato", align:"center", headerFilter:"input"},                
@@ -118,15 +119,15 @@ function selectedPalets(data){
             {title:"Sel", field:"Sel", align:"center", visible:false},
             {title:"Local", field:"Local", align:"center",headerFilter:"input",headerFilter:"input"},                
             {title:"QTD.", field:"Quantidade", align:"center",headerFilter:"input"},                
-            {title:"QTD. Acertada", field:"NovaQtd",  hozAlign:"center", editor:"number",formatter:function (cell) {
+            {title:"QTD. Acertada", field:"NovaQtd",  hozAlign:"center", editor:"number", headerSort:false, formatter:function (cell) {
                 let val = cell.getValue();
                 let el = cell.getElement();        
                 el.style.backgroundColor = "#fdfd96";        
                 return val;
             }},
-            {title:"Reabilitado", field:"Reabilitado", hozAlign:"center", editor:true, formatter:"tickCross"},
+            {title:"Reabilitado", field:"Reabilitado", hozAlign:"center", editor:true, formatter:"tickCross", headerSort:false},
             {title:"Id", field:"Id", align:"center", visible:false},
-            {title:" ",formatter:deleteUser, width:50, align:"center",tooltip:true, cellClick:function(e, cell){
+            {title:" ",formatter:deleteUser, width:50, align:"center",tooltip:true, headerSort:false,cellClick:function(e, cell){
                 let row01 = cell.getRow();
                 // Deleta a linha
                 row01.delete();
@@ -193,48 +194,50 @@ function save_paletes(){
                     window.location = "home/logout";
                 } else {                    
                     tableSelPaletes.clearAlert();
-                    //selectedPalets(tablePaletes.getSelectedData());
-
-                    
+                    //selectedPalets(tablePaletes.getSelectedData());                    
                    let paletes = data['paletes'];
+                   //console.log(paletes);
+                   
+                    // Passo 1: agrupa todos os itens por chave DocPL + Sector
+                    const grupos = new Map();
 
-                    // 1. Remove duplicados de DocPL, preferindo os com Local
-                    const docPLMap = new Map();
+                    for (const item of paletes) {
+                        const chave = `${item.DocPL}||${item.Sector}`;
 
-                    for (let i = 0; i < paletes.length; i++) {
-                        const item = paletes[i];
-                        const docPL = item.DocPL ?? "";      // agora aceita vazio
-                        const sector = item.Sector ?? "";    // agrupa também por setor
-                        const local = item.Local;
-                        const chave = `${docPL}||${sector}`; // chave composta
+                        if (!grupos.has(chave)) grupos.set(chave, []);
+                        grupos.get(chave).push(item);
+                    }
 
-                        const existente = docPLMap.get(chave);
+                    let resultado = [];
 
-                        if (!existente) {
-                            docPLMap.set(chave, item);
+                    for (const [chave, itens] of grupos.entries()) {
+                        // Verifica se tem algum com quantidade diferente de zero
+                        const temQtdDiferenteDeZero = itens.some(i => Number(i.Quantidade) !== 0);
+
+                        if (temQtdDiferenteDeZero) {
+                            // Mantém somente os que têm quantidade != 0
+                            const filtrados = itens.filter(i => Number(i.Quantidade) !== 0);
+                            resultado.push(...filtrados);
                         } else {
-                            const existenteTemLocal = !isVazio(existente.Local);
-                            const itemTemLocal = !isVazio(local);
-
-                            if (itemTemLocal) {
-                                // Substitui SEMPRE se o novo tem Local
-                                docPLMap.set(chave, item);
-                            } else if (!existenteTemLocal) {
-                                // Ambos sem local → fica o mais recente
-                                docPLMap.set(chave, item);
-                            }
-                            // Se existente já tem Local e item não → mantém o existente
+                            // Todos têm quantidade 0 — mantém só o último do grupo
+                            resultado.push(itens[itens.length - 1]);
                         }
                     }
 
-                    // 2. Trabalha com a lista filtrada
-                    let paletesFiltradas = Array.from(docPLMap.values());
+                    if (resultado.length > 1) {
+                        const temQuantidadeValida = resultado.some(item => Number(item.Quantidade) !== 0);
 
-                    selectedData.push(...paletesFiltradas);
+                        if (temQuantidadeValida) {
+                            resultado = resultado.filter(item => Number(item.Quantidade) !== 0);
+                        } else {
+                            resultado = [resultado[resultado.length - 1]];  // só mantém o último do array inteiro
+                        }
+                    }
+                    //console.log(resultado);
 
-
+                    selectedData.push(...resultado);                    
                     //selectedData.push(...data['paletes']); // espalha os objetos
-                    console.log(selectedData);
+                    //console.log(selectedData);
     
                     selectedPalets(selectedData);
                     
