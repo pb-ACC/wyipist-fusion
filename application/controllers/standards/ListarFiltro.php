@@ -865,15 +865,16 @@ class ListarFiltro extends CI_Controller
             $campos = $this->input->post('campos');  
 
             $palete=$campos['palete'];
-            $refp=$campos['referencia'];
-            $lote=$campos['lote'];
-            $calibre=$campos['calibre'];
+            //$refp=$campos['referencia'];
+            //$lote=$campos['lote'];
+            //$calibre=$campos['calibre'];
 
             $cond = '';
             if (!empty($palete)) {
                 $cond .= " AND A.Palete LIKE '%" . addslashes($palete) . "%'";
             }
 
+            /*
             if (!empty($refp)) {
                 $cond .= " AND A.RefP LIKE '%" . addslashes($refp) . "%'";
             }
@@ -885,6 +886,7 @@ class ListarFiltro extends CI_Controller
             if (!empty($calibre)) {
                 $cond .= " AND isnull(A.Calibre,'') LIKE '%" . addslashes($calibre) . "%'";
             }
+            */
 
             $emp = strtoupper($emp);
             if($emp == 'CERAGNI'){                

@@ -76,7 +76,12 @@ $.ajax({
 });
 
 window.addEventListener(
-  "keydown", (event) => { if(event.key === 'Enter') save_paletes(); }
+  "keydown", (event) => { 
+                            if(event.key === 'Enter') {
+                                event.preventDefault();  
+                                save_paletes(); 
+                            }
+                        }
 );
 /*PALETES*/
 function selectedPalets(data){
@@ -103,7 +108,7 @@ function selectedPalets(data){
             {title:"LinhaPL", field:"LinhaPL", align:"center", visible:false},                
             {title:"Referencia", field:"Referencia", align:"center",headerFilter:"input"},                
             {title:"Artigo", field:"Artigo", align:"center", visible:false},
-            {title:"Descrição", field:"DescricaoArtigo", align:"center",headerFilter:"input", width: 500},                
+            {title:"Descrição", field:"DescricaoArtigo", align:"center",headerFilter:"input", width: 400},                
             {title:"UNI.", field:"Unidade", align:"center", visible:false},
             {title:"Sector", field:"Sector", align:"center",headerFilter:"input"},                                
             {title:"Formato", field:"Formato", align:"center", headerFilter:"input"},                
@@ -112,10 +117,10 @@ function selectedPalets(data){
             {title:"Superficie", field:"Superficie", align:"center", visible:false},
             {title:"Decoracao", field:"Decoracao", align:"center", visible:false},
             {title:"RefCor", field:"RefCor", align:"center", visible:false},
-            {title:"Lote", field:"Lote", align:"center", visible:false},
+            {title:"Lote", field:"Lote", align:"center", headerFilter:"input"},
             {title:"Nivel", field:"Nivel", align:"center", visible:false},                
             {title:"TabEspessura", field:"TabEspessura", align:"center", visible:false},                                
-            {title:"Calibre", field:"Calibre", align:"center", visible:false},  
+            {title:"Calibre", field:"Calibre", align:"center",  headerFilter:"input"},
             {title:"Sel", field:"Sel", align:"center", visible:false},
             {title:"Local", field:"Local", align:"center",headerFilter:"input",headerFilter:"input"},                
             {title:"QTD.", field:"Quantidade", align:"center",headerFilter:"input"},                
