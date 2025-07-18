@@ -242,32 +242,8 @@ function save_paletes(){
 
                     selectedData.push(...resultado);                    
                     */
-                
-                    const paletes = data['paletes'];
-                    const grupos = new Map();
-
-                    for (const key in paletes) {
-                        if (paletes.hasOwnProperty(key)) {
-                            const item = paletes[key];
-                            const chave = `${item.DocPL}`;
-                            if (!grupos.has(chave)) grupos.set(chave, []);
-                            grupos.get(chave).push(item);
-                        }
-                    }
-
-                    console.log(grupos); // array com o maior objeto de cada grupo        
-
-                    let maiores = [];
-                    for (const [chave, itens] of grupos.entries()) {
-                        const maior = itens.reduce((max, obj) => (obj.Id > max.Id ? obj : max), itens[0]);
-                        maiores.push(maior);
-                    }
-                    
-                    console.log(maiores); // array com o maior objeto de cada grupo                   
-                    //selectedData.push(...data['paletes']); // espalha os objetos
-                    selectedData.push(...maiores); // espalha os objetos                    
-                    
-                    console.log(selectedData);    
+                                   
+                    selectedData.push(...data['paletes']); // espalha os objetos                   
                     selectedPalets(selectedData);
                     
                     $('#empresasDP').prop('disabled', false);

@@ -874,15 +874,17 @@ class GetPalets extends CI_Model
         //echo $setor;
         $sql01 = "SELECT count(A.id) nLinhas
                   FROM ( SELECT cast(0 as int) Sel, A.Sector, isnull(A.Local,'') Local, round(sum(case when A.TipoMovimento<='10' then A.Quantidade else -A.Quantidade end),8) Quantidade, case when isnull(B.Unidade,'')='' then 'M2' else B.Unidade end Unidade,
-                            A.RefP Referencia, A.Artigo, B.Descricao DescricaoArtigo, isnull(A.Lote,'') Lote, isnull(A.Calibre,'') Calibre, 0 LinhaPL, isnull(C.Numero,'') DocPL, B.Formato, B.Qual, B.TipoEmbalagem, B.Superficie, B.Decoracao,
-                            B.RefCor, B.TabEspessura, isnull(D.NivelPalete,'') Nivel, cast(0 as float) NovaQtd, CAST(ROW_NUMBER() OVER(ORDER BY min(A.DataHoraMov) asc)-1 AS int) Id
-                         from StkLDocs A join ReferArt B on (A.RefP=B.Referencia and A.Artigo=B.Artigo)
-                                         join PlDocs   C on ((case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
-                                         join PllDocs  D on (C.Numero=D.NumeroDocumento)
-                        where A.Sector in ({$setor}) and C.Serie not in ('C','PC') $cond
-                         -- and isnull(A.Local,'')<>''
-                        group by A.Sector, isnull(A.Local,''), A.RefP, A.Artigo, isnull(A.Lote,''), isnull(A.Calibre,''), isnull(C.Numero,''), B.Formato, B.Qual, B.TipoEmbalagem,
-                                 B.Superficie, B.Decoracao, B.RefCor, B.TabEspessura, case when isnull(B.Unidade,'')='' then 'M2' else B.Unidade end, B.Descricao, isnull(D.NivelPalete,'')                        
+                                    A.RefP Referencia, A.Artigo, B.Descricao DescricaoArtigo, isnull(A.Lote,'') Lote, isnull(A.Calibre,'') Calibre, 0 LinhaPL, isnull(C.Numero,'') DocPL, B.Formato, B.Qual, B.TipoEmbalagem, B.Superficie, B.Decoracao,
+                                    B.RefCor, B.TabEspessura, isnull(D.NivelPalete,'') Nivel, cast(0 as float) NovaQtd, cast(0 as int) Reabilitado, CAST(ROW_NUMBER() OVER(PARTITION BY isnull(C.Numero,'') ORDER BY isnull(C.Numero,''), max(A.DataHoraMov) desc) AS int) OrdemPalete, 
+                                    CAST(ROW_NUMBER() OVER(ORDER BY min(A.DataHoraMov) asc)-1 AS int) Id
+                            from StkLDocs A join ReferArt B on (A.RefP=B.Referencia and A.Artigo=B.Artigo)
+                                            join PlDocs   C on ((case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
+                                            join PllDocs  D on (C.Numero=D.NumeroDocumento)
+                            where A.Sector in ({$setor}) and C.Serie not in ('C','PC') 
+                                and A.Palete in (select Palete from StkLDocs where 1=1 $cond group by Palete)
+                            group by A.Sector, isnull(A.Local,''), A.RefP, A.Artigo, isnull(A.Lote,''), isnull(A.Calibre,''), isnull(C.Numero,''), B.Formato, B.Qual, B.TipoEmbalagem,
+                                        B.Superficie, B.Decoracao, B.RefCor, B.TabEspessura, case when isnull(B.Unidade,'')='' then 'M2' else B.Unidade end, B.Descricao, isnull(D.NivelPalete,'')                      
+                            
                      ) A";        
         $query01 = $this->db->query($sql01);        
         $tot  = $query01->result();
@@ -901,16 +903,22 @@ class GetPalets extends CI_Model
             $fetch = $offset + 3500;
             set_time_limit(0);
             $this->db->db_pconnect();
-            $sql02 = "SELECT cast(0 as int) Sel, A.Sector, isnull(A.Local,'') Local, round(sum(case when A.TipoMovimento<='10' then A.Quantidade else -A.Quantidade end),8) Quantidade, case when isnull(B.Unidade,'')='' then 'M2' else B.Unidade end Unidade,
-                            A.RefP Referencia, A.Artigo, B.Descricao DescricaoArtigo, isnull(A.Lote,'') Lote, isnull(A.Calibre,'') Calibre, 0 LinhaPL, isnull(C.Numero,'') DocPL, B.Formato, B.Qual, B.TipoEmbalagem, B.Superficie, B.Decoracao,
-                            B.RefCor, B.TabEspessura, isnull(D.NivelPalete,'') Nivel, cast(0 as float) NovaQtd, cast(0 as int) Reabilitado, CAST(ROW_NUMBER() OVER(ORDER BY min(A.DataHoraMov) asc)-1 AS int) Id
-                      from StkLDocs A join ReferArt B on (A.RefP=B.Referencia and A.Artigo=B.Artigo)
-                                      join PlDocs   C on ((case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
-                                      join PllDocs  D on (C.Numero=D.NumeroDocumento)
-                      where A.Sector in ({$setor}) and C.Serie not in ('C','PC') $cond
-                      group by A.Sector, isnull(A.Local,''), A.RefP, A.Artigo, isnull(A.Lote,''), isnull(A.Calibre,''), isnull(C.Numero,''), B.Formato, B.Qual, B.TipoEmbalagem,
-                                B.Superficie, B.Decoracao, B.RefCor, B.TabEspessura, case when isnull(B.Unidade,'')='' then 'M2' else B.Unidade end, B.Descricao, isnull(D.NivelPalete,'')                      
-                      Order by min(A.DataHoraMov) ASC
+            $sql02 = "SELECT  *
+                      FROM (
+                            SELECT cast(0 as int) Sel, A.Sector, isnull(A.Local,'') Local, round(sum(case when A.TipoMovimento<='10' then A.Quantidade else -A.Quantidade end),8) Quantidade, case when isnull(B.Unidade,'')='' then 'M2' else B.Unidade end Unidade,
+                                    A.RefP Referencia, A.Artigo, B.Descricao DescricaoArtigo, isnull(A.Lote,'') Lote, isnull(A.Calibre,'') Calibre, 0 LinhaPL, isnull(C.Numero,'') DocPL, B.Formato, B.Qual, B.TipoEmbalagem, B.Superficie, B.Decoracao,
+                                    B.RefCor, B.TabEspessura, isnull(D.NivelPalete,'') Nivel, cast(0 as float) NovaQtd, cast(0 as int) Reabilitado, CAST(ROW_NUMBER() OVER(PARTITION BY isnull(C.Numero,'') ORDER BY isnull(C.Numero,''), max(A.DataHoraMov) desc) AS int) OrdemPalete,
+                                    CAST(ROW_NUMBER() OVER(ORDER BY min(A.DataHoraMov) asc)-1 AS int) Id
+                            from StkLDocs A join ReferArt B on (A.RefP=B.Referencia and A.Artigo=B.Artigo)
+                                            join PlDocs   C on ((case when isnull(A.DocPL,'')='' then A.Palete else A.DocPL end)=C.Numero)
+                                            join PllDocs  D on (C.Numero=D.NumeroDocumento)
+                            where A.Sector in ({$setor}) and C.Serie not in ('C','PC') 
+                                and A.Palete in (select Palete from StkLDocs where 1=1 $cond group by Palete)
+                            group by A.Sector, isnull(A.Local,''), A.RefP, A.Artigo, isnull(A.Lote,''), isnull(A.Calibre,''), isnull(C.Numero,''), B.Formato, B.Qual, B.TipoEmbalagem,
+                                        B.Superficie, B.Decoracao, B.RefCor, B.TabEspessura, case when isnull(B.Unidade,'')='' then 'M2' else B.Unidade end, B.Descricao, isnull(D.NivelPalete,'')                      
+                            ) A
+                      where OrdemPalete=1
+                      order by Id
                       OFFSET ".$offset." ROWS
                       FETCH NEXT ".$fetch ." ROWS ONLY";  
             //and isnull(A.Local,'')<>'' 
