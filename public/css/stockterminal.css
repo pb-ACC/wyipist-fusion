@@ -549,3 +549,7 @@ input[type=range] {
 .wrapper{
     background-color: whitesmoke !important;
 }
+
+.tabulator-header-contents{
+       background-color: white !important; 
+}

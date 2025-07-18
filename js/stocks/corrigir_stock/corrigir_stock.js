@@ -95,9 +95,8 @@ function selectedPalets(data){
         //selectableRows:true, //make rows selectable
         headerSort:false, //disable header sort for all columns
         placeholder:"Sem Dados Disponíveis",   
-        layout:"fitColumns",      //fit columns to width of table
-        //responsiveLayout:"hide",  //hide columns that don't fit on the table   
-        renderHorizontal:"virtual",     
+        layout:"fitDataTable",      //fit columns to width of table
+        renderHorizontal:"virtual",   
         pagination:"local",       //paginate the data
         paginationSize:25,         //allow 7 rows per page of data        
         columnDefaults:{
@@ -200,7 +199,8 @@ function save_paletes(){
                 } else {                    
                     tableSelPaletes.clearAlert();
                     //selectedPalets(tablePaletes.getSelectedData());                    
-                   let paletes = data['paletes'];
+                  /*
+                  let paletes = data['paletes'];
                    //console.log(paletes);
                    
                     // Passo 1: agrupa todos os itens por chave DocPL + Sector
@@ -241,9 +241,33 @@ function save_paletes(){
                     //console.log(resultado);
 
                     selectedData.push(...resultado);                    
+                    */
+                
+                    const paletes = data['paletes'];
+                    const grupos = new Map();
+
+                    for (const key in paletes) {
+                        if (paletes.hasOwnProperty(key)) {
+                            const item = paletes[key];
+                            const chave = `${item.DocPL}`;
+                            if (!grupos.has(chave)) grupos.set(chave, []);
+                            grupos.get(chave).push(item);
+                        }
+                    }
+
+                    console.log(grupos); // array com o maior objeto de cada grupo        
+
+                    let maiores = [];
+                    for (const [chave, itens] of grupos.entries()) {
+                        const maior = itens.reduce((max, obj) => (obj.Id > max.Id ? obj : max), itens[0]);
+                        maiores.push(maior);
+                    }
+                    
+                    console.log(maiores); // array com o maior objeto de cada grupo                   
                     //selectedData.push(...data['paletes']); // espalha os objetos
-                    //console.log(selectedData);
-    
+                    selectedData.push(...maiores); // espalha os objetos                    
+                    
+                    console.log(selectedData);    
                     selectedPalets(selectedData);
                     
                     $('#empresasDP').prop('disabled', false);

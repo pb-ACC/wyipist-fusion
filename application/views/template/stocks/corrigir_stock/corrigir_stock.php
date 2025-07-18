@@ -33,7 +33,7 @@
          
                     <form id="form-palete">
                         <div class="row g-3">
-                        <!--  
+                          
                         <div class="col-12 col-md-3">
                                 <label for="referencia" class="form-label">Referência</label>
                                 <div class="input-group">
@@ -41,15 +41,13 @@
                                     <input type="text" class="form-control" id="referencia" name="referencia">
                                 </div>
                             </div>
-                        -->
-                            <div class="col-4 col-md-4">
+                            <div class="col-12 col-md-3">
                                 <label for="palete" class="form-label">Palete</label>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="bi bi-upc-scan"></i></span>
                                     <input type="text" class="form-control" id="palete" name="palete">
                                 </div>
                             </div>
-                        <!--
                             <div class="col-12 col-md-3">
                                 <label for="lote" class="form-label">Lote</label>
                                 <div class="input-group">
@@ -65,8 +63,7 @@
                                     <input type="text" class="form-control" id="calibre" name="calibre">
                                 </div>
                             </div>
-                        -->
-
+                        
                         </div>
                     </form>
                     
